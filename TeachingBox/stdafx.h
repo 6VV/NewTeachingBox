@@ -12,6 +12,6 @@
 #include <QRadioButton>
 #include <QVBoxLayout>
 #include <QtWidgets>
-
+#include <QStackedWidget>
 
 #pragma warning(pop)

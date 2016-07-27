@@ -5,21 +5,25 @@
 
 
 
+const QColor WarningLight::COLOR_ON = Qt::red;
+
+const QColor WarningLight::COLOR_OFF = Qt::black;
+
 WarningLight::WarningLight(QWidget* parent/*=0*/)
 	:QWidget(parent)
 {
 	update();
 }
 
-void WarningLight::Warn()
+void WarningLight::LightOn()
 {
-	m_color = Qt::red;
+	m_color = COLOR_ON;
 	update();
 }
 
-void WarningLight::Normal()
+void WarningLight::LightOff()
 {
-	m_color = Qt::green;
+	m_color = COLOR_OFF;
 	update();
 }
 

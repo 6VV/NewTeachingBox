@@ -20,8 +20,6 @@
 
 class WarningLight;
 class QButtonGroup;
-class QRadioButton;
-class QLabel;
 
 class TeachingBox : public InternationalWidget
 {
@@ -74,17 +72,12 @@ private:
 	ExecuteMode m_executeMode=ExecuteMode::AUTO;
 
 private:
-	//示教盒上侧控件
 	QButtonGroup* m_modelButtonGroup;
-	QRadioButton* m_btnMode1;
-	QRadioButton* m_btnMode2;
-	QRadioButton* m_btnMode3;
 
 	WarningLight* m_clRun;
 	WarningLight* m_clError;
 	WarningLight* m_clPro;
 	WarningLight* m_clMot;
-
 };
 
 #endif // TEACHINGBOX_H

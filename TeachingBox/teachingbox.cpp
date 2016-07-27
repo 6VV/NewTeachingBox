@@ -3,7 +3,7 @@
 #include "WarningLight.h"
 #include "QBoxLayout"
 #include "Button.h"
-#include "ScreenMain.h"
+#include "Screen.h"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -46,28 +46,28 @@ void TeachingBox::InitVertical()
 void TeachingBox::InitTop(QLayout* layout)
 {
 	QHBoxLayout* realLayout = dynamic_cast<QHBoxLayout*>(layout);
-	m_modelButtonGroup = new QButtonGroup(this);
-	m_btnMode1 = new QRadioButton(this);
-	m_btnMode2 = new QRadioButton(this);
-	m_btnMode3 = new QRadioButton(this);
-	m_modelButtonGroup->addButton(m_btnMode1, ExecuteMode::AUTO);
-	m_modelButtonGroup->addButton(m_btnMode2, ExecuteMode::STEP);
-	m_modelButtonGroup->addButton(m_btnMode3, ExecuteMode::MANUAL);
-	m_btnMode1->setChecked(true);
+    m_modelButtonGroup = new QButtonGroup(this);
+	QRadioButton* btnMode1 = new QRadioButton(this);
+	QRadioButton* btnMode2 = new QRadioButton(this);
+	QRadioButton* btnMode3 = new QRadioButton(this);
+	m_modelButtonGroup->addButton(btnMode1, ExecuteMode::AUTO);
+	m_modelButtonGroup->addButton(btnMode2, ExecuteMode::STEP);
+	m_modelButtonGroup->addButton(btnMode3, ExecuteMode::MANUAL);
+	btnMode1->setChecked(true);
 
 	Button* btnScram = new Button("Scram",this);
 
 	realLayout->addStretch(1);
-	realLayout->addWidget(m_btnMode1);
-	realLayout->addWidget(m_btnMode2);
-	realLayout->addWidget(m_btnMode3);
+	realLayout->addWidget(btnMode1);
+	realLayout->addWidget(btnMode2);
+	realLayout->addWidget(btnMode3);
 	realLayout->addStretch(1);
 	realLayout->addWidget(btnScram);
 	realLayout->addStretch(1);
 
-	connect(m_btnMode1, SIGNAL(clicked()), this, SLOT(SlotOnModelChanged()));
-	connect(m_btnMode2, SIGNAL(clicked()), this, SLOT(SlotOnModelChanged()));
-	connect(m_btnMode3, SIGNAL(clicked()), this, SLOT(SlotOnModelChanged()));
+	connect(btnMode1, SIGNAL(clicked()), this, SLOT(SlotOnModelChanged()));
+	connect(btnMode2, SIGNAL(clicked()), this, SLOT(SlotOnModelChanged()));
+	connect(btnMode3, SIGNAL(clicked()), this, SLOT(SlotOnModelChanged()));
 }
 
 void TeachingBox::InitBottom(QLayout* layout)
@@ -134,7 +134,6 @@ void TeachingBox::InitOption(QLayout* layout)
 	Button* btnCoordinate = new Button("Coordinate", this);
 	Button* btnWarning = new Button("Warning", this);
 
-
 	realLayout->addWidget(btnUndefine);
 	realLayout->addWidget(btnSetting);
 	realLayout->addWidget(btnVariate);
@@ -142,6 +141,7 @@ void TeachingBox::InitOption(QLayout* layout)
 	realLayout->addWidget(btnProgram);
 	realLayout->addWidget(btnCoordinate);
 	realLayout->addWidget(btnWarning);
+
 }
 
 void TeachingBox::InitMovement(QLayout* layout)
@@ -190,7 +190,9 @@ void TeachingBox::InitMovement(QLayout* layout)
 
 void TeachingBox::InitScreen(QLayout* layout)
 {
-	layout->addWidget(new ScreenMain(this));
+	layout->addWidget(new Screen(this));
+	layout->setSpacing(0);
+	layout->setMargin(0);
 }
 
 void TeachingBox::InitWarning(QLayout* layout)

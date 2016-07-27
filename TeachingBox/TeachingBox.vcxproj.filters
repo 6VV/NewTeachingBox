@@ -50,6 +50,12 @@
     <Filter Include="Source Files\Screen">
       <UniqueIdentifier>{9c838c1b-4970-44d7-9ffb-5a5cba874c0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\TeachingBox">
+      <UniqueIdentifier>{fb294944-ad0f-487a-be24-dd5669e06daa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TeachingBox">
+      <UniqueIdentifier>{f3d9cb6a-a09a-4594-b34d-8476015aff4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -61,17 +67,11 @@
     <ClCompile Include="GeneratedFiles\qrc_teachingbox.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="TeachingBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TeachingBox.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_TeachingBox.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="WarningLight.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_WarningLight.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -91,7 +91,16 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
-    <ClCompile Include="ScreenMain.cpp">
+    <ClCompile Include="Screen.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="TeachingBox.cpp">
+      <Filter>Source Files\TeachingBox</Filter>
+    </ClCompile>
+    <ClCompile Include="WarningLight.cpp">
+      <Filter>Source Files\TeachingBox</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenState.cpp">
       <Filter>Source Files\Screen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -102,14 +111,14 @@
     <CustomBuild Include="stdafx.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="TeachingBox.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="WarningLight.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="InternationalWidget.h">
       <Filter>Header Files\Widget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TeachingBox.h">
+      <Filter>Header Files\TeachingBox</Filter>
+    </CustomBuild>
+    <CustomBuild Include="WarningLight.h">
+      <Filter>Header Files\TeachingBox</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -124,7 +133,10 @@
     <ClInclude Include="Button.h">
       <Filter>Header Files\Widget</Filter>
     </ClInclude>
-    <ClInclude Include="ScreenMain.h">
+    <ClInclude Include="Screen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenState.h">
       <Filter>Header Files\Screen</Filter>
     </ClInclude>
   </ItemGroup>
