@@ -1,7 +1,17 @@
-//½ûÓÃµÚÈı·½¿âÖĞµÄ¾¯¸æ
+ï»¿/*ç¦ç”¨ç¬¬ä¸‰æ–¹åº“ä¸­çš„è­¦å‘Š*/
 #pragma warning(push)
 #pragma warning(disable:4127)
 
+#include <QButtonGroup>
+#include <QDebug>
+#include <QEvent>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLayout>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QVBoxLayout>
 #include <QtWidgets>
+
 
 #pragma warning(pop)

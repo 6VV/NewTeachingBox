@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="TeachingBox">
+    <qresource prefix="/TeachingBox">
+        <file>teachingbox_zh.qm</file>
     </qresource>
 </RCC>
