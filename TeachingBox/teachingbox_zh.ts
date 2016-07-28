@@ -2,10 +2,11 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
-    <name>TeachingBox</name>
+    <name>ScreenWarning</name>
     <message>
-        <source>Scram</source>
-        <translation type="obsolete">急停</translation>
+        <location filename="ScreenWarning.cpp" line="24"/>
+        <source>Confirm</source>
+        <translation type="unfinished">确认</translation>
     </message>
 </context>
 </TS>

@@ -13,5 +13,6 @@
 #include <QVBoxLayout>
 #include <QtWidgets>
 #include <QStackedWidget>
+#include <QGroupBox>
 
 #pragma warning(pop)

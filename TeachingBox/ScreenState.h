@@ -1,10 +1,26 @@
 ﻿#ifndef _SCREEN_HEAD_H_
 #define _SCREEN_HEAD_H_
 
+/*************************************************
+//  Copyright (C), 2015-2016, CS&S. Co., Ltd.
+//  File name: 	    ScreenState.h
+//  Author:			刘巍      
+//  Version: 		1.0     
+//  Date: 			2016/07/27
+//  Description:	屏幕中状态栏部分，实时显示机器人当前状态
+//  Others:
+//  History:
+//    <author>      刘巍 
+//    <time>        2016/07/27
+//    <version>     1.0 
+//    <desc>        build this moudle     
+*************************************************/
+
 #include "InternationalWidget.h"
 #include "QLabel"
 
-class Layout;
+class QLayout;
+class LabelWithBorder;
 
 class ScreenState:public InternationalWidget
 {
@@ -21,16 +37,6 @@ private:
 	QLayout* GetSecondLayout();
 
 private:
-	class LabelWithBorder :public QLabel
-	{
-	public:
-		LabelWithBorder(QWidget* parent = 0);
-		LabelWithBorder(const QString& text, QWidget* parent = 0);
-
-	private:
-		void Init();
-	};
-
 	LabelWithBorder* m_lbOperationMode;	/*操作模式*/
 	LabelWithBorder* m_lbServo;			/*机器人状态*/
 	LabelWithBorder* m_lbCoordinate;		/*参考坐标系*/

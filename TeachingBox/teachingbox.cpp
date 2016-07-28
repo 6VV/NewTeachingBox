@@ -4,6 +4,7 @@
 #include "QBoxLayout"
 #include "Button.h"
 #include "Screen.h"
+#include "TeachingBoxContext.h"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -50,9 +51,9 @@ void TeachingBox::InitTop(QLayout* layout)
 	QRadioButton* btnMode1 = new QRadioButton(this);
 	QRadioButton* btnMode2 = new QRadioButton(this);
 	QRadioButton* btnMode3 = new QRadioButton(this);
-	m_modelButtonGroup->addButton(btnMode1, ExecuteMode::AUTO);
-	m_modelButtonGroup->addButton(btnMode2, ExecuteMode::STEP);
-	m_modelButtonGroup->addButton(btnMode3, ExecuteMode::MANUAL);
+	m_modelButtonGroup->addButton(btnMode1, TeachingBoxContext::AUTO);
+	m_modelButtonGroup->addButton(btnMode2, TeachingBoxContext::STEP);
+	m_modelButtonGroup->addButton(btnMode3, TeachingBoxContext::MANUAL);
 	btnMode1->setChecked(true);
 
 	Button* btnScram = new Button("Scram",this);
@@ -220,10 +221,10 @@ void TeachingBox::SlotOnModelChanged()
 {
 	switch (m_modelButtonGroup->checkedId())
 	{
-	case ExecuteMode::AUTO:
-	case ExecuteMode::STEP:
-	case ExecuteMode::MANUAL:{
-		m_executeMode = static_cast<ExecuteMode>(m_modelButtonGroup->checkedId());
+	case TeachingBoxContext::AUTO:
+	case TeachingBoxContext::STEP:
+	case TeachingBoxContext::MANUAL:{
+		TeachingBoxContext::SetExecuteMode(static_cast<TeachingBoxContext::ExecuteMode>(m_modelButtonGroup->checkedId()));
 	}break;
 	default:break;
 	}

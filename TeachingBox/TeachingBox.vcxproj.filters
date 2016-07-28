@@ -56,6 +56,30 @@
     <Filter Include="Source Files\TeachingBox">
       <UniqueIdentifier>{f3d9cb6a-a09a-4594-b34d-8476015aff4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Screen\ScreenSetting">
+      <UniqueIdentifier>{c126758a-133a-4f19-977b-7fd6fcbde27e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Context">
+      <UniqueIdentifier>{a1b74205-e610-4296-9d82-b6a60a1c5e59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\Screen">
+      <UniqueIdentifier>{e37fcda1-d983-493c-b56b-7cf734c95e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\Screen">
+      <UniqueIdentifier>{eb4d9d29-aaee-42cc-b508-91b41818841e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenSetting">
+      <UniqueIdentifier>{6484afed-bab7-434d-88f5-228c2816f72b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\ScreenMain">
+      <UniqueIdentifier>{5706a00a-aff2-4cda-a655-67e313f0892c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenMain">
+      <UniqueIdentifier>{b88f5f9a-1599-4fce-b2f7-89740d2c20f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context">
+      <UniqueIdentifier>{47204817-e217-4180-9321-0b6180b1fe39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -91,17 +115,53 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
-    <ClCompile Include="Screen.cpp">
-      <Filter>Source Files\Screen</Filter>
-    </ClCompile>
     <ClCompile Include="TeachingBox.cpp">
       <Filter>Source Files\TeachingBox</Filter>
     </ClCompile>
     <ClCompile Include="WarningLight.cpp">
       <Filter>Source Files\TeachingBox</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenWarning.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenWarning.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenWarning.cpp">
+      <Filter>Source Files\Screen\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="LabelWithBorder.cpp">
+      <Filter>Source Files\Screen\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>Source Files\Screen\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenAxis.cpp">
+      <Filter>Source Files\Screen\Screen</Filter>
+    </ClCompile>
     <ClCompile Include="ScreenState.cpp">
-      <Filter>Source Files\Screen</Filter>
+      <Filter>Source Files\Screen\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenSetting.cpp">
+      <Filter>Source Files\Screen\ScreenSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenMain.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenMain.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TeachingBoxContext.cpp">
+      <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenMain.cpp">
+      <Filter>Source Files\Screen\ScreenMain</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenFactory.cpp">
+      <Filter>Source Files\Screen\ScreenMain</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenMainParent.cpp">
+      <Filter>Source Files\Screen\ScreenMain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,12 +180,18 @@
     <CustomBuild Include="WarningLight.h">
       <Filter>Header Files\TeachingBox</Filter>
     </CustomBuild>
+    <CustomBuild Include="ScreenWarning.h">
+      <Filter>Header Files\Screen\Screen</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ScreenMain.h">
+      <Filter>Header Files\Screen\ScreenMain</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="teachingbox_zh.ts">
+    <None Include="teachingbox_zh.qm">
       <Filter>Translation Files</Filter>
     </None>
-    <None Include="teachingbox_zh.qm">
+    <None Include="teachingbox_zh.ts">
       <Filter>Translation Files</Filter>
     </None>
   </ItemGroup>
@@ -133,11 +199,32 @@
     <ClInclude Include="Button.h">
       <Filter>Header Files\Widget</Filter>
     </ClInclude>
+    <ClInclude Include="TeachingBoxContext.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenSetting.h">
+      <Filter>Header Files\Screen\ScreenSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="LabelWithBorder.h">
+      <Filter>Header Files\Screen\Screen</Filter>
+    </ClInclude>
     <ClInclude Include="Screen.h">
-      <Filter>Header Files\Screen</Filter>
+      <Filter>Header Files\Screen\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenAxis.h">
+      <Filter>Header Files\Screen\Screen</Filter>
     </ClInclude>
     <ClInclude Include="ScreenState.h">
-      <Filter>Header Files\Screen</Filter>
+      <Filter>Header Files\Screen\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="NScreenType.h">
+      <Filter>Header Files\Screen\ScreenMain</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenFactory.h">
+      <Filter>Header Files\Screen\ScreenMain</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenMainParent.h">
+      <Filter>Header Files\Screen\ScreenMain</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

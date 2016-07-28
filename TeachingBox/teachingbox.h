@@ -63,15 +63,6 @@ private slots:
 	virtual void UpdateText() override;
 
 private:
-	enum ExecuteMode
-	{
-		AUTO,
-		STEP,
-		MANUAL,
-	};
-	ExecuteMode m_executeMode=ExecuteMode::AUTO;
-
-private:
 	QButtonGroup* m_modelButtonGroup;
 
 	WarningLight* m_clRun;

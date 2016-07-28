@@ -3,8 +3,6 @@
 #include "QPainter"
 #include "QPen"
 
-
-
 const QColor WarningLight::COLOR_ON = Qt::red;
 
 const QColor WarningLight::COLOR_OFF = Qt::black;
