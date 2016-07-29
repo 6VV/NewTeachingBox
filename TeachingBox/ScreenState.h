@@ -1,5 +1,5 @@
-﻿#ifndef _SCREEN_HEAD_H_
-#define _SCREEN_HEAD_H_
+﻿#ifndef _TEACHING_BOX_SCREEN_HEAD_H_
+#define _TEACHING_BOX_SCREEN_HEAD_H_
 
 /*************************************************
 //  Copyright (C), 2015-2016, CS&S. Co., Ltd.

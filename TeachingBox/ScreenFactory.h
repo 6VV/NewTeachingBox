@@ -1,5 +1,5 @@
-﻿#ifndef _SCREEN_FACTORY_H_
-#define _SCREEN_FACTORY_H_
+﻿#ifndef _TEACHING_BOX_SCREEN_FACTORY_H_
+#define _TEACHING_BOX_SCREEN_FACTORY_H_
 
 /*************************************************
 //  Copyright (C), 2015-2016, CS&S. Co., Ltd.
@@ -17,7 +17,7 @@
 *************************************************/
 
 #include "QHash"
-#include "NScreenType.h"
+#include "ScreenType.h"
 
 class QWidget;
 
@@ -26,16 +26,16 @@ class ScreenFactory
 public:
 	~ScreenFactory();
 
-	QWidget* Create(const NScreenType::ScreenType type, QWidget* parent);
+	QWidget* Create(const ScreenType::ScreenType type, QWidget* parent);
+	void Destroy(const ScreenType::ScreenType type);
+
+private:
 	void Clear();
-	void Destroy(const NScreenType::ScreenType type);
+	QWidget* CreateWithoutCheck(const ScreenType::ScreenType type, QWidget* parent);
+	QWidget* Find(const ScreenType::ScreenType type);
 
 private:
-	QWidget* Find(const NScreenType::ScreenType type);
-	QWidget* CreateWithoutCheck(const NScreenType::ScreenType type, QWidget* parent);
-
-private:
-	QHash<NScreenType::ScreenType, QWidget*> m_screens;
+	QHash<ScreenType::ScreenType, QWidget*> m_screens;
 };
 
 #endif

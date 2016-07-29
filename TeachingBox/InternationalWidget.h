@@ -1,5 +1,5 @@
-﻿#ifndef _INTERNATIONAL_WIDGET_H_
-#define _INTERNATIONAL_WIDGET_H_
+﻿#ifndef _TEACHING_BOX_INTERNATIONAL_WIDGET_H_
+#define _TEACHING_BOX_INTERNATIONAL_WIDGET_H_
 
 /*************************************************
 //  Copyright (C), 2015-2016, CS&S. Co., Ltd.

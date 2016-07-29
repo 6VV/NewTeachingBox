@@ -6,7 +6,7 @@
 
 
 ScreenSetting::ScreenSetting(QWidget* parent)
-	:ScreenMainParent(parent)
+	:InternationalWidget(parent)
 {
 	Init();
 }
@@ -20,28 +20,28 @@ void ScreenSetting::UpdateText()
 {
 	/*登录窗口*/
 	m_groupboxLogin->setTitle(tr("Login"));
-	m_lbUser->setText(QCoreApplication::translate("CScreenSetting", "User"));
-	m_lbAuthority->setText(QCoreApplication::translate("CScreenSetting", "Level"));
-	m_btnLogout->setText(QCoreApplication::translate("CScreenSetting", "Logout"));
+	m_lbUser->setText(tr("User"));
+	m_lbAuthority->setText(tr("Level"));
+	m_btnLogout->setText(tr("Logout"));
 
 	/*系统设置窗口*/
-	m_groupboxSystemSettings->setTitle(QCoreApplication::translate("CScreenSetting", "System settings"));
-	m_lbLanguage->setText(QCoreApplication::translate("CScreenSetting", "Language"));
-	m_lbDate->setText(QCoreApplication::translate("CScreenSetting", "Date"));
-	m_lbTime->setText(QCoreApplication::translate("CScreenSetting", "time"));
-	m_cmbLanguage->setItemText(0, QCoreApplication::translate("CScreenSetting", "English"));
-	m_cmbLanguage->setItemText(1, QCoreApplication::translate("CScreenSetting", "Chinese"));
+	m_groupboxSystemSettings->setTitle(tr("System settings"));
+	m_lbLanguage->setText(tr("Language"));
+	m_lbDate->setText(tr("Date"));
+	m_lbTime->setText(tr("time"));
+	m_cmbLanguage->setItemText(0, tr("English"));
+	m_cmbLanguage->setItemText(1, tr("Chinese"));
 
 	/*机器人控制权限窗口*/
-	m_groupboxRobotControlAuthority->setTitle(QCoreApplication::translate("CScreenSetting", "Robot control authority"));
-	m_lbControlAuthority->setText(QCoreApplication::translate("CScreenSetting", "Control authority"));
-	m_lbDevice->setText(QCoreApplication::translate("CScreenSetting", "Device"));
-	m_lbDeviceIp->setText(QCoreApplication::translate("CScreenSetting", "Device IP"));
+	m_groupboxRobotControlAuthority->setTitle(tr("Robot control authority"));
+	m_lbControlAuthority->setText(tr("Control authority"));
+	m_lbDevice->setText(tr("Device"));
+	m_lbDeviceIp->setText(tr("Device IP"));
 
 	/*显示设置窗口*/
-	m_groupboxDispaySettings->setTitle(QCoreApplication::translate("CScreenSetting", "Display setting"));
-	m_lbLockScreen->setText(QCoreApplication::translate("CScreenSetting", "Displaylock"));
-	m_btnLockScreen->setText(QCoreApplication::translate("CScreenSetting", "Lock"));
+	m_groupboxDispaySettings->setTitle(tr("Display setting"));
+	m_lbLockScreen->setText(tr("Displaylock"));
+	m_btnLockScreen->setText(tr("Lock"));
 
 
 	/*更新日期时间*/
@@ -55,7 +55,6 @@ void ScreenSetting::UpdateText()
 void ScreenSetting::Init()
 {
 	QGridLayout* layout = new QGridLayout(this);
-	m_layoutMain->addLayout(layout);
 
 	layout->addWidget(CreateBoxLogin(), 0, 0);
 	layout->addWidget(CreateBoxSystemSettings(), 0, 1);
@@ -69,12 +68,7 @@ void ScreenSetting::Init()
 	layout->setSpacing(5);
 	layout->setMargin(5);
 
-	QList<QPushButton*> btnList;
-	btnList.append(new Button("test"));
-	UpdateButtonList(btnList);
-
 	UpdateText();
-
 }
 
 QGroupBox* ScreenSetting::CreateBoxLogin()
@@ -168,8 +162,9 @@ QGroupBox* ScreenSetting::CreateBoxSystemSettings()
 	layoutTime->setStretch(1, 1);
 
 	/*为控件添加内容*/
-	m_cmbLanguage->addItem(tr("English"));
-	m_cmbLanguage->addItem(tr( "Chinese"));
+	m_cmbLanguage->addItem(tr("English"),"en");
+	m_cmbLanguage->addItem(tr("Chinese"),"zh");
+	connect(m_cmbLanguage, SIGNAL(currentIndexChanged(int)), this, SLOT(SlotChangeLanguage(int)));
 
 	/*设置控件样式*/
 	m_lbDateValue->setFrameStyle(QFrame::WinPanel | QFrame::Sunken);
@@ -254,4 +249,22 @@ QGroupBox* ScreenSetting::CreateBoxLockScreenSetting()
 	return m_groupboxDispaySettings;
 }
 
+void ScreenSetting::SlotChangeLanguage(int index)
+{
+	static QTranslator* translator = nullptr;
+	if (translator != nullptr)
+	{
+		qApp->removeTranslator(translator);
+		delete(translator);
+		translator = nullptr;
+	}
+	translator = new QTranslator;
+
+	QString languate = m_cmbLanguage->itemData(index).toString();
+	QString text = QString(":/TeachingBox/teachingbox_%1.qm").arg(languate);
+	if (translator->load(text))
+	{
+		qApp->installTranslator(translator);
+	}
+}
 

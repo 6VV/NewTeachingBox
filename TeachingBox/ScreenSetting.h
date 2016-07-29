@@ -1,16 +1,18 @@
 ﻿#ifndef _SCREEN_SETTING_H_
 #define _SCREEN_SETTING_H_
 
-#include "ScreenMainParent.h"
+#include "InternationalWidget.h"
 
 class Button;
 class QGroupBox;
+class QComboBox;
+class QCheckBox;
+class QLabel;
 
-class ScreenSetting:public ScreenMainParent
+class ScreenSetting:public InternationalWidget
 {
-	friend class ScreenFactory;
-
-private:
+	Q_OBJECT
+public:
 	ScreenSetting(QWidget* parent);
 	ScreenSetting(const ScreenSetting&);
 	ScreenSetting& operator=(const ScreenSetting&);
@@ -24,6 +26,9 @@ private:
 	QGroupBox* CreateBoxSystemSettings();
 	QGroupBox* CreateBoxRobotControlAuthority();
 	QGroupBox* CreateBoxLockScreenSetting();
+
+private slots:
+	void SlotChangeLanguage(int index);
 
 private:
 	QGroupBox* m_groupboxLogin;
@@ -57,7 +62,6 @@ private:
 	/*显示设置窗口*/
 	QLabel* m_lbLockScreen;
 	Button* m_btnLockScreen;
-
 };
 
 #endif

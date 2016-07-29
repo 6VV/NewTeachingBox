@@ -22,16 +22,19 @@ public:
 	virtual ~ScreenMainParent();
 
 protected:
-	void UpdateButtonList(QList<QPushButton*> btnList);
+	virtual QList<QPushButton*> GetButtonList() =0;
+	virtual QLayout* GetMainLayout() =0;
 
 private:
-	void Init();
+	void showEvent(QShowEvent *) override;
 
-protected:
+	void Init();
+	void UpdateButtonLayout(const QList<QPushButton*>& btnList);
+
+private:
+	bool m_isFirstShow = true;
 	QHBoxLayout* m_layoutMain;
 	QHBoxLayout* m_layoutButtons;
-
-private:
 	Button* m_btnBack;
 };
 

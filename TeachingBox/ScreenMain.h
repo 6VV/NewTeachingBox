@@ -1,8 +1,10 @@
-﻿#ifndef _SCREEN_MAIN_H_
-#define _SCREEN_MAIN_H_
+﻿#ifndef _TEACHING_BOX_SCREEN_MAIN_H_
+#define _TEACHING_BOX_SCREEN_MAIN_H_
 
 #include "QStackedWidget"
-#include "ScreenFactory.h"
+#include <memory>
+
+class ScreenFactory;
 
 class ScreenMain:public QStackedWidget
 {
@@ -16,7 +18,7 @@ private:
 	void Init();
 
 private:
-	ScreenFactory m_screenFactory;
+	std::unique_ptr<ScreenFactory> m_screenFactory;
 };
 
 #endif

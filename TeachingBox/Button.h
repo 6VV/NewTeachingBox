@@ -1,5 +1,5 @@
-﻿#ifndef _BUTTON_H_
-#define _BUTTON_H_
+﻿#ifndef _TEACHING_BOX_BUTTON_H_
+#define _TEACHING_BOX_BUTTON_H_
 
 /*************************************************
 //  Copyright (C), 2015-2016, CS&S. Co., Ltd.

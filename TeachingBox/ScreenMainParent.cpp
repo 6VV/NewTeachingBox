@@ -17,7 +17,7 @@ ScreenMainParent::~ScreenMainParent()
 
 }
 
-void ScreenMainParent::UpdateButtonList(QList<QPushButton*> btnList)
+void ScreenMainParent::UpdateButtonLayout(const QList<QPushButton*>& btnList)
 {
 	for (auto var : btnList)
 	{
@@ -33,6 +33,17 @@ void ScreenMainParent::UpdateButtonList(QList<QPushButton*> btnList)
 	}
 
 	m_layoutButtons->addWidget(m_btnBack);
+}
+
+void ScreenMainParent::showEvent(QShowEvent *)
+{
+	if (m_isFirstShow)
+	{
+		m_layoutMain->addLayout(GetMainLayout());
+		UpdateButtonLayout(GetButtonList());
+
+		m_isFirstShow = false;
+	}
 }
 
 void ScreenMainParent::Init()

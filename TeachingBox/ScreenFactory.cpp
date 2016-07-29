@@ -1,7 +1,6 @@
 ﻿#include "stdafx.h"
 #include "ScreenFactory.h"
-#include "ScreenSetting.h"
-
+#include "ScreenService.h"
 
 
 ScreenFactory::~ScreenFactory()
@@ -9,7 +8,7 @@ ScreenFactory::~ScreenFactory()
 	Clear();
 }
 
-QWidget* ScreenFactory::Create(const NScreenType::ScreenType type, QWidget* parent)
+QWidget* ScreenFactory::Create(const ScreenType::ScreenType type, QWidget* parent)
 {
 	auto result = Find(type);
 	if (!result)
@@ -21,7 +20,7 @@ QWidget* ScreenFactory::Create(const NScreenType::ScreenType type, QWidget* pare
 	return result;
 }
 
-void ScreenFactory::Destroy(const NScreenType::ScreenType type)
+void ScreenFactory::Destroy(const ScreenType::ScreenType type)
 {
 	delete Find(type);
 	m_screens.remove(type);
@@ -36,7 +35,7 @@ void ScreenFactory::Clear()
 	m_screens.clear();
 }
 
-QWidget* ScreenFactory::Find(const NScreenType::ScreenType type)
+QWidget* ScreenFactory::Find(const ScreenType::ScreenType type)
 {
 	auto iter = m_screens.find(type);
 	if (iter==m_screens.end())
@@ -47,12 +46,12 @@ QWidget* ScreenFactory::Find(const NScreenType::ScreenType type)
 	return iter.value();
 }
 
-QWidget* ScreenFactory::CreateWithoutCheck(const NScreenType::ScreenType type, QWidget* parent)
+QWidget* ScreenFactory::CreateWithoutCheck(const ScreenType::ScreenType type, QWidget* parent)
 {
 	switch (type)
 	{
-	case NScreenType::SETTING:{
-		return new ScreenSetting(parent);
+	case ScreenType::SERVICE:{
+		return new ScreenService(parent);
 	}break;
 	default:{
 		return nullptr;

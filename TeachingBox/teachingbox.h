@@ -1,5 +1,5 @@
-﻿#ifndef _TEACHING_BOX_H_
-#define _TEACHING_BOX_H_
+﻿#ifndef _TEACHING_BOX_TEACHING_BOX_H_
+#define _TEACHING_BOX_TEACHING_BOX_H_
 
 /*************************************************
 //  Copyright (C), 2015-2016, CS&S. Co., Ltd.

@@ -1,5 +1,5 @@
-﻿#ifndef _WARNING_LIGHT_H_
-#define _WARNING_LIGHT_H_
+﻿#ifndef _TEACHING_BOX_WARNING_LIGHT_H_
+#define _TEACHING_BOX_WARNING_LIGHT_H_
 
 /*************************************************
 //  Copyright (C), 2015-2016, CS&S. Co., Ltd.
