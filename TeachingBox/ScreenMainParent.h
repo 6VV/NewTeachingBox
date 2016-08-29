@@ -22,12 +22,12 @@ public:
 	virtual ~ScreenMainParent();
 
 protected:
+	void showEvent(QShowEvent *) override;
+
 	virtual QList<QPushButton*> GetButtonList() =0;
 	virtual QLayout* GetMainLayout() =0;
 
 private:
-	void showEvent(QShowEvent *) override;
-
 	void Init();
 	void UpdateButtonLayout(const QList<QPushButton*>& btnList);
 

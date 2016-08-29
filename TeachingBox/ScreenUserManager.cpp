@@ -1,8 +1,13 @@
 ﻿#include "stdafx.h"
 #include "ScreenUserManager.h"
 #include "Button.h"
+#include "DialogEditUser.h"
+#include "QList"
+#include "User.h"
+#include "UserDatabase.h"
+#include "QMessageBox"
 
-
+using namespace Database;
 
 ScreenUserManager::ScreenUserManager(QWidget* parent)
 	:InternationalWidget(parent)
@@ -17,6 +22,39 @@ ScreenUserManager::ScreenUserManager(QWidget* parent)
 ScreenUserManager::~ScreenUserManager()
 {
 
+}
+
+void ScreenUserManager::OnUpdate()
+{
+	int currentAuthority = TeachingBoxContext::GetUser().GetAuthority();
+	QList<User> suitableUsers;
+
+	QList<User> allUsers = UserDatabase::SelectAllUsers();
+	for (auto var : allUsers)
+	{
+		if (var.GetAuthority() <= currentAuthority)
+		{
+			suitableUsers.append(var);
+		}
+	}
+
+	m_tableWidget->setRowCount(suitableUsers.size());
+
+	int index = 0;
+	for (auto user:suitableUsers)
+	{
+		m_tableWidget->setItem(index, 0, new QTableWidgetItem(user.GetName()));
+		m_tableWidget->setItem(index, 1, new QTableWidgetItem(QString::number(user.GetAuthority())));
+		m_tableWidget->setItem(index, 2, new QTableWidgetItem(user.GetLanguage()));
+
+		++index;
+	}
+
+}
+
+void ScreenUserManager::showEvent(QShowEvent *)
+{
+	OnUpdate();
 }
 
 QLayout* ScreenUserManager::GetButtonLayout()
@@ -52,6 +90,7 @@ QLayout* ScreenUserManager::GetMainLayout()
 void ScreenUserManager::Init()
 {
 	InitLayout();
+	InitSignalSlot();
 
 	UpdateText();
 }
@@ -67,6 +106,13 @@ void ScreenUserManager::InitLayout()
 	layout->setStretch(1, 0);
 }
 
+void ScreenUserManager::InitSignalSlot()
+{
+	connect(m_btnNew, SIGNAL(clicked()), this, SLOT(SlotOnNewButtonClicked()));
+	connect(m_btnEdit, SIGNAL(clicked()), this, SLOT(SlotOnEditButtonClicked()));
+	connect(m_btnDelete, SIGNAL(clicked()), this, SLOT(SlotOnDeleteButtonClicked()));
+}
+
 void ScreenUserManager::UpdateText()
 {
 	m_btnNew->setText(tr("New"));
@@ -78,4 +124,53 @@ void ScreenUserManager::UpdateText()
 		<< tr("Authority")
 		<< tr("Language");
 	m_tableWidget->setHorizontalHeaderLabels(strHeader);
+}
+
+void ScreenUserManager::SlotOnNewButtonClicked()
+{
+	(new DialogEidtUser(this,this,DialogEidtUser::ADD))->show();
+}
+
+void ScreenUserManager::SlotOnEditButtonClicked()
+{
+	auto item = m_tableWidget->item(m_tableWidget->currentRow(), 0);
+	if (item==nullptr)
+	{
+		return;
+	}
+	QString name = item->text();
+	(new DialogEidtUser(this, this, DialogEidtUser::EDIT, name))->show();
+}
+
+void ScreenUserManager::SlotOnDeleteButtonClicked()
+{
+	int row = m_tableWidget->currentRow();
+	if (row < 0)
+	{
+		QMessageBox::warning(this, tr("Warning"),tr("Please Select An User"));
+		return;
+	}
+
+	/*获取删除的用户名*/
+	QString userName = m_tableWidget->item(row, 0)->text();
+
+	/*获取要删除的用户*/
+	User user=UserDatabase::SelectUser(userName);
+
+	/*用户权限低于当前操作者*/
+	switch (QMessageBox::question(this, tr("Delete User"), userName,
+		QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok))
+	{
+	case QMessageBox::Ok:
+	{
+		UserDatabase::DeleteUserInfo(userName);
+		OnUpdate();
+	}break;
+	case QMessageBox::Cancel:
+	{
+		return;
+	}break;
+	default:
+		break;
+	}
 }

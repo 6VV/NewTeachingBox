@@ -1,6 +1,21 @@
 ﻿#ifndef _SCREEN_SETTING_H_
 #define _SCREEN_SETTING_H_
 
+/*************************************************
+//  Copyright (C), 2015-2016, CS&S. Co., Ltd.
+//  File name: 	    ScreenSetting.h
+//  Author:			刘巍      
+//  Version: 		1.0     
+//  Date: 			2016/08/01
+//  Description:	登录界面，包括用户登录及系统基本设置方面
+//  Others:
+//  History:
+//    <author>      刘巍 
+//    <time>        2016/08/01
+//    <version>     1.0 
+//    <desc>        build this moudle     
+*************************************************/
+
 #include "InternationalWidget.h"
 
 class Button;
@@ -28,6 +43,8 @@ private:
 	QGroupBox* CreateBoxLockScreenSetting();
 
 private slots:
+	void showEvent(QShowEvent *) override;
+
 	void SlotChangeLanguage(int index);
 
 private:

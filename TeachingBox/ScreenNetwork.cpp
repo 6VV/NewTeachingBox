@@ -43,6 +43,7 @@ void ScreenNetwork::InitLayout()
 	layoutButton->addWidget(m_btnAdd);
 	layoutButton->addWidget(m_btnDelete);
 	layoutButton->addWidget(m_btnConnect);
+	layoutButton->addStretch(1);
 
 	layout->addWidget(m_listWidgetHost);
 	layout->addLayout(layoutButton);

@@ -27,6 +27,7 @@ public:
 	~ScreenUser();
 
 private:
+	void showEvent(QShowEvent *) override;
 	virtual void UpdateText() override;
 
 	void Init();

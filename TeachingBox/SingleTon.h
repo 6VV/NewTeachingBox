@@ -20,7 +20,7 @@
 #include <mutex>
 
 template<typename TYPE>
-class CSingleTon
+class SingleTon
 {
 public:
 	/*获取唯一实例*/
@@ -59,7 +59,7 @@ private:
 		CGarbo();
 		~CGarbo()
 		{
-			CSingleTon::Destroy();
+			SingleTon::Destroy();
 		}
 	};
 	static CGarbo m_garbo;
@@ -68,15 +68,15 @@ private:
 	static TYPE* m_instance; /*唯一实例*/
 
 	/*禁止构造函数*/
-	CSingleTon();
-	CSingleTon(const CSingleTon&);
-	CSingleTon& operator=(const CSingleTon&);
+	SingleTon();
+	SingleTon(const SingleTon&);
+	SingleTon& operator=(const SingleTon&);
 
 	/*禁止析构函数*/
-	~CSingleTon();
+	~SingleTon();
 };
 
 template<typename TYPE>
-TYPE* CSingleTon<TYPE>::m_instance = nullptr;
+TYPE* SingleTon<TYPE>::m_instance = nullptr;
 
 #endif

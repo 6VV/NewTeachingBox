@@ -4,22 +4,27 @@
 
 #include <QButtonGroup>
 #include <QCheckBox>
+#include <QComboBox>
 #include <QDebug>
 #include <QEvent>
-#include <QComboBox>
+#include <QGroupBox>
 #include <QHash>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLayout>
 #include <QListWidget>
+#include <QLineEdit>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QStringList>
 #include <QTableWidget>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 #include <QVBoxLayout>
 #include <QtWidgets>
 #include <QStackedWidget>
-#include <QGroupBox>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 #pragma warning(pop)
 

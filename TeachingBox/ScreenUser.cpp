@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "ScreenUser.h"
 #include "QTableWidget"
+#include "TeachingBoxContext.h"
 
 
 
@@ -14,6 +15,13 @@ ScreenUser::ScreenUser(QWidget* parent)
 ScreenUser::~ScreenUser()
 {
 
+}
+
+void ScreenUser::showEvent(QShowEvent *)
+{
+	User user = TeachingBoxContext::GetUser();
+	m_tableWidget->setItem(0, 0, new QTableWidgetItem(user.GetName()));
+	m_tableWidget->setItem(0, 2, new QTableWidgetItem(QString::number(user.GetAuthority())));
 }
 
 void ScreenUser::UpdateText()

@@ -8,7 +8,7 @@
 //  Version: 		1.0     
 //  Date: 			2016/07/29
 //  Description:	用于显示用户、系统、网络等设置的界面
-//  Others:
+//  Others:			
 //  History:
 //    <author>      刘巍 
 //    <time>        2016/07/29
@@ -27,7 +27,7 @@ class ScreenNetwork;
 
 class ScreenService:public ScreenMainParent
 {
-	friend class ScreenFactory;
+	friend class ScreenManager;
 
 	Q_OBJECT
 
@@ -37,17 +37,20 @@ private:
 	ScreenService& operator=(const ScreenService&);
 	~ScreenService();
 	
+	virtual void UpdateText() override;
+	virtual QList<QPushButton*> GetButtonList() override;
+	virtual QLayout* GetMainLayout() override;
+
 	void Init();
 	void InitStackedWidget();
 	void InitSignalSlot();
 
-	virtual void UpdateText() override;
-
-	virtual QList<QPushButton*> GetButtonList() override;
-
-	virtual QLayout* GetMainLayout() override;
+	void UpdateControlerEnabled();
+	void UpdateControlerEnabled(bool enabled);
 
 private slots:
+	void showEvent(QShowEvent *) override;
+
 	void SlotOnChangeToScreenSetting();
 	void SlotOnChangeToScreenUser();
 	void SlotOnChangeToScreenUserManager();

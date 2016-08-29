@@ -16,8 +16,14 @@
 //    <desc>        build this moudle     
 *************************************************/
 
+#include "User.h"
+#include "QPoint"
+#include "QSize"
+
 namespace TeachingBoxContext
 {
+	const int STRING_MAX_LENGTH = 128;
+
 	enum ExecuteMode
 	{
 		AUTO,
@@ -25,7 +31,17 @@ namespace TeachingBoxContext
 		MANUAL,
 	};
 
+	QString GetLanguage();
+	User GetUser();
+
+	QRect GetScreenRect();
+
+	void SetTeachingBoxRect(const QRect& rect);
+	void SetScreenRect(const QRect& rect);
+
 	void SetExecuteMode(ExecuteMode mode);
+	void SetLanguage(const QString& language);
+	void SetUser(const User& user);
 }
 
 

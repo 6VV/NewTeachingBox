@@ -5,6 +5,7 @@
 #include "Button.h"
 #include "Screen.h"
 #include "TeachingBoxContext.h"
+#include "ScreenManager.h"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -15,6 +16,12 @@ TeachingBox::TeachingBox(QWidget *parent)
 TeachingBox::~TeachingBox()
 {
 
+}
+
+void TeachingBox::paintEvent(QPaintEvent *e)
+{
+	InternationalWidget::paintEvent(e);
+	TeachingBoxContext::SetTeachingBoxRect(geometry());
 }
 
 void TeachingBox::Init()
@@ -128,7 +135,7 @@ void TeachingBox::InitOption(QLayout* layout)
 	QVBoxLayout* realLayout = dynamic_cast<QVBoxLayout*>(layout);
 
 	Button* btnUndefine=new Button("U",this);
-	Button* btnSetting = new Button("Setting", this);
+	Button* btnService = new Button("Setting", this);
 	Button* btnVariate = new Button("Variate", this);
 	Button* btnProject = new Button("Project", this);
 	Button* btnProgram = new Button("Program", this);
@@ -136,13 +143,15 @@ void TeachingBox::InitOption(QLayout* layout)
 	Button* btnWarning = new Button("Warning", this);
 
 	realLayout->addWidget(btnUndefine);
-	realLayout->addWidget(btnSetting);
+	realLayout->addWidget(btnService);
 	realLayout->addWidget(btnVariate);
 	realLayout->addWidget(btnProject);
 	realLayout->addWidget(btnProgram);
 	realLayout->addWidget(btnCoordinate);
 	realLayout->addWidget(btnWarning);
 
+	connect(btnService, SIGNAL(clicked()), this, SLOT(SlotOnServiceButtonClicked()));
+	connect(btnVariate, SIGNAL(clicked()), this, SLOT(SlotOnVariateButtonClicked()));
 }
 
 void TeachingBox::InitMovement(QLayout* layout)
@@ -232,4 +241,14 @@ void TeachingBox::SlotOnModelChanged()
 
 void TeachingBox::UpdateText()
 {
+}
+
+void TeachingBox::SlotOnServiceButtonClicked()
+{
+	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::SERVICE);
+}
+
+void TeachingBox::SlotOnVariateButtonClicked()
+{
+	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::VARIATE);
 }

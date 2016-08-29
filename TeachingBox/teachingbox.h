@@ -46,6 +46,9 @@ public:
 	TeachingBox(QWidget *parent = 0);
 	~TeachingBox();
 
+protected:
+	void paintEvent(QPaintEvent *e) override;
+
 private:
 	void Init();
 	void InitBottom(QLayout* layout);
@@ -61,6 +64,9 @@ private slots:
 	void SlotOnModelChanged();
 
 	virtual void UpdateText() override;
+
+	void SlotOnServiceButtonClicked();
+	void SlotOnVariateButtonClicked();
 
 private:
 	QButtonGroup* m_modelButtonGroup;

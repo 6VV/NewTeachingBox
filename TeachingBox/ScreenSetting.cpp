@@ -2,6 +2,8 @@
 #include "ScreenSetting.h"
 #include "QGridLayout"
 #include "Button.h"
+#include "Language.h"
+#include "TeachingBoxContext.h"
 
 
 
@@ -29,8 +31,8 @@ void ScreenSetting::UpdateText()
 	m_lbLanguage->setText(tr("Language"));
 	m_lbDate->setText(tr("Date"));
 	m_lbTime->setText(tr("time"));
-	m_cmbLanguage->setItemText(0, tr("English"));
-	m_cmbLanguage->setItemText(1, tr("Chinese"));
+	//m_cmbLanguage->setItemText(0, tr("English"));
+	//m_cmbLanguage->setItemText(1, tr("Chinese"));
 
 	/*机器人控制权限窗口*/
 	m_groupboxRobotControlAuthority->setTitle(tr("Robot control authority"));
@@ -162,8 +164,10 @@ QGroupBox* ScreenSetting::CreateBoxSystemSettings()
 	layoutTime->setStretch(1, 1);
 
 	/*为控件添加内容*/
-	m_cmbLanguage->addItem(tr("English"),"en");
-	m_cmbLanguage->addItem(tr("Chinese"),"zh");
+	for (auto var :Language::LANGUAGES)
+	{
+		m_cmbLanguage->addItem(var.first, var.second);
+	}
 	connect(m_cmbLanguage, SIGNAL(currentIndexChanged(int)), this, SLOT(SlotChangeLanguage(int)));
 
 	/*设置控件样式*/
@@ -249,6 +253,14 @@ QGroupBox* ScreenSetting::CreateBoxLockScreenSetting()
 	return m_groupboxDispaySettings;
 }
 
+void ScreenSetting::showEvent(QShowEvent *)
+{
+	User user = TeachingBoxContext::GetUser();
+	m_cmbUser->setCurrentText(user.GetName());
+	m_lbAuthorityValue->setText(QString::number(user.GetAuthority()));
+	m_cmbLanguage->setCurrentText(TeachingBoxContext::GetLanguage());
+}
+
 void ScreenSetting::SlotChangeLanguage(int index)
 {
 	static QTranslator* translator = nullptr;
@@ -265,6 +277,7 @@ void ScreenSetting::SlotChangeLanguage(int index)
 	if (translator->load(text))
 	{
 		qApp->installTranslator(translator);
+		TeachingBoxContext::SetLanguage(m_cmbLanguage->currentText());
 	}
 }
 
