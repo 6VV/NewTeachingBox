@@ -17,6 +17,12 @@ TDynamic::TDynamic(QDataStream& dataStream) : TVariate(dataStream)
 	WriteValueStream(dataStream);
 }
 
+TDynamic::TDynamic(const TDynamic& variate)
+	: TVariate(variate)
+{
+	m_value = variate.m_value;
+}
+
 const tDynamicConstraint& TDynamic::GetValue() const
 {
 	return m_value;
@@ -52,6 +58,11 @@ void TDynamic::SlotOnTextChanged()
 	m_value.m_PostureDeceleration = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(5), 1))->text().toDouble();
 
 	UpdateRamAndDatabaseFrom(*this);
+}
+
+TVariate* TDynamic::Clone() const
+{
+	return new TDynamic(*this);
 }
 
 void TDynamic::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)

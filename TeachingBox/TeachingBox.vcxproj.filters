@@ -137,6 +137,15 @@
     <Filter Include="Source Files\Screen\ScreenVariate\TreeWidget">
       <UniqueIdentifier>{13a51189-ba57-4adb-8873-5f104a7cdf85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Screen\ScreenVariate\NewVariate">
+      <UniqueIdentifier>{708f8b3f-02a5-4304-ad88-f0793b421812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\ScreenVariate\NewVariate">
+      <UniqueIdentifier>{2725e29e-968a-43c9-a043-904104b47977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Variate\Variate">
+      <UniqueIdentifier>{a196207d-ed50-41a3-95f4-38f72c9edc91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -280,9 +289,6 @@
     <ClCompile Include="ScreenVariate.cpp">
       <Filter>Source Files\Screen\ScreenVariate</Filter>
     </ClCompile>
-    <ClCompile Include="VariateScope.cpp">
-      <Filter>Source Files\Variate</Filter>
-    </ClCompile>
     <ClCompile Include="ButtonGroup.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
@@ -385,9 +391,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ComboBoxInTree.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="KeyBoardButton.cpp">
-      <Filter>Source Files\Widget\Keyboard</Filter>
-    </ClCompile>
     <ClCompile Include="Keyboard.cpp">
       <Filter>Source Files\Widget\Keyboard</Filter>
     </ClCompile>
@@ -411,6 +414,54 @@
     </ClCompile>
     <ClCompile Include="WidgetItemInTree.cpp">
       <Filter>Source Files\Screen\ScreenVariate\TreeWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DialogNewVariate.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DialogNewVariate.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardButton.cpp">
+      <Filter>Source Files\Widget\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogNewVariate.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_VariateTableManager.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_VariateTableManager.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="VariateTableManager.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="VariateDatabase.cpp">
+      <Filter>Source Files\DataPersistence</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TVariateManager.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TVariateManager.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TVariateManager.cpp">
+      <Filter>Source Files\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="TScope.cpp">
+      <Filter>Source Files\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="TVariateFactory.cpp">
+      <Filter>Source Files\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="TVariateType.cpp">
+      <Filter>Source Files\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectContext.cpp">
+      <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="Context.cpp">
+      <Filter>Source Files\Context</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -450,31 +501,7 @@
     <CustomBuild Include="ScreenVariate.h">
       <Filter>Header Files\Screen\ScreenVariate</Filter>
     </CustomBuild>
-    <CustomBuild Include="TVariate.h">
-      <Filter>Header Files\Variate</Filter>
-    </CustomBuild>
     <CustomBuild Include="TSymbol.h">
-      <Filter>Header Files\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TPosition.h">
-      <Filter>Header Files\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TInteger.h">
-      <Filter>Header Files\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TString.h">
-      <Filter>Header Files\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TOverlap.h">
-      <Filter>Header Files\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TDouble.h">
-      <Filter>Header Files\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TDynamic.h">
-      <Filter>Header Files\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TBool.h">
       <Filter>Header Files\Variate</Filter>
     </CustomBuild>
     <CustomBuild Include="ComboBoxInTree.h">
@@ -485,6 +512,39 @@
     </CustomBuild>
     <CustomBuild Include="LineEditWithRegExpAndKeyboard.h">
       <Filter>Header Files\Widget\Keyboard</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DialogNewVariate.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="VariateTableManager.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TVariateManager.h">
+      <Filter>Header Files\Variate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TBool.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TDouble.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TDynamic.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TInteger.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TOverlap.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TPosition.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TString.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TVariate.h">
+      <Filter>Header Files\Variate\Variate</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -544,23 +604,11 @@
     <ClInclude Include="ScreenManager.h">
       <Filter>Header Files\Screen\ScreenMain</Filter>
     </ClInclude>
-    <ClInclude Include="VariateScope.h">
-      <Filter>Header Files\Variate</Filter>
-    </ClInclude>
     <ClInclude Include="ButtonGroup.h">
       <Filter>Header Files\Widget</Filter>
     </ClInclude>
     <ClInclude Include="DataStruct.h">
       <Filter>Header Files\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="cbuttonkeyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ccomboboxwithtree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ckeyboard.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TreeWidgetItemWithVariate.h">
       <Filter>Header Files\Screen\ScreenVariate\TreeWidget</Filter>
@@ -571,9 +619,6 @@
     <ClInclude Include="LineEditInTree.h">
       <Filter>Header Files\Screen\ScreenVariate\TreeWidget</Filter>
     </ClInclude>
-    <ClInclude Include="KeyBoardButton.h">
-      <Filter>Header Files\Widget\Keyboard</Filter>
-    </ClInclude>
     <ClInclude Include="KeyboardInterface.h">
       <Filter>Header Files\Widget\Keyboard</Filter>
     </ClInclude>
@@ -582,6 +627,30 @@
     </ClInclude>
     <ClInclude Include="WarningManager.h">
       <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardButton.h">
+      <Filter>Header Files\Widget\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="IEditVariate.h">
+      <Filter>Header Files\Screen\ScreenVariate</Filter>
+    </ClInclude>
+    <ClInclude Include="VariateDatabase.h">
+      <Filter>Header Files\DataPersistence</Filter>
+    </ClInclude>
+    <ClInclude Include="TScope.h">
+      <Filter>Header Files\Variate</Filter>
+    </ClInclude>
+    <ClInclude Include="TVariateFactory.h">
+      <Filter>Header Files\Variate</Filter>
+    </ClInclude>
+    <ClInclude Include="TVariateType.h">
+      <Filter>Header Files\Variate</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectContext.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.h">
+      <Filter>Header Files\Context</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

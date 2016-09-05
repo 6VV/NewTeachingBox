@@ -14,7 +14,10 @@ public:
 
 public:
 	TOverlap(const QString& scope, const QString& name, const tOverlapConstraint& value);
+	TOverlap(const TOverlap& variate);
 	TOverlap(QDataStream& dataStream);
+
+	virtual TVariate* Clone() const override;
 
 	const tOverlapConstraint& GetValue() const;
 	void SetValue(const tOverlapConstraint& value);
@@ -29,6 +32,7 @@ protected:
 
 protected slots:
 	void SlotOnTextChanged();
+
 
 private:
 	tOverlapConstraint m_value;

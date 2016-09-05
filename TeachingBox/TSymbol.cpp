@@ -17,6 +17,14 @@ TSymbol::TSymbol(QDataStream& dataStream)
 	dataStream >> m_type;
 }
 
+TSymbol::TSymbol(const TSymbol& symbol)
+{
+	m_scope = symbol.m_scope;
+	m_name = symbol.m_name;
+	m_type = symbol.m_type;
+	m_category = symbol.m_category;
+}
+
 TSymbol& TSymbol::operator=(const TSymbol& symbol)
 {
 	m_scope = symbol.m_scope;

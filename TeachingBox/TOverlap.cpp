@@ -19,6 +19,12 @@ TOverlap::TOverlap(QDataStream& dataStream) : TVariate(dataStream)
 	WriteValueSteam(dataStream);
 }
 
+TOverlap::TOverlap(const TOverlap& variate)
+	: TVariate(variate)
+{
+	m_value = variate.m_value;
+}
+
 const tOverlapConstraint& TOverlap::GetValue() const
 {
 	return m_value;
@@ -97,4 +103,9 @@ void TOverlap::SlotOnTextChanged()
 	m_value.m_TransitionParameter = static_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(1), 1))->text().toDouble();
 
 	UpdateRamAndDatabaseFrom(*this);
+}
+
+TVariate* TOverlap::Clone() const
+{
+	return new TOverlap(*this);
 }

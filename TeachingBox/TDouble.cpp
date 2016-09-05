@@ -15,6 +15,12 @@ TDouble::TDouble(QDataStream& dataStream) : TVariate(dataStream)
 	dataStream >> m_value;
 }
 
+TDouble::TDouble(const TDouble& variate)
+	: TVariate(variate)
+{
+	m_value = variate.m_value;
+}
+
 double TDouble::GetValue()
 {
 	return m_value;
@@ -52,5 +58,10 @@ void TDouble::UpdateFromValue(const TVariate& variate)
 void TDouble::SlotOnTextChanged(const QString& newValue)
 {
 	UpdateRamAndDatabaseFrom(TDouble(m_symbol.GetScope(), m_symbol.GetName(), newValue.toDouble()));
+}
+
+TVariate* TDouble::Clone() const
+{
+	return new TDouble(*this);
 }
 

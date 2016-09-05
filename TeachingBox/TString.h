@@ -9,7 +9,10 @@ class TString:public TVariate
 
 public:
 	TString(const QString& scope, const QString& name, const QString& value);
+	TString(const TString& variate);
 	TString(QDataStream& dataStream);
+
+	virtual TVariate* Clone() const override;
 
 	const QString& GetValue() const;
 	void SetValue(const QString& value);
@@ -25,7 +28,7 @@ protected slots:
 	void SlotOnTextChanged(const QString& text);
 
 private:
-	QString m_string;
+	QString m_value;
 };
 
 #endif

@@ -16,6 +16,12 @@ TBool::TBool(QDataStream& dataStream) : TVariate(dataStream)
 	dataStream >> m_value;
 }
 
+TBool::TBool(const TBool& variate)
+	: TVariate(variate)
+{
+	m_value = variate.m_value;
+}
+
 const bool TBool::GetValue() const
 {
 	return m_value;
@@ -68,5 +74,10 @@ void TBool::SlotOnIndexChanged(const QString& text)
 		value = true;
 	}
 	UpdateRamAndDatabaseFrom(TBool(m_symbol.GetScope(), m_symbol.GetName(), value));
+}
+
+TVariate* TBool::Clone() const
+{
+	return new TBool(*this);
 }
 

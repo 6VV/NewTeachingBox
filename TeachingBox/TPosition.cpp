@@ -23,6 +23,12 @@ TPosition::TPosition(const QString& scope, const QString& name, const tAxesAllPo
 	m_value = value;
 }
 
+TPosition::TPosition(const TPosition& variate)
+	: TVariate(variate)
+{
+	m_value = variate.m_value;
+}
+
 const tAxesAllPositions TPosition::GetValue() const
 {
 	return m_value;
@@ -82,4 +88,9 @@ void TPosition::SlotOnTextChanged()
 
 	m_value = position;
 	UpdateRamAndDatabaseFrom(*this);
+}
+
+TVariate* TPosition::Clone() const
+{
+	return new TPosition(*this);
 }

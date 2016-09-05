@@ -9,9 +9,11 @@ class TInteger:public TVariate
 
 public:
 	TInteger(const QString& scope, const QString& name,const int value);
+	TInteger(const TInteger& variate);
 	TInteger(QDataStream& dataStream);
 
-public:
+	virtual TVariate* Clone() const override;
+
 	int GetValue();
 	void SetValue(const int value);
 	virtual void ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
@@ -22,6 +24,7 @@ protected:
 
 protected slots:
 	void SlotOnTextChanged(const QString& newValue);
+
 
 private:
 	int m_value;

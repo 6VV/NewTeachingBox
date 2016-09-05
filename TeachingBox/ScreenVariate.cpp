@@ -1,10 +1,12 @@
 ﻿#include "stdafx.h"
 #include "ScreenVariate.h"
 #include "QTreeWidget"
-#include "VariateScope.h"
 #include "ButtonGroup.h"
-
-
+#include "DialogNewVariate.h"
+#include "WarningManager.h"
+#include "TScope.h"
+#include "Context.h"
+#include "TVariateManager.h"
 
 ScreenVariate::ScreenVariate(QWidget* parent /*= 0*/)
 	:ScreenMainParent(parent)
@@ -28,6 +30,25 @@ void ScreenVariate::SlotOnVariateButtonClicked()
 	m_btnGroupVariate->show();
 }
 
+void ScreenVariate::SlotOnNewVariateButtonClicked()
+{
+	auto item = m_treeWidget->currentItem();
+
+	if (item==nullptr)
+	{
+		WarningManager::Warning(this, tr("Please select a scope"));
+		return;
+	}
+	
+	auto scopeItem = item;
+	while (scopeItem->parent()!=nullptr)
+	{
+		scopeItem = scopeItem->parent();
+	}
+
+	(new VariateWidget::DialogNewVariate(scopeItem->text(0),this,this))->show();
+}
+
 QList<QPushButton*> ScreenVariate::GetButtonList()
 {
 	QList<QPushButton*> btnList;
@@ -47,6 +68,22 @@ QLayout* ScreenVariate::GetMainLayout()
 	return layout;
 }
 
+QTreeWidgetItem* ScreenVariate::FindScopeItem(const QString& scope)
+{
+	for (int i = 0; i < m_treeWidget->topLevelItemCount();++i)
+	{
+		auto item = m_treeWidget->topLevelItem(i);
+		QString text = item->text(0);
+		text;
+		if (item->text(0)==scope)
+		{
+			return item;
+		}
+	}
+
+	return nullptr;
+}
+
 void ScreenVariate::Init()
 {
 	InitTreeWidget();
@@ -61,10 +98,24 @@ void ScreenVariate::InitTreeWidget()
 	m_treeWidget->setColumnCount(2);
 	m_treeWidget->header()->setSectionResizeMode(QHeaderView::Stretch);	//平均分布各列
 
-	m_treeWidget->addTopLevelItem(new QTreeWidgetItem(QStringList{ VariateScope::SCOPE_SYSTEM }));
-	m_treeWidget->addTopLevelItem(new QTreeWidgetItem(QStringList{ VariateScope::SCOPE_SYNERGIC }));
-	m_treeWidget->addTopLevelItem(new QTreeWidgetItem(QStringList{ VariateScope::SCOPE_GLOBAL }));
-	m_treeWidget->addTopLevelItem(new QTreeWidgetItem(QStringList{ VariateScope::SCOPE_PROJECT }));
+	QStringList scopes = Context::sProjectContext.GetScopes();
+
+	for (auto scope:scopes)
+	{
+		auto treeItem = new QTreeWidgetItem(QStringList{ scope });
+		m_treeWidget->addTopLevelItem(treeItem);
+
+		auto variates = TVariateManager::GetInstance()->GetVariatesFromScope(scope);
+		for (auto variate:variates)
+		{
+			variate->ReadTreeWidgetItem(treeItem, m_treeWidget);
+		}
+	}
+
+	//m_treeWidget->addTopLevelItem(new QTreeWidgetItem(QStringList{ TScope::STR_SCOPE_SYSTEM }));
+	//m_treeWidget->addTopLevelItem(new QTreeWidgetItem(QStringList{ TScope::STR_SCOPE_SYNERGIC }));
+	//m_treeWidget->addTopLevelItem(new QTreeWidgetItem(QStringList{ TScope::STR_SCOPE_GLOBAL }));
+	
 }
 
 void ScreenVariate::InitButtonWidget()
@@ -90,6 +141,7 @@ void ScreenVariate::InitButtonWidget()
 void ScreenVariate::InitSignalSlot()
 {
 	connect(m_btnVariate, SIGNAL(clicked()), this, SLOT(SlotOnVariateButtonClicked()));
+	connect(m_btnNew, SIGNAL(clicked()), this, SLOT(SlotOnNewVariateButtonClicked()));
 }
 
 void ScreenVariate::UpdateText()
@@ -110,4 +162,10 @@ void ScreenVariate::UpdateText()
 	headStrings.append(tr("Variate"));
 	headStrings.append(tr("Value"));
 	m_treeWidget->setHeaderLabels(headStrings);
+}
+
+void ScreenVariate::OnNewVariate(TVariate& variate)
+{
+	variate.ReadTreeWidgetItem(FindScopeItem(variate.GetScope()), m_treeWidget);
+
 }

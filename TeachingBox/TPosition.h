@@ -11,7 +11,10 @@ class TPosition:public TVariate
 
 public:
 	TPosition(const QString& scope, const QString& name, const tAxesAllPositions& value);
+	TPosition(const TPosition& variate);
 	TPosition(QDataStream& dataStream);
+
+	virtual TVariate* Clone() const override;
 
 	const tAxesAllPositions GetValue() const;
 
@@ -24,6 +27,7 @@ protected:
 
 protected slots:
 	void SlotOnTextChanged();
+
 
 private:
 	tAxesAllPositions m_value;

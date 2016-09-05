@@ -1,5 +1,5 @@
-﻿#ifndef _INTERPRETER_T_SYMBOL_H_
-#define _INTERPRETER_T_SYMBOL_H_
+﻿#ifndef _TEACHING_BOX_T_SYMBOL_H_
+#define _TEACHING_BOX_T_SYMBOL_H_
 
 #include "QString"
 #include "QObject"
@@ -32,6 +32,7 @@ public:
 public:
 	TSymbol(const QString& scope, const QString& name, const SymbolCategory category, const SymbolType type);
 	TSymbol(QDataStream& dataStream);
+	TSymbol(const TSymbol& symbol);
 	TSymbol& operator=(const TSymbol& symbol);
 
 	SymbolType GetType() const;

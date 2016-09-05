@@ -8,7 +8,7 @@ TreeWidgetItemWithVariate::TreeWidgetItemWithVariate(QTreeWidgetItem* parentItem
 {
 	this->setText(0, variate->GetName());
 	this->setText(1, TSymbol::Map_Type[variate->GetType()]);
-	this->setText(2, variate->GetScope());
+	//this->setText(2, variate->GetScope());
 }
 
 TreeWidgetItemWithVariate::~TreeWidgetItemWithVariate()

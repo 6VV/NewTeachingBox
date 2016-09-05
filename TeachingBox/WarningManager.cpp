@@ -3,7 +3,6 @@
 #include "QMessageBox"
 
 
-
 WarningManager::WarningManager()
 {
 

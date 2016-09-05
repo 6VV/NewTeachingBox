@@ -14,7 +14,10 @@ public:
 
 public:
 	TBool(const QString& scope, const QString& name, const bool value);
+	TBool(const TBool& variate);
 	TBool(QDataStream& dataStream);
+
+	virtual TVariate* Clone() const override;
 
 	const bool GetValue() const;
 	void SetValue(const bool value);
@@ -27,6 +30,7 @@ protected:
 
 protected slots:
 	void SlotOnIndexChanged(const QString&);
+
 
 
 private:

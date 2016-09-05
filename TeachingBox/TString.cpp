@@ -7,22 +7,28 @@
 TString::TString(const QString& scope, const QString& name, const QString& value)
 	:TVariate(scope,name,TSymbol::TYPE_STRING)
 {
-	m_string = value;
+	m_value = value;
 }
 
 TString::TString(QDataStream& dataStream) : TVariate(dataStream)
 {
-	dataStream >> m_string;
+	dataStream >> m_value;
+}
+
+TString::TString(const TString& variate)
+	: TVariate(variate)
+{
+	m_value = variate.m_value;
 }
 
 const QString& TString::GetValue() const
 {
-	return m_string;
+	return m_value;
 }
 
 void TString::SetValue(const QString& value)
 {
-	m_string = value;
+	m_value = value;
 }
 
 void TString::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
@@ -30,7 +36,7 @@ void TString::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeW
 	TreeWidgetItemWithVariate* VariateItem = new TreeWidgetItemWithVariate(parentItem, this);
 	QTreeWidgetItem* item = new QTreeWidgetItem(VariateItem, QStringList("Value"));
 
-	QLineEdit* lineEditValue = new QLineEdit(m_string);
+	QLineEdit* lineEditValue = new QLineEdit(m_value);
 
 	treeWidget->setItemWidget(item, 1, lineEditValue);
 
@@ -39,16 +45,21 @@ void TString::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeW
 
 void TString::ReadValueStream(QDataStream& dataStream)const
 {
-	dataStream << m_string;
+	dataStream << m_value;
 }
 
 void TString::UpdateFromValue(const TVariate& variate)
 {
-	m_string = static_cast<const TString&>(variate).m_string;
+	m_value = static_cast<const TString&>(variate).m_value;
 }
 
 void TString::SlotOnTextChanged(const QString& text)
 {
-	m_string = text;
+	m_value = text;
 	UpdateRamAndDatabaseFrom(*this);
+}
+
+TVariate* TString::Clone() const
+{
+	return new TString(*this);
 }

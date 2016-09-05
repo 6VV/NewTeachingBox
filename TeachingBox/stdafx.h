@@ -6,6 +6,7 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDebug>
+#include <QDialog>
 #include <QEvent>
 #include <QGroupBox>
 #include <QHash>

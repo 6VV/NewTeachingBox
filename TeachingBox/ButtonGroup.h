@@ -13,7 +13,7 @@ public:
 	~ButtonGroup();
 
 private:
-	void showEvent(QShowEvent *);
+	void showEvent(QShowEvent *) override;
 
 	void Init();
 

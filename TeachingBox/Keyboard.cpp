@@ -103,7 +103,11 @@ void Keyboard::InitLayout()
 	
 	/*设置位置及大小*/
 	QRect rect = TeachingBoxContext::GetScreenRect();
-	this->setGeometry(rect.left(), rect.top(), rect.width(), rect.height());
+	int x = rect.top();
+	int y = rect.bottom();
+	x;
+	y;
+	this->setGeometry(rect.left(), (rect.top()+rect.bottom())/2, rect.width(), rect.height()/2);
 
 	//this->setWindowModality(Qt::ApplicationModal);	/*其它窗口无效化*/
 
@@ -576,7 +580,8 @@ void Keyboard::Clear()
 void Keyboard::showEvent(QShowEvent *event)
 {
 	QWidget::showEvent(event);
-	this->move(TeachingBoxContext::GetScreenRect().left(),TeachingBoxContext::GetScreenRect().top());
+	this->move(TeachingBoxContext::GetScreenRect().left(),
+		(TeachingBoxContext::GetScreenRect().top() + TeachingBoxContext::GetScreenRect().bottom())/2);
 }
 
 void Keyboard::hideEvent(QHideEvent *event)

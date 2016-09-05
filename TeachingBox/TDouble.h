@@ -9,7 +9,10 @@ class TDouble:public TVariate
 
 public:
 	TDouble(const QString& scope, const QString& name, const double value);
+	TDouble(const TDouble& variate);
 	TDouble(QDataStream& dataStream);
+
+	virtual TVariate* Clone() const override;
 
 	double GetValue();
 	void SetValue(const double value);
@@ -22,6 +25,7 @@ protected:
 
 protected slots:
 	void SlotOnTextChanged(const QString& newValue);
+
 
 
 private:

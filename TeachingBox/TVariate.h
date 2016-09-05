@@ -19,10 +19,13 @@ public:
 
 public:
 	TVariate(const QString& scope, const QString& name,TSymbol::SymbolType type);
+	TVariate(const TVariate& variate);
 	TVariate(QDataStream& dataStream);
 	virtual ~TVariate(){};
 
 public:
+	virtual TVariate* Clone() const = 0;
+
 	QString GetScope() const;
 	QString GetName() const;
 	TSymbol::SymbolType GetType() const;

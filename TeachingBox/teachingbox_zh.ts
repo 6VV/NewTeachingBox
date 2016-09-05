@@ -40,6 +40,70 @@
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="VariateTableManager.cpp" line="20"/>
+        <location filename="VariateTableManager.cpp" line="151"/>
+        <source>Name</source>
+        <translation type="unfinished">名字</translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="21"/>
+        <source>Scope</source>
+        <translation type="unfinished">作用域</translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="22"/>
+        <source>Type</source>
+        <translation type="unfinished">类型</translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="151"/>
+        <location filename="VariateTableManager.cpp" line="167"/>
+        <location filename="VariateTableManager.cpp" line="176"/>
+        <location filename="VariateTableManager.cpp" line="185"/>
+        <location filename="VariateTableManager.cpp" line="197"/>
+        <location filename="VariateTableManager.cpp" line="251"/>
+        <source>Value</source>
+        <translation type="unfinished">值</translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="232"/>
+        <source>Velocity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="233"/>
+        <source>Acceleration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="234"/>
+        <source>Deceleration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="235"/>
+        <source>PostureVelocity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="236"/>
+        <source>PostureAcceleration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="237"/>
+        <source>PostureDeceleration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="250"/>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ScreenNetwork</name>
     <message>
         <location filename="ScreenNetwork.cpp" line="27"/>
@@ -238,58 +302,63 @@
 <context>
     <name>ScreenVariate</name>
     <message>
-        <location filename="ScreenVariate.cpp" line="97"/>
-        <location filename="ScreenVariate.cpp" line="110"/>
+        <location filename="ScreenVariate.cpp" line="37"/>
+        <source>Please select a scope</source>
+        <translation type="unfinished">请选择作用域</translation>
+    </message>
+    <message>
+        <location filename="ScreenVariate.cpp" line="118"/>
+        <location filename="ScreenVariate.cpp" line="131"/>
         <source>Variate</source>
         <translation type="unfinished">变量</translation>
     </message>
     <message>
-        <location filename="ScreenVariate.cpp" line="98"/>
+        <location filename="ScreenVariate.cpp" line="119"/>
         <source>Teach</source>
         <translation type="unfinished">示教</translation>
     </message>
     <message>
-        <location filename="ScreenVariate.cpp" line="99"/>
+        <location filename="ScreenVariate.cpp" line="120"/>
         <source>Clear Unused</source>
         <translation type="unfinished">清除未用</translation>
     </message>
     <message>
-        <location filename="ScreenVariate.cpp" line="100"/>
+        <location filename="ScreenVariate.cpp" line="121"/>
         <source>Check</source>
         <translation type="unfinished">检查</translation>
     </message>
     <message>
-        <location filename="ScreenVariate.cpp" line="102"/>
+        <location filename="ScreenVariate.cpp" line="123"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">复制</translation>
     </message>
     <message>
-        <location filename="ScreenVariate.cpp" line="103"/>
+        <location filename="ScreenVariate.cpp" line="124"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">剪切</translation>
     </message>
     <message>
-        <location filename="ScreenVariate.cpp" line="104"/>
+        <location filename="ScreenVariate.cpp" line="125"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">粘贴</translation>
     </message>
     <message>
-        <location filename="ScreenVariate.cpp" line="105"/>
+        <location filename="ScreenVariate.cpp" line="126"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">重命名</translation>
     </message>
     <message>
-        <location filename="ScreenVariate.cpp" line="106"/>
+        <location filename="ScreenVariate.cpp" line="127"/>
         <source>New</source>
         <translation type="unfinished">新建</translation>
     </message>
     <message>
-        <location filename="ScreenVariate.cpp" line="107"/>
+        <location filename="ScreenVariate.cpp" line="128"/>
         <source>Delete</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="ScreenVariate.cpp" line="111"/>
+        <location filename="ScreenVariate.cpp" line="132"/>
         <source>Value</source>
         <translation type="unfinished">值</translation>
     </message>
@@ -300,6 +369,34 @@
         <location filename="ScreenWarning.cpp" line="24"/>
         <source>Confirm</source>
         <translation type="unfinished">确认</translation>
+    </message>
+</context>
+<context>
+    <name>VariateWidget::DialogNewVariate</name>
+    <message>
+        <location filename="DialogNewVariate.cpp" line="36"/>
+        <source>Wrong Variate</source>
+        <translation type="unfinished">错误的变量</translation>
+    </message>
+    <message>
+        <location filename="DialogNewVariate.cpp" line="86"/>
+        <source>Type</source>
+        <translation type="unfinished">类型</translation>
+    </message>
+    <message>
+        <location filename="DialogNewVariate.cpp" line="89"/>
+        <source>Confirm</source>
+        <translation type="unfinished">确认</translation>
+    </message>
+    <message>
+        <location filename="DialogNewVariate.cpp" line="90"/>
+        <source>Cancle</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <location filename="DialogNewVariate.cpp" line="190"/>
+        <source>New Variate</source>
+        <translation type="unfinished">新建变量</translation>
     </message>
 </context>
 </TS>

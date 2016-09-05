@@ -9,7 +9,10 @@ class TDynamic:public TVariate
 	Q_OBJECT
 public:
 	TDynamic(const QString& scope, const QString& name, const tDynamicConstraint& value);
+	TDynamic(const TDynamic& variate);
 	TDynamic(QDataStream& dataStream);
+
+	virtual TVariate* Clone() const override;
 
 	const tDynamicConstraint& GetValue() const;
 	void SetValue(const tDynamicConstraint& value);
@@ -24,6 +27,7 @@ protected:
 
 protected slots:
 	void SlotOnTextChanged();
+
 
 private:
 	tDynamicConstraint m_value;

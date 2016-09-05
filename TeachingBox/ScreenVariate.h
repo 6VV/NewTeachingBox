@@ -19,15 +19,20 @@
 
 #include "ScreenMainParent.h"
 #include "Button.h"
+#include "IEditVariate.h"
 
 class QTreeWidget;
 class ButtonGroup;
+class QTreeWidgetItem;
 
-class ScreenVariate:public ScreenMainParent
+class ScreenVariate:public ScreenMainParent,IEditVariate
 {
 	friend class ScreenManager;
 
 	Q_OBJECT
+
+public:
+	virtual void OnNewVariate(TVariate& variate) override;
 
 private:
 	ScreenVariate(QWidget* parent = 0);
@@ -38,9 +43,13 @@ private:
 private slots:
 	void SlotOnVariateButtonClicked();
 
+	void SlotOnNewVariateButtonClicked();
+
 private:
 	virtual QList<QPushButton*> GetButtonList() override;
 	virtual QLayout* GetMainLayout() override;
+
+	QTreeWidgetItem* FindScopeItem(const QString& scope);
 
 	void Init();
 	void InitTreeWidget();

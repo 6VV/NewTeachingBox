@@ -1,6 +1,6 @@
 ﻿#include "stdafx.h"
 #include "TInteger.h"
-#include "VariateType.h"
+#include "TVariateType.h"
 #include "RegExp.h"
 #include "TSymbol.h"
 #include "TreeWidgetItemWithVariate.h"
@@ -17,6 +17,12 @@ TInteger::TInteger(const QString& scope, const QString& name, const int value)
 TInteger::TInteger(QDataStream& dataStream) :TVariate(dataStream)
 {
 	dataStream >> m_value;
+}
+
+TInteger::TInteger(const TInteger& variate)
+	: TVariate(variate)
+{
+	m_value = variate.m_value;
 }
 
 int TInteger::GetValue()
@@ -45,10 +51,15 @@ void TInteger::SlotOnTextChanged(const QString& newValue)
 }
 
 
+TVariate* TInteger::Clone() const
+{
+	return new TInteger(*this);
+}
+
 void TInteger::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	TreeWidgetItemWithVariate* VariateItem = new TreeWidgetItemWithVariate(parentItem, this);
-	QTreeWidgetItem* item = new QTreeWidgetItem(VariateItem, QStringList("Value"));
+	QTreeWidgetItem* item = new QTreeWidgetItem(VariateItem, QStringList{ "Value" });
 
 	LineEditWithRegExpAndKeyboard* lineEditValue = new LineEditWithRegExpAndKeyboard(
 		QString::number(m_value), RegExp::STR_REG_INT);

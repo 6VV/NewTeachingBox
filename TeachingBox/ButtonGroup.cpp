@@ -51,5 +51,6 @@ void ButtonGroup::Init()
 
 	m_layout->setMargin(0);
 	m_layout->setSpacing(0);
+
 }
 

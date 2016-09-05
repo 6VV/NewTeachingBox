@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "TVariate.h"
+#include "TVariateManager.h"
 //#include "TVariateManager.h"
 
 
@@ -11,6 +12,11 @@ TVariate::TVariate(const QString& scope, const QString& name, TSymbol::SymbolTyp
 	: m_symbol(scope, name, TSymbol::CATEGORY_VARIABLE, type)
 {
 
+}
+
+TVariate::TVariate(const TVariate& variate)
+	: m_symbol(variate.m_symbol)
+{
 }
 
 QString TVariate::GetScope() const
@@ -65,7 +71,6 @@ void TVariate::UpdateFromVariate(const TVariate& variate)
 
 void TVariate::UpdateRamAndDatabaseFrom(const TVariate& variate) const
 {
-	variate;
-	//TVariateManager::GetInstance()->Update(m_symbol.GetScope(), m_symbol.GetName(), variate);
+	TVariateManager::GetInstance()->UpdateVariate(m_symbol.GetScope(), m_symbol.GetName(), variate);
 }
 
