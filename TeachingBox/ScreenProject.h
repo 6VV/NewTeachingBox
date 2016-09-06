@@ -11,10 +11,6 @@
 //					1、新建项目：在总项目文件夹下新建一以项目名命名的文件夹
 //					2、新建程序：在选择的项目下，新建一txt文档，所有文件均以EOF结尾
 //					3、删除文件：根据选择的内容，删除txt文档或项目文件夹
-//
-//
-//
-
 //  Others:
 //  Function List:
 //  History:
@@ -43,15 +39,24 @@ public:
 private slots:
 	void SlotOnButtonDeleteClicked();
 	void SlotOnButtonFileClicked();
+	void SlotOnButtonNewProjectClicked();
+	void SlotOnButtonNewProgramClicked();
+	void SlotOnButtonRefreshClicked();
+	void SlotOnButtonLoadClicked();
 
 private:
-	void Init();
-	void InitButtonGroup();
-	void InitSignalSlot();
-
 	virtual QList<QPushButton*> GetButtonList() override;
 	virtual QLayout* GetMainLayout() override;
 	virtual void UpdateText() override;
+
+	void Init();
+	void InitButtonGroup();
+	void InitSignalSlot();
+	bool IsCurrentItemProject();
+	bool IsCurrentItemProgram();
+
+	void InitFileTree();
+
 
 private:
 	std::unique_ptr<ProjectManager> m_projectManager;

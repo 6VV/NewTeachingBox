@@ -25,12 +25,25 @@ class ProjectManager
 {
 private:
 	static const QString PROJECT_PATH;
+	static const QString FILE_SUFFIX ;
 
 public:
+	bool CreateProject(const QString& project);
+	bool CreateProgram(const QString& project, const QString& program);
+
+	void DeleteProject(const QString& name);
+	void DeleteProgram(const QString& project,const QString& program);
+
 	void GetAllFiles(QTreeWidgetItem* parent);
+	QStringList GetProjectFiles(const QString& project);
+	QStringList GetStateTexts(const QString& fileName);
+
+	bool ExistProject(const QString& project);
+	bool ExistProgram(const QString& project, const QString& program);
 
 private:
 	void GetAllFilesFromPath(const QString & path, QTreeWidgetItem* parent);
+	QString GetWholeFileName(const QString& fileName);
 };
 
 #endif

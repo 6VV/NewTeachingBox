@@ -5,7 +5,9 @@
 #include "Button.h"
 #include "ProjectManager.h"
 #include "ButtonGroup.h"
-
+#include "WarningManager.h"
+#include "QInputDialog"
+#include "Context.h"
 
 
 ScreenProject::ScreenProject(QWidget* parent)
@@ -34,7 +36,24 @@ ScreenProject::~ScreenProject()
 
 void ScreenProject::SlotOnButtonDeleteClicked()
 {
+	if (IsCurrentItemProject())
+	{
+		m_projectManager->DeleteProject(m_treeWidget->currentItem()->text(0));
+		delete m_treeWidget->takeTopLevelItem(m_treeWidget->currentIndex().row());
+	}
+	else if (IsCurrentItemProgram())
+	{
+		auto item = m_treeWidget->currentItem();
+		m_projectManager->DeleteProgram(item->parent()->text(0), item->text(0));
 
+		item->parent()->removeChild(item);
+		delete item;
+	}
+	else
+	{
+		WarningManager::Warning(this, tr("Please select a file"));
+		return;
+	}
 }
 
 void ScreenProject::SlotOnButtonFileClicked()
@@ -42,9 +61,103 @@ void ScreenProject::SlotOnButtonFileClicked()
 	m_btnGroupFile->show();
 }
 
+void ScreenProject::SlotOnButtonNewProjectClicked()
+{
+	/*输入项目名*/
+	bool ok;
+	QString projectName = QInputDialog::getText(this, tr("New project"), tr("Input project name:"),QLineEdit::Normal,QString(),&ok);
+	
+	if (!ok)
+	{
+		return;
+	}
+
+	/*若已存在该项目*/
+	if (m_projectManager->ExistProject(projectName))
+	{
+		WarningManager::Warning(this, tr("Already exist ") + projectName);
+		return;
+	}
+	
+	/*创建项目 */
+	if (m_projectManager->CreateProject(projectName))
+	{
+		m_treeWidget->addTopLevelItem(new QTreeWidgetItem(m_projectManager->GetStateTexts(projectName)));
+	}
+}
+
+void ScreenProject::SlotOnButtonNewProgramClicked()
+{
+	/*若为无效节点*/
+	if (!IsCurrentItemProgram() && !IsCurrentItemProject())
+	{
+		WarningManager::Warning(this, tr("Please select a project"));
+		return;
+	}
+
+	/*输入程序名*/
+	bool ok;
+	QString program = QInputDialog::getText(this, tr("New program"), tr("Input program name:"), QLineEdit::Normal, QString(), &ok);
+	if (!ok)
+	{
+		return;
+	}
+	
+	/*获取当前项目节点*/
+	QTreeWidgetItem* parentItem = nullptr;
+	if (IsCurrentItemProject())
+	{
+		parentItem = m_treeWidget->currentItem();
+	}
+	else
+	{
+		parentItem = m_treeWidget->currentItem()->parent();
+	}
+
+	/*是否已存在该程序*/
+	QString project = parentItem->text(0);
+	if (m_projectManager->ExistProgram(project, program))
+	{
+		WarningManager::Warning(this, tr("Already exist ") + program);
+		return;
+	}
+
+	/*创建程序，添加节点*/
+	if (m_projectManager->CreateProgram(project, program))
+	{
+		parentItem->addChild(new QTreeWidgetItem(m_projectManager->GetStateTexts(program)));
+	}
+}
+
+void ScreenProject::SlotOnButtonRefreshClicked()
+{
+	InitFileTree();
+}
+
+void ScreenProject::SlotOnButtonLoadClicked()
+{
+	if (!IsCurrentItemProject() && !IsCurrentItemProgram())
+	{
+		WarningManager::Warning(this, tr("Please select a file"));
+		return;
+	}
+	
+	QString project;
+	if (IsCurrentItemProject())
+	{
+		project = m_treeWidget->currentItem()->text(0);
+	}
+	else
+	{
+		project = m_treeWidget->currentItem()->parent()->text(0);
+	}
+
+	Context::sProjectContext.SetLoadedProject(project, m_projectManager->GetProjectFiles(project));
+}
+
 void ScreenProject::Init()
 {
-	m_projectManager->GetAllFiles(m_treeWidget->invisibleRootItem());
+	InitFileTree();
 	InitButtonGroup();
 	InitSignalSlot();
 
@@ -63,6 +176,11 @@ void ScreenProject::InitButtonGroup()
 void ScreenProject::InitSignalSlot()
 {
 	connect(m_btnFile, SIGNAL(clicked()), this, SLOT(SlotOnButtonFileClicked()));
+	connect(m_btnDelete, SIGNAL(clicked()), this, SLOT(SlotOnButtonDeleteClicked()));
+	connect(m_btnNewProject, SIGNAL(clicked()), this, SLOT(SlotOnButtonNewProjectClicked()));
+	connect(m_btnNewProgram, SIGNAL(clicked()), this, SLOT(SlotOnButtonNewProgramClicked()));
+	connect(m_btnRefresh, SIGNAL(clicked()), this, SLOT(SlotOnButtonRefreshClicked()));
+	connect(m_btnLoad, SIGNAL(clicked()), this, SLOT(SlotOnButtonLoadClicked()));
 }
 
 QList<QPushButton*> ScreenProject::GetButtonList()
@@ -86,9 +204,38 @@ QLayout* ScreenProject::GetMainLayout()
 	return layout;
 }
 
+bool ScreenProject::IsCurrentItemProject()
+{
+	return m_treeWidget->currentItem() != nullptr && m_treeWidget->currentItem()->parent() == nullptr;
+}
+
+bool ScreenProject::IsCurrentItemProgram()
+{
+	auto currentItem = m_treeWidget->currentItem();
+	if (currentItem==nullptr)
+	{
+		return false;
+	}
+
+	if (currentItem->parent() == nullptr)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+void ScreenProject::InitFileTree()
+{
+	m_treeWidget->clear();
+	m_treeWidget->header()->setSectionResizeMode(QHeaderView::Stretch);
+
+	m_projectManager->GetAllFiles(m_treeWidget->invisibleRootItem());
+}
+
 void ScreenProject::UpdateText()
 {
-	m_treeWidget->setHeaderLabel(tr("Project"));
+	m_treeWidget->setHeaderLabels(QStringList{ tr("Project"),tr("Setting") });
 
 	m_btnLoad->setText(tr("Load"));
 	m_btnOpen->setText(tr("Open"));

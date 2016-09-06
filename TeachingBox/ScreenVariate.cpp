@@ -104,6 +104,12 @@ QLayout* ScreenVariate::GetMainLayout()
 	return layout;
 }
 
+void ScreenVariate::showEvent(QShowEvent *e)
+{
+	ScreenMainParent::showEvent(e);
+	InitTreeWidget();
+}
+
 QTreeWidgetItem* ScreenVariate::FindScopeItem(const QString& scope)
 {
 	for (int i = 0; i < m_treeWidget->topLevelItemCount();++i)
@@ -122,7 +128,6 @@ QTreeWidgetItem* ScreenVariate::FindScopeItem(const QString& scope)
 
 void ScreenVariate::Init()
 {
-	InitTreeWidget();
 	InitButtonWidget();
 	InitSignalSlot();
 
@@ -131,6 +136,7 @@ void ScreenVariate::Init()
 
 void ScreenVariate::InitTreeWidget()
 {
+	m_treeWidget->clear();
 	m_treeWidget->setColumnCount(2);
 	m_treeWidget->header()->setSectionResizeMode(QHeaderView::Stretch);	//平均分布各列
 
@@ -147,11 +153,6 @@ void ScreenVariate::InitTreeWidget()
 			variate->ReadTreeWidgetItem(treeItem, m_treeWidget);
 		}
 	}
-
-	//m_treeWidget->addTopLevelItem(new QTreeWidgetItem(QStringList{ TScope::STR_SCOPE_SYSTEM }));
-	//m_treeWidget->addTopLevelItem(new QTreeWidgetItem(QStringList{ TScope::STR_SCOPE_SYNERGIC }));
-	//m_treeWidget->addTopLevelItem(new QTreeWidgetItem(QStringList{ TScope::STR_SCOPE_GLOBAL }));
-	
 }
 
 void ScreenVariate::InitButtonWidget()

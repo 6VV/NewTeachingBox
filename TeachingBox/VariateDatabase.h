@@ -35,6 +35,7 @@ namespace Database{
 		static const QString GetTextCreateTable();
 
 		static void DeleteVariate(const QString& scope, const QString& name);
+		static void DeleteVariate(const QString& scope);
 		static void InsertVariate(QDataStream& dataStream);
 		static QVector<QByteArray> SelectAllVariates();
 		static void UpdateVariate(const QString& scope, const QString& name, QDataStream& dataStream);

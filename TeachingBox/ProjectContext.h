@@ -25,7 +25,6 @@ private:
 	const QString STR_SCOPE_SYSTEM = "SYSTEM";		/*系统作用域*/
 	const QString STR_SCOPE_SYNERGIC = "SYNERGIC";	/*协作作用域*/
 	const QString STR_SCOPE_GLOBAL = "GLOBAL";		/*全局作用域*/
-	const QString STR_SCOPE_PROJECT = "PROJECT";		/*项目作用域*/
 
 	const QStringList SCOPE_ORI;	/*初始作用域*/
 
@@ -34,11 +33,16 @@ public:
 
 	QStringList GetScopes();
 
+	void SetLoadedProject(const QString& project, const QStringList& programs);
+
 private:
 	ProjectContext& operator=(const ProjectContext&);
 
 private:
 	QStringList m_currentScopes;
+
+	QString m_project;
+	QStringList m_programs;
 };
 
 #endif

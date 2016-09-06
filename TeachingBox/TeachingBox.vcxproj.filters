@@ -161,6 +161,9 @@
     <Filter Include="Source Files\Screen\ScreenProgram">
       <UniqueIdentifier>{0a4851bc-f95c-4c1e-9bb8-b3f6990f13de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Text">
+      <UniqueIdentifier>{9a1f3381-1d15-43b8-9385-d3c444299eeb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -508,6 +511,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CodeEditor.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="TesTreeWdigetItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TesTreeWdigetItem.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TesTreeWdigetItem.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="teachingbox.qrc">
@@ -599,6 +611,9 @@
     </CustomBuild>
     <CustomBuild Include="CodeEditor.h">
       <Filter>Header Files\Screen\ScreenProgram</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TesTreeWdigetItem.h">
+      <Filter>Header Files\Text</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

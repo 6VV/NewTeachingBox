@@ -41,6 +41,23 @@ void TVariateManager::DeleteVariate(const QString& scope, const QString& name)
 	VariateDatabase::DeleteVariate(scope, name);
 }
 
+void TVariateManager::DeleteProjectVariates(const QStringList& names)
+{
+	for (auto name:names)
+	{
+		VariateDatabase::DeleteVariate(name);
+	}
+	
+	LoadInitDataFromDatabase();
+}
+
+void TVariateManager::DeleteProgramVariates(const QString& program)
+{
+	VariateDatabase::DeleteVariate(program);
+
+	LoadInitDataFromDatabase();
+}
+
 QVector<TVariate*> TVariateManager::GetVariatesFromScope(const QString& scope)
 {
 	QVector<TVariate*> variates;
@@ -64,6 +81,9 @@ QVector<TVariate*> TVariateManager::GetVariatesFromScope(const QString& scope)
 
 void TVariateManager::LoadInitDataFromDatabase()
 {
+	ClearMap();
+	m_scopeRoot->ClearSelf();
+
 	auto variates = VariateDatabase::SelectAllVariates();
 	for (auto var : variates)
 	{

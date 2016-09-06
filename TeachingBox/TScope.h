@@ -33,12 +33,12 @@ public:
 
 public:
 	void AddVariate(const TVariate* variate);
+	void ClearSelf();			/*清除自身作用域*/
 	void DeleteVariate(const QString& scope, const QString& name);
 	void UpdateVariate(const QString& scope,const QString& name,const TVariate* variate);
 
 private:
 	void ClearChildren();	/*清除子作用域数据*/
-	void ClearSelf();		/*清除自身作用域*/
 
 	void DefineSymbol(TSymbol* sym);		/*定义作用域内符号*/
 	bool DefineSymbol(const QString& desScope, TSymbol* symbol);

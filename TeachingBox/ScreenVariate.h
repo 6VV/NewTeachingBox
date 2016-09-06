@@ -48,6 +48,7 @@ private slots:
 private:
 	virtual QList<QPushButton*> GetButtonList() override;
 	virtual QLayout* GetMainLayout() override;
+	virtual void showEvent(QShowEvent *) override;
 
 	QTreeWidgetItem* FindScopeItem(const QString& scope);
 

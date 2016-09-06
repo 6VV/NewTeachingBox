@@ -2,16 +2,6 @@
 #include "ProjectContext.h"
 
 
-//const QString ProjectContext::STR_SCOPE_SYSTEM = "SYSTEM";		/*系统作用域*/
-//
-//const QString ProjectContext::STR_SCOPE_SYNERGIC = "SYNERGIC";	/*协作作用域*/
-//
-//const QString ProjectContext::STR_SCOPE_GLOBAL = "GLOBAL";		/*全局作用域*/
-//
-//const QString ProjectContext::STR_SCOPE_PROJECT = "PROJECT";		/*项目作用域*/
-
-//const QStringList ProjectContext::SCOPE_ORI{ STR_SCOPE_SYSTEM, STR_SCOPE_SYNERGIC, STR_SCOPE_GLOBAL };
-
 ProjectContext::ProjectContext()
 	:SCOPE_ORI(QStringList{ STR_SCOPE_SYSTEM, STR_SCOPE_SYNERGIC, STR_SCOPE_GLOBAL })
 {
@@ -21,4 +11,14 @@ ProjectContext::ProjectContext()
 QStringList ProjectContext::GetScopes()
 {
 	return m_currentScopes;
+}
+
+void ProjectContext::SetLoadedProject(const QString& project, const QStringList& programs)
+{
+	m_project = project;
+	m_programs = programs;
+
+	m_currentScopes = SCOPE_ORI;
+	m_currentScopes.append(m_project);
+	m_currentScopes.append(m_programs);
 }

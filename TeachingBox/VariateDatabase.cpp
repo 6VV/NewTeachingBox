@@ -110,6 +110,20 @@ namespace Database{
 		}
 	}
 
+	void VariateDatabase::DeleteVariate(const QString& scope)
+	{
+		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QString oper = QString("delete from %1 where %2='%3'")
+			.arg(VARIATE_TABLE_NAME)
+			.arg(VARIATE_COLUMN_SCOPE).arg(scope);
+		query.prepare(oper);
+
+		if (!query.exec())
+		{
+			throw Exception("delete variate from database failed:\n" + oper);
+		}
+	}
+
 	const QString Database::VariateDatabase::GetTextCreateTable()
 	{
 		QString length = QString::number(TeachingBoxContext::STRING_MAX_LENGTH);
