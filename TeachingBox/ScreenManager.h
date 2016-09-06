@@ -31,6 +31,8 @@ public:
 	{
 		SERVICE,
 		VARIATE,
+		PROJECT,
+		PROGRAM,
 	};
 
 public:

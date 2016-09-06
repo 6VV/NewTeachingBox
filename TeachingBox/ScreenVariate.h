@@ -18,9 +18,9 @@
 *************************************************/
 
 #include "ScreenMainParent.h"
-#include "Button.h"
 #include "IEditVariate.h"
 
+class Button;
 class QTreeWidget;
 class ButtonGroup;
 class QTreeWidgetItem;
@@ -41,8 +41,8 @@ private:
 	~ScreenVariate();
 
 private slots:
+	void SlotOnDeleteVariateButtonClicked();
 	void SlotOnVariateButtonClicked();
-
 	void SlotOnNewVariateButtonClicked();
 
 private:

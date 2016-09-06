@@ -146,6 +146,21 @@
     <Filter Include="Header Files\Variate\Variate">
       <UniqueIdentifier>{a196207d-ed50-41a3-95f4-38f72c9edc91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Screen\ScreenProject">
+      <UniqueIdentifier>{41a82332-187b-4449-bdd1-0c8aadbb22ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\ScreenProgram">
+      <UniqueIdentifier>{ca5055d9-cdce-47d0-8f93-be62eb58cd81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Variate\Variate">
+      <UniqueIdentifier>{477b747c-f4f4-4989-bdc4-f2d42ea864fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenProject">
+      <UniqueIdentifier>{48021f86-7be7-49a6-909c-c2b5863f66d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenProgram">
+      <UniqueIdentifier>{0a4851bc-f95c-4c1e-9bb8-b3f6990f13de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -346,31 +361,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_TBool.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="TBool.cpp">
-      <Filter>Source Files\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TDouble.cpp">
-      <Filter>Source Files\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TDynamic.cpp">
-      <Filter>Source Files\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TInteger.cpp">
-      <Filter>Source Files\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TOverlap.cpp">
-      <Filter>Source Files\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TPosition.cpp">
-      <Filter>Source Files\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TString.cpp">
-      <Filter>Source Files\Variate</Filter>
-    </ClCompile>
     <ClCompile Include="TSymbol.cpp">
-      <Filter>Source Files\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TVariate.cpp">
       <Filter>Source Files\Variate</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_LineEditWithRegExpAndKeyboard.cpp">
@@ -463,6 +454,60 @@
     <ClCompile Include="Context.cpp">
       <Filter>Source Files\Context</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenProject.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenProject.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TBool.cpp">
+      <Filter>Source Files\Variate\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="TDouble.cpp">
+      <Filter>Source Files\Variate\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="TDynamic.cpp">
+      <Filter>Source Files\Variate\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="TInteger.cpp">
+      <Filter>Source Files\Variate\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="TOverlap.cpp">
+      <Filter>Source Files\Variate\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="TPosition.cpp">
+      <Filter>Source Files\Variate\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="TVariate.cpp">
+      <Filter>Source Files\Variate\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="TString.cpp">
+      <Filter>Source Files\Variate\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenProject.cpp">
+      <Filter>Source Files\Screen\ScreenProject</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectManager.cpp">
+      <Filter>Source Files\Screen\ScreenProject</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenProgram.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenProgram.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenProgram.cpp">
+      <Filter>Source Files\Screen\ScreenProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="CodeEditor.cpp">
+      <Filter>Source Files\Screen\ScreenProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CodeEditor.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CodeEditor.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="teachingbox.qrc">
@@ -545,6 +590,15 @@
     </CustomBuild>
     <CustomBuild Include="TVariate.h">
       <Filter>Header Files\Variate\Variate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ScreenProject.h">
+      <Filter>Header Files\Screen\ScreenProject</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ScreenProgram.h">
+      <Filter>Header Files\Screen\ScreenProgram</Filter>
+    </CustomBuild>
+    <CustomBuild Include="CodeEditor.h">
+      <Filter>Header Files\Screen\ScreenProgram</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -651,6 +705,9 @@
     </ClInclude>
     <ClInclude Include="Context.h">
       <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectManager.h">
+      <Filter>Header Files\Screen\ScreenProject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

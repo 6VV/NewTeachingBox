@@ -28,15 +28,7 @@ void ButtonGroup::showEvent(QShowEvent *)
 	int positionLeft = m_parentButton->geometry().left() + TeachingBoxContext::GetScreenRect().left();
 	int positionBottom = TeachingBoxContext::GetScreenRect().bottom();
 
-	//int positionMaxRight = m_parentButton->geometry().right() + TeachingBoxContext::GetScreenPoint().x();
-	//if (positionLeft + this->width() > positionMaxRight)
-	//{
-	//	this->move(positionMaxRight - this->width(), positionBottom - this->height());
-	//}
-	//else
-	//{
-		this->move(positionLeft, positionBottom - this->height()-m_parentButton->height());
-	//}
+	this->move(positionLeft, positionBottom - this->height()-m_parentButton->height());
 }
 
 void ButtonGroup::Init()

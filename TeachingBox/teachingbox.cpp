@@ -152,6 +152,8 @@ void TeachingBox::InitOption(QLayout* layout)
 
 	connect(btnService, SIGNAL(clicked()), this, SLOT(SlotOnServiceButtonClicked()));
 	connect(btnVariate, SIGNAL(clicked()), this, SLOT(SlotOnVariateButtonClicked()));
+	connect(btnProject, SIGNAL(clicked()), this, SLOT(SlotOnProjectButtonClicked()));
+	connect(btnProgram, SIGNAL(clicked()), this, SLOT(SlotOnProgramButtonClicked()));
 }
 
 void TeachingBox::InitMovement(QLayout* layout)
@@ -251,4 +253,14 @@ void TeachingBox::SlotOnServiceButtonClicked()
 void TeachingBox::SlotOnVariateButtonClicked()
 {
 	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::VARIATE);
+}
+
+void TeachingBox::SlotOnProjectButtonClicked()
+{
+	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROJECT);
+}
+
+void TeachingBox::SlotOnProgramButtonClicked()
+{
+	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
 }

@@ -7,6 +7,8 @@
 #include "TScope.h"
 #include "Context.h"
 #include "TVariateManager.h"
+#include "QMessageBox"
+#include "Button.h"
 
 ScreenVariate::ScreenVariate(QWidget* parent /*= 0*/)
 	:ScreenMainParent(parent)
@@ -23,6 +25,40 @@ ScreenVariate::ScreenVariate(QWidget* parent /*= 0*/)
 ScreenVariate::~ScreenVariate()
 {
 
+}
+
+void ScreenVariate::SlotOnDeleteVariateButtonClicked()
+{
+	auto item = m_treeWidget->currentItem();
+	if (item==nullptr || item->parent()==nullptr)
+	{
+		WarningManager::Warning(this, tr("Please select a variate"));
+		return;
+	}
+
+	if (item->parent()->parent()!=nullptr)
+	{
+		item = item->parent();
+	}
+
+	auto parentItem = item->parent();
+	QString scope = parentItem->text(0);
+	QString name = item->text(0);
+
+	switch (QMessageBox::warning(this, tr("Warning"), tr("Delete variate?") + "\n"+ name, QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok))
+	{
+	case QMessageBox::Ok:{
+		TVariateManager::GetInstance()->DeleteVariate(scope, name);
+
+		parentItem->removeChild(item);
+		delete item;
+	}break;
+	case QMessageBox::Cancel:{
+
+	}break;
+	default:
+		break;
+	}
 }
 
 void ScreenVariate::SlotOnVariateButtonClicked()
@@ -100,13 +136,13 @@ void ScreenVariate::InitTreeWidget()
 
 	QStringList scopes = Context::sProjectContext.GetScopes();
 
-	for (auto scope:scopes)
+	for (auto scope : scopes)
 	{
 		auto treeItem = new QTreeWidgetItem(QStringList{ scope });
 		m_treeWidget->addTopLevelItem(treeItem);
 
 		auto variates = TVariateManager::GetInstance()->GetVariatesFromScope(scope);
-		for (auto variate:variates)
+		for (auto variate : variates)
 		{
 			variate->ReadTreeWidgetItem(treeItem, m_treeWidget);
 		}
@@ -142,6 +178,7 @@ void ScreenVariate::InitSignalSlot()
 {
 	connect(m_btnVariate, SIGNAL(clicked()), this, SLOT(SlotOnVariateButtonClicked()));
 	connect(m_btnNew, SIGNAL(clicked()), this, SLOT(SlotOnNewVariateButtonClicked()));
+	connect(m_btnDelete, SIGNAL(clicked()), this, SLOT(SlotOnDeleteVariateButtonClicked()));
 }
 
 void ScreenVariate::UpdateText()

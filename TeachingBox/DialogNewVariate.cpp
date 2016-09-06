@@ -44,7 +44,7 @@ namespace VariateWidget{
 			return;
 		}
 		m_iEditVariate->OnNewVariate(*variate);
-		TVariateManager::GetInstance()->Add(*variate);
+		TVariateManager::GetInstance()->AddVariate(*variate);
 
 		Destroy();
 	}
@@ -166,8 +166,10 @@ namespace VariateWidget{
 
 	void DialogNewVariate::Init()
 	{
-		setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
+		this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint);
+		//setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
 		this->setWindowModality(Qt::ApplicationModal);
+		setWindowTitle(tr("New Variate"));
 
 		InitLayout();
 		InitSignalSlot();
@@ -180,11 +182,11 @@ namespace VariateWidget{
 		QVBoxLayout* layout = new QVBoxLayout(this);
 		layout->setMargin(0);
 
-		layout->addWidget(GetTitleWidget());
+		//layout->addWidget(GetTitleWidget());
 		layout->addLayout(GetVariateLayout());
 		layout->addLayout(GetButtonLayout());
 
-		layout->setStretch(1, 1);
+		layout->setStretch(0, 1);
 	}
 
 	QWidget* DialogNewVariate::GetTitleWidget()

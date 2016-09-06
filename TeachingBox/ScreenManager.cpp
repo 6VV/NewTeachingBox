@@ -3,6 +3,8 @@
 #include "QStackedWidget"
 #include "ScreenService.h"
 #include "ScreenVariate.h"
+#include "ScreenProject.h"
+#include "ScreenProgram.h"
 
 
 
@@ -62,7 +64,13 @@ QWidget* ScreenManager::CreateWithoutCheck(const ScreenType type, QWidget* paren
 	}break;
 	case ScreenType::VARIATE:{
 		return new ScreenVariate(parent);
-	}
+	}break;
+	case ScreenType::PROJECT:{
+		return new ScreenProject(parent);
+	}break;
+	case ScreenType::PROGRAM:{
+		return new ScreenProgram(parent);
+	}break;
 	default:{
 		return nullptr;
 	}

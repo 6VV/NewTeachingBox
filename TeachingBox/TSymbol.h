@@ -2,7 +2,6 @@
 #define _TEACHING_BOX_T_SYMBOL_H_
 
 #include "QString"
-#include "QObject"
 #include "QHash"
 
 class TSymbol:public QObject

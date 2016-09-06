@@ -5,6 +5,7 @@
 #include "QByteArray"
 #include "VariateDatabase.h"
 #include "TVariateFactory.h"
+#include "Exception.h"
 
 using namespace Database;
 
@@ -24,11 +25,20 @@ TVariateManager::~TVariateManager()
 	ClearMap();
 }
 
-void TVariateManager::Add(const TVariate& object)
+void TVariateManager::AddVariate(const TVariate& object)
 {
 	TVariate* variate = object.Clone();
 	AddInMemory(variate);
 	AddInDatabase(variate);
+}
+
+void TVariateManager::DeleteVariate(const QString& scope, const QString& name)
+{
+	delete m_objectMap.value(scope).value(name);
+	m_objectMap[scope].remove(name);
+
+	m_scopeRoot->DeleteVariate(scope, name);
+	VariateDatabase::DeleteVariate(scope, name);
 }
 
 QVector<TVariate*> TVariateManager::GetVariatesFromScope(const QString& scope)

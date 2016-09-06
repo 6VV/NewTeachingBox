@@ -2,6 +2,7 @@
 #include "VariateDatabase.h"
 #include "TeachingBoxContext.h"
 #include "DatabaseHelper.h"
+#include "Exception.h"
 
 
 namespace Database{
@@ -33,7 +34,7 @@ namespace Database{
 
 		if (!query.exec())
 		{
-			throw std::exception("insert into database failed");
+			throw Exception("insert into database failed");
 		}
 
 	}
@@ -49,7 +50,7 @@ namespace Database{
 
 		if (!query.exec())
 		{
-			throw std::exception("select variates from database failed");
+			throw Exception("select variates from database failed");
 		}
 
 		while (query.next())
@@ -90,7 +91,22 @@ namespace Database{
 
 		if (!query.exec())
 		{
-			throw std::exception("update variate in database failed");
+			throw Exception("update variate in database failed");
+		}
+	}
+
+	void VariateDatabase::DeleteVariate(const QString& scope, const QString& name)
+	{
+		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QString oper = QString("delete from %1 where %2='%3' and %4='%5'")
+			.arg(VARIATE_TABLE_NAME)
+			.arg(VARIATE_COLUMN_SCOPE).arg(scope)
+			.arg(VARIATE_COLUMN_NAME).arg(name);
+		query.prepare(oper);
+
+		if (!query.exec())
+		{
+			throw Exception("delete variate from database failed:\n" + oper);
 		}
 	}
 

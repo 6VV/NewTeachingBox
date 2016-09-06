@@ -33,7 +33,7 @@ public:
 
 public:
 	void AddVariate(const TVariate* variate);
-
+	void DeleteVariate(const QString& scope, const QString& name);
 	void UpdateVariate(const QString& scope,const QString& name,const TVariate* variate);
 
 private:

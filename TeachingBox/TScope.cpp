@@ -112,7 +112,7 @@ TScope* TScope::FindScopeScrollDown(const QString& strScope)
 	}
 
 	/*遍历子作用域*/
-	for each (auto var in m_listScope)
+    for (auto var : m_listScope)
 	{
 		TScope* scope = var->FindScopeScrollDown(strScope);
 		if (scope != nullptr)
@@ -174,7 +174,7 @@ void TScope::RenameSymbol(const QString& oldName, const QString& newName, TSymbo
 
 void TScope::ClearChildren()
 {
-	for each (auto var in m_listScope)
+    for (auto var : m_listScope)
 	{
 		delete(var);
 	}
@@ -184,7 +184,7 @@ void TScope::ClearChildren()
 
 void TScope::ClearSelf()
 {
-	for each (auto var in m_mapSymbol)
+    for (auto var : m_mapSymbol)
 	{
 		delete(var);
 	}
@@ -218,6 +218,14 @@ void TScope::AddVariate(const TVariate* variate)
 	}
 }
 
+
+void TScope::DeleteVariate(const QString& scope, const QString& name)
+{
+	if (TScope* scopeFound = FindScopeScrollDown(scope))
+	{
+		scopeFound->DeleteSymbol(name);
+	}
+}
 
 void TScope::UpdateVariate(const QString& scope, const QString& name, const TVariate* variate)
 {
