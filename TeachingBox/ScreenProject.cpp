@@ -8,6 +8,8 @@
 #include "WarningManager.h"
 #include "QInputDialog"
 #include "Context.h"
+#include "CodeEditor.h"
+#include "ScreenManager.h"
 
 
 ScreenProject::ScreenProject(QWidget* parent)
@@ -34,8 +36,33 @@ ScreenProject::~ScreenProject()
 }
 
 
+void ScreenProject::SlotOnButtonCloseClicked()
+{
+	if (!IsCurrentItemValidity())
+	{
+		return;
+	}
+
+	QTreeWidgetItem* projectItem = nullptr;
+	if (IsCurrentItemProject())
+	{
+		projectItem = m_treeWidget->currentItem();
+	}
+	else
+	{
+		projectItem = m_treeWidget->currentItem()->parent();
+	}
+
+	SetLoadState(projectItem, LoadState::UNLOADED);
+	Context::projectContext.UnloadProject();
+}
+
 void ScreenProject::SlotOnButtonDeleteClicked()
 {
+	if (!IsCurrentItemValidity())
+	{
+		return;
+	}
 	if (IsCurrentItemProject())
 	{
 		m_projectManager->DeleteProject(m_treeWidget->currentItem()->text(0));
@@ -48,11 +75,6 @@ void ScreenProject::SlotOnButtonDeleteClicked()
 
 		item->parent()->removeChild(item);
 		delete item;
-	}
-	else
-	{
-		WarningManager::Warning(this, tr("Please select a file"));
-		return;
 	}
 }
 
@@ -89,9 +111,8 @@ void ScreenProject::SlotOnButtonNewProjectClicked()
 void ScreenProject::SlotOnButtonNewProgramClicked()
 {
 	/*若为无效节点*/
-	if (!IsCurrentItemProgram() && !IsCurrentItemProject())
+	if (!IsCurrentItemValidity())
 	{
-		WarningManager::Warning(this, tr("Please select a project"));
 		return;
 	}
 
@@ -129,6 +150,26 @@ void ScreenProject::SlotOnButtonNewProgramClicked()
 	}
 }
 
+void ScreenProject::SlotOnButtonOpenClicked()
+{
+	if (!IsCurrentItemValidity())
+	{
+		return;
+	}
+
+	if (IsCurrentItemProject())
+	{
+		WarningManager::Warning(this, tr("Please select a program"));
+		return;
+	}
+
+	QString program = m_treeWidget->currentItem()->text(0);
+	QString project = m_treeWidget->currentItem()->parent()->text(0);
+
+	CodeEditor::GetInstance()->setPlainText(m_projectManager->GetFileText(project, program));
+	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
+}
+
 void ScreenProject::SlotOnButtonRefreshClicked()
 {
 	InitFileTree();
@@ -136,23 +177,33 @@ void ScreenProject::SlotOnButtonRefreshClicked()
 
 void ScreenProject::SlotOnButtonLoadClicked()
 {
-	if (!IsCurrentItemProject() && !IsCurrentItemProgram())
+	if (!IsCurrentItemValidity())
 	{
-		WarningManager::Warning(this, tr("Please select a file"));
 		return;
 	}
-	
-	QString project;
+
+	QString projectLoaded = Context::projectContext.GetProjectLoaded();
+	if (!projectLoaded.isEmpty())
+	{
+		WarningManager::Warning(this, tr("Already load project") + ":\n" + projectLoaded);
+		return;
+	}
+
+	QTreeWidgetItem* projectItem = nullptr;
 	if (IsCurrentItemProject())
 	{
-		project = m_treeWidget->currentItem()->text(0);
+		projectItem = m_treeWidget->currentItem();
 	}
 	else
 	{
-		project = m_treeWidget->currentItem()->parent()->text(0);
+		projectItem = m_treeWidget->currentItem()->parent();
+		SlotOnButtonOpenClicked();
 	}
 
-	Context::sProjectContext.SetLoadedProject(project, m_projectManager->GetProjectFiles(project));
+	QString project = projectItem->text(0);
+	Context::projectContext.SetLoadedProject(project, m_projectManager->GetProjectFiles(project));
+
+	SetLoadState(projectItem, LoadState::LOADED);
 }
 
 void ScreenProject::Init()
@@ -179,8 +230,11 @@ void ScreenProject::InitSignalSlot()
 	connect(m_btnDelete, SIGNAL(clicked()), this, SLOT(SlotOnButtonDeleteClicked()));
 	connect(m_btnNewProject, SIGNAL(clicked()), this, SLOT(SlotOnButtonNewProjectClicked()));
 	connect(m_btnNewProgram, SIGNAL(clicked()), this, SLOT(SlotOnButtonNewProgramClicked()));
+
 	connect(m_btnRefresh, SIGNAL(clicked()), this, SLOT(SlotOnButtonRefreshClicked()));
 	connect(m_btnLoad, SIGNAL(clicked()), this, SLOT(SlotOnButtonLoadClicked()));
+	connect(m_btnOpen, SIGNAL(clicked()), this, SLOT(SlotOnButtonOpenClicked()));
+	connect(m_btnClose, SIGNAL(clicked()), this, SLOT(SlotOnButtonCloseClicked()));
 }
 
 QList<QPushButton*> ScreenProject::GetButtonList()
@@ -233,6 +287,31 @@ void ScreenProject::InitFileTree()
 	m_projectManager->GetAllFiles(m_treeWidget->invisibleRootItem());
 }
 
+void ScreenProject::SetLoadState(QTreeWidgetItem* projectItem, LoadState state)
+{
+	QString stateText{};
+
+	switch (state)
+	{
+	case ScreenProject::LOADED:
+	{
+		stateText = tr("Loaded");
+	}break;
+	case ScreenProject::UNLOADED:
+	{
+		stateText = "---";
+	}break;
+	default:
+		break;
+	}
+
+	projectItem->setText(1, stateText);
+	for (auto i = 0; i < projectItem->childCount(); ++i)
+	{
+		projectItem->child(i)->setText(1, stateText);
+	}
+}
+
 void ScreenProject::UpdateText()
 {
 	m_treeWidget->setHeaderLabels(QStringList{ tr("Project"),tr("Setting") });
@@ -247,4 +326,15 @@ void ScreenProject::UpdateText()
 	m_btnNewProgram->setText(tr("New Program"));
 	m_btnNewProject->setText(tr("New Project"));
 	m_btnDelete->setText(tr("Delete"));
+}
+
+bool ScreenProject::IsCurrentItemValidity()
+{
+	if (m_treeWidget->currentItem()==nullptr)
+	{
+		WarningManager::Warning(this, tr("Invalid Item"));
+		return false;
+	}
+
+	return true;
 }

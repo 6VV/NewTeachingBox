@@ -161,8 +161,65 @@
     <Filter Include="Source Files\Screen\ScreenProgram">
       <UniqueIdentifier>{0a4851bc-f95c-4c1e-9bb8-b3f6990f13de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Text">
+    <Filter Include="Header Files\Test">
       <UniqueIdentifier>{9a1f3381-1d15-43b8-9385-d3c444299eeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test">
+      <UniqueIdentifier>{143323a8-8a2e-49b5-9888-c8240c0e2069}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interpreter">
+      <UniqueIdentifier>{8c2e972f-7b83-4887-b572-6e69539e0837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interpreter\Token">
+      <UniqueIdentifier>{b4bb9459-2598-4857-ad1f-aa0c74504825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interpreter">
+      <UniqueIdentifier>{a12861c0-e1e8-4b9a-b0c9-c0edba2df0cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interpreter\Token">
+      <UniqueIdentifier>{ac0e08bf-b81e-46c2-8116-1005c46a5478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interpreter\TAstNode">
+      <UniqueIdentifier>{ad6f182d-12da-4a41-a4ed-98d97433492b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interpreter\TAstNode">
+      <UniqueIdentifier>{e217b0ee-6b58-492f-9f63-aef2b6f41973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interpreter\TAstNode\For">
+      <UniqueIdentifier>{dd7d95b9-17cf-4228-ac5e-ab7c2d4e809d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interpreter\TAstNode\If">
+      <UniqueIdentifier>{279c89d7-f9b5-462a-9877-3ee67a1da151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interpreter\TAstNode\Assign">
+      <UniqueIdentifier>{1a66242b-d394-41f2-91a2-300b3e43e9a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interpreter\TAstNode\Macro">
+      <UniqueIdentifier>{5ba4daa7-fba2-41d6-a71a-d1624e9d46bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interpreter\TAstNode\For">
+      <UniqueIdentifier>{67aba7a7-6227-423f-aff3-180d16428507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interpreter\TAstNode\If">
+      <UniqueIdentifier>{e0457c23-3975-4afe-a96f-9269bd49a385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interpreter\TAstNode\Macro">
+      <UniqueIdentifier>{bdd40d49-af1a-48f2-ae8e-1fd2f902ff11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interpreter\TAstNode\Assign">
+      <UniqueIdentifier>{f891d2b3-4daf-40f9-a931-717801f46b52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interpreter\TAstNode\Program">
+      <UniqueIdentifier>{cac06fea-ce74-4435-a90e-cccd73cbdadb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interpreter\TAstNode\Program">
+      <UniqueIdentifier>{39f72c61-b71e-4dd5-9c65-f505dc28f225}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Init">
+      <UniqueIdentifier>{e70d6548-9174-4a84-8834-b56d838f3b4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Init">
+      <UniqueIdentifier>{058f86c2-1431-4077-85d3-73d253bb0388}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -391,9 +448,6 @@
     <ClCompile Include="TreeWidgetItemWithVariate.cpp">
       <Filter>Source Files\Screen\ScreenVariate\TreeWidget</Filter>
     </ClCompile>
-    <ClCompile Include="RegExp.cpp">
-      <Filter>Source Files\Context</Filter>
-    </ClCompile>
     <ClCompile Include="WarningManager.cpp">
       <Filter>Source Files\Exception</Filter>
     </ClCompile>
@@ -511,14 +565,92 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CodeEditor.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="TesTreeWdigetItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TesTreeWdigetItem.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_TestTreeWdigetItem.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TesTreeWdigetItem.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_TestTreeWdigetItem.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TestTreeWdigetItem.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Macro.cpp">
+      <Filter>Source Files\Screen\ScreenProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogNewMacro.cpp">
+      <Filter>Source Files\Screen\ScreenProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogParent.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DialogNewMacro.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DialogNewMacro.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TToken.cpp">
+      <Filter>Source Files\Interpreter\Token</Filter>
+    </ClCompile>
+    <ClCompile Include="TTokenType.cpp">
+      <Filter>Source Files\Interpreter\Token</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNode.cpp">
+      <Filter>Source Files\Interpreter\TAstNode</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeFactory.cpp">
+      <Filter>Source Files\Interpreter\TAstNode</Filter>
+    </ClCompile>
+    <ClCompile Include="TInterpreterException.cpp">
+      <Filter>Source Files\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="InterpreterContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TLexer.cpp">
+      <Filter>Source Files\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeForSentence.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\For</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeNextSentence.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\For</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeElseIfSentence.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\If</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeElseSentence.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\If</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeEndIfSentence.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\If</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeIfSentence.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\If</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeMovlSentence.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\Macro</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeAssignSentence.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\Assign</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeOperator.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\Assign</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeRoot.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\Program</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeProgram.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\Program</Filter>
+    </ClCompile>
+    <ClCompile Include="RegExp.cpp">
+      <Filter>Source Files\Init</Filter>
+    </ClCompile>
+    <ClCompile Include="TInterpreter.cpp">
+      <Filter>Source Files\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="InterpreterManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -612,8 +744,11 @@
     <CustomBuild Include="CodeEditor.h">
       <Filter>Header Files\Screen\ScreenProgram</Filter>
     </CustomBuild>
-    <CustomBuild Include="TesTreeWdigetItem.h">
-      <Filter>Header Files\Text</Filter>
+    <CustomBuild Include="TestTreeWdigetItem.h">
+      <Filter>Header Files\Test</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DialogNewMacro.h">
+      <Filter>Header Files\Screen\ScreenProgram</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -676,9 +811,6 @@
     <ClInclude Include="ButtonGroup.h">
       <Filter>Header Files\Widget</Filter>
     </ClInclude>
-    <ClInclude Include="DataStruct.h">
-      <Filter>Header Files\Context</Filter>
-    </ClInclude>
     <ClInclude Include="TreeWidgetItemWithVariate.h">
       <Filter>Header Files\Screen\ScreenVariate\TreeWidget</Filter>
     </ClInclude>
@@ -690,9 +822,6 @@
     </ClInclude>
     <ClInclude Include="KeyboardInterface.h">
       <Filter>Header Files\Widget\Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="RegExp.h">
-      <Filter>Header Files\Context</Filter>
     </ClInclude>
     <ClInclude Include="WarningManager.h">
       <Filter>Header Files\Exception</Filter>
@@ -723,6 +852,81 @@
     </ClInclude>
     <ClInclude Include="ProjectManager.h">
       <Filter>Header Files\Screen\ScreenProject</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogParent.h">
+      <Filter>Header Files\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>Header Files\Screen\ScreenProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="TToken.h">
+      <Filter>Header Files\Interpreter\Token</Filter>
+    </ClInclude>
+    <ClInclude Include="TTokenWithValue.h">
+      <Filter>Header Files\Interpreter\Token</Filter>
+    </ClInclude>
+    <ClInclude Include="TTokenType.h">
+      <Filter>Header Files\Interpreter\Token</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeFactory.h">
+      <Filter>Header Files\Interpreter\TAstNode</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNode.h">
+      <Filter>Header Files\Interpreter\TAstNode</Filter>
+    </ClInclude>
+    <ClInclude Include="TInterpreterException.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="TLexer.h">
+      <Filter>Header Files\Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpreterContext.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeForSentence.h">
+      <Filter>Header Files\Interpreter\TAstNode\For</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeElseIfSentence.h">
+      <Filter>Header Files\Interpreter\TAstNode\If</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeElseSentence.h">
+      <Filter>Header Files\Interpreter\TAstNode\If</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeEndIfSentence.h">
+      <Filter>Header Files\Interpreter\TAstNode\If</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeIfSentence.h">
+      <Filter>Header Files\Interpreter\TAstNode\If</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeAssignSentence.h">
+      <Filter>Header Files\Interpreter\TAstNode\Assign</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeOperator.h">
+      <Filter>Header Files\Interpreter\TAstNode\Assign</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeMovlSentence.h">
+      <Filter>Header Files\Interpreter\TAstNode\Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeNextSentence.h">
+      <Filter>Header Files\Interpreter\TAstNode\For</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeRoot.h">
+      <Filter>Header Files\Interpreter\TAstNode\Program</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeProgram.h">
+      <Filter>Header Files\Interpreter\TAstNode\Program</Filter>
+    </ClInclude>
+    <ClInclude Include="RegExp.h">
+      <Filter>Header Files\Init</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStruct.h">
+      <Filter>Header Files\Init</Filter>
+    </ClInclude>
+    <ClInclude Include="TInterpreter.h">
+      <Filter>Header Files\Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="InterpreterManager.h">
+      <Filter>Header Files\Interpreter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

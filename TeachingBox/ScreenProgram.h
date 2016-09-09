@@ -32,8 +32,10 @@ public:
 	~ScreenProgram() override;
 
 private slots:
-	void SlotNoAddvanceButtonClicked();
-	void SlotOnEditButtonClicked();
+	void SlotOnButtonAddvanceClicked();
+	void SlotOnButtonNewClicked();
+	void SlotOnButtonEditClicked();
+	void SlotOnButtonSetPCClicked();
 
 private:
 	void Init();

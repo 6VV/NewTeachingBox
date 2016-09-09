@@ -6,9 +6,11 @@
 class Exception
 {
 public:
+	Exception();
 	Exception(const QString& info);
+	virtual ~Exception(){};
 	
-	QString GetInfo();
+	virtual QString GetInfo();
 
 private:
 	QString m_info;

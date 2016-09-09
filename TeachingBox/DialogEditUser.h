@@ -1,7 +1,7 @@
 ﻿#ifndef _TEACHING_BOX_DIALOG_EIDT_USER_H_
 #define _TEACHING_BOX_DIALOG_EIDT_USER_H_
 
-#include "InternationalWidget.h"
+#include "DialogParent.h"
 
 class QLabel;
 class QLineEdit;
@@ -11,7 +11,7 @@ class QCheckBox;
 
 class IUserManager;
 
-class DialogEidtUser:public InternationalWidget
+class DialogEidtUser:public DialogParent
 {
 	Q_OBJECT
 
@@ -30,6 +30,7 @@ protected:
 
 private:
 	virtual void UpdateText() override;
+	virtual void SetSize() override;
 
 	void Init();
 	void InitLayout();

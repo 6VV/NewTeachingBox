@@ -31,3 +31,4 @@
 
 #include <mutex>
 #include <memory>
+#include <vector>

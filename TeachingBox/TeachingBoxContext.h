@@ -1,5 +1,5 @@
-﻿#ifndef _TEACHING_BOX_CONTEXT_H_
-#define _TEACHING_BOX_CONTEXT_H_
+﻿#ifndef _TEACHING_BOX_TEACHING_BOX_CONTEXT_H_
+#define _TEACHING_BOX_TEACHING_BOX_CONTEXT_H_
 
 /*************************************************
 //  Copyright (C), 2015-2016, CS&S. Co., Ltd.
@@ -24,13 +24,6 @@ namespace TeachingBoxContext
 {
 	const int STRING_MAX_LENGTH = 128;
 
-	enum ExecuteMode
-	{
-		AUTO,
-		STEP,
-		MANUAL,
-	};
-
 	QString GetLanguage();
 	User GetUser();
 
@@ -39,7 +32,6 @@ namespace TeachingBoxContext
 	void SetTeachingBoxRect(const QRect& rect);
 	void SetScreenRect(const QRect& rect);
 
-	void SetExecuteMode(ExecuteMode mode);
 	void SetLanguage(const QString& language);
 	void SetUser(const User& user);
 }

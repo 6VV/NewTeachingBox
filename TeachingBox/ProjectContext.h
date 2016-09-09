@@ -32,8 +32,11 @@ public:
 	ProjectContext();
 
 	QStringList GetScopes();
+	QString GetProjectLoaded();
 
 	void SetLoadedProject(const QString& project, const QStringList& programs);
+
+	void UnloadProject();
 
 private:
 	ProjectContext& operator=(const ProjectContext&);

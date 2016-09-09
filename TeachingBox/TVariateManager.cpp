@@ -79,6 +79,37 @@ QVector<TVariate*> TVariateManager::GetVariatesFromScope(const QString& scope)
 	return variates;
 }
 
+TVariate* TVariateManager::GetVariate(const QString& scope, const QString& name)
+{
+	auto iterMap = m_objectMap.find(scope);
+	if (iterMap == m_objectMap.end())
+	{
+		return nullptr;
+	}
+	auto iterVar = iterMap.value().find(name);
+	if (iterVar == iterMap.value().end())
+	{
+		return nullptr;
+	}
+	return iterVar.value();
+}
+
+TVariate* TVariateManager::GetVariateSrollUp(const QString& scope, const QString& name)
+{
+	TScope* currentScope = m_scopeRoot->FindScopeScrollDown(scope);
+	if (!currentScope)
+	{
+		return nullptr;
+	}
+	TSymbol* symbol = currentScope->FindSymbolScrollUp(name);
+	if (!symbol)
+	{
+		return nullptr;
+	}
+	return GetVariate(symbol->GetScope(), symbol->GetName());
+
+}
+
 void TVariateManager::LoadInitDataFromDatabase()
 {
 	ClearMap();

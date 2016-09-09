@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "TesTreeWdigetItem.h"
+#include "TestTreeWdigetItem.h"
 #include "QPushButton"
 #include "QBoxLayout"
 

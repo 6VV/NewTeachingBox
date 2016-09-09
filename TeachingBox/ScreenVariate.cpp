@@ -140,7 +140,7 @@ void ScreenVariate::InitTreeWidget()
 	m_treeWidget->setColumnCount(2);
 	m_treeWidget->header()->setSectionResizeMode(QHeaderView::Stretch);	//平均分布各列
 
-	QStringList scopes = Context::sProjectContext.GetScopes();
+	QStringList scopes = Context::projectContext.GetScopes();
 
 	for (auto scope : scopes)
 	{

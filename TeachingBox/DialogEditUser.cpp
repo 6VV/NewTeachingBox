@@ -13,7 +13,7 @@
 using namespace Database;
 
 DialogEidtUser::DialogEidtUser(QWidget* parent, IUserManager* userManager, OperatorType type, const QString& name/*=""*/)
-	:InternationalWidget(parent)
+	:DialogParent(parent)
 	, m_userManager(userManager)
 	, m_type(type)
 	, m_oldName(name)
@@ -35,14 +35,14 @@ DialogEidtUser::DialogEidtUser(QWidget* parent, IUserManager* userManager, Opera
 
 void DialogEidtUser::showEvent(QShowEvent *e)
 {
-	InternationalWidget::showEvent(e);
+	DialogParent::showEvent(e);
 
-	/*设置固定大小*/
-	this->setFixedSize(this->width(), this->height());
+	///*设置固定大小*/
+	//this->setFixedSize(this->width(), this->height());
 
-	/*移动到屏幕中央*/
-	this->move(TeachingBoxContext::GetScreenRect().left()+ TeachingBoxContext::GetScreenRect().width() / 2 - this->width() / 2,
-		TeachingBoxContext::GetScreenRect().top() + TeachingBoxContext::GetScreenRect().height() / 2 - this->height() / 2);
+	///*移动到屏幕中央*/
+	//this->move(TeachingBoxContext::GetScreenRect().left()+ TeachingBoxContext::GetScreenRect().width() / 2 - this->width() / 2,
+	//	TeachingBoxContext::GetScreenRect().top() + TeachingBoxContext::GetScreenRect().height() / 2 - this->height() / 2);
 
 	InitUser();
 }
@@ -58,6 +58,11 @@ void DialogEidtUser::UpdateText()
 	m_btnCancel->setText(tr("Cancel"));
 }
 
+void DialogEidtUser::SetSize()
+{
+	this->setFixedSize(this->width(), this->height());
+}
+
 void DialogEidtUser::Init()
 {
 	InitLayout();
@@ -67,8 +72,8 @@ void DialogEidtUser::Init()
 
 void DialogEidtUser::InitLayout()
 {
-	this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint );
-	this->setWindowModality(Qt::ApplicationModal);
+	//this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint );
+	//this->setWindowModality(Qt::ApplicationModal);
 
 	User user = TeachingBoxContext::GetUser();
 
@@ -89,6 +94,7 @@ void DialogEidtUser::InitLayout()
 
 	layoutMain->addLayout(layoutUser);
 	layoutMain->addLayout(layoutButton);
+	layoutMain->setStretch(0, 1);
 
 	layoutUser->setMargin(10);
 	layoutUser->setSpacing(10);
@@ -105,10 +111,12 @@ void DialogEidtUser::InitLayout()
 	layoutUser->addWidget(m_comboBoxAuthority, 3, 1);
 	layoutUser->addWidget(m_comboBoxLanguage, 4, 1);
 
-	layoutButton->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Preferred));
+	layoutButton->addStretch(0);
 	layoutButton->addWidget(m_btnConfirm);
+	layoutButton->addStretch(0);
 	layoutButton->addWidget(m_btnCancel);
-	layoutButton->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Preferred));
+	layoutButton->addStretch(0);
+
 }
 
 void DialogEidtUser::InitSignalSlot()

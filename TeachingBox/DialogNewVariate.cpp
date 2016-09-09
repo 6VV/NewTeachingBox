@@ -17,7 +17,7 @@
 namespace VariateWidget{
 
 	DialogNewVariate::DialogNewVariate(const QString& scope, IEditVariate* iEditVariate, QWidget* parent)
-		:InternationalWidget(parent)
+		:DialogParent(parent)
 		, m_scope(scope)
 		, m_iEditVariate(iEditVariate)
 		, m_variateTableManager(new VariateTableManager(this))
@@ -71,17 +71,17 @@ namespace VariateWidget{
 		m_variateTableManager->ChangeToType(currentType);
 	}
 
-	void DialogNewVariate::showEvent(QShowEvent *)
-	{
-		QRect screenRect = TeachingBoxContext::GetScreenRect();
-		/*设置固定大小*/
-		this->setFixedSize(screenRect.width() * 2 / 3, screenRect.height() * 2 / 3);
+	//void DialogNewVariate::showEvent(QShowEvent *)
+	//{
+	//	QRect screenRect = TeachingBoxContext::GetScreenRect();
+	//	/*设置固定大小*/
+	//	this->setFixedSize(screenRect.width() * 2 / 3, screenRect.height() * 2 / 3);
 
-		/*移动到屏幕中央*/
-		this->move(screenRect.left() + screenRect.width() / 2 - this->width() / 2,
-			screenRect.top() + screenRect.height() / 2 - this->height() / 2);
+	//	/*移动到屏幕中央*/
+	//	this->move(screenRect.left() + screenRect.width() / 2 - this->width() / 2,
+	//		screenRect.top() + screenRect.height() / 2 - this->height() / 2);
 
-	}
+	//}
 
 	void DialogNewVariate::UpdateText()
 	{
@@ -166,9 +166,9 @@ namespace VariateWidget{
 
 	void DialogNewVariate::Init()
 	{
-		this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint);
-		//setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
-		this->setWindowModality(Qt::ApplicationModal);
+		//this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint);
+		////setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
+		//this->setWindowModality(Qt::ApplicationModal);
 		setWindowTitle(tr("New Variate"));
 
 		InitLayout();

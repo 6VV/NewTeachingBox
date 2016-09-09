@@ -27,36 +27,49 @@ class QTreeWidget;
 class Button;
 class ButtonGroup;
 class ProjectManager;
+class QTreeWidgetItem;
 
 class ScreenProject:public ScreenMainParent
 {
 	Q_OBJECT
+
+private:
+	enum LoadState
+	{
+		LOADED,
+		UNLOADED,
+	};
 
 public:
 	ScreenProject(QWidget* parent);
 	~ScreenProject() override;
 
 private slots:
+	void SlotOnButtonCloseClicked();
 	void SlotOnButtonDeleteClicked();
 	void SlotOnButtonFileClicked();
+	void SlotOnButtonLoadClicked();
 	void SlotOnButtonNewProjectClicked();
 	void SlotOnButtonNewProgramClicked();
+	void SlotOnButtonOpenClicked();
 	void SlotOnButtonRefreshClicked();
-	void SlotOnButtonLoadClicked();
 
 private:
 	virtual QList<QPushButton*> GetButtonList() override;
 	virtual QLayout* GetMainLayout() override;
 	virtual void UpdateText() override;
 
+
 	void Init();
 	void InitButtonGroup();
 	void InitSignalSlot();
+	bool IsCurrentItemValidity();
 	bool IsCurrentItemProject();
 	bool IsCurrentItemProgram();
 
 	void InitFileTree();
 
+	void SetLoadState(QTreeWidgetItem* projectItem,LoadState state);
 
 private:
 	std::unique_ptr<ProjectManager> m_projectManager;

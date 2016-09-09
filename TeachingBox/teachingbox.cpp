@@ -4,8 +4,10 @@
 #include "QBoxLayout"
 #include "Button.h"
 #include "Screen.h"
-#include "TeachingBoxContext.h"
 #include "ScreenManager.h"
+#include "InterpreterContext.h"
+#include "Context.h"
+#include "TeachingBoxContext.h"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -58,9 +60,9 @@ void TeachingBox::InitTop(QLayout* layout)
 	QRadioButton* btnMode1 = new QRadioButton(this);
 	QRadioButton* btnMode2 = new QRadioButton(this);
 	QRadioButton* btnMode3 = new QRadioButton(this);
-	m_modelButtonGroup->addButton(btnMode1, TeachingBoxContext::AUTO);
-	m_modelButtonGroup->addButton(btnMode2, TeachingBoxContext::STEP);
-	m_modelButtonGroup->addButton(btnMode3, TeachingBoxContext::MANUAL);
+	m_modelButtonGroup->addButton(btnMode1, InterpreterContext::AUTO);
+	m_modelButtonGroup->addButton(btnMode2, InterpreterContext::STEP);
+	m_modelButtonGroup->addButton(btnMode3, InterpreterContext::MANUAL);
 	btnMode1->setChecked(true);
 
 	Button* btnScram = new Button("Scram",this);
@@ -198,6 +200,8 @@ void TeachingBox::InitMovement(QLayout* layout)
 	realLayout->addWidget(A6Minus, 6, 1);
 
 	realLayout->addWidget(btn2nd, 7, 0);
+
+	connect(btnStart, SIGNAL(clicked()), this, SLOT(SlotOnStartButtonClicked()));
 }
 
 void TeachingBox::InitScreen(QLayout* layout)
@@ -232,10 +236,10 @@ void TeachingBox::SlotOnModelChanged()
 {
 	switch (m_modelButtonGroup->checkedId())
 	{
-	case TeachingBoxContext::AUTO:
-	case TeachingBoxContext::STEP:
-	case TeachingBoxContext::MANUAL:{
-		TeachingBoxContext::SetExecuteMode(static_cast<TeachingBoxContext::ExecuteMode>(m_modelButtonGroup->checkedId()));
+	case InterpreterContext::AUTO:
+	case InterpreterContext::STEP:
+	case InterpreterContext::MANUAL:{
+		Context::interpreterContext.SetExecuteMode(static_cast<InterpreterContext::ExecuteMode>(m_modelButtonGroup->checkedId()));
 	}break;
 	default:break;
 	}
@@ -263,4 +267,9 @@ void TeachingBox::SlotOnProjectButtonClicked()
 void TeachingBox::SlotOnProgramButtonClicked()
 {
 	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
+}
+
+void TeachingBox::SlotOnStartButtonClicked()
+{
+	
 }

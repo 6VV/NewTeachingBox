@@ -13,6 +13,11 @@ QStringList ProjectContext::GetScopes()
 	return m_currentScopes;
 }
 
+QString ProjectContext::GetProjectLoaded()
+{
+	return m_project;
+}
+
 void ProjectContext::SetLoadedProject(const QString& project, const QStringList& programs)
 {
 	m_project = project;
@@ -21,4 +26,12 @@ void ProjectContext::SetLoadedProject(const QString& project, const QStringList&
 	m_currentScopes = SCOPE_ORI;
 	m_currentScopes.append(m_project);
 	m_currentScopes.append(m_programs);
+}
+
+void ProjectContext::UnloadProject()
+{
+	m_project = QString{};
+	m_programs = QStringList{};
+
+	m_currentScopes = SCOPE_ORI;
 }

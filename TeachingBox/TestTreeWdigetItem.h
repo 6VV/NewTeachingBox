@@ -4,6 +4,8 @@
 #include "QTreeWidget"
 #include "QDebug"
 
+class QPushButton;
+
 class TestTreeWidgetItem:public QTreeWidgetItem
 {
 public:

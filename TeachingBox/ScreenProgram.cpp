@@ -4,6 +4,7 @@
 #include "CodeEditor.h"
 #include "Button.h"
 #include "ButtonGroup.h"
+#include "DialogNewMacro.h"
 
 
 
@@ -41,14 +42,24 @@ ScreenProgram::~ScreenProgram()
 {
 }
 
-void ScreenProgram::SlotNoAddvanceButtonClicked()
+void ScreenProgram::SlotOnButtonAddvanceClicked()
 {
 	m_btnGroupAddvance->show();
 }
 
-void ScreenProgram::SlotOnEditButtonClicked()
+void ScreenProgram::SlotOnButtonNewClicked()
+{
+	(new DialogNewMacro(this))->show();
+}
+
+void ScreenProgram::SlotOnButtonEditClicked()
 {
 	m_btnGroupEdit->show();
+}
+
+void ScreenProgram::SlotOnButtonSetPCClicked()
+{
+	m_codeEditor->HighlightPCLine();
 }
 
 void ScreenProgram::Init()
@@ -62,8 +73,10 @@ void ScreenProgram::Init()
 
 void ScreenProgram::InitSignalSlot()
 {
-	connect(m_btnAddvance, SIGNAL(clicked()), this, SLOT(SlotNoAddvanceButtonClicked()));
-	connect(m_btnEdit, SIGNAL(clicked()), this, SLOT(SlotOnEditButtonClicked()));
+	connect(m_btnAddvance, SIGNAL(clicked()), this, SLOT(SlotOnButtonAddvanceClicked()));
+	connect(m_btnNew, SIGNAL(clicked()), this, SLOT(SlotOnButtonNewClicked()));
+	connect(m_btnEdit, SIGNAL(clicked()), this, SLOT(SlotOnButtonEditClicked()));
+	connect(m_btnSetPC, SIGNAL(clicked()), this, SLOT(SlotOnButtonSetPCClicked()));
 }
 
 QList<QPushButton*> ScreenProgram::GetButtonList()

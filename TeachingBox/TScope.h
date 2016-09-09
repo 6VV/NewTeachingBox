@@ -35,6 +35,10 @@ public:
 	void AddVariate(const TVariate* variate);
 	void ClearSelf();			/*清除自身作用域*/
 	void DeleteVariate(const QString& scope, const QString& name);
+
+	TSymbol* FindSymbolScrollUp(const QString& strName);	/*在自身及上层作用域内查找符号*/
+	TScope* FindScopeScrollDown(const QString& scope);	/*在本作用域及以下的所有作用域查找*/
+
 	void UpdateVariate(const QString& scope,const QString& name,const TVariate* variate);
 
 private:
@@ -44,9 +48,7 @@ private:
 	bool DefineSymbol(const QString& desScope, TSymbol* symbol);
 	void DeleteSymbol(const QString& strName);	/*从本作用域中删除符号*/
 
-	TSymbol* FindSymbolScrollUp(const QString& strName);	/*在自身及上层作用域内查找符号*/
 	TSymbol* FindSymbolInSelf(const QString& strName);	/*在自身作用域内查找符号*/
-	TScope* FindScopeScrollDown(const QString& scope);	/*在本作用域及以下的所有作用域查找*/
 	ScopeSymbol FindSymbolScopeScrollUp(const QString& strSymbolName);	/*查找符号所在作用域*/
 
 	QString& GetScopeName();	/*获取当前作用域的名称*/

@@ -37,6 +37,7 @@ public:
 	void GetAllFiles(QTreeWidgetItem* parent);
 	QStringList GetProjectFiles(const QString& project);
 	QStringList GetStateTexts(const QString& fileName);
+	QString GetFileText(const QString& project, const QString& program);
 
 	bool ExistProject(const QString& project);
 	bool ExistProgram(const QString& project, const QString& program);

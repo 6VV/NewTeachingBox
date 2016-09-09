@@ -53,11 +53,38 @@ namespace
 	private:
 		CodeEditor *codeEditor;
 	};
+
+
+	struct LightLine
+	{
+		LightLine(int l,const QColor& c)
+			:lineNumber(l)
+			, color(c)
+		{}
+		int lineNumber;
+		QColor color;
+	};
+
+	struct LineHighlighter
+	{
+		static const QColor COLOR_PC;		/*蓝色，显示当前执行行*/
+		static const QColor COLOR_WRONG;	/*红色，出错行*/
+		static const QColor COLOR_EDIT;	/*黄色，当前编辑行*/
+
+		LightLine pcLine={ -1, COLOR_PC };
+		LightLine wrongLine={ -1, COLOR_WRONG };
+		LightLine editLine={ -1, COLOR_EDIT };
+
+		//int pcLineNumber=-1;
+		//int wrongLineNumber=-1;
+		//int editLineNumber=-1;
+	}; 
 }
 
 class CodeEditor : public QPlainTextEdit
 {
 	friend SingleTon<CodeEditor>;
+	friend LineNumberArea;
 
 	Q_OBJECT
 
@@ -78,18 +105,16 @@ private:
 	~CodeEditor();
 
 public:
-	int GetPCLineNumber();	/*获取PC行号*/
-	int GetLineNumberAreaWidth();		/*返回左侧区域宽度*/
+	//int GetPCLineNumber();	/*获取PC行号*/
 
-	void ClearWrongLine();	/*清除错误行颜色*/
+	//void ClearWrongLine();	/*清除错误行颜色*/
 
 	//void DealText();	/*处理文本*/
 	//void DeleteCurrentLine();	/*删除当前行*/
 
-	void HighlightPCLine(const int lineNumber);	/*高亮显示PC行*/
-	//void InsertTextBeforeLine(const QString& strText);	/*插入文本*/
+	void HighlightPCLine();	/*高亮显示PC行*/
+	void InsertTextBeforeLine(const QString& text);	/*插入文本*/
 	//void InsertTextBeforeLineUnsafely(const QString& strText);	/*插入文本（不进行语法检查）*/
-	void PaintLineNumberArea(QPaintEvent *event);	/*绘制左侧行号区域*/
 
 	//void SaveFile();	/*保存文件*/
 
@@ -113,9 +138,17 @@ private:
 	//void FormatText(const QString& text); /*格式化文本*/
 	//void FormatCurrentText();	/*格式化当前文本*/
 	//bool ParseText();		/*解析文本并生成树*/
+	void AddSelection(QList<QTextEdit::ExtraSelection>& selections, const LightLine lightLine);
+
+	int GetLineNumberAreaWidth();		/*返回左侧区域宽度*/
+	QTextEdit::ExtraSelection GetSelection(int lineNumber, const QColor& color);
 
 	void HighLightEditLine(const int lineNumber);	/*高亮显示编辑行*/
 	void HighlightWrongLine(const int lineNumber);	/*高亮显示错误行*/
+	void HighlightAllLines();	/*高亮显示行*/
+
+	void PaintLineNumberArea(QPaintEvent *event);	/*绘制左侧行号区域*/
+
 
 	//void _DeleteCurrentLine();
 	//void _UpdateCurrentLine(const QString& text);
@@ -125,15 +158,8 @@ private:
 private:
 	int m_textChangeTime = 0;
 	QWidget *m_lineNumberArea;
+	LineHighlighter m_lineHighlighter;
 
-	QList<QTextEdit::ExtraSelection> m_extraSelections;	/*所有颜色行*/
-	QTextEdit::ExtraSelection m_selectSelection;	/*当前选择行*/
-	QTextEdit::ExtraSelection m_pcSelection;	/*当前执行行*/
-	QTextEdit::ExtraSelection m_wrongSelection;	/*错误代码行*/
-
-	QColor COLOR_PC = QColor(Qt::blue).lighter(160);	/*蓝色，显示当前执行行*/
-	QColor COLOR_WRONG = QColor(Qt::red).light(160);	/*红色，出错行*/
-	QColor COLOR_EDIT = QColor(Qt::yellow).light(160);	/*黄色，当前编辑行*/
 };
 
 #endif

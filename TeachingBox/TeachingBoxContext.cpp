@@ -6,7 +6,6 @@
 
 namespace
 {
-	TeachingBoxContext::ExecuteMode g_executeMode = TeachingBoxContext::AUTO;
 	User g_user{};
 	QString g_language = Language::ENGLISH;
 	QPoint g_screenPos{};
@@ -45,11 +44,6 @@ void TeachingBoxContext::SetTeachingBoxRect(const QRect& rect)
 void TeachingBoxContext::SetScreenRect(const QRect& rect)
 {
 	g_screenRect = rect;
-}
-
-void TeachingBoxContext::SetExecuteMode(ExecuteMode mode)
-{
-	g_executeMode = mode;
 }
 
 void TeachingBoxContext::SetLanguage(const QString& language)

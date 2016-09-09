@@ -32,7 +32,7 @@ namespace VariateWidget{
 		m_lineEidtName = new LineEditWithRegExpAndKeyboard("", RegExp::STR_REG_STRING_NAME);
 
 		m_comboBoxScope = new QComboBox;
-		m_comboBoxScope->addItems(Context::sProjectContext.GetScopes());
+		m_comboBoxScope->addItems(Context::projectContext.GetScopes());
 
 		m_comboBoxType = new QComboBox;
 		m_comboBoxType->addItems(TVariateType::TYPE_COLLECTION);

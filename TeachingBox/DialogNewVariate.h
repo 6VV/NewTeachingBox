@@ -17,9 +17,9 @@
 //    <desc>        build this moudle     
 *************************************************/
 
-#include "InternationalWidget.h"
 #include <memory>
 #include "VariateTableManager.h"
+#include "DialogParent.h"
 
 class Button;
 class QLayout;
@@ -34,7 +34,7 @@ class IEditVariate;
 
 namespace VariateWidget{
 
-	class DialogNewVariate :public InternationalWidget
+	class DialogNewVariate :public DialogParent
 	{
 		Q_OBJECT
 
@@ -50,7 +50,7 @@ namespace VariateWidget{
 		void UpdateVariateWidget(const QString& currentType);
 
 	private:
-		void showEvent(QShowEvent *) override;
+		//void showEvent(QShowEvent *) override;
 		void UpdateText() override;
 
 		void Destroy();

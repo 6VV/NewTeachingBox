@@ -3,4 +3,6 @@
 
 
 
-ProjectContext Context::sProjectContext{};
+ProjectContext Context::projectContext{};
+
+InterpreterContext Context::interpreterContext{};

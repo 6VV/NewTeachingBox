@@ -2,7 +2,7 @@
 #include "CodeEditor.h"
 
 namespace{
-	LineNumberArea::LineNumberArea(CodeEditor *editor) 
+	LineNumberArea::LineNumberArea(CodeEditor *editor)
 		: QWidget(editor)
 		, codeEditor(editor)
 	{
@@ -17,6 +17,12 @@ namespace{
 	{
 		codeEditor->PaintLineNumberArea(event);
 	}
+
+	const QColor LineHighlighter::COLOR_PC{ QColor(Qt::blue).lighter(160) };	
+
+	const QColor LineHighlighter::COLOR_WRONG{ QColor(Qt::red).light(160) };
+
+	const QColor LineHighlighter::COLOR_EDIT{ QColor(Qt::yellow).light(160) };
 }
 
 CodeEditor* CodeEditor::GetInstance()
@@ -59,81 +65,72 @@ int CodeEditor::GetLineNumberAreaWidth()
 	return space;
 }
 
-void CodeEditor::HighlightPCLine(const int lineNumber)
+void CodeEditor::HighlightPCLine()
 {
-	int currentLine = lineNumber >= this->document()->blockCount()?1:lineNumber;
+	//int currentLine = lineNumber >= this->document()->blockCount() ? 1 : lineNumber;
 
-	QTextBlock block = this->document()->findBlockByLineNumber(currentLine - 1);
-	QTextCursor cursor(block);
-
-	m_extraSelections.clear();
-	if (!isReadOnly())
-	{
-		m_pcSelection.format.setBackground(COLOR_PC);
-		m_pcSelection.format.setProperty(QTextFormat::FullWidthSelection, true);
-		m_pcSelection.cursor = cursor;
-		m_pcSelection.cursor.clearSelection();
-
-		m_extraSelections.append(m_selectSelection);
-		m_extraSelections.append(m_pcSelection);
-		m_extraSelections.append(m_wrongSelection);
-	}
-	setExtraSelections(m_extraSelections);
+	m_lineHighlighter.pcLine.lineNumber = textCursor().blockNumber();
+	HighlightAllLines();
 }
 
 void CodeEditor::HighlightWrongLine(const int lineNumber)
 {
-	QTextBlock wrongBlock = this->document()->findBlockByLineNumber(lineNumber);
-	QTextCursor wrongCursor(wrongBlock);
-
-	m_extraSelections.clear();
-	if (!isReadOnly())
-	{
-		m_wrongSelection.format.setBackground(COLOR_WRONG);
-		m_wrongSelection.format.setProperty(QTextFormat::FullWidthSelection, true);
-		m_wrongSelection.cursor = wrongCursor;
-		m_wrongSelection.cursor.clearSelection();
-
-		m_extraSelections.append(m_selectSelection);
-		m_extraSelections.append(m_pcSelection);
-		m_extraSelections.append(m_wrongSelection);
-	}
-	setExtraSelections(m_extraSelections);
-}
-
-void CodeEditor::ClearWrongLine()
-{
-	m_extraSelections.clear();
-
-	m_wrongSelection.format.clearBackground();
-	m_wrongSelection.format.clearProperty(QTextFormat::FullWidthSelection);
-
-	m_extraSelections.append(m_selectSelection);
-	m_extraSelections.append(m_pcSelection);
-	m_extraSelections.append(m_wrongSelection);
-
-	setExtraSelections(m_extraSelections);
+	m_lineHighlighter.wrongLine.lineNumber = lineNumber;
+	HighlightAllLines();
 }
 
 void CodeEditor::HighLightEditLine(const int lineNumber)
 {
+	m_lineHighlighter.editLine.lineNumber = lineNumber;
+	HighlightAllLines();
+}
+
+void CodeEditor::HighlightAllLines()
+{
+	QList<QTextEdit::ExtraSelection> selections;
+	AddSelection(selections, m_lineHighlighter.editLine);
+	AddSelection(selections, m_lineHighlighter.pcLine);
+	AddSelection(selections, m_lineHighlighter.wrongLine);
+
+	setExtraSelections(selections);
+}
+
+void CodeEditor::AddSelection(QList<QTextEdit::ExtraSelection>& selections, const LightLine lightLine)
+{
+	if (lightLine.lineNumber==-1)
+	{
+		return;
+	}
+	selections.append(GetSelection(lightLine.lineNumber, lightLine.color));
+}
+
+QTextEdit::ExtraSelection CodeEditor::GetSelection(int lineNumber, const QColor& color)
+{
 	QTextBlock block = this->document()->findBlockByLineNumber(lineNumber);
 	QTextCursor cursor(block);
 
-	m_extraSelections.clear();
-	if (!isReadOnly())
-	{
-		m_wrongSelection.format.setBackground(COLOR_EDIT);
-		m_wrongSelection.format.setProperty(QTextFormat::FullWidthSelection, true);
-		m_wrongSelection.cursor = cursor;
-		m_wrongSelection.cursor.clearSelection();
+	QTextEdit::ExtraSelection selection;
+	selection.format.setBackground(color);
+	selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+	selection.cursor = cursor;
+	selection.cursor.clearSelection();
 
-		m_extraSelections.append(m_selectSelection);
-		m_extraSelections.append(m_pcSelection);
-		m_extraSelections.append(m_wrongSelection);
-	}
-	setExtraSelections(m_extraSelections);
+	return selection;
 }
+
+//void CodeEditor::ClearWrongLine()
+//{
+//	m_extraSelections.clear();
+//
+//	m_wrongSelection.format.clearBackground();
+//	m_wrongSelection.format.clearProperty(QTextFormat::FullWidthSelection);
+//
+//	m_extraSelections.append(m_selectSelection);
+//	m_extraSelections.append(m_pcSelection);
+//	m_extraSelections.append(m_wrongSelection);
+//
+//	setExtraSelections(m_extraSelections);
+//}
 
 /*更新右侧区域宽度*/
 void CodeEditor::SlotUpdateCodeAreaWidth(int /* newBlockCount */)
@@ -170,10 +167,10 @@ void CodeEditor::resizeEvent(QResizeEvent *e)
 
 void CodeEditor::showEvent(QShowEvent *)
 {
-	m_pcSelection.format.clearBackground();
-	m_pcSelection.format.clearProperty(QTextFormat::FullWidthSelection);
-	m_wrongSelection.format.clearBackground();
-	m_wrongSelection.format.clearProperty(QTextFormat::FullWidthSelection);
+	//m_pcSelection.format.clearBackground();
+	//m_pcSelection.format.clearProperty(QTextFormat::FullWidthSelection);
+	//m_wrongSelection.format.clearBackground();
+	//m_wrongSelection.format.clearProperty(QTextFormat::FullWidthSelection);
 }
 
 /*高亮显示某行*/
@@ -182,10 +179,10 @@ void CodeEditor::SlotHighlightCurrentLine()
 	HighLightEditLine(textCursor().blockNumber());
 }
 
-int CodeEditor::GetPCLineNumber()
-{
-	return m_pcSelection.cursor.blockNumber() + 1;
-}
+//int CodeEditor::GetPCLineNumber()
+//{
+//	return m_pcSelection.cursor.blockNumber() + 1;
+//}
 
 /*************************************************
 //  Function: 		PaintLineNumberArea
@@ -226,10 +223,12 @@ void CodeEditor::PaintLineNumberArea(QPaintEvent *event)
 	}
 }
 
-//void CodeEditor::InsertTextBeforeLine(const QString& strText)
-//{
-//	OperatorText(INSERT_LINE, strText);
-//}
+void CodeEditor::InsertTextBeforeLine(const QString& text)
+{
+	moveCursor(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
+	insertPlainText(text + "\n");
+	++m_textChangeTime;
+}
 //
 //void CodeEditor::InsertTextBeforeLineUnsafely(const QString& strText)
 //{
@@ -385,3 +384,4 @@ void CodeEditor::PaintLineNumberArea(QPaintEvent *event)
 //{
 //	OperatorText(UPDATE_LINE, strNewText);
 //}
+

@@ -3,6 +3,7 @@
 
 #include "QString"
 #include "QHash"
+#include "QObject"
 
 class TSymbol:public QObject
 {

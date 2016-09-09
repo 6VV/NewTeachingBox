@@ -18,11 +18,13 @@
 *************************************************/
 
 #include "ProjectContext.h"
+#include "InterpreterContext.h"
 
 class Context
 {
 public:
-	static ProjectContext sProjectContext;
+	static ProjectContext projectContext;
+	static InterpreterContext interpreterContext;
 };
 
 #endif

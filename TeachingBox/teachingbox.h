@@ -69,6 +69,7 @@ private slots:
 	void SlotOnVariateButtonClicked();
 	void SlotOnProjectButtonClicked();
 	void SlotOnProgramButtonClicked();
+	void SlotOnStartButtonClicked();
 
 private:
 	QButtonGroup* m_modelButtonGroup;

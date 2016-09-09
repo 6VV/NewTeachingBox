@@ -149,3 +149,21 @@ QString ProjectManager::GetWholeFileName(const QString& fileName)
 	return fileName + "." + FILE_SUFFIX;
 }
 
+QString ProjectManager::GetFileText(const QString& project, const QString& program)
+{
+	QString filePath = PROJECT_PATH + "/" + project + "/" + GetWholeFileName(program);
+	QFile file(filePath);
+
+	QString result;
+	if (file.open(QFile::ReadOnly))
+	{
+		QTextStream fileIn(&file);
+		fileIn.setCodec("UTF-8");
+		fileIn.seek(0);
+		result = fileIn.readAll();
+		file.close();
+	}
+
+	return result;
+}
+
