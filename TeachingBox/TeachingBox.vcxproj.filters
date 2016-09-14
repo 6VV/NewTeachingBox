@@ -604,9 +604,6 @@
     <ClCompile Include="TInterpreterException.cpp">
       <Filter>Source Files\Exception</Filter>
     </ClCompile>
-    <ClCompile Include="InterpreterContext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TLexer.cpp">
       <Filter>Source Files\Interpreter</Filter>
     </ClCompile>
@@ -649,8 +646,26 @@
     <ClCompile Include="TInterpreter.cpp">
       <Filter>Source Files\Interpreter</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TInterpreterThread.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TInterpreterThread.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_InterpreterManager.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_InterpreterManager.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
     <ClCompile Include="InterpreterManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="TInterpreterThread.cpp">
+      <Filter>Source Files\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="InterpreterContext.cpp">
+      <Filter>Source Files\Context</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -749,6 +764,12 @@
     </CustomBuild>
     <CustomBuild Include="DialogNewMacro.h">
       <Filter>Header Files\Screen\ScreenProgram</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TInterpreterThread.h">
+      <Filter>Header Files\Interpreter</Filter>
+    </CustomBuild>
+    <CustomBuild Include="InterpreterManager.h">
+      <Filter>Header Files\Interpreter</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -923,9 +944,6 @@
       <Filter>Header Files\Init</Filter>
     </ClInclude>
     <ClInclude Include="TInterpreter.h">
-      <Filter>Header Files\Interpreter</Filter>
-    </ClInclude>
-    <ClInclude Include="InterpreterManager.h">
       <Filter>Header Files\Interpreter</Filter>
     </ClInclude>
   </ItemGroup>

@@ -18,6 +18,7 @@
 *************************************************/
 
 #include "QMap"
+#include "QVector"
 
 class QTreeWidgetItem;
 
@@ -27,6 +28,8 @@ private:
 	static const QString PROJECT_PATH;
 	static const QString FILE_SUFFIX ;
 
+	typedef QMap<QString, QVector<QString>> FILE_MAP;
+
 public:
 	bool CreateProject(const QString& project);
 	bool CreateProgram(const QString& project, const QString& program);
@@ -35,12 +38,15 @@ public:
 	void DeleteProgram(const QString& project,const QString& program);
 
 	void GetAllFiles(QTreeWidgetItem* parent);
+	FILE_MAP GetFileMap();
 	QStringList GetProjectFiles(const QString& project);
 	QStringList GetStateTexts(const QString& fileName);
 	QString GetFileText(const QString& project, const QString& program);
 
 	bool ExistProject(const QString& project);
 	bool ExistProgram(const QString& project, const QString& program);
+
+	bool SaveFile(const QString& program, const QString& text);
 
 private:
 	void GetAllFilesFromPath(const QString & path, QTreeWidgetItem* parent);

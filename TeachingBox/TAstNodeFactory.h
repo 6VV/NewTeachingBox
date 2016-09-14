@@ -12,9 +12,9 @@ private:
 	typedef TTokenType::Type TYPE;
 
 public:
-	static const std::shared_ptr<TAstNode> CreateAst();
+	static const std::shared_ptr<TAstNode> CreateAstFromProject(const QString& project);
 
-	static const std::shared_ptr<TAstNode> GetOneNode(TLexer* const lexer);
+	static const std::shared_ptr<TAstNode> GetNode(TLexer* const lexer);
 
 };
 

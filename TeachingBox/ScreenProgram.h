@@ -44,6 +44,7 @@ private:
 	void InitEditGroup();
 	void InitAddvanceGroup();
 
+	virtual void showEvent(QShowEvent *e) override;
 	virtual QList<QPushButton*> GetButtonList() override;
 	virtual QLayout* GetMainLayout() override;
 	virtual void UpdateText() override;

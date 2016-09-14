@@ -31,6 +31,7 @@ const QHash<QString, TTokenType::Type> TTokenType::VALUE_MAP{
 
 QHash<QString, TTokenType::Type> TTokenType::KEY_MAP{};
 
+TTokenType::Initialization TTokenType::initialization{};
 
 TTokenType::Initialization::Initialization()
 {

@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "CodeEditor.h"
+#include "Context.h"
 
 namespace{
 	LineNumberArea::LineNumberArea(CodeEditor *editor)
@@ -65,11 +66,20 @@ int CodeEditor::GetLineNumberAreaWidth()
 	return space;
 }
 
+int CodeEditor::GetPCLineNumber()
+{
+	return m_lineHighlighter.pcLine.lineNumber+1;
+}
+
 void CodeEditor::HighlightPCLine()
 {
-	//int currentLine = lineNumber >= this->document()->blockCount() ? 1 : lineNumber;
+	HighlightPCLine(textCursor().blockNumber()+1);
+}
 
-	m_lineHighlighter.pcLine.lineNumber = textCursor().blockNumber();
+void CodeEditor::HighlightPCLine(int lineNumber)
+{
+	Context::interpreterContext.SetLineNumber(lineNumber);
+	m_lineHighlighter.pcLine.lineNumber = lineNumber-1;
 	HighlightAllLines();
 }
 

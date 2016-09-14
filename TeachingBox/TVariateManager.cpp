@@ -6,6 +6,8 @@
 #include "VariateDatabase.h"
 #include "TVariateFactory.h"
 #include "Exception.h"
+#include "ProjectContext.h"
+#include "ProjectManager.h"
 
 using namespace Database;
 
@@ -17,7 +19,35 @@ TVariateManager* TVariateManager::GetInstance()
 TVariateManager::TVariateManager()
 	:m_scopeRoot(new TScope())
 {
+	InitScope();
+
 	LoadInitDataFromDatabase();
+}
+
+void TVariateManager::InitScope()
+{
+	auto systemScope = new TScope(ProjectContext::ScopeSystem());
+	m_scopeRoot->PushScope(systemScope);
+
+	auto synergicScope = new TScope(ProjectContext::ScopeSynergic());
+	systemScope->PushScope(synergicScope);
+
+	auto globalScope = new TScope(ProjectContext::ScopeGlobal());
+	synergicScope->PushScope(globalScope);
+
+	ProjectManager projectManager;
+	auto fileMap = projectManager.GetFileMap();
+
+	for (auto iterProject = fileMap.begin(); iterProject != fileMap.end(); ++iterProject)
+	{
+		auto projectScope = new TScope(iterProject.key());
+		globalScope->PushScope(projectScope);
+
+		for (auto file : iterProject.value())
+		{
+			projectScope->PushScope(new TScope(file));
+		}
+	}
 }
 
 TVariateManager::~TVariateManager()

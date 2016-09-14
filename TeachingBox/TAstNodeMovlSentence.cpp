@@ -73,7 +73,7 @@ void TAstNodeMovlSentence::ParseSemantic() const
 
 void TAstNodeMovlSentence::CheckParameterType(std::shared_ptr<TAstNode> node,int type) const
 {
-	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::interpreterContext.GetCurrentScope(),
+	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(),
 		static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue());
 
 	if (variate==nullptr)
@@ -117,17 +117,17 @@ tMovLParam TAstNodeMovlSentence::GetMovlParameter() const
 tAxesAllPositions TAstNodeMovlSentence::GetPosition(const QString& name) const
 {
 	return static_cast<TPosition*>(TVariateManager::GetInstance()
-		->GetVariateSrollUp(Context::interpreterContext.GetCurrentScope(), name))->GetValue();
+		->GetVariateSrollUp(GetScope(), name))->GetValue();
 }
 
 tDynamicConstraint TAstNodeMovlSentence::GetDynamic(const QString& name) const
 {
 	return static_cast<TDynamic*>(TVariateManager::GetInstance()
-		->GetVariateSrollUp(Context::interpreterContext.GetCurrentScope(), name))->GetValue();
+		->GetVariateSrollUp(GetScope(), name))->GetValue();
 }
 
 tOverlapConstraint TAstNodeMovlSentence::GetOverlap(const QString& name) const
 {
 	return static_cast<TOverlap*>(TVariateManager::GetInstance()
-		->GetVariateSrollUp(Context::interpreterContext.GetCurrentScope(), name))->GetValue();
+		->GetVariateSrollUp(GetScope(), name))->GetValue();
 }

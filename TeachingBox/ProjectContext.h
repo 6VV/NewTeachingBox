@@ -21,10 +21,13 @@
 
 class ProjectContext
 {
-private:
-	const QString STR_SCOPE_SYSTEM = "SYSTEM";		/*系统作用域*/
-	const QString STR_SCOPE_SYNERGIC = "SYNERGIC";	/*协作作用域*/
-	const QString STR_SCOPE_GLOBAL = "GLOBAL";		/*全局作用域*/
+public:
+	static const QString ScopeSystem();
+	static const QString ScopeSynergic();
+	static const QString ScopeGlobal();
+	//static const QString STR_SCOPE_SYSTEM;		/*系统作用域*/
+	//static const QString STR_SCOPE_SYNERGIC ;	/*协作作用域*/
+	//static const QString STR_SCOPE_GLOBAL;		/*全局作用域*/
 
 	const QStringList SCOPE_ORI;	/*初始作用域*/
 
@@ -33,8 +36,14 @@ public:
 
 	QStringList GetScopes();
 	QString GetProjectLoaded();
+	QString GetCurrentProgram();
+	QString GetFileOpened();
 
+	void SetCurrentProgram(const QString& program);
 	void SetLoadedProject(const QString& project, const QStringList& programs);
+	void SetFileOpened(const QString& file);
+
+	bool IsCurrentFileLoad();
 
 	void UnloadProject();
 
@@ -42,10 +51,12 @@ private:
 	ProjectContext& operator=(const ProjectContext&);
 
 private:
-	QStringList m_currentScopes;
+	QStringList m_currentScopes{};
 
-	QString m_project;
-	QStringList m_programs;
+	QString m_project{};
+	QStringList m_programs{};
+	QString m_currentProgram{};
+	QString m_fileOpened{};
 };
 
 #endif

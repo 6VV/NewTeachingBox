@@ -23,7 +23,7 @@ const std::shared_ptr<TAstNode> TAstNodeProgram::GetAstNode(TLexer* const lexer,
 {
 	std::shared_ptr<TAstNode> result(new TAstNodeProgram(token));
 	std::shared_ptr<TAstNode> node{};
-	while (node = TAstNodeFactory::GetOneNode(lexer))
+	while (node = TAstNodeFactory::GetNode(lexer))
 	{
 		result->AddChild(node);
 		SkipEol(lexer);

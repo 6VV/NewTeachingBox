@@ -51,7 +51,7 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnTerminalValue(const TAst
 	}break;
 	case TOKEN_TYPE::ID:
 	{
-		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(Context::interpreterContext.GetCurrentScope(),
+		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(),
 			static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue());
 		switch (var->GetType())
 		{
@@ -399,7 +399,7 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetTerminalSymbolType(cons
 	case TOKEN_TYPE::LITERAL_STRING:return SYMBOL_TYPE::TYPE_STRING;
 	case TOKEN_TYPE::ID:
 	{
-		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(Context::interpreterContext.GetCurrentScope(),
+		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(node->GetScope(),
 			static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue());
 
 		if (var)

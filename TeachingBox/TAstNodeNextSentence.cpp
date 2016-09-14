@@ -23,7 +23,7 @@ TAstNode::ValueReturned TAstNodeNextSentence::Execute() const
 {
 	auto thirdChild = m_parentNode->GetFirstChild()->GetSibling()->GetSibling();
 
-	auto scope = Context::interpreterContext.GetCurrentScope();
+	auto scope = GetScope();
 	auto name = static_cast<TTokenWithValue<QString>*>(m_parentNode->GetFirstChild()->GetFirstChild()->GetToken().get())->GetValue();
 	auto type = TVariateManager::GetInstance()->GetVariateSrollUp(scope, name)->GetType();
 

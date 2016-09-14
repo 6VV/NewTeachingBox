@@ -26,7 +26,7 @@ TAstNodeAssignSentence::~TAstNodeAssignSentence()
 TAstNode::ValueReturned TAstNodeAssignSentence::Execute() const
 {
 
-	auto var = TVariateManager::GetInstance()->GetVariateSrollUp(Context::interpreterContext.GetCurrentScope(),
+	auto var = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(),
 		static_cast<TTokenWithValue<QString>*>(m_firstChild->GetToken().get())->GetValue());
 
 	auto value = m_firstChild->GetSibling()->Execute();
@@ -98,7 +98,7 @@ const std::shared_ptr<TAstNode> TAstNodeAssignSentence::GetAssignException(TLexe
 
 void TAstNodeAssignSentence::ParseSemantic() const
 {
-	auto var = TVariateManager::GetInstance()->GetVariateSrollUp(Context::interpreterContext.GetCurrentScope(),
+	auto var = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(),
 		static_cast<TTokenWithValue<QString>*>(m_firstChild->GetToken().get())->GetValue());
 
 	if (!var)

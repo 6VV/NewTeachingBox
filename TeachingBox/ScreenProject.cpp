@@ -10,6 +10,8 @@
 #include "Context.h"
 #include "CodeEditor.h"
 #include "ScreenManager.h"
+#include "InterpreterManager.h"
+#include "TInterpreterException.h"
 
 
 ScreenProject::ScreenProject(QWidget* parent)
@@ -150,6 +152,8 @@ void ScreenProject::SlotOnButtonNewProgramClicked()
 	}
 }
 
+//切换到编辑界面，显示选中文件内容
+//若选中的文件已被加载，则设置解释器中下一个执行节点为选中文件对应的程序节点
 void ScreenProject::SlotOnButtonOpenClicked()
 {
 	if (!IsCurrentItemValidity())
@@ -166,7 +170,25 @@ void ScreenProject::SlotOnButtonOpenClicked()
 	QString program = m_treeWidget->currentItem()->text(0);
 	QString project = m_treeWidget->currentItem()->parent()->text(0);
 
-	CodeEditor::GetInstance()->setPlainText(m_projectManager->GetFileText(project, program));
+	QString nextProgram = project + "." + program;
+	QString currentProgram = Context::projectContext.GetFileOpened();
+
+	if (nextProgram==currentProgram)
+	{
+		return;
+	}
+
+	auto codeEidtor = CodeEditor::GetInstance();
+
+	if (!currentProgram.isEmpty())
+	{
+		m_projectManager->SaveFile(currentProgram, codeEidtor->toPlainText());
+	}
+
+	codeEidtor->setPlainText(m_projectManager->GetFileText(project, program));
+	codeEidtor->HighlightPCLine(1);
+
+	Context::projectContext.SetFileOpened(nextProgram);
 	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
 }
 
@@ -193,13 +215,24 @@ void ScreenProject::SlotOnButtonLoadClicked()
 	if (IsCurrentItemProject())
 	{
 		projectItem = m_treeWidget->currentItem();
+		UpdateLoadProjectState(projectItem);
 	}
 	else
 	{
 		projectItem = m_treeWidget->currentItem()->parent();
+
+		QString program = m_treeWidget->currentItem()->text(0);
+		QString project = projectItem->text(0);
+
+		Context::projectContext.SetCurrentProgram(project+"."+program);
+
+		UpdateLoadProjectState(projectItem);
 		SlotOnButtonOpenClicked();
 	}
+}
 
+void ScreenProject::UpdateLoadProjectState(QTreeWidgetItem* projectItem)
+{
 	QString project = projectItem->text(0);
 	Context::projectContext.SetLoadedProject(project, m_projectManager->GetProjectFiles(project));
 

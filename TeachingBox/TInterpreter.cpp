@@ -1,14 +1,19 @@
 ﻿#include "stdafx.h"
 #include "TInterpreter.h"
-
+//#include "TLexer.h"
+//#include "Context.h"
+//#include "TAstNodeFactory.h"
+//#include "TAstNode.h"
+//#include "CodeEditor.h"
+//#include <memory>
 //
 //void TInterpreter::ExecuteAll(int lineNum)
 //{
-//	TContext::SetExecuteState(true);
+//	Context::interpreterContext.IsExecuting(true);
 //	InitContext(lineNum);
 //
 //	TAstNode* nextNode = nullptr;
-//	while ((nextNode = TContext::GetNextNode()) != nullptr && TContext::GetExecuteState())
+//	while ((nextNode = Context::interpreterContext.GetNextNode()) != nullptr && Context::interpreterContext.IsExecuting())
 //	{
 //		nextNode->Execute();
 //	}
@@ -18,34 +23,34 @@
 //
 //void TInterpreter::ExecuteOneLine(int lineNum)
 //{
-//	InitContext(lineNum);
-//	TAstNode* nextNode = TContext::GetNextNode();
+//	//InitContext(lineNum);
+//	//TAstNode* nextNode = TContext::GetNextNode();
 //
-//	if (nextNode!=nullptr)
-//	{
-//		nextNode->Execute();
-//	}
-//	CCodeEditor::GetInstance()->HighlightPCLine(TContext::GetNextNode()->GetToken()->GetLineNumber());
+//	//if (nextNode!=nullptr)
+//	//{
+//	//	nextNode->Execute();
+//	//}
+//	//CCodeEditor::GetInstance()->HighlightPCLine(TContext::GetNextNode()->GetToken()->GetLineNumber());
 //}
 //
 //void TInterpreter::StopExecute()
 //{
-//	TContext::SetExecuteState(false);
-//	CTcpManager::GetInstance()->SendData(CTcpSpecialCommand::CommandStopExecute());
+//	//TContext::SetExecuteState(false);
+//	//CTcpManager::GetInstance()->SendData(CTcpSpecialCommand::CommandStopExecute());
 //}
 //
 //void TInterpreter::Parse(const QString& text)
 //{
-//	auto rootNode = TAstNodeFactory::CreateAst();
-//	rootNode->ParseSemantic();
+//	//auto rootNode = TAstNodeFactory::CreateAst();
+//	//rootNode->ParseSemantic();
 //
-//	TContext::SetRootNode(rootNode);
-//	TContext::SetNextNode(rootNode.get());
+//	//TContext::SetRootNode(rootNode);
+//	//TContext::SetNextNode(rootNode.get());
 //}
 //
 //TAstNode* TInterpreter::FindStartNode(std::shared_ptr<TAstNode> rootNode,int lineNumber)
 //{
-//	std::shared_ptr<TAstNode> currentNode = rootNode->GetFirstChild();
+//	auto currentNode = rootNode->GetFirstChild();
 //	if (currentNode == nullptr)
 //	{
 //		return nullptr;
@@ -77,15 +82,15 @@
 //
 //void TInterpreter::InitContext(int lineNum)
 //{
-//	TContext::SetNextNode(FindStartNode(TContext::GetRootNode(), lineNum));
+//	Context::interpreterContext.SetNextNode(FindStartNode(Context::interpreterContext.GetRootNode(), lineNum));
 //
-//	TAstNode* node = TContext::GetNextNode();
+//	TAstNode* node = Context::interpreterContext.GetNextNode();
 //	while (node->GetParentNode()->GetParentNode())
 //	{
 //		node = node->GetParentNode();
 //	}
 //
-//	TContext::SetCurrentProgramNode(node);
+//	Context::interpreterContext.SetCurrentProgramNode(node);
 //}
-
+//
 

@@ -14,15 +14,15 @@
 #include "ProjectManager.h"
 #include "Context.h"
 
-const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAst()
+const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QString& project)
 {
 	std::shared_ptr<TAstNode> result(new TAstNodeRoot);
 	ProjectManager projectManager;
-	QString project = Context::projectContext.GetProjectLoaded();
 	QList<QString> fileNames = projectManager.GetProjectFiles(project);
 	for (const QString& var : fileNames)
 	{
-		QString fileText=projectManager.GetFileText(project,var);
+		
+		QString fileText=projectManager.GetFileText(project,var.split(".").at(1));
 
 		TLexer lexer(fileText);
 		std::shared_ptr<TToken> token(new TTokenWithValue<QString>(TYPE::ID, 0, var));
@@ -30,10 +30,12 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAst()
 		result->AddChild(TAstNodeProgram::GetAstNode(&lexer, token));
 	}
 
+	result->ParseSemantic();
+
 	return result;
 }
 
-const std::shared_ptr<TAstNode> TAstNodeFactory::GetOneNode(TLexer* const lexer)
+const std::shared_ptr<TAstNode> TAstNodeFactory::GetNode(TLexer* const lexer)
 {
 	auto token = lexer->PeekToken();
 

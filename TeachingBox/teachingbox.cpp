@@ -8,6 +8,9 @@
 #include "InterpreterContext.h"
 #include "Context.h"
 #include "TeachingBoxContext.h"
+#include "InterpreterManager.h"
+#include "TInterpreterException.h"
+#include "WarningManager.h"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -271,5 +274,12 @@ void TeachingBox::SlotOnProgramButtonClicked()
 
 void TeachingBox::SlotOnStartButtonClicked()
 {
+	try{
+		InterpreterManager::GetInstance()->StartExecute();
+	}
+	catch (TInterpreterException& e){
+		WarningManager::Warning(this, e.GetInfo());
+		return;
+	}
 	
 }

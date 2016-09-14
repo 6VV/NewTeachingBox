@@ -105,7 +105,7 @@ private:
 	~CodeEditor();
 
 public:
-	//int GetPCLineNumber();	/*获取PC行号*/
+	int GetPCLineNumber();	/*获取PC行号*/
 
 	//void ClearWrongLine();	/*清除错误行颜色*/
 
@@ -113,6 +113,8 @@ public:
 	//void DeleteCurrentLine();	/*删除当前行*/
 
 	void HighlightPCLine();	/*高亮显示PC行*/
+	void HighlightPCLine(int lineNumber);
+
 	void InsertTextBeforeLine(const QString& text);	/*插入文本*/
 	//void InsertTextBeforeLineUnsafely(const QString& strText);	/*插入文本（不进行语法检查）*/
 

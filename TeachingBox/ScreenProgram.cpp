@@ -5,6 +5,7 @@
 #include "Button.h"
 #include "ButtonGroup.h"
 #include "DialogNewMacro.h"
+#include "Context.h"
 
 
 
@@ -159,4 +160,16 @@ void ScreenProgram::InitAddvanceGroup()
 	btnGroupAddvance.append(m_btnInvalidate);
 
 	m_btnGroupAddvance = new ButtonGroup(btnGroupAddvance, m_btnAddvance);
+}
+
+void ScreenProgram::showEvent(QShowEvent *e)
+{
+	ScreenMainParent::showEvent(e);
+
+	if (!Context::projectContext.IsCurrentFileLoad())
+	{
+		m_btnSetPC->setEnabled(false);
+	}
+
+	m_btnSetPC->setEnabled(true);
 }

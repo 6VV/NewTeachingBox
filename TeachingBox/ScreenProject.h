@@ -49,6 +49,7 @@ private slots:
 	void SlotOnButtonDeleteClicked();
 	void SlotOnButtonFileClicked();
 	void SlotOnButtonLoadClicked();
+
 	void SlotOnButtonNewProjectClicked();
 	void SlotOnButtonNewProgramClicked();
 	void SlotOnButtonOpenClicked();
@@ -70,6 +71,8 @@ private:
 	void InitFileTree();
 
 	void SetLoadState(QTreeWidgetItem* projectItem,LoadState state);
+
+	void UpdateLoadProjectState(QTreeWidgetItem* projectItem);
 
 private:
 	std::unique_ptr<ProjectManager> m_projectManager;

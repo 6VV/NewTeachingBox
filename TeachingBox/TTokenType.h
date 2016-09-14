@@ -91,6 +91,7 @@ public:
 private:
 	class Initialization
 	{
+	public:
 		Initialization();
 	};
 

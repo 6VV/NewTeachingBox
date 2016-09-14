@@ -39,6 +39,8 @@ public:
 	TSymbol* FindSymbolScrollUp(const QString& strName);	/*在自身及上层作用域内查找符号*/
 	TScope* FindScopeScrollDown(const QString& scope);	/*在本作用域及以下的所有作用域查找*/
 
+	void PushScope(TScope* scope);		/*添加子作用域*/
+
 	void UpdateVariate(const QString& scope,const QString& name,const TVariate* variate);
 
 private:
@@ -53,8 +55,6 @@ private:
 
 	QString& GetScopeName();	/*获取当前作用域的名称*/
 	TScope* GetEnclosingScope();	/*获取上层作用域*/
-
-	void PushScope(TScope* scope);		/*添加子作用域*/
 
 	void RenameSymbol(const QString& oldName, const QString& newName, TSymbol* symbol);	/*变量重命名*/
 

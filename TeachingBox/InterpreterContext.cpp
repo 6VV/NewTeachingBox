@@ -1,12 +1,13 @@
 ﻿#include "stdafx.h"
 #include "InterpreterContext.h"
+#include "TTokenWithValue.h"
+#include "TAstNode.h"
 
 
-
-QString InterpreterContext::GetCurrentScope() const
-{
-	return m_currentScope;
-}
+//QString InterpreterContext::GetCurrentScope() const
+//{
+//	return m_currentScope;
+//}
 
 TAstNode* InterpreterContext::GetNextNode() const
 {
@@ -23,10 +24,15 @@ InterpreterContext::ExecuteMode InterpreterContext::GetExecuteMode() const
 	return m_executeMode;
 }
 
-void InterpreterContext::SetCurrentScope(QString val)
+std::shared_ptr<TAstNode> InterpreterContext::GetRootNode() const
 {
-	m_currentScope = val;
+	return m_rootNode;
 }
+
+//void InterpreterContext::SetCurrentScope(QString val)
+//{
+//	m_currentScope = val;
+//}
 
 void InterpreterContext::SetNextNode(TAstNode* nextNode)
 {
@@ -43,6 +49,11 @@ void InterpreterContext::SetExecuteMode(ExecuteMode mode)
 	m_executeMode = mode;
 }
 
+void InterpreterContext::SetRootNode(std::shared_ptr<TAstNode> rootNode)
+{
+	m_rootNode = rootNode;
+}
+
 void InterpreterContext::IsExecuting(bool isExecuting)
 {
 	m_isExecuting = isExecuting;
@@ -51,4 +62,14 @@ void InterpreterContext::IsExecuting(bool isExecuting)
 bool InterpreterContext::IsExecuting() const
 {
 	return m_isExecuting;
+}
+
+int InterpreterContext::GetLineNumber() const
+{
+	return m_lineNumber;
+}
+
+void InterpreterContext::SetLineNumber(int val)
+{
+	m_lineNumber = val;
 }

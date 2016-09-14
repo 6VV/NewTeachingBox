@@ -19,6 +19,7 @@
 #include <QRadioButton>
 #include <QStringList>
 #include <QTableWidget>
+#include <QThread>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QVBoxLayout>

@@ -74,7 +74,7 @@ void TAstNodeIfSentence::AddThenChild(TLexer* const lexer, std::shared_ptr<TAstN
 	result->AddChild(thenNode);
 
 	std::shared_ptr<TAstNode> childNode{};
-	while (childNode = TAstNodeFactory::GetOneNode(lexer))
+	while (childNode = TAstNodeFactory::GetNode(lexer))
 	{
 		thenNode->AddChild(childNode);
 	}

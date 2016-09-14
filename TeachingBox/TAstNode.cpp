@@ -5,6 +5,7 @@
 #include "TAstNodeFactory.h"
 #include "TInterpreterException.h"
 #include "TToken.h"
+#include "TTokenWithValue.h"
 
 
 TAstNode::TAstNode(const std::shared_ptr<TToken> token /*= nullptr*/)
@@ -69,7 +70,7 @@ TAstNode::ValueReturned TAstNode::Execute() const
 void TAstNode::AddSentenceNodes(TLexer* const lexer, std::shared_ptr<TAstNode> parentNode)
 {
 	std::shared_ptr<TAstNode> childNode{};
-	while (childNode = TAstNodeFactory::GetOneNode(lexer))
+	while (childNode = TAstNodeFactory::GetNode(lexer))
 	{
 		parentNode->AddChild(childNode);
 	}
@@ -90,6 +91,22 @@ void TAstNode::CheckEofEol(TLexer* const lexer)
 		throw TInterpreterException(TInterpreterException::SENTENCE_NOT_END_WITH_ABNORMAL_END, lexer->GetToken()->GetLineNumber());
 	}
 
+}
+
+QString TAstNode::GetScope() const
+{
+	if (m_parentNode == nullptr || m_parentNode->GetParentNode() == nullptr)
+	{
+		return QString{};
+	}
+
+	auto programNode = m_parentNode;
+	while (programNode->GetParentNode()->GetParentNode()!=NULL)
+	{
+		programNode = programNode->GetParentNode();
+	}
+
+	return static_cast<TTokenWithValue<QString>*>(programNode->GetToken().get())->GetValue();
 }
 
 bool TAstNode::IsEofOrEol(const int type)

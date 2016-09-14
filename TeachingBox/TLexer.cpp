@@ -115,6 +115,7 @@ const bool TLexer::CheckPushOtherToken(const char c)
 	case '\\':{PushTokenNote();}break;
 	case '#':{SkipCharInSameLine();}break;
 	case  ',':{PushToken((TYPE::SEPARATOR_COMMA)); }break;
+	case '\0':{PushToken(TYPE::SEPARATOR_EOF); }break;
 	default:{return false;}
 	}
 
@@ -279,27 +280,28 @@ const bool TLexer::CheckPushReserveValue(const TYPE type)
 
 void TLexer::Parse()
 {
-	char c = m_reader.GetCurrentChar();
-	while (c)
+	char c;
+	while (m_reader.GetCurrentChar())
 	{
 		m_reader.SkipBlank();
 		c = m_reader.GetCurrentChar();
 
-		if (CheckPushDigit(c)){continue;}
-		else if (CheckPushId(c)){continue;}
-		else if (CheckPushOtherToken(c)){continue;}
-		else{ThrowException_UnknownToken(QString(c));}
-		c = m_reader.GetCurrentChar();
+		if (CheckPushDigit(c)){ continue; }
+		else if (CheckPushId(c)){ continue; }
+		else if (CheckPushOtherToken(c)){ continue; }
+		else{ ThrowException_UnknownToken(QString(c)); }
 	}
 
 	PushToken(TYPE::SEPARATOR_EOF);
 }
 
+inline
 void TLexer::PushToken(const TYPE type)
 {
 	m_tokens.push_back(std::shared_ptr<TToken>(new TToken(type, m_reader.GetLineNumber())));
 }
 
+inline
 TLexer::Reader::Reader(const QString& text) :m_text(&text)
 {
 	const_cast<QString*>(m_text)->append(QChar('\0'));
@@ -332,21 +334,25 @@ const char TLexer::Reader::GetNextChar()
 	return m_text->at(m_index).toLatin1();
 }
 
+inline
 const char TLexer::Reader::GetCurrentChar() const
 {
 	return m_text->at(m_index).toLatin1();
 }
 
+inline
 const int TLexer::Reader::GetLineNumber() const
 {
 	return m_lineNumber;
 }
 
+inline
 const bool TLexer::Reader::IsEof() const
 {
 	return m_index >= m_text->size();
 }
 
+inline
 const char TLexer::Reader::PeekChar(const int index) const
 {
 	return m_text->at(m_index + index).toLatin1();

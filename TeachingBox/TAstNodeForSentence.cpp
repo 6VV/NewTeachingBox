@@ -34,7 +34,7 @@ TAstNode::ValueReturned TAstNodeForSentence::Execute() const
 	auto sencondValue = secondChild->Execute();
 	//auto thirdValue = thirdChild->Execute();
 
-	auto scope = Context::interpreterContext.GetCurrentScope();
+	auto scope = GetScope();
 	auto name = static_cast<TTokenWithValue<QString>*>(m_firstChild->GetFirstChild()->GetToken().get())->GetValue();
 	auto type = TVariateManager::GetInstance()->GetVariateSrollUp(scope, name)->GetType();
 

@@ -6,16 +6,16 @@ class TAstNode;
 class TInterpreter
 {
 public:
-	//static void ExecuteAll(int lineNum);
-	//static void ExecuteOneLine(int lineNum);
+	/*static void ExecuteAll(int lineNum);
+	static void ExecuteOneLine(int lineNum);
 
-	//static void StopExecute();
+	static void StopExecute();
 
-	//static void Parse(const QString& text);
+	static void Parse(const QString& text);
 
 private:
-	//static TAstNode* FindStartNode(std::shared_ptr<TAstNode> rootNode,int lineNum);
-	//static void InitContext(int lineNum);
+	static TAstNode* FindStartNode(std::shared_ptr<TAstNode> rootNode,int lineNum);
+	static void InitContext(int lineNum);*/
 };
 
 #endif
