@@ -41,6 +41,9 @@ public:
 
 	void PushScope(TScope* scope);		/*添加子作用域*/
 
+	QString ScopeName() const;
+	TScope* ParentScope() const;
+
 	void UpdateVariate(const QString& scope,const QString& name,const TVariate* variate);
 
 private:

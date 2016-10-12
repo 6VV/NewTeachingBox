@@ -16,6 +16,7 @@ public:
 		NameIsTooLong,		/*名称过长*/
 		PleaseSelectScope,	/*请选择作用域*/
 		PleaseSelectVariable,	/*请选择变量*/
+		PleaseLoadProject,	/*请加载项目*/
 		AlreadyExitVariable,	/*已存在该变量*/
 		AlreadyLoadOtherProject,	/*已加载其它项目*/
 		ForbidDelete,		/*禁止删除*/

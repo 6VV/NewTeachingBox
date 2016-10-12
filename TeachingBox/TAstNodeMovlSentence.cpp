@@ -8,6 +8,7 @@
 #include "TPosition.h"
 #include "TDynamic.h"
 #include "TOverlap.h"
+#include "RemoteManager.h"
 
 TAstNodeMovlSentence::TAstNodeMovlSentence(const std::shared_ptr<TToken> token /*= nullptr*/) :TAstNode(token)
 {
@@ -90,7 +91,10 @@ void TAstNodeMovlSentence::CheckParameterType(std::shared_ptr<TAstNode> node,int
 
 void TAstNodeMovlSentence::SendMovlData() const
 {
-	//TMacroData::Send(GetMovlParameter(), COMMAND_ID::MOVL, m_token->GetLineNumber(),(long long)(TContext::GetCurrentProgramNode()));
+	char data[sizeof(tMovLParam)];
+	*(tMovLParam*)data = GetMovlParameter();
+	RemoteManager::GetInstance()->SendMovlCommand(data,sizeof(tMovLParam),m_token->GetLineNumber(),
+		reinterpret_cast<long long>(GetProgramNode()));
 }
 
 tMovLParam TAstNodeMovlSentence::GetMovlParameter() const

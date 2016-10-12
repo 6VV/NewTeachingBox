@@ -51,6 +51,8 @@ const char* RegExp::STR_REG_NUM_CHAR_UNDERLINE = "[_a-zA-Z0-9]*";
 /*变量名，首字符为字母或下划线*/
 const char* RegExp::STR_REG_STRING_NAME = "[_a-zA-Z][_a-zA-Z0-9]*";
 
+const char* RegExp::STR_REG_IP_ADDRESS="((?:(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))\\.){3}(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d))))";
+
 RegExp::RegExp()
 {
 

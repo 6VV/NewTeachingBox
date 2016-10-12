@@ -6,6 +6,7 @@
 #include "ButtonGroup.h"
 #include "DialogNewMacro.h"
 #include "Context.h"
+#include "MacroWidgetFactory.h"
 
 
 
@@ -48,6 +49,17 @@ void ScreenProgram::SlotOnButtonAddvanceClicked()
 	m_btnGroupAddvance->show();
 }
 
+void ScreenProgram::SlotOnButtonModifyClicked()
+{
+	auto widget = MacroWidgetFactory::CreateMacroWidget(m_codeEditor->CurrentLineText(), this);
+
+	if (widget==nullptr)
+	{
+		return;
+	}
+	widget->show();
+}
+
 void ScreenProgram::SlotOnButtonNewClicked()
 {
 	(new DialogNewMacro(this))->show();
@@ -75,6 +87,7 @@ void ScreenProgram::Init()
 void ScreenProgram::InitSignalSlot()
 {
 	connect(m_btnAddvance, SIGNAL(clicked()), this, SLOT(SlotOnButtonAddvanceClicked()));
+	connect(m_btnModify, SIGNAL(clicked()), this, SLOT(SlotOnButtonModifyClicked()));
 	connect(m_btnNew, SIGNAL(clicked()), this, SLOT(SlotOnButtonNewClicked()));
 	connect(m_btnEdit, SIGNAL(clicked()), this, SLOT(SlotOnButtonEditClicked()));
 	connect(m_btnSetPC, SIGNAL(clicked()), this, SLOT(SlotOnButtonSetPCClicked()));

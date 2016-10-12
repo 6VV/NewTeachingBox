@@ -46,6 +46,7 @@ private:
 	static const QString TYPE_ARC_WELDING;
 	static const QString TYPE_SPOT_WELDING;
 
+public:
 	/*命令*/
 	static const QString MACRO_MOVL;
 	static const QString MACRO_MOVJ;

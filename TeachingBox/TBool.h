@@ -22,16 +22,14 @@ public:
 	const bool GetValue() const;
 	void SetValue(const bool value);
 
-	virtual void ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 
 protected:
 	virtual void ReadValueStream(QDataStream& dataStream) const override;
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
-protected slots:
-	void SlotOnIndexChanged(const QString&);
 
-
+private:
+	void Init();
 
 private:
 	bool m_value;

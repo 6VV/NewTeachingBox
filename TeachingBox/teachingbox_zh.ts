@@ -40,6 +40,19 @@
     </message>
 </context>
 <context>
+    <name>DialogNewAddress</name>
+    <message>
+        <location filename="DialogNewAddress.cpp" line="89"/>
+        <source>Confirm</source>
+        <translation type="unfinished">确认</translation>
+    </message>
+    <message>
+        <location filename="DialogNewAddress.cpp" line="90"/>
+        <source>Cancle</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+</context>
+<context>
     <name>DialogNewMacro</name>
     <message>
         <location filename="DialogNewMacro.cpp" line="32"/>
@@ -140,17 +153,17 @@
 <context>
     <name>ScreenNetwork</name>
     <message>
-        <location filename="ScreenNetwork.cpp" line="27"/>
+        <location filename="ScreenNetwork.cpp" line="29"/>
         <source>Add</source>
         <translation type="unfinished">添加</translation>
     </message>
     <message>
-        <location filename="ScreenNetwork.cpp" line="28"/>
+        <location filename="ScreenNetwork.cpp" line="30"/>
         <source>Delete</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="ScreenNetwork.cpp" line="29"/>
+        <location filename="ScreenNetwork.cpp" line="31"/>
         <source>Connect</source>
         <translation type="unfinished">连接</translation>
     </message>
@@ -158,87 +171,87 @@
 <context>
     <name>ScreenProgram</name>
     <message>
-        <location filename="ScreenProgram.cpp" line="100"/>
+        <location filename="ScreenProgram.cpp" line="107"/>
         <source>Modify</source>
         <translation type="unfinished">修改</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="101"/>
+        <location filename="ScreenProgram.cpp" line="108"/>
         <source>Macro</source>
         <translation type="unfinished">宏</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="102"/>
+        <location filename="ScreenProgram.cpp" line="109"/>
         <source>New</source>
         <translation type="unfinished">新建</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="103"/>
+        <location filename="ScreenProgram.cpp" line="110"/>
         <source>SetPC</source>
         <translation type="unfinished">设置PC</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="108"/>
+        <location filename="ScreenProgram.cpp" line="115"/>
         <source>Keyboard</source>
         <translation type="unfinished">键盘</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="109"/>
+        <location filename="ScreenProgram.cpp" line="116"/>
         <source>SubProgram</source>
         <translation type="unfinished">子程序</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="110"/>
+        <location filename="ScreenProgram.cpp" line="117"/>
         <source>Format</source>
         <translation type="unfinished">格式化</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="111"/>
+        <location filename="ScreenProgram.cpp" line="118"/>
         <source>Search</source>
         <translation type="unfinished">查找</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="112"/>
+        <location filename="ScreenProgram.cpp" line="119"/>
         <source>Note</source>
         <translation type="unfinished">注释</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="113"/>
+        <location filename="ScreenProgram.cpp" line="120"/>
         <source>Invalidate</source>
         <translation type="unfinished">无效化</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="116"/>
+        <location filename="ScreenProgram.cpp" line="123"/>
         <source>SelectAll</source>
         <translation type="unfinished">选择全部</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="117"/>
+        <location filename="ScreenProgram.cpp" line="124"/>
         <source>Cut</source>
         <translation type="unfinished">剪切</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="118"/>
+        <location filename="ScreenProgram.cpp" line="125"/>
         <source>Copy</source>
         <translation type="unfinished">复制</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="119"/>
+        <location filename="ScreenProgram.cpp" line="126"/>
         <source>Paste</source>
         <translation type="unfinished">粘贴</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="120"/>
+        <location filename="ScreenProgram.cpp" line="127"/>
         <source>Delete</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="121"/>
+        <location filename="ScreenProgram.cpp" line="128"/>
         <source>Undo</source>
         <translation type="unfinished">撤销</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="122"/>
+        <location filename="ScreenProgram.cpp" line="129"/>
         <source>Redo</source>
         <translation type="unfinished">重做</translation>
     </message>
@@ -247,12 +260,12 @@
         <translation type="obsolete">设置PC</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="104"/>
+        <location filename="ScreenProgram.cpp" line="111"/>
         <source>Edit</source>
         <translation type="unfinished">编辑</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="105"/>
+        <location filename="ScreenProgram.cpp" line="112"/>
         <source>Addvance</source>
         <translation type="unfinished">高级</translation>
     </message>
@@ -260,103 +273,103 @@
 <context>
     <name>ScreenProject</name>
     <message>
-        <location filename="ScreenProject.cpp" line="90"/>
+        <location filename="ScreenProject.cpp" line="92"/>
         <source>New project</source>
         <translation type="unfinished">新建项目</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="90"/>
+        <location filename="ScreenProject.cpp" line="92"/>
         <source>Input project name:</source>
         <translation type="unfinished">输入项目名：</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="100"/>
-        <location filename="ScreenProject.cpp" line="142"/>
+        <location filename="ScreenProject.cpp" line="102"/>
+        <location filename="ScreenProject.cpp" line="144"/>
         <source>Already exist </source>
         <translation type="unfinished">已存在</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="121"/>
+        <location filename="ScreenProject.cpp" line="123"/>
         <source>New program</source>
         <translation type="unfinished">新建程序</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="121"/>
+        <location filename="ScreenProject.cpp" line="123"/>
         <source>Input program name:</source>
         <translation type="unfinished">输入程序名</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="162"/>
+        <location filename="ScreenProject.cpp" line="166"/>
         <source>Please select a program</source>
         <translation type="unfinished">请选择一个程序</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="188"/>
+        <location filename="ScreenProject.cpp" line="210"/>
         <source>Already load project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="298"/>
+        <location filename="ScreenProject.cpp" line="331"/>
         <source>Loaded</source>
         <translation type="unfinished">已加载</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="317"/>
+        <location filename="ScreenProject.cpp" line="350"/>
         <source>Project</source>
         <translation type="unfinished">项目</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="317"/>
+        <location filename="ScreenProject.cpp" line="350"/>
         <source>Setting</source>
         <translation type="unfinished">设置</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="319"/>
+        <location filename="ScreenProject.cpp" line="352"/>
         <source>Load</source>
         <translation type="unfinished">加载</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="320"/>
+        <location filename="ScreenProject.cpp" line="353"/>
         <source>Open</source>
         <translation type="unfinished">打开</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="321"/>
+        <location filename="ScreenProject.cpp" line="354"/>
         <source>Close</source>
         <translation type="unfinished">关闭</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="322"/>
+        <location filename="ScreenProject.cpp" line="355"/>
         <source>Info</source>
         <translation type="unfinished">信息</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="323"/>
+        <location filename="ScreenProject.cpp" line="356"/>
         <source>Refresh</source>
         <translation type="unfinished">刷新</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="324"/>
+        <location filename="ScreenProject.cpp" line="357"/>
         <source>File</source>
         <translation type="unfinished">文件</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="326"/>
+        <location filename="ScreenProject.cpp" line="359"/>
         <source>New Program</source>
         <translation type="unfinished">新建程序</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="327"/>
+        <location filename="ScreenProject.cpp" line="360"/>
         <source>New Project</source>
         <translation type="unfinished">新建项目</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="328"/>
+        <location filename="ScreenProject.cpp" line="361"/>
         <source>Delete</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="335"/>
+        <location filename="ScreenProject.cpp" line="368"/>
         <source>Invalid Item</source>
         <translation type="unfinished">无效的节点</translation>
     </message>

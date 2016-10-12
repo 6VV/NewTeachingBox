@@ -3,6 +3,7 @@
 #include "TreeWidgetItemWithVariate.h"
 #include "RegExp.h"
 #include "LineEditInTree.h"
+#include "TPositionWidget.h"
 
 
 TPosition::TPosition(QDataStream& dataStream) : TVariate(dataStream)
@@ -15,18 +16,24 @@ TPosition::TPosition(QDataStream& dataStream) : TVariate(dataStream)
 		m_value.m_AxisPosition[i] = value;
 		//m_value.push_back(value);
 	}
+
+	Init();
 }
 
 TPosition::TPosition(const QString& scope, const QString& name, const tAxesAllPositions& value)
 	:TVariate(scope, name, TSymbol::TYPE_POSITION)
 {
 	m_value = value;
+
+	Init();
 }
 
 TPosition::TPosition(const TPosition& variate)
 	: TVariate(variate)
 {
 	m_value = variate.m_value;
+
+	Init();
 }
 
 const tAxesAllPositions TPosition::GetValue() const
@@ -34,30 +41,9 @@ const tAxesAllPositions TPosition::GetValue() const
 	return m_value;
 }
 
-void TPosition::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
+void TPosition::SetValue(const tAxesAllPositions& value)
 {
-	TreeWidgetItemWithVariate* variateItem = new TreeWidgetItemWithVariate(parentItem, this);
-
-	QVector<QTreeWidgetItem*> treeItems;
-	for (int i = 0; i < AXIS_SIZE;++i)
-	{
-		QString name = "Axis"+QString::number(i + 1);
-
-		treeItems.push_back(new QTreeWidgetItem(variateItem, QStringList{ name }));
-	}
-
-	QVector<LineEditInTree*> lineEdits;
-	for (int i = 0; i < treeItems.size();++i)
-	{
-		LineEditInTree* lineEdit = new LineEditInTree(variateItem,treeWidget,
-			QString::number(m_value.m_AxisPosition[i]), RegExp::STR_REG_FLOAT);
-
-		lineEdits.push_back(lineEdit);
-		treeWidget->setItemWidget(treeItems.at(i), 1, lineEdit);
-
-		connect(lineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(SlotOnTextChanged()));
-	}
-
+	m_value = value;
 }
 
 void TPosition::ReadValueStream(QDataStream& dataStream)const
@@ -73,21 +59,28 @@ void TPosition::UpdateFromValue(const TVariate& variate)
 	m_value = static_cast<const TPosition&>(variate).m_value;
 }
 
-void TPosition::SlotOnTextChanged()
+//void TPosition::SlotOnTextChanged()
+//{
+//	LineEditInTree* currentWidget = static_cast<LineEditInTree*>(sender());
+//	QTreeWidgetItem* parentItem = currentWidget->GetParentItem();
+//	QTreeWidget* treeWidget = currentWidget->GetTreeWidget();
+//
+//	tAxesAllPositions position{};
+//	for (int i = 0; i < parentItem->childCount();++i)
+//	{
+//		QLineEdit* lineEdit=static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(i), 1));
+//		position.m_AxisPosition[i] = lineEdit->text().toDouble();
+//	}
+//
+//	m_value = position;
+//
+//	m_itemVariate->IsSave(true);
+//	//UpdateRamAndDatabaseFrom(*this);
+//}
+
+void TPosition::Init()
 {
-	LineEditInTree* currentWidget = static_cast<LineEditInTree*>(sender());
-	QTreeWidgetItem* parentItem = currentWidget->GetParentItem();
-	QTreeWidget* treeWidget = currentWidget->GetTreeWidget();
-
-	tAxesAllPositions position{};
-	for (int i = 0; i < parentItem->childCount();++i)
-	{
-		QLineEdit* lineEdit=static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(i), 1));
-		position.m_AxisPosition[i] = lineEdit->text().toDouble();
-	}
-
-	m_value = position;
-	UpdateRamAndDatabaseFrom(*this);
+	m_variateWidget = new TPositionWidget(this);
 }
 
 TVariate* TPosition::Clone() const

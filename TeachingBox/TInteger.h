@@ -16,15 +16,13 @@ public:
 
 	int GetValue();
 	void SetValue(const int value);
-	virtual void ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 
 protected:
 	virtual void ReadValueStream(QDataStream& dataStream) const override;
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
-protected slots:
-	void SlotOnTextChanged(const QString& newValue);
-
+private:
+	void Init();
 
 private:
 	int m_value;

@@ -62,6 +62,22 @@ TAstNode* TAstNode::GetParentNode() const
 	return m_parentNode;
 }
 
+const TAstNode* TAstNode::GetProgramNode() const
+{
+	if (m_parentNode==nullptr)
+	{
+		return nullptr;
+	}
+
+	auto result = this;
+	while (result->m_parentNode->m_parentNode!=nullptr)
+	{
+		result = result->m_parentNode;
+	}
+
+	return result;
+}
+
 TAstNode::ValueReturned TAstNode::Execute() const
 {
 	return ValueReturned{};

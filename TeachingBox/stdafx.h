@@ -11,6 +11,8 @@
 #include <QGroupBox>
 #include <QHash>
 #include <QHBoxLayout>
+#include <QHostAddress>
+#include <QHostInfo>
 #include <QLabel>
 #include <QLayout>
 #include <QListWidget>
@@ -19,6 +21,7 @@
 #include <QRadioButton>
 #include <QStringList>
 #include <QTableWidget>
+#include <QTcpSocket>
 #include <QThread>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>

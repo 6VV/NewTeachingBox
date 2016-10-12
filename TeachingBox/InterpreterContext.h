@@ -34,32 +34,31 @@ public:
 public:
 	//QString GetCurrentScope() const;
 	TAstNode* GetNextNode() const;
-	TAstNode* GetCurrentProgramNode() const;
 	ExecuteMode GetExecuteMode() const;
 	std::shared_ptr<TAstNode> GetRootNode() const;
 	int GetLineNumber() const;
 
-	bool IsExecuting() const;
-
+	bool IsAllowExecute() const;
+	void IsAllowExecute(bool isExecuting);
+	bool IsAllowSendCommandData() const;
+	void IsAllowSendCommandData(bool enabled);
 
 	//void SetCurrentScope(QString val);
 	void SetNextNode(TAstNode* nextNode);
-	void SetCurrentProgramNode(const TAstNode* programNode);
 	void SetExecuteMode(ExecuteMode mode);
 	void SetRootNode(std::shared_ptr<TAstNode> rootNode);
 	void SetLineNumber(int val);
 
-	void IsExecuting(bool isExecuting);
 
 private:
 	ExecuteMode m_executeMode=ExecuteMode::AUTO;
 	std::shared_ptr<TAstNode> m_rootNode{ nullptr };
 	TAstNode*  m_nextNode=nullptr;
-	TAstNode* m_currentProgramNode=nullptr;
 
 	int m_lineNumber=1;
 
-	bool m_isExecuting = false;
+	bool m_isAllowExecute = false;
+	bool m_isAllowSendData = false;
 };
 
 #endif

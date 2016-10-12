@@ -17,7 +17,6 @@ public:
 	const tDynamicConstraint& GetValue() const;
 	void SetValue(const tDynamicConstraint& value);
 
-	virtual void ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 
 protected:
 	virtual void ReadValueStream(QDataStream& dataStream) const override;
@@ -25,9 +24,9 @@ protected:
 
 	void WriteValueStream(QDataStream& dataStream);
 
-protected slots:
-	void SlotOnTextChanged();
 
+private:
+	void Init();
 
 private:
 	tDynamicConstraint m_value;

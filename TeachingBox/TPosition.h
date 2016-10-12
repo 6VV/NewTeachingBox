@@ -18,16 +18,16 @@ public:
 
 	const tAxesAllPositions GetValue() const;
 
-	virtual void ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
+	void SetValue(const tAxesAllPositions& value);
+
 
 protected:
 	virtual void ReadValueStream(QDataStream& dataStream) const override;
 
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
-protected slots:
-	void SlotOnTextChanged();
-
+private:
+	void Init();
 
 private:
 	tAxesAllPositions m_value;

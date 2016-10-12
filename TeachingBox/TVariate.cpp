@@ -1,7 +1,8 @@
 ﻿#include "stdafx.h"
 #include "TVariate.h"
 #include "TVariateManager.h"
-//#include "TVariateManager.h"
+#include "TreeWidgetItemWithVariate.h"
+#include "TVariateWidget.h"
 
 
 TVariate::TVariate(QDataStream& dataStream) : m_symbol(dataStream)
@@ -17,6 +18,11 @@ TVariate::TVariate(const QString& scope, const QString& name, TSymbol::SymbolTyp
 TVariate::TVariate(const TVariate& variate)
 	: m_symbol(variate.m_symbol)
 {
+}
+
+TVariate::~TVariate()
+{
+	delete m_variateWidget;
 }
 
 QString TVariate::GetScope() const
@@ -39,6 +45,11 @@ void TVariate::SetName(const QString& name)
 	m_symbol.SetName(name);
 }
 
+void TVariate::Save()
+{
+	UpdateRamAndDatabaseFrom(*this);
+}
+
 void TVariate::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget,
 	const TSymbol::SymbolType type)
 {
@@ -46,6 +57,11 @@ void TVariate::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* tree
 	{
 		this->ReadTreeWidgetItem(parentItem, treeWidget);
 	}
+}
+
+void TVariate::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
+{
+	m_variateWidget->ReadTreeWidgetItem(parentItem, treeWidget);
 }
 
 void TVariate::ReadDataStream(QDataStream& dataStream) const

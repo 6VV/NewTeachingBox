@@ -24,7 +24,14 @@ private:
 	~InterpreterManager();
 
 public:
-	void StartExecute();
+	void AutoExecute();
+
+	void ManualExecute();
+
+	void StepExecute();
+	void StopExecute();
+
+	void ExecuteNextCommand();
 
 private:
 	TAstNode* GetProgramNode(const QString& program);
@@ -33,11 +40,14 @@ private:
 	void LoadProject(const QString& project);
 
 	void SaveFile();
-	void SetStartNode();
+	void UpdateStartNode();
 
 signals:
-	void SignalStartExecute();
+	void SignalStopExecute();
+	void SignalStepExecute();
+	void SignalAutoExecute();
 
+	void SignalExecuteNextCommand();
 private:
 	TInterpreterThread* m_interpreterThread=nullptr;
 	QThread* m_thread=nullptr;

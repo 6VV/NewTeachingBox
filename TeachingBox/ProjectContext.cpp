@@ -34,25 +34,21 @@ QStringList ProjectContext::GetScopes()
 	return m_currentScopes;
 }
 
+const QStringList& ProjectContext::GetPrograms() const
+{
+	return m_programs;
+}
+
 QString ProjectContext::GetProjectLoaded()
 {
 	return m_project;
 }
 
-QString ProjectContext::GetCurrentProgram()
+QString ProjectContext::ProgramOpened()
 {
-	return m_currentProgram;
+	return m_programOpened;
 }
 
-QString ProjectContext::GetFileOpened()
-{
-	return m_fileOpened;
-}
-
-void ProjectContext::SetCurrentProgram(const QString& program)
-{
-	m_currentProgram = program;
-}
 
 void ProjectContext::SetLoadedProject(const QString& project, const QStringList& programs)
 {
@@ -64,15 +60,15 @@ void ProjectContext::SetLoadedProject(const QString& project, const QStringList&
 	m_currentScopes.append(m_programs);
 }
 
-void ProjectContext::SetFileOpened(const QString& file)
+void ProjectContext::ProgramOpened(const QString& file)
 {
-	m_fileOpened = file;
+	m_programOpened = file;
 }
 
 
 bool ProjectContext::IsCurrentFileLoad()
 {
-	if (m_programs.contains(m_fileOpened))
+	if (m_programs.contains(m_programOpened))
 	{
 		return true;
 	}

@@ -1,6 +1,8 @@
 ﻿#include "stdafx.h"
 #include "CodeEditor.h"
 #include "Context.h"
+#include <assert.h>
+#include "ProjectManager.h"
 
 namespace{
 	LineNumberArea::LineNumberArea(CodeEditor *editor)
@@ -66,9 +68,38 @@ int CodeEditor::GetLineNumberAreaWidth()
 	return space;
 }
 
+void CodeEditor::ClearWrongLine()
+{
+	HighlightWrongLine(0);
+}
+
 int CodeEditor::GetPCLineNumber()
 {
 	return m_lineHighlighter.pcLine.lineNumber+1;
+}
+
+void CodeEditor::HighlightPCLine(const QString& program, int lineNumber)
+{
+	if (program!=Context::projectContext.ProgramOpened())
+	{
+		auto stringList = program.split(".");
+		assert(stringList.size() == 2);
+
+		if (stringList.size() != 2)
+		{
+			return;
+		}
+
+		auto project = stringList.at(0);
+		auto file = stringList.at(1);
+
+		ProjectManager projectManager;
+
+		setPlainText(projectManager.GetFileText(project, file));
+		Context::projectContext.ProgramOpened(program);
+	}
+
+	HighlightPCLine(lineNumber);
 }
 
 void CodeEditor::HighlightPCLine()
@@ -85,7 +116,7 @@ void CodeEditor::HighlightPCLine(int lineNumber)
 
 void CodeEditor::HighlightWrongLine(const int lineNumber)
 {
-	m_lineHighlighter.wrongLine.lineNumber = lineNumber;
+	m_lineHighlighter.wrongLine.lineNumber = lineNumber-1;
 	HighlightAllLines();
 }
 
@@ -231,6 +262,14 @@ void CodeEditor::PaintLineNumberArea(QPaintEvent *event)
 		bottom = top + (int)blockBoundingRect(block).height();
 		++blockNumber;
 	}
+}
+
+QString CodeEditor::CurrentLineText()
+{
+	/*获取光标所在行文本*/
+	QTextCursor cursor = textCursor();
+	cursor.select(QTextCursor::LineUnderCursor);
+	return cursor.selectedText();
 }
 
 void CodeEditor::InsertTextBeforeLine(const QString& text)

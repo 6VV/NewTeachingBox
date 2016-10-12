@@ -33,6 +33,16 @@ void TScope::PushScope(TScope* scope)
 	//scope->SetEnclosingScope(this);
 }
 
+QString TScope::ScopeName() const
+{
+	return m_scopeName;
+}
+
+TScope* TScope::ParentScope() const
+{
+	return m_enclosingScope;
+}
+
 void TScope::DefineSymbol(TSymbol* sym)
 {
 	this->m_mapSymbol[sym->GetName()] = sym;

@@ -221,6 +221,42 @@
     <Filter Include="Source Files\Init">
       <UniqueIdentifier>{058f86c2-1431-4077-85d3-73d253bb0388}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Remote">
+      <UniqueIdentifier>{1911943f-48d3-4718-8702-02ec4eb9f5e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Remote">
+      <UniqueIdentifier>{5027c1a5-431b-438a-8f97-9fdc470ecece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\ScreenService\Network">
+      <UniqueIdentifier>{524dae68-f012-4e45-b67e-fe03ab8ce7f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenService\Network">
+      <UniqueIdentifier>{13f30e41-0f9a-48c6-aad4-a93607d5bbf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\ScreenProgram\Macro">
+      <UniqueIdentifier>{2bac3b7c-e9ca-46ce-b56f-9b4e1f3de8d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\ScreenProgram\Macro\MacroWidget">
+      <UniqueIdentifier>{537dffce-adcb-4f8a-970c-d854fac4751c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\ScreenProgram\Macro\MacroSeletor">
+      <UniqueIdentifier>{33a7bf08-137e-4bfa-8357-99410de74cab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Variate\VariateWidget">
+      <UniqueIdentifier>{67676c09-d166-49e1-9852-917db685df40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenProgram\Macro">
+      <UniqueIdentifier>{adedf3ec-071a-427b-829a-b635e22167a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenProgram\Macro\MacroWidget">
+      <UniqueIdentifier>{5133a2aa-049c-4548-a183-4e3d4546c286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenProgram\Macro\MacroSeletor">
+      <UniqueIdentifier>{b76be5ed-9000-4855-a098-759e3449bbaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Variate\VariateWidget">
+      <UniqueIdentifier>{4abc844e-b120-41c0-9e77-8a071f0364b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -324,9 +360,6 @@
     </ClCompile>
     <ClCompile Include="Language.cpp">
       <Filter>Source Files\User</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenNetwork.cpp">
-      <Filter>Source Files\Screen\ScreenService</Filter>
     </ClCompile>
     <ClCompile Include="ScreenUser.cpp">
       <Filter>Source Files\Screen\ScreenService</Filter>
@@ -574,12 +607,6 @@
     <ClCompile Include="TestTreeWdigetItem.cpp">
       <Filter>Source Files\Test</Filter>
     </ClCompile>
-    <ClCompile Include="Macro.cpp">
-      <Filter>Source Files\Screen\ScreenProgram</Filter>
-    </ClCompile>
-    <ClCompile Include="DialogNewMacro.cpp">
-      <Filter>Source Files\Screen\ScreenProgram</Filter>
-    </ClCompile>
     <ClCompile Include="DialogParent.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
@@ -667,6 +694,150 @@
     <ClCompile Include="InterpreterContext.cpp">
       <Filter>Source Files\Context</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TcpManager.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TcpManager.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TcpAdapter.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TcpAdapter.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpManager.cpp">
+      <Filter>Source Files\Remote</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpAdapter.cpp">
+      <Filter>Source Files\Remote</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoteManager.cpp">
+      <Filter>Source Files\Remote</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DialogNewAddress.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DialogNewAddress.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeGosubSentence.cpp">
+      <Filter>Source Files\Interpreter\TAstNode</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogNewAddress.cpp">
+      <Filter>Source Files\Screen\ScreenService\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenNetwork.cpp">
+      <Filter>Source Files\Screen\ScreenService\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RemoteParser.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RemoteParser.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MacroWidgetParent.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MacroWidgetParent.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MacroWidgetMovl.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MacroWidgetMovl.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroWidgetParent.cpp">
+      <Filter>Source Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroWidgetFactory.cpp">
+      <Filter>Source Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroWidgetMovl.cpp">
+      <Filter>Source Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogNewMacro.cpp">
+      <Filter>Source Files\Screen\ScreenProgram\Macro\MacroSeletor</Filter>
+    </ClCompile>
+    <ClCompile Include="Macro.cpp">
+      <Filter>Source Files\Screen\ScreenProgram\Macro\MacroSeletor</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoteParser.cpp">
+      <Filter>Source Files\Remote</Filter>
+    </ClCompile>
+    <ClCompile Include="TPositionWidget.cpp">
+      <Filter>Source Files\Variate\VariateWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="TVariateWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TPositionWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TPositionWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TVariateWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TVariateWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TOverlapWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TOverlapWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TOverlapWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TDynamicWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TDynamicWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TDynamicWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TBoolWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TBoolWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TBoolWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TDoubleWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TDoubleWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TDoubleWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TIntegerWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TIntegerWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TIntegerWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TStringWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TStringWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TStringWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="teachingbox.qrc">
@@ -691,9 +862,6 @@
       <Filter>Header Files\Screen\ScreenService</Filter>
     </CustomBuild>
     <CustomBuild Include="ScreenSetting.h">
-      <Filter>Header Files\Screen\ScreenService</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenNetwork.h">
       <Filter>Header Files\Screen\ScreenService</Filter>
     </CustomBuild>
     <CustomBuild Include="ScreenUserManager.h">
@@ -762,14 +930,59 @@
     <CustomBuild Include="TestTreeWdigetItem.h">
       <Filter>Header Files\Test</Filter>
     </CustomBuild>
-    <CustomBuild Include="DialogNewMacro.h">
-      <Filter>Header Files\Screen\ScreenProgram</Filter>
-    </CustomBuild>
     <CustomBuild Include="TInterpreterThread.h">
       <Filter>Header Files\Interpreter</Filter>
     </CustomBuild>
     <CustomBuild Include="InterpreterManager.h">
       <Filter>Header Files\Interpreter</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TcpManager.h">
+      <Filter>Header Files\Remote</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TcpAdapter.h">
+      <Filter>Header Files\Remote</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ScreenNetwork.h">
+      <Filter>Header Files\Screen\ScreenService\Network</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DialogNewAddress.h">
+      <Filter>Header Files\Screen\ScreenService\Network</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RemoteParser.h">
+      <Filter>Header Files\Remote</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MacroWidgetParent.h">
+      <Filter>Header Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DialogNewMacro.h">
+      <Filter>Header Files\Screen\ScreenProgram\Macro\MacroSeletor</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MacroWidgetMovl.h">
+      <Filter>Header Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TPositionWidget.h">
+      <Filter>Header Files\Variate\VariateWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TVariateWidget.h">
+      <Filter>Header Files\Variate\VariateWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TOverlapWidget.h">
+      <Filter>Header Files\Variate\VariateWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TDynamicWidget.h">
+      <Filter>Header Files\Variate\VariateWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TBoolWidget.h">
+      <Filter>Header Files\Variate\VariateWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TDoubleWidget.h">
+      <Filter>Header Files\Variate\VariateWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TIntegerWidget.h">
+      <Filter>Header Files\Variate\VariateWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TStringWidget.h">
+      <Filter>Header Files\Variate\VariateWidget</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -877,9 +1090,6 @@
     <ClInclude Include="DialogParent.h">
       <Filter>Header Files\Widget</Filter>
     </ClInclude>
-    <ClInclude Include="Macro.h">
-      <Filter>Header Files\Screen\ScreenProgram</Filter>
-    </ClInclude>
     <ClInclude Include="TToken.h">
       <Filter>Header Files\Interpreter\Token</Filter>
     </ClInclude>
@@ -945,6 +1155,21 @@
     </ClInclude>
     <ClInclude Include="TInterpreter.h">
       <Filter>Header Files\Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoteManager.h">
+      <Filter>Header Files\Remote</Filter>
+    </ClInclude>
+    <ClInclude Include="IScreenNetwork.h">
+      <Filter>Header Files\Screen\ScreenService\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeGosubSentence.h">
+      <Filter>Header Files\Interpreter\TAstNode</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroWidgetFactory.h">
+      <Filter>Header Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>Header Files\Screen\ScreenProgram\Macro\MacroSeletor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

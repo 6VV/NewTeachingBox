@@ -22,17 +22,15 @@ public:
 	const tOverlapConstraint& GetValue() const;
 	void SetValue(const tOverlapConstraint& value);
 
-	virtual void ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
-
 protected:
 	virtual void ReadValueStream(QDataStream& dataStream) const override;
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
 	void WriteValueSteam(QDataStream& dataStream);
 
-protected slots:
-	void SlotOnTextChanged();
 
+private:
+	void Init();
 
 private:
 	tOverlapConstraint m_value;

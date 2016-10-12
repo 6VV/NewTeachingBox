@@ -3,6 +3,10 @@
 #include "Button.h"
 #include "QListWidget"
 #include "QBoxLayout"
+#include "DialogNewAddress.h"
+#include "TcpManager.h"
+#include "WarningManager.h"
+#include "RegExp.h"
 
 
 
@@ -32,7 +36,10 @@ void ScreenNetwork::UpdateText()
 void ScreenNetwork::Init()
 {
 	InitLayout();
+	InitSignalSlot();
 	UpdateText();
+
+	m_listWidgetHost->addItem(TcpManager::LocalIPAddress());
 }
 
 void ScreenNetwork::InitLayout()
@@ -49,4 +56,51 @@ void ScreenNetwork::InitLayout()
 	layout->addLayout(layoutButton);
 
 	layout->setStretch(0, 1);
+}
+
+void ScreenNetwork::InitSignalSlot()
+{
+	connect(m_btnAdd, SIGNAL(clicked()), this, SLOT(SlotOnAddClicked()));
+	connect(m_btnDelete, SIGNAL(clicked()), this, SLOT(SlotOnDeleteClicked()));
+	connect(m_btnConnect, SIGNAL(clicked()), this, SLOT(SlotOnConnectClicked()));
+}
+
+bool ScreenNetwork::IsValidAddress(const QString& address)
+{
+	QRegExp regExp(RegExp::STR_REG_IP_ADDRESS);
+
+	return regExp.exactMatch(address);
+}
+
+void ScreenNetwork::SlotOnAddClicked()
+{
+	(new DialogNewAddress(this, this))->show();
+}
+
+void ScreenNetwork::SlotOnDeleteClicked()
+{
+	delete m_listWidgetHost->takeItem(m_listWidgetHost->currentRow());
+}
+
+void ScreenNetwork::SlotOnConnectClicked()
+{
+	if (m_listWidgetHost->currentItem()==nullptr)
+	{
+		WarningManager::Warning(this, tr("Please select an address"));
+		return;
+	}
+
+	auto address = m_listWidgetHost->currentItem()->text();
+	if (!IsValidAddress(address))
+	{
+		WarningManager::Warning(this, tr("Not valid address"));
+		return;
+	}
+
+	TcpManager::GetInstance()->ConnectAddress(address);
+}
+
+void ScreenNetwork::OnNewAddress(const QString& address)
+{
+	m_listWidgetHost->addItem(address);
 }

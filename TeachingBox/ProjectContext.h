@@ -35,13 +35,12 @@ public:
 	ProjectContext();
 
 	QStringList GetScopes();
+	const QStringList& GetPrograms() const;
 	QString GetProjectLoaded();
-	QString GetCurrentProgram();
-	QString GetFileOpened();
+	QString ProgramOpened();
+	void ProgramOpened(const QString& file);
 
-	void SetCurrentProgram(const QString& program);
 	void SetLoadedProject(const QString& project, const QStringList& programs);
-	void SetFileOpened(const QString& file);
 
 	bool IsCurrentFileLoad();
 
@@ -55,8 +54,7 @@ private:
 
 	QString m_project{};
 	QStringList m_programs{};
-	QString m_currentProgram{};
-	QString m_fileOpened{};
+	QString m_programOpened{};
 };
 
 #endif

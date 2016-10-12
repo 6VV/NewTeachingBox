@@ -29,6 +29,8 @@ public:
 		TYPE_NOT_MATCH,
 		UNKNOW_TOKEN,
 		WRONG_GRAMMAR,
+		NOT_PROGRAM_NAME,
+		UNKNOWN_SENTENCE,
 	};
 
 private:
@@ -38,6 +40,8 @@ public:
 	TInterpreterException(const InterpreterExceptionCode id,const int lineNumber,const QString& text="");
 
 	virtual QString GetInfo() override;
+
+	int GetLineNumber() const;
 
 private:
 	InterpreterExceptionCode m_id;

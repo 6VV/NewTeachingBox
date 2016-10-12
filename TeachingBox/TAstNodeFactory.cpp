@@ -13,6 +13,7 @@
 #include "TAstNodeProgram.h"
 #include "ProjectManager.h"
 #include "Context.h"
+#include "TAstNodeGosubSentence.h"
 
 const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QString& project)
 {
@@ -56,6 +57,9 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::GetNode(TLexer* const lexer)
 	case TYPE::MACRO_MOVL:
 	{
 		return TAstNodeMovlSentence::GetAstNode(lexer);
+	}break;
+	case TYPE::STURCTURE_GOSUB:{
+		return TAstNodeGosubSentence::GetAstNode(lexer);
 	}break;
 	default:
 	{

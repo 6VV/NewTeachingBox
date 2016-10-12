@@ -32,6 +32,7 @@ public:
 	std::shared_ptr<TAstNode> GetEndChild() const;
 	std::shared_ptr<TAstNode> GetSibling() const;
 	TAstNode* GetParentNode() const;
+	const TAstNode* GetProgramNode() const;
 	QString GetScope() const;
 
 	virtual ValueReturned Execute() const;

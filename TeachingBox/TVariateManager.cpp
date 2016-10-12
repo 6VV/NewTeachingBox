@@ -109,6 +109,20 @@ QVector<TVariate*> TVariateManager::GetVariatesFromScope(const QString& scope)
 	return variates;
 }
 
+QVector<TVariate*> TVariateManager::GetVariatesScollUp(const QString& scope)
+{
+	QVector<TVariate*> result;
+
+	auto scopeNode = m_scopeRoot->FindScopeScrollDown(scope);
+	while (scopeNode!=nullptr)
+	{
+		result.append(std::move(GetVariatesFromScope(scopeNode->ScopeName())));
+		scopeNode = scopeNode->ParentScope();
+	}
+
+	return result;
+}
+
 TVariate* TVariateManager::GetVariate(const QString& scope, const QString& name)
 {
 	auto iterMap = m_objectMap.find(scope);
@@ -197,7 +211,16 @@ void TVariateManager::UpdateInMap(const QString& scope, const QString& name, con
 
 	iterMap.value().erase(iterVar);
 
-	m_objectMap[scope][name] = ptrVariate;
+	m_objectMap[scope][newVariate.GetName()] = ptrVariate;
+}
+
+void TVariateManager::UpdateInMapScollUp(const QString& scope, const QString& name, const TVariate& newVariate)
+{
+	auto currentScope = m_scopeRoot->FindScopeScrollDown(scope);
+	auto symbol = currentScope->FindSymbolScrollUp(name);
+	auto scopeName = symbol->GetScope();
+
+	UpdateInMap(scopeName, name, newVariate);
 }
 
 void TVariateManager::UpdateInDatabase(const QString& scope, const QString& name, const TVariate& newVariate)

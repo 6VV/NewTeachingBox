@@ -5,24 +5,31 @@
 #include "ComboBoxInTree.h"
 #include "LineEditInTree.h"
 #include "DataStruct.h"
+#include "TOverlapWidget.h"
 
 const QString TOverlap::STR_MODE_ABSOLUTE = "Absolute";
 const QString TOverlap::STR_MODE_RELATIVE = "Relative";
 
 TOverlap::TOverlap(const QString& scope, const QString& name, const tOverlapConstraint& value)
-	:TVariate(scope, name, TSymbol::TYPE_OVERLAP), m_value(value)
+	:TVariate(scope, name, TSymbol::TYPE_OVERLAP)
+	, m_value(value)
 {
+	Init();
 }
 
 TOverlap::TOverlap(QDataStream& dataStream) : TVariate(dataStream)
 {
 	WriteValueSteam(dataStream);
+
+	Init();
 }
 
 TOverlap::TOverlap(const TOverlap& variate)
 	: TVariate(variate)
 {
 	m_value = variate.m_value;
+
+	Init();
 }
 
 const tOverlapConstraint& TOverlap::GetValue() const
@@ -33,38 +40,6 @@ const tOverlapConstraint& TOverlap::GetValue() const
 void TOverlap::SetValue(const tOverlapConstraint& value)
 {
 	m_value = value;
-}
-
-void TOverlap::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
-{
-	TreeWidgetItemWithVariate* variateItem = new TreeWidgetItemWithVariate(parentItem, this);
-
-	ComboBoxInTree* modeBox = new ComboBoxInTree(variateItem,treeWidget);
-	modeBox->addItem(STR_MODE_ABSOLUTE);
-	modeBox->addItem(STR_MODE_RELATIVE);
-
-	switch (m_value.m_TransitionMode)
-	{
-	case tTransitionMode::kTransitionModeAbsolute:
-	{
-		modeBox->setCurrentText(STR_MODE_ABSOLUTE);
-	}break;
-	case tTransitionMode::kTransitionModeRelative:
-	{
-		modeBox->setCurrentText(STR_MODE_RELATIVE);
-	}break;
-	default:
-		break;
-	}
-
-	QTreeWidgetItem* modeItem = new QTreeWidgetItem(variateItem, QStringList{ "Mode" });
-	treeWidget->setItemWidget(modeItem, 1, modeBox);
-	connect(modeBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(SlotOnTextChanged()));
-
-	LineEditInTree* paraEdit = new LineEditInTree(variateItem, treeWidget, QString::number(m_value.m_TransitionParameter), RegExp::STR_REG_FLOAT);
-	QTreeWidgetItem* parameterItem = new QTreeWidgetItem(variateItem, QStringList{ "Value" });
-	treeWidget->setItemWidget(parameterItem, 1, paraEdit);
-	connect(paraEdit, SIGNAL(textChanged(const QString&)), this, SLOT(SlotOnTextChanged()));
 }
 
 void TOverlap::ReadValueStream(QDataStream& dataStream)const
@@ -84,25 +59,9 @@ void TOverlap::WriteValueSteam(QDataStream& dataStream)
 	dataStream >> m_value.m_TransitionParameter;
 }
 
-void TOverlap::SlotOnTextChanged()
+void TOverlap::Init()
 {
-	WidgetItemInTree* widget = dynamic_cast<WidgetItemInTree*>(sender());
-	QTreeWidgetItem* variateItem = widget->GetParentItem();
-	QTreeWidget* treeWidget = widget->GetTreeWidget();
-
-	QString mode = static_cast<QComboBox*>(treeWidget->itemWidget(variateItem->child(0), 1))->currentText();
-	if (mode==STR_MODE_ABSOLUTE)
-	{
-		m_value.m_TransitionMode = tTransitionMode::kTransitionModeAbsolute;
-	}
-	else
-	{
-		m_value.m_TransitionMode = tTransitionMode::kTransitionModeRelative;
-	}
-
-	m_value.m_TransitionParameter = static_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(1), 1))->text().toDouble();
-
-	UpdateRamAndDatabaseFrom(*this);
+	m_variateWidget = new TOverlapWidget(this);
 }
 
 TVariate* TOverlap::Clone() const

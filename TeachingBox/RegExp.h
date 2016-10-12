@@ -58,6 +58,9 @@ public:
 	/*变量名，首字母为字母或下划线*/
 	static const char* STR_REG_STRING_NAME;
 
+	/*IP地址*/
+	static const char* STR_REG_IP_ADDRESS;
+
 protected:
 	
 private:

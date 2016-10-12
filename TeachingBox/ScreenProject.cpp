@@ -171,10 +171,11 @@ void ScreenProject::SlotOnButtonOpenClicked()
 	QString project = m_treeWidget->currentItem()->parent()->text(0);
 
 	QString nextProgram = project + "." + program;
-	QString currentProgram = Context::projectContext.GetFileOpened();
+	QString currentProgram = Context::projectContext.ProgramOpened();
 
 	if (nextProgram==currentProgram)
 	{
+		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
 		return;
 	}
 
@@ -185,10 +186,11 @@ void ScreenProject::SlotOnButtonOpenClicked()
 		m_projectManager->SaveFile(currentProgram, codeEidtor->toPlainText());
 	}
 
-	codeEidtor->setPlainText(m_projectManager->GetFileText(project, program));
-	codeEidtor->HighlightPCLine(1);
+	codeEidtor->HighlightPCLine(nextProgram, 1);
+	//codeEidtor->setPlainText(m_projectManager->GetFileText(project, program));
+	//codeEidtor->HighlightPCLine(1);
 
-	Context::projectContext.SetFileOpened(nextProgram);
+	//Context::projectContext.SetFileOpened(nextProgram);
 	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
 }
 
@@ -223,8 +225,6 @@ void ScreenProject::SlotOnButtonLoadClicked()
 
 		QString program = m_treeWidget->currentItem()->text(0);
 		QString project = projectItem->text(0);
-
-		Context::projectContext.SetCurrentProgram(project+"."+program);
 
 		UpdateLoadProjectState(projectItem);
 		SlotOnButtonOpenClicked();

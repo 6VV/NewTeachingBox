@@ -105,6 +105,9 @@ private:
 	~CodeEditor();
 
 public:
+	void ClearWrongLine();
+	QString CurrentLineText();
+
 	int GetPCLineNumber();	/*获取PC行号*/
 
 	//void ClearWrongLine();	/*清除错误行颜色*/
@@ -112,8 +115,10 @@ public:
 	//void DealText();	/*处理文本*/
 	//void DeleteCurrentLine();	/*删除当前行*/
 
+	void HighlightPCLine(const QString& program, int lineNumber);
 	void HighlightPCLine();	/*高亮显示PC行*/
 	void HighlightPCLine(int lineNumber);
+	void HighlightWrongLine(const int lineNumber);	/*高亮显示错误行*/
 
 	void InsertTextBeforeLine(const QString& text);	/*插入文本*/
 	//void InsertTextBeforeLineUnsafely(const QString& strText);	/*插入文本（不进行语法检查）*/
@@ -146,11 +151,9 @@ private:
 	QTextEdit::ExtraSelection GetSelection(int lineNumber, const QColor& color);
 
 	void HighLightEditLine(const int lineNumber);	/*高亮显示编辑行*/
-	void HighlightWrongLine(const int lineNumber);	/*高亮显示错误行*/
 	void HighlightAllLines();	/*高亮显示行*/
 
 	void PaintLineNumberArea(QPaintEvent *event);	/*绘制左侧行号区域*/
-
 
 	//void _DeleteCurrentLine();
 	//void _UpdateCurrentLine(const QString& text);

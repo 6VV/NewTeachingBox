@@ -79,8 +79,17 @@ void TAstNodeIfSentence::AddThenChild(TLexer* const lexer, std::shared_ptr<TAstN
 		thenNode->AddChild(childNode);
 	}
 
+	int lineNumber=0;
+	if (thenNode->GetEndChild()==nullptr)
+	{
+		lineNumber = thenNode->GetToken()->GetLineNumber();
+	}
+	else
+	{
+		lineNumber = thenNode->GetEndChild()->GetToken()->GetLineNumber();
+	}
 	thenNode->AddChild(std::shared_ptr<TAstNode>(new TAstNodeEndIfSentence(
-		std::shared_ptr<TToken>(new TToken(TOKEN_TYPE::STURCTURE_END_IF, thenNode->GetEndChild()->GetToken()->GetLineNumber())))));
+		std::shared_ptr<TToken>(new TToken(TOKEN_TYPE::STURCTURE_END_IF, lineNumber)))));
 }
 
 TAstNode::ValueReturned TAstNodeIfSentence::Execute() const

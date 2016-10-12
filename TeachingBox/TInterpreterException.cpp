@@ -23,7 +23,9 @@ const QMap<int, QString> TInterpreterException::Exception_TEXT
 	{ IF_SENTENCE_SHOULD_WITH_BOOL, "if sentence should  with bool" },
 	{ NOT_MOVL_SENTENCE, "not movl sentence" },
 	{ MOVL_SHOULD_WITH_POSITOIN_DYNAMIC_OVERLAP, "movl should should be with position,dynamic,overlap" },
-	{ LOSE_COMMA, "lose comma" }
+	{ LOSE_COMMA, "lose comma" },
+	{ NOT_PROGRAM_NAME, "not program name" },
+	{ UNKNOWN_SENTENCE, "unknown sentence" },
 };
 
 TInterpreterException::TInterpreterException(const InterpreterExceptionCode id, const int lineNumber, const QString& text/*=""*/)
@@ -41,5 +43,10 @@ QString TInterpreterException::GetInfo()
 		text.append("\nText: " + m_text);
 	}
 	return text;
+}
+
+int TInterpreterException::GetLineNumber() const
+{
+	return m_lineNumber;
 }
 

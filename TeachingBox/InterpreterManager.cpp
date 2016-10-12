@@ -22,26 +22,56 @@ void InterpreterManager::LoadProject(const QString& project)
 	Context::interpreterContext.SetRootNode(TAstNodeFactory::CreateAstFromProject(project));
 }
 
-void InterpreterManager::StartExecute()
+void InterpreterManager::AutoExecute()
 {
 	SaveFile();
 	LoadProject(Context::projectContext.GetProjectLoaded());
-	SetStartNode();
+	UpdateStartNode();
 
-	emit SignalStartExecute();
+	Context::interpreterContext.IsAllowExecute(true);
+	Context::interpreterContext.IsAllowSendCommandData(true);
+	emit SignalAutoExecute();
 }
 
-void InterpreterManager::SetStartNode()
+void InterpreterManager::StepExecute()
 {
-	auto program = Context::projectContext.GetCurrentProgram();
+	SaveFile();
+	LoadProject(Context::projectContext.GetProjectLoaded());
+	UpdateStartNode();
+
+	Context::interpreterContext.IsAllowExecute(true);
+	Context::interpreterContext.IsAllowSendCommandData(true);
+	emit SignalStepExecute();
+}
+
+void InterpreterManager::UpdateStartNode()
+{
+	auto program = Context::projectContext.ProgramOpened();
 	Context::interpreterContext.SetNextNode(GetNodeOnLineFromProgram(GetProgramNode(program), Context::interpreterContext.GetLineNumber()));
+}
+
+void InterpreterManager::ManualExecute()
+{
+	AutoExecute();
+}
+
+void InterpreterManager::StopExecute()
+{
+	Context::interpreterContext.IsAllowExecute(false);
+
+	emit SignalStopExecute();
+}
+
+void InterpreterManager::ExecuteNextCommand()
+{
+	emit SignalExecuteNextCommand();
 }
 
 void InterpreterManager::SaveFile()
 {
 	ProjectManager projectManager;
 
-	projectManager.SaveFile(Context::projectContext.GetCurrentProgram(), CodeEditor::GetInstance()->toPlainText());
+	projectManager.SaveFile(Context::projectContext.ProgramOpened(), CodeEditor::GetInstance()->toPlainText());
 }
 
 TAstNode* InterpreterManager::GetProgramNode(const QString& program)
@@ -106,7 +136,10 @@ InterpreterManager::InterpreterManager()
 {
 	m_interpreterThread->moveToThread(m_thread);
 
-	connect(this, SIGNAL(SignalStartExecute()), m_interpreterThread, SLOT(SlotStartExecute()));
+	connect(this, SIGNAL(SignalAutoExecute()), m_interpreterThread, SLOT(SlotAutoExecute()));
+	connect(this, SIGNAL(SignalStopExecute()), m_interpreterThread, SLOT(SlotStopExecute()));
+	connect(this, SIGNAL(SignalStepExecute()), m_interpreterThread, SLOT(SlotStepExecute()));
+	connect(this, SIGNAL(SignalExecuteNextCommand()), m_interpreterThread, SLOT(SlotExecuteNextCommand()));
 
 	m_thread->start();
 }

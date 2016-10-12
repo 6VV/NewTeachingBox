@@ -24,9 +24,14 @@ class TInterpreterThread:public QObject
 	Q_OBJECT
 
 public slots:
-	void SlotStartExecute();
-	void SlotStepExecute();
+	void SlotExecuteNextCommand();
 	
+	void SlotAutoExecute();
+	void SlotStepExecute();
+	void SlotStopExecute();
+
+private:
+	void SendEndCommand();
 };
 
 #endif

@@ -14,10 +14,6 @@ TAstNode* InterpreterContext::GetNextNode() const
 	return m_nextNode;
 }
 
-TAstNode* InterpreterContext::GetCurrentProgramNode() const
-{
-	return m_currentProgramNode;
-}
 
 InterpreterContext::ExecuteMode InterpreterContext::GetExecuteMode() const
 {
@@ -27,6 +23,16 @@ InterpreterContext::ExecuteMode InterpreterContext::GetExecuteMode() const
 std::shared_ptr<TAstNode> InterpreterContext::GetRootNode() const
 {
 	return m_rootNode;
+}
+
+void InterpreterContext::IsAllowSendCommandData(bool enabled)
+{
+	m_isAllowSendData = enabled;
+}
+
+bool InterpreterContext::IsAllowSendCommandData() const
+{
+	return m_isAllowSendData;
 }
 
 //void InterpreterContext::SetCurrentScope(QString val)
@@ -39,10 +45,6 @@ void InterpreterContext::SetNextNode(TAstNode* nextNode)
 	m_nextNode = nextNode;
 }
 
-void InterpreterContext::SetCurrentProgramNode(const TAstNode* programNode)
-{
-	m_currentProgramNode = const_cast<TAstNode*>(programNode);
-}
 
 void InterpreterContext::SetExecuteMode(ExecuteMode mode)
 {
@@ -54,14 +56,14 @@ void InterpreterContext::SetRootNode(std::shared_ptr<TAstNode> rootNode)
 	m_rootNode = rootNode;
 }
 
-void InterpreterContext::IsExecuting(bool isExecuting)
+void InterpreterContext::IsAllowExecute(bool isExecuting)
 {
-	m_isExecuting = isExecuting;
+	m_isAllowExecute = isExecuting;
 }
 
-bool InterpreterContext::IsExecuting() const
+bool InterpreterContext::IsAllowExecute() const
 {
-	return m_isExecuting;
+	return m_isAllowExecute;
 }
 
 int InterpreterContext::GetLineNumber() const

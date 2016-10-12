@@ -11,6 +11,8 @@
 #include "InterpreterManager.h"
 #include "TInterpreterException.h"
 #include "WarningManager.h"
+#include "TcpManager.h"
+#include "CodeEditor.h"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -31,6 +33,8 @@ void TeachingBox::paintEvent(QPaintEvent *e)
 
 void TeachingBox::Init()
 {
+	InitContext();
+
 	setFixedSize(WIDTH, HEIGHT);
 
 	InitVertical();
@@ -135,6 +139,11 @@ void TeachingBox::InitCenter(QLayout* layout)
 	InitMovement(movementLayout);
 }
 
+void TeachingBox::InitContext()
+{
+	TcpManager::GetInstance();
+}
+
 void TeachingBox::InitOption(QLayout* layout)
 {
 	QVBoxLayout* realLayout = dynamic_cast<QVBoxLayout*>(layout);
@@ -204,7 +213,9 @@ void TeachingBox::InitMovement(QLayout* layout)
 
 	realLayout->addWidget(btn2nd, 7, 0);
 
-	connect(btnStart, SIGNAL(clicked()), this, SLOT(SlotOnStartButtonClicked()));
+	connect(btnStart, SIGNAL(pressed()), this, SLOT(SlotOnStartButtonPressed()));
+	connect(btnStart, SIGNAL(released()), this, SLOT(SlotOnStartButtonReleased()));
+	connect(btnStop, SIGNAL(clicked()), this, SLOT(SlotOnStopButtonClicked()));
 }
 
 void TeachingBox::InitScreen(QLayout* layout)
@@ -272,14 +283,50 @@ void TeachingBox::SlotOnProgramButtonClicked()
 	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
 }
 
-void TeachingBox::SlotOnStartButtonClicked()
+void TeachingBox::SlotOnStartButtonReleased()
 {
+	switch (Context::interpreterContext.GetExecuteMode())
+	{
+	case InterpreterContext::MANUAL:{
+		SlotOnStopButtonClicked();
+	}break;
+	default:break;
+	}
+}
+
+void TeachingBox::SlotOnStartButtonPressed()
+{
+	if (Context::projectContext.GetProjectLoaded().isEmpty())
+	{
+		WarningManager::Warning(this, WarningManager::PleaseLoadProject);
+		return;
+	}
 	try{
-		InterpreterManager::GetInstance()->StartExecute();
+		CodeEditor::GetInstance()->ClearWrongLine();
+
+		switch (Context::interpreterContext.GetExecuteMode())
+		{
+		case InterpreterContext::AUTO:{
+			InterpreterManager::GetInstance()->AutoExecute();
+		}break;
+		case InterpreterContext::MANUAL:{
+			InterpreterManager::GetInstance()->ManualExecute();
+		}break;
+		case InterpreterContext::STEP:{
+			InterpreterManager::GetInstance()->StepExecute();
+		}break;
+		default:
+			break;
+		}
 	}
 	catch (TInterpreterException& e){
+		CodeEditor::GetInstance()->HighlightWrongLine(e.GetLineNumber());
 		WarningManager::Warning(this, e.GetInfo());
 		return;
 	}
-	
+}
+
+void TeachingBox::SlotOnStopButtonClicked()
+{
+	InterpreterManager::GetInstance()->StopExecute();
 }

@@ -56,11 +56,11 @@ void TAstNodeForSentence::UpdateValue(SYMBOL_TYPE type, const QString& scope, co
 {
 	if (type == SYMBOL_TYPE::TYPE_INTERGER)
 	{
-		TVariateManager::GetInstance()->UpdateInMap(scope, name, TInteger(scope, name, static_cast<int>(value)));
+		TVariateManager::GetInstance()->UpdateInMapScollUp(scope, name, TInteger(scope, name, static_cast<int>(value)));
 	}
 	else
 	{
-		TVariateManager::GetInstance()->UpdateInMap(scope, name, TDouble(scope, name, value));
+		TVariateManager::GetInstance()->UpdateInMapScollUp(scope, name, TDouble(scope, name, value));
 	}
 }
 

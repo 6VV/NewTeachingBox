@@ -33,6 +33,7 @@ public:
 
 private slots:
 	void SlotOnButtonAddvanceClicked();
+	void SlotOnButtonModifyClicked();
 	void SlotOnButtonNewClicked();
 	void SlotOnButtonEditClicked();
 	void SlotOnButtonSetPCClicked();

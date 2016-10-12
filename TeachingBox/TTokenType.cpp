@@ -16,7 +16,8 @@ const QHash<QString, TTokenType::Type> TTokenType::STRUCTURE_MAP{
 	{"CASE", STURCTURE_CASE},
 	{"DEFAULT", STURCTURE_DEFAULT},
 	{"ENDSWITCH", STURCTURE_END_SWITCH},
-	{"EOF", SEPARATOR_EOF}
+	{"EOF", SEPARATOR_EOF},
+	{"GOSUB", STURCTURE_GOSUB},
 };
 
 const QHash<QString, TTokenType::Type> TTokenType::MACRO_MAP{

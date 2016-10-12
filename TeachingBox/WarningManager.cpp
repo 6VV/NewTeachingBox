@@ -39,6 +39,9 @@ void WarningManager::Warning(QWidget* widget, WarningCode warningCode)
 	{
 		Warning(widget, "Please Select Variable");
 	}break;
+	case PleaseLoadProject:{
+		Warning(widget, "Please load project");
+	}break;
 	case AlreadyExitVariable:
 	{
 		Warning(widget, "Already Exit This Variable");

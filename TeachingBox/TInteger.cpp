@@ -5,6 +5,7 @@
 #include "TSymbol.h"
 #include "TreeWidgetItemWithVariate.h"
 #include "LineEditWithRegExpAndKeyboard.h"
+#include "TIntegerWidget.h"
 
 
 
@@ -12,17 +13,23 @@ TInteger::TInteger(const QString& scope, const QString& name, const int value)
 	:TVariate(scope,name,TSymbol::TYPE_INTERGER)
 {
 	m_value = value;
+
+	Init();
 }
 
 TInteger::TInteger(QDataStream& dataStream) :TVariate(dataStream)
 {
 	dataStream >> m_value;
+
+	Init();
 }
 
 TInteger::TInteger(const TInteger& variate)
 	: TVariate(variate)
 {
 	m_value = variate.m_value;
+
+	Init();
 }
 
 int TInteger::GetValue()
@@ -45,27 +52,15 @@ void TInteger::UpdateFromValue(const TVariate& variate)
 	m_value = static_cast<const TInteger&>(variate).m_value;
 }
 
-void TInteger::SlotOnTextChanged(const QString& newValue)
-{
-	UpdateRamAndDatabaseFrom(TInteger(m_symbol.GetScope(), m_symbol.GetName(), newValue.toInt()));
-}
 
+void TInteger::Init()
+{
+	m_variateWidget = new TIntegerWidget(this);
+}
 
 TVariate* TInteger::Clone() const
 {
 	return new TInteger(*this);
 }
 
-void TInteger::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
-{
-	TreeWidgetItemWithVariate* VariateItem = new TreeWidgetItemWithVariate(parentItem, this);
-	QTreeWidgetItem* item = new QTreeWidgetItem(VariateItem, QStringList{ "Value" });
-
-	LineEditWithRegExpAndKeyboard* lineEditValue = new LineEditWithRegExpAndKeyboard(
-		QString::number(m_value), RegExp::STR_REG_INT);
-
-	treeWidget->setItemWidget(item, 1, lineEditValue);
-
-	connect(lineEditValue, SIGNAL(textChanged(const QString&)), this, SLOT(SlotOnTextChanged(const QString&)));
-}
 

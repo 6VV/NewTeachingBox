@@ -11,8 +11,11 @@ public:
 	TreeWidgetItemWithVariate(QTreeWidgetItem* parentItem,TVariate* variate);
 	~TreeWidgetItemWithVariate();
 	
+	void IsSave(bool isSave);
+
 private:
 	TVariate* m_variate;
+	bool m_isSave=false;
 };
 
 #endif

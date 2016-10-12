@@ -53,6 +53,7 @@ private:
 	void Init();
 	void InitBottom(QLayout* layout);
 	void InitCenter(QLayout* layout);
+	void InitContext();
 	void InitOption(QLayout* layout);
 	void InitMovement(QLayout* layout);
 	void InitScreen(QLayout* layout);
@@ -69,7 +70,11 @@ private slots:
 	void SlotOnVariateButtonClicked();
 	void SlotOnProjectButtonClicked();
 	void SlotOnProgramButtonClicked();
-	void SlotOnStartButtonClicked();
+	void SlotOnStartButtonReleased();
+	void SlotOnStartButtonPressed();
+	void SlotOnStopButtonClicked();
+
+
 
 private:
 	QButtonGroup* m_modelButtonGroup;

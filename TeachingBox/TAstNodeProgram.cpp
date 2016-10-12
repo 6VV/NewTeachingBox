@@ -31,7 +31,7 @@ const std::shared_ptr<TAstNode> TAstNodeProgram::GetAstNode(TLexer* const lexer,
 
 	if (lexer->PeekToken()->GetType() != TOKEN_TYPE::SEPARATOR_EOF)
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, lexer->PeekToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::UNKNOWN_SENTENCE, lexer->PeekToken()->GetLineNumber());
 	}
 
 	return result;
@@ -39,7 +39,6 @@ const std::shared_ptr<TAstNode> TAstNodeProgram::GetAstNode(TLexer* const lexer,
 
 TAstNode::ValueReturned TAstNodeProgram::Execute() const
 {
-	Context::interpreterContext.SetCurrentProgramNode(this);
 	Context::interpreterContext.SetNextNode(m_firstChild.get());
 
 	return TAstNode::Execute();
