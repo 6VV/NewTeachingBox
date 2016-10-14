@@ -50,19 +50,19 @@ void TOverlapWidget::OnValueChanged()
 
 	QString mode = static_cast<QComboBox*>(treeWidget->itemWidget(variateItem->child(0), 1))->currentText();
 
-	tOverlapConstraint value;
+	//tOverlapConstraint value;
 	if (mode == STR_MODE_ABSOLUTE)
 	{
-		value.m_TransitionMode = tTransitionMode::kTransitionModeAbsolute;
+		m_value.m_TransitionMode = tTransitionMode::kTransitionModeAbsolute;
 	}
 	else
 	{
-		value.m_TransitionMode = tTransitionMode::kTransitionModeRelative;
+		m_value.m_TransitionMode = tTransitionMode::kTransitionModeRelative;
 	}
 
-	value.m_TransitionParameter = static_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(1), 1))->text().toDouble();
+	m_value.m_TransitionParameter = static_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(1), 1))->text().toDouble();
 
-	static_cast<TOverlap*>(m_variate)->SetValue(value);
+	//static_cast<TOverlap*>(m_variate)->SetValue(value);
 }
 
 TOverlapWidget::TOverlapWidget(TOverlap* overlap)
@@ -74,4 +74,14 @@ TOverlapWidget::TOverlapWidget(TOverlap* overlap)
 TOverlapWidget::~TOverlapWidget()
 {
 
+}
+
+tOverlapConstraint TOverlapWidget::Value() const
+{
+	return m_value;
+}
+
+void TOverlapWidget::UpdateVariate()
+{
+	static_cast<TOverlap*>(m_variate)->SetValue(m_value);
 }

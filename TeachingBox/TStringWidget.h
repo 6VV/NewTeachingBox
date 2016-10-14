@@ -29,10 +29,14 @@ public:
 	TStringWidget(TString* variate);
 	~TStringWidget();
 
+	virtual void UpdateVariate() override;
+
+private:
 	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 
 private:
 	virtual void OnValueChanged() override;
+	QString m_value;
 
 };
 

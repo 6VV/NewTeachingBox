@@ -43,7 +43,7 @@ void ScreenVariate::SlotOnDeleteVariateButtonClicked()
 
 	auto parentItem = item->parent();
 	QString scope = parentItem->text(0);
-	QString name = item->text(0);
+	QString name = item->text(1);
 
 	switch (QMessageBox::warning(this, tr("Warning"), tr("Delete variate?") + "\n"+ name, QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok))
 	{

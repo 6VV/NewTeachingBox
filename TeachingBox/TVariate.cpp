@@ -47,6 +47,7 @@ void TVariate::SetName(const QString& name)
 
 void TVariate::Save()
 {
+	m_variateWidget->UpdateVariate();
 	UpdateRamAndDatabaseFrom(*this);
 }
 

@@ -13,6 +13,8 @@ public:
 	
 	void IsSave(bool isSave);
 
+	void Variate(TVariate* variate);
+
 private:
 	TVariate* m_variate;
 	bool m_isSave=false;

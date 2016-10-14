@@ -8,7 +8,7 @@ class TDouble:public TVariate
 	Q_OBJECT
 
 public:
-	TDouble(const QString& scope, const QString& name, const double value);
+	TDouble(const QString& scope, const QString& name, const double value=0);
 	TDouble(const TDouble& variate);
 	TDouble(QDataStream& dataStream);
 

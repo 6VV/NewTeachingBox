@@ -16,6 +16,11 @@ TIntegerWidget::~TIntegerWidget()
 
 }
 
+void TIntegerWidget::UpdateVariate()
+{
+	static_cast<TInteger*>(m_variate)->SetValue(m_value);
+}
+
 void TIntegerWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	QTreeWidgetItem* item = new QTreeWidgetItem(parentItem, QStringList{ "Value" });
@@ -31,6 +36,6 @@ void TIntegerWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTre
 
 void TIntegerWidget::OnValueChanged()
 {
-	auto value = static_cast<QLineEdit*>(sender())->text().toInt();
-	static_cast<TInteger*>(m_variate)->SetValue(value);
+	m_value = static_cast<QLineEdit*>(sender())->text().toInt();
+	//static_cast<TInteger*>(m_variate)->SetValue(value);
 }

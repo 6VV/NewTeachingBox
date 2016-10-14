@@ -8,7 +8,7 @@ class TDynamic:public TVariate
 {
 	Q_OBJECT
 public:
-	TDynamic(const QString& scope, const QString& name, const tDynamicConstraint& value);
+	TDynamic(const QString& scope, const QString& name, const tDynamicConstraint& value = tDynamicConstraint{});
 	TDynamic(const TDynamic& variate);
 	TDynamic(QDataStream& dataStream);
 

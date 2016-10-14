@@ -32,15 +32,21 @@ public:
 	TVariateWidget(TVariate* variate);
 	virtual ~TVariateWidget();
 	
+	virtual void UpdateVariate()=0;
+
 	void ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget);
 
-	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)=0;
+	void ReadContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget);
+
 
 protected slots:
 	void SlotOnValueChanged();
 
 protected:
 	virtual void OnValueChanged()=0;
+
+private:
+	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) = 0;
 
 protected:
 	TVariate* m_variate;

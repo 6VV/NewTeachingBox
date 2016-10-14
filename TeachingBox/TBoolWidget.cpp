@@ -18,6 +18,11 @@ TBoolWidget::~TBoolWidget()
 
 }
 
+void TBoolWidget::UpdateVariate()
+{
+	static_cast<TBool*>(m_variate)->SetValue(m_value);
+}
+
 void TBoolWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	QTreeWidgetItem* item = new QTreeWidgetItem(parentItem, QStringList("Value"));
@@ -46,12 +51,12 @@ void TBoolWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWi
 void TBoolWidget::OnValueChanged()
 {
 	auto text = static_cast<QComboBox*>(sender())->currentText();
-	bool value = false;
+	//bool value = false;
 
 	if (text == STR_VALUE_TRUE)
 	{
-		value = true;
+		m_value = true;
 	}
 
-	static_cast<TBool*>(m_variate)->SetValue(value);
+	//static_cast<TBool*>(m_variate)->SetValue(value);
 }

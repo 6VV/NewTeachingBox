@@ -29,11 +29,16 @@ public:
 	TIntegerWidget(TInteger* variate);
 	~TIntegerWidget();
 
+	virtual void UpdateVariate() override;
+
+private:
 	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 
 private:
 	virtual void OnValueChanged() override;
 
+private:
+	int m_value;
 };
 
 #endif

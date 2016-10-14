@@ -8,7 +8,7 @@ class TString:public TVariate
 	Q_OBJECT
 
 public:
-	TString(const QString& scope, const QString& name, const QString& value);
+	TString(const QString& scope, const QString& name, const QString& value="");
 	TString(const TString& variate);
 	TString(QDataStream& dataStream);
 

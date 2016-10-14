@@ -18,6 +18,7 @@
 *************************************************/
 
 #include "TVariateWidget.h"
+#include "DataStruct.h"
 
 class TDynamic;
 
@@ -29,11 +30,16 @@ public:
 	TDynamicWidget(TDynamic* dynamic);
 	~TDynamicWidget();
 
+	virtual void UpdateVariate() override;
+
+private:
 	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 
 private:
 	virtual void OnValueChanged() override;
 
+private:
+	tDynamicConstraint m_value;
 };
 
 #endif

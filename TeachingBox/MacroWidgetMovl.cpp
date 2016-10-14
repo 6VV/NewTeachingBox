@@ -18,8 +18,9 @@ MacroWidgetMovl::~MacroWidgetMovl()
 
 void MacroWidgetMovl::Init()
 {
-	AddPosition("*");
-	AddPosition("*");
+	AddParameter(SymbolType::TYPE_POSITION,"p1");
+	AddParameter(SymbolType::TYPE_DYNAMIC,"*");
+	AddParameter(SymbolType::TYPE_OVERLAP, "*");
 }
 
 void MacroWidgetMovl::OnConfirm()

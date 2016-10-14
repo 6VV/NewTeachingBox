@@ -15,6 +15,11 @@ TStringWidget::~TStringWidget()
 
 }
 
+void TStringWidget::UpdateVariate()
+{
+	static_cast<TString*>(m_variate)->SetValue(m_value);
+}
+
 void TStringWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	QTreeWidgetItem* item = new QTreeWidgetItem(parentItem, QStringList("Value"));
@@ -28,5 +33,6 @@ void TStringWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTree
 
 void TStringWidget::OnValueChanged()
 {
-	static_cast<TString*>(m_variate)->SetValue(static_cast<QLineEdit*>(sender())->text());
+	m_value = static_cast<QLineEdit*>(sender())->text();
+	//static_cast<TString*>(m_variate)->SetValue(static_cast<QLineEdit*>(sender())->text());
 }

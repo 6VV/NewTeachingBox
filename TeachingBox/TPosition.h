@@ -10,7 +10,7 @@ class TPosition:public TVariate
 	Q_OBJECT
 
 public:
-	TPosition(const QString& scope, const QString& name, const tAxesAllPositions& value);
+	TPosition(const QString& scope, const QString& name, const tAxesAllPositions& value = tAxesAllPositions{});
 	TPosition(const TPosition& variate);
 	TPosition(QDataStream& dataStream);
 
@@ -21,7 +21,7 @@ public:
 	void SetValue(const tAxesAllPositions& value);
 
 
-protected:
+private:
 	virtual void ReadValueStream(QDataStream& dataStream) const override;
 
 	virtual void UpdateFromValue(const TVariate& variate) override;

@@ -7,9 +7,9 @@ const QString ProjectContext::ScopeSystem()
 	return "SYSTEM";
 }
 
-const QString ProjectContext::ScopeSynergic()
+const QString ProjectContext::ScopeCooperate()
 {
-	return "SYNERGIC";
+	return "COOPERATE";
 }
 
 const QString ProjectContext::ScopeGlobal()
@@ -24,7 +24,7 @@ const QString ProjectContext::ScopeGlobal()
 //const QString ProjectContext::STR_SCOPE_GLOBAL = "GLOBAL";
 
 ProjectContext::ProjectContext()
-	:SCOPE_ORI(QStringList{ ScopeSystem(), ScopeSynergic(), ScopeGlobal() })
+	:SCOPE_ORI(QStringList{ ScopeSystem(), ScopeCooperate(), ScopeGlobal() })
 {
 	m_currentScopes.append(SCOPE_ORI);
 }

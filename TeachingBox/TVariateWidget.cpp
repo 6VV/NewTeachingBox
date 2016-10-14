@@ -13,14 +13,22 @@ TVariateWidget::TVariateWidget(TVariate* variate)
 
 TVariateWidget::~TVariateWidget()
 {
-
+	delete m_variate;
+	m_variate = nullptr;
 }
 
 void TVariateWidget::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	m_itemVariateHeader = new TreeWidgetItemWithVariate(parentItem, m_variate);
 
-	ReadContentTreeWidgetItem(m_itemVariateHeader, treeWidget);
+	ReadContentIntoItem(m_itemVariateHeader, treeWidget);
+}
+
+void TVariateWidget::ReadContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget)
+{
+	parentItem->Variate(m_variate);
+
+	ReadContentTreeWidgetItem(parentItem, treeWidget);
 }
 
 void TVariateWidget::SlotOnValueChanged()

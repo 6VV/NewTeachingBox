@@ -24,3 +24,8 @@ void TreeWidgetItemWithVariate::IsSave(bool isSave)
 	m_isSave = isSave;
 }
 
+void TreeWidgetItemWithVariate::Variate(TVariate* variate)
+{
+	m_variate = variate;
+}
+

@@ -18,6 +18,7 @@
 *************************************************/
 
 #include "TVariateWidget.h"
+#include "DataStruct.h"
 
 class TPosition;
 
@@ -29,12 +30,19 @@ public:
 	TPositionWidget(TPosition* positon);
 	~TPositionWidget();
 
+	virtual void UpdateVariate() override;
+
+	tAxesAllPositions Value() const;
+
+private:
 	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 
 private:
 	virtual void OnValueChanged() override;
 
+
 private:
+	tAxesAllPositions m_value;
 };
 
 #endif

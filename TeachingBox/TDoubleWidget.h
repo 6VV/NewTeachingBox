@@ -29,11 +29,16 @@ public:
 	TDoubleWidget(TDouble* variate);
 	~TDoubleWidget();
 
+	virtual void UpdateVariate() override;
+
+private:
 	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 
 private:
 	virtual void OnValueChanged() override;
 
+private:
+	double m_value;
 };
 
 #endif

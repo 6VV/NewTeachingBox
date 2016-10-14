@@ -23,7 +23,7 @@ class ProjectContext
 {
 public:
 	static const QString ScopeSystem();
-	static const QString ScopeSynergic();
+	static const QString ScopeCooperate();
 	static const QString ScopeGlobal();
 	//static const QString STR_SCOPE_SYSTEM;		/*系统作用域*/
 	//static const QString STR_SCOPE_SYNERGIC ;	/*协作作用域*/

@@ -18,6 +18,7 @@
 *************************************************/
 
 #include "TVariateWidget.h"
+#include "DataStruct.h"
 
 class TOverlap;
 
@@ -33,11 +34,18 @@ public:
 	TOverlapWidget(TOverlap* overlap);
 	~TOverlapWidget();
 
+	virtual void UpdateVariate() override;
+
+	tOverlapConstraint Value() const;
+
+private:
 	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 
 private:
 	virtual void OnValueChanged() override;
 
+private:
+	tOverlapConstraint m_value;
 };
 
 #endif

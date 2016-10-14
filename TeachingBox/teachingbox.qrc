@@ -2,4 +2,11 @@
     <qresource prefix="/TeachingBox">
         <file>teachingbox_zh.qm</file>
     </qresource>
+    <qresource prefix="/new/image">
+        <file>Resources/Image/C.PNG</file>
+        <file>Resources/Image/L.PNG</file>
+        <file>Resources/Image/P.PNG</file>
+        <file>Resources/Image/S.PNG</file>
+        <file>Resources/Image/G.PNG</file>
+    </qresource>
 </RCC>

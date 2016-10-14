@@ -26,9 +26,8 @@ TInteger::TInteger(QDataStream& dataStream) :TVariate(dataStream)
 
 TInteger::TInteger(const TInteger& variate)
 	: TVariate(variate)
+	, m_value(variate.m_value)
 {
-	m_value = variate.m_value;
-
 	Init();
 }
 

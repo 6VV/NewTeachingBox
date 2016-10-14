@@ -32,9 +32,17 @@ class MacroWidgetParent :public DialogParent
 
 	typedef TSymbol::SymbolType SymbolType;
 
+private:
+	static const QString IMAGE_LOGO_SYSTEM;
+	static const QString IMAGE_LOGO_COORPERATER;
+	static const QString IMAGE_LOGO_GLOBAL;
+	static const QString IMAGE_LOGO_PROJECT;
+	static const QString IMAGE_LOGO_LOCAL;
+
+	static const QMap<SymbolType, QString> TYPE_HEADER_MAP;
+
 public:
 	MacroWidgetParent(const QString& macroText,QWidget* parent = nullptr);
-
 
 	virtual ~MacroWidgetParent();
 
@@ -42,6 +50,7 @@ protected:
 	virtual void OnConfirm() = 0;
 
 	void AddPosition(const QString& name);
+	void AddParameter(SymbolType type, const QString& name);
 
 private slots:
 	void SlotOnButtonConfirmClicked();
@@ -50,17 +59,19 @@ private slots:
 private:
 	virtual void UpdateText() override;
 
-	const QStringList GetVariates(SymbolType type) const;
+	QMap<QString, QStringList> GetVariateMap(SymbolType type) const;
+	QComboBox* GetComboBox(SymbolType type) const;
 
 	void InitMacroText(const QString& macroText);
 	void InitLayout();
 	void InitSignalSlot();
 
+	QString GetSuggestName(SymbolType type) const;
 
 protected:
 	QString m_macroName{};
 	QString m_macroParameterText{};
-	QVector<TVariate*> m_variates;
+	QMap<QString,QVector<TVariate*>> m_variatesMap;
 
 	QTreeWidget* m_treeWidget;
 

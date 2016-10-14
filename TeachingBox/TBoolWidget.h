@@ -33,11 +33,16 @@ public:
 	TBoolWidget(TBool* variate);
 	~TBoolWidget();
 
+	virtual void UpdateVariate() override;
+
+private:
 	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 
 private:
 	virtual void OnValueChanged() override;
 
+private:
+	bool m_value;
 };
 
 #endif

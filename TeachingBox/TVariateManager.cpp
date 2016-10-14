@@ -29,7 +29,7 @@ void TVariateManager::InitScope()
 	auto systemScope = new TScope(ProjectContext::ScopeSystem());
 	m_scopeRoot->PushScope(systemScope);
 
-	auto synergicScope = new TScope(ProjectContext::ScopeSynergic());
+	auto synergicScope = new TScope(ProjectContext::ScopeCooperate());
 	systemScope->PushScope(synergicScope);
 
 	auto globalScope = new TScope(ProjectContext::ScopeGlobal());
@@ -109,19 +109,21 @@ QVector<TVariate*> TVariateManager::GetVariatesFromScope(const QString& scope)
 	return variates;
 }
 
-QVector<TVariate*> TVariateManager::GetVariatesScollUp(const QString& scope)
+QMap<QString, QVector<TVariate*>> TVariateManager::GetVariatesMapFromScope(const QString& scope)
 {
-	QVector<TVariate*> result;
+	QMap<QString, QVector<TVariate*>> result;
 
 	auto scopeNode = m_scopeRoot->FindScopeScrollDown(scope);
-	while (scopeNode!=nullptr)
+	while (scopeNode != nullptr)
 	{
-		result.append(std::move(GetVariatesFromScope(scopeNode->ScopeName())));
+		result[scopeNode->ScopeName()] = std::move(GetVariatesFromScope(scopeNode->ScopeName()));
 		scopeNode = scopeNode->ParentScope();
 	}
 
 	return result;
+
 }
+
 
 TVariate* TVariateManager::GetVariate(const QString& scope, const QString& name)
 {

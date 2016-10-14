@@ -16,6 +16,11 @@ TDoubleWidget::~TDoubleWidget()
 
 }
 
+void TDoubleWidget::UpdateVariate()
+{
+	static_cast<TDouble*>(m_variate)->SetValue(m_value);
+}
+
 void TDoubleWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	QTreeWidgetItem* item = new QTreeWidgetItem(parentItem, QStringList("Value"));
@@ -31,6 +36,6 @@ void TDoubleWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTree
 
 void TDoubleWidget::OnValueChanged()
 {
-	auto value = static_cast<QLineEdit*>(sender())->text().toDouble();
-	static_cast<TDouble*>(m_variate)->SetValue(value);
+	m_value = static_cast<QLineEdit*>(sender())->text().toDouble();
+	//static_cast<TDouble*>(m_variate)->SetValue(value);
 }

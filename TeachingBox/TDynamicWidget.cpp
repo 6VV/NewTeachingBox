@@ -17,6 +17,11 @@ TDynamicWidget::~TDynamicWidget()
 
 }
 
+void TDynamicWidget::UpdateVariate()
+{
+	static_cast<TDynamic*>(m_variate)->SetValue(m_value);
+}
+
 void TDynamicWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	QStringList variateNames = QStringList{ "Velocity", "Acceleration", "Deceleration",
@@ -56,13 +61,13 @@ void TDynamicWidget::OnValueChanged()
 	QTreeWidgetItem* parentItem = currentWidget->GetParentItem();
 	QTreeWidget* treeWidget = currentWidget->GetTreeWidget();
 
-	tDynamicConstraint value;
-	value.m_Velocity = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(0), 1))->text().toDouble();
-	value.m_Acceleration = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(1), 1))->text().toDouble();
-	value.m_Deceleration = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(2), 1))->text().toDouble();
-	value.m_PostureVelocity = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(3), 1))->text().toDouble();
-	value.m_PostureDeceleration = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(4), 1))->text().toDouble();
-	value.m_PostureDeceleration = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(5), 1))->text().toDouble();
+	//tDynamicConstraint value;
+	m_value.m_Velocity = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(0), 1))->text().toDouble();
+	m_value.m_Acceleration = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(1), 1))->text().toDouble();
+	m_value.m_Deceleration = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(2), 1))->text().toDouble();
+	m_value.m_PostureVelocity = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(3), 1))->text().toDouble();
+	m_value.m_PostureAcceleration = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(4), 1))->text().toDouble();
+	m_value.m_PostureDeceleration = static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(5), 1))->text().toDouble();
 
-	static_cast<TDynamic*>(m_variate)->SetValue(value);
+	//static_cast<TDynamic*>(m_variate)->SetValue(value);
 }
