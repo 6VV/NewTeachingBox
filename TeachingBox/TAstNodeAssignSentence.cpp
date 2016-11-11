@@ -26,8 +26,8 @@ TAstNodeAssignSentence::~TAstNodeAssignSentence()
 TAstNode::ValueReturned TAstNodeAssignSentence::Execute() const
 {
 
-	auto var = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(),
-		static_cast<TTokenWithValue<QString>*>(m_firstChild->GetToken().get())->GetValue());
+	auto var = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), m_firstChild->GetToken()->Name()
+		/*static_cast<TTokenWithValue<QString>*>(m_firstChild->GetToken().get())->GetValue()*/);
 
 	auto value = m_firstChild->GetSibling()->Execute();
 
@@ -75,17 +75,17 @@ const std::shared_ptr<TAstNode> TAstNodeAssignSentence::GetAssignException(TLexe
 {
 	auto firstToken = lexer->GetToken();
 
-	if (firstToken->GetType() != TOKEN_TYPE::ID)
+	if (firstToken->Type() != TOKEN_TYPE::ID)
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, firstToken->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, firstToken->LineNumber());
 	}
 
 	std::shared_ptr<TAstNode> firstChild(new TAstNodeOperator(firstToken));
 
 	auto assignToken = lexer->GetToken();
-	if (assignToken->GetType() != TOKEN_TYPE::OPERATOR_ASSIGN)
+	if (assignToken->Type() != TOKEN_TYPE::OPERATOR_ASSIGN)
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, assignToken->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, assignToken->LineNumber());
 	}
 
 	std::shared_ptr<TAstNode> assignNode(new TAstNodeAssignSentence(assignToken));
@@ -98,13 +98,13 @@ const std::shared_ptr<TAstNode> TAstNodeAssignSentence::GetAssignException(TLexe
 
 void TAstNodeAssignSentence::ParseSemantic() const
 {
-	auto var = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(),
-		static_cast<TTokenWithValue<QString>*>(m_firstChild->GetToken().get())->GetValue());
+	auto var = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), m_firstChild->GetToken()->Name()
+		/*static_cast<TTokenWithValue<QString>*>(m_firstChild->GetToken().get())->GetValue()*/);
 
 	if (!var)
 	{
-		throw TInterpreterException(TInterpreterException::NOT_FIND_VARIATE, m_token->GetLineNumber(),
-			static_cast<TTokenWithValue<QString>*>(m_firstChild->GetToken().get())->GetValue());
+		throw TInterpreterException(TInterpreterException::NOT_FIND_VARIATE, m_token->LineNumber(), m_firstChild->GetToken()->Name()
+			/*static_cast<TTokenWithValue<QString>*>(m_firstChild->GetToken().get())->GetValue()*/);
 	}
 
 	auto type1 = var->GetType();
@@ -115,7 +115,7 @@ void TAstNodeAssignSentence::ParseSemantic() const
 		if ((type1!=TSymbol::TYPE_INTERGER && type1!=TSymbol::TYPE_DOUBLE)
 			|| (type2 != TSymbol::TYPE_INTERGER && type2 != TSymbol::TYPE_DOUBLE))
 		{
-			throw TInterpreterException(TInterpreterException::TYPE_NOT_MATCH, m_token->GetLineNumber());
+			throw TInterpreterException(TInterpreterException::TYPE_NOT_MATCH, m_token->LineNumber());
 		}
 	}
 }

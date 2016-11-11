@@ -22,9 +22,9 @@ TAstNodeEndIfSentence::~TAstNodeEndIfSentence()
 const std::shared_ptr<TAstNode> TAstNodeEndIfSentence::GetAstNode(TLexer* const lexer)
 {
 	auto token = lexer->GetToken();
-	if (token->GetType()!=TOKEN_TYPE::STURCTURE_END_IF)
+	if (token->Type()!=TOKEN_TYPE::STURCTURE_END_IF)
 	{
-		throw TInterpreterException(TInterpreterException::IF_SENTENCE_SHOULD_END_WITH_ENDIF, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::IF_SENTENCE_SHOULD_END_WITH_ENDIF, token->LineNumber());
 	}
 
 	CheckEofEol(lexer);
@@ -46,7 +46,7 @@ void TAstNodeEndIfSentence::ParseSemantic() const
 TAstNode* TAstNodeEndIfSentence::FindNextValidNode() const
 {
 	auto desNode = m_parentNode;
-	while (desNode->GetToken()->GetType() != TOKEN_TYPE::STRUCTURE_IF)
+	while (desNode->GetToken()->Type() != TOKEN_TYPE::STRUCTURE_IF)
 	{
 		desNode = desNode->GetParentNode();
 	}

@@ -23,9 +23,9 @@ TAstNodeMovlSentence::~TAstNodeMovlSentence()
 const std::shared_ptr<TAstNode> TAstNodeMovlSentence::GetAstNode(TLexer* const lexer)
 {
 	auto token = lexer->GetToken();
-	if (token->GetType()!=TOKEN_TYPE::MACRO_MOVL)
+	if (token->Type()!=TOKEN_TYPE::MACRO_MOVL)
 	{
-		throw TInterpreterException(TInterpreterException::NOT_MOVL_SENTENCE, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::NOT_MOVL_SENTENCE, token->LineNumber());
 	}
 	std::shared_ptr<TAstNode> result(new TAstNodeMovlSentence(token));
 
@@ -42,19 +42,19 @@ const std::shared_ptr<TAstNode> TAstNodeMovlSentence::GetAstNode(TLexer* const l
 const std::shared_ptr<TAstNode> TAstNodeMovlSentence::GetParameter(TLexer* const lexer)
 {
 	auto token = lexer->GetToken();
-	if (token->GetType() != TOKEN_TYPE::ID)
+	if (token->Type() != TOKEN_TYPE::ID)
 	{
-		throw TInterpreterException(TInterpreterException::MOVL_SHOULD_WITH_POSITOIN_DYNAMIC_OVERLAP, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::MOVL_SHOULD_WITH_POSITOIN_DYNAMIC_OVERLAP, token->LineNumber());
 	}
 	return std::shared_ptr<TAstNode>(new TAstNode(token));
 }
 
 void TAstNodeMovlSentence::CheckComma(TLexer* const lexer)
 {
-	if (lexer->GetToken()->GetType() != TOKEN_TYPE::SEPARATOR_COMMA)
+	if (lexer->GetToken()->Type() != TOKEN_TYPE::SEPARATOR_COMMA)
 	{
 		lexer->UnGetToken();
-		throw TInterpreterException(TInterpreterException::LOSE_COMMA, lexer->PeekToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::LOSE_COMMA, lexer->PeekToken()->LineNumber());
 	}
 }
 
@@ -74,18 +74,18 @@ void TAstNodeMovlSentence::ParseSemantic() const
 
 void TAstNodeMovlSentence::CheckParameterType(std::shared_ptr<TAstNode> node,int type) const
 {
-	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(),
-		static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue());
+	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), node->GetToken()->Name()
+		/*static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue()*/);
 
 	if (variate==nullptr)
 	{
-		throw TInterpreterException(TInterpreterException::UNKNOW_TOKEN, node->GetToken()->GetLineNumber()
-			, static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue());
+		throw TInterpreterException(TInterpreterException::UNKNOW_TOKEN, node->GetToken()->LineNumber()
+			, node->GetToken()->Name()/*static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue()*/);
 	}
 
 	if (variate->GetType() != type)
 	{
-		throw TInterpreterException(TInterpreterException::MOVL_SHOULD_WITH_POSITOIN_DYNAMIC_OVERLAP, node->GetToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::MOVL_SHOULD_WITH_POSITOIN_DYNAMIC_OVERLAP, node->GetToken()->LineNumber());
 	}
 }
 
@@ -93,7 +93,7 @@ void TAstNodeMovlSentence::SendMovlData() const
 {
 	char data[sizeof(tMovLParam)];
 	*(tMovLParam*)data = GetMovlParameter();
-	RemoteManager::GetInstance()->SendMovlCommand(data,sizeof(tMovLParam),m_token->GetLineNumber(),
+	RemoteManager::GetInstance()->SendMovlCommand(data,sizeof(tMovLParam),m_token->LineNumber(),
 		reinterpret_cast<long long>(GetProgramNode()));
 }
 
@@ -102,14 +102,14 @@ tMovLParam TAstNodeMovlSentence::GetMovlParameter() const
 	tMovLParam movlParam;
 
 	std::shared_ptr<TAstNode> firstChild = this->GetFirstChild();
-	tAxesAllPositions position = GetPosition(static_cast<TTokenWithValue<QString>*>(firstChild->GetToken().get())->GetValue());
+	tAxesAllPositions position = GetPosition(firstChild->GetToken()->Name()/*static_cast<TTokenWithValue<QString>*>(firstChild->GetToken().get())->GetValue()*/);
 
 
 	std::shared_ptr<TAstNode> secondChild = firstChild->GetSibling();
-	tDynamicConstraint dynamic = GetDynamic(static_cast<TTokenWithValue<QString>*>(secondChild->GetToken().get())->GetValue());
+	tDynamicConstraint dynamic = GetDynamic(secondChild->GetToken()->Name()/*static_cast<TTokenWithValue<QString>*>(secondChild->GetToken().get())->GetValue()*/);
 
 	std::shared_ptr<TAstNode> thirdChild = secondChild->GetSibling();
-	tOverlapConstraint overlap = GetOverlap(static_cast<TTokenWithValue<QString>*>(thirdChild->GetToken().get())->GetValue());
+	tOverlapConstraint overlap = GetOverlap(thirdChild->GetToken()->Name()/*static_cast<TTokenWithValue<QString>*>(thirdChild->GetToken().get())->GetValue()*/);
 
 	movlParam.m_Destination = position;
 	movlParam.m_Dynamic = dynamic;

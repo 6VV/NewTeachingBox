@@ -32,7 +32,7 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnTerminalValue(const TAst
 {
 	TAstNodeOperator::ValueReturned result{};
 
-	switch (node->GetToken()->GetType())
+	switch (node->GetToken()->Type())
 	{
 	case TOKEN_TYPE::LITERAL_INTERGER:
 	{
@@ -51,8 +51,8 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnTerminalValue(const TAst
 	}break;
 	case TOKEN_TYPE::ID:
 	{
-		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(),
-			static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue());
+		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), node->GetToken()->Name()
+			/*static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue()*/);
 		switch (var->GetType())
 		{
 		case SYMBOL_TYPE::TYPE_INTERGER:
@@ -85,7 +85,7 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnNonTerminalValue(const T
 {
 	TAstNodeOperator::ValueReturned result{};
 
-	switch (node->GetToken()->GetType())
+	switch (node->GetToken()->Type())
 	{
 	case TOKEN_TYPE::OPERATOR_NEGATIVE:
 	{
@@ -106,7 +106,7 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnNonTerminalValue(const T
 		if (result1.type == SYMBOL_TYPE::TYPE_INTERGER && result2.type == SYMBOL_TYPE::TYPE_INTERGER)
 		{
 			result.type = SYMBOL_TYPE::TYPE_INTERGER;
-			switch (node->GetToken()->GetType())
+			switch (node->GetToken()->Type())
 			{
 			case TOKEN_TYPE::OPERATOR_PLUS:result.value = static_cast<int>(result1.value) + static_cast<int>(result2.value); break;
 			case TOKEN_TYPE::OPERATOR_MINUS:result.value = static_cast<int>(result1.value) - static_cast<int>(result2.value); break;
@@ -119,7 +119,7 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnNonTerminalValue(const T
 		else
 		{
 			result.type = SYMBOL_TYPE::TYPE_DOUBLE;
-			switch (node->GetToken()->GetType())
+			switch (node->GetToken()->Type())
 			{
 			case TOKEN_TYPE::OPERATOR_PLUS:result.value = result1.value + result2.value; break;
 			case TOKEN_TYPE::OPERATOR_MINUS:result.value = result1.value - result2.value; break;
@@ -139,7 +139,7 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnNonTerminalValue(const T
 		auto result1 = ReturnValue(node->GetFirstChild().get());
 		auto result2 = ReturnValue(node->GetFirstChild()->GetSibling().get());
 
-		switch (node->GetToken()->GetType())
+		switch (node->GetToken()->Type())
 		{
 		case TOKEN_TYPE::OPERATOR_GREATE_THAN:result.value = result1.value > result2.value;break;
 		case TOKEN_TYPE::OPERATOR_GREATE_EQUAL:result.value = result1.value >= result2.value; break;
@@ -197,7 +197,7 @@ const bool TAstNodeOperator::IsExistOperator(const TOKEN_TYPE type)
 const std::shared_ptr<TAstNode> TAstNodeOperator::GetValue(TLexer* const lexer)
 {
 	auto value = lexer->GetToken();
-	switch (value->GetType())
+	switch (value->Type())
 	{
 	case TOKEN_TYPE::LITERAL_INTERGER:case TOKEN_TYPE::LITERAL_DOUBLE:case TOKEN_TYPE::LITERAL_BOOL:case TOKEN_TYPE::ID:
 	{
@@ -206,25 +206,25 @@ const std::shared_ptr<TAstNode> TAstNodeOperator::GetValue(TLexer* const lexer)
 	case TOKEN_TYPE::OPERATOR_MINUS:
 	{
 		auto nextValue = lexer->GetToken();
-		switch (nextValue->GetType())
+		switch (nextValue->Type())
 		{
 		case TOKEN_TYPE::LITERAL_INTERGER:case TOKEN_TYPE::LITERAL_DOUBLE:case TOKEN_TYPE::ID:
 		{
-			value->SetType(TOKEN_TYPE::OPERATOR_NEGATIVE);
+			value->Type(TOKEN_TYPE::OPERATOR_NEGATIVE);
 			auto result = GetNode(value);
 			result->AddChild(GetNode(nextValue));
 			return result;
 		}break;
 		default:
 		{
-			throw TInterpreterException(TInterpreterException::NEGATIVE_SHOULD_WITH_INT_OR_DOUBLE, value->GetLineNumber());
+			throw TInterpreterException(TInterpreterException::NEGATIVE_SHOULD_WITH_INT_OR_DOUBLE, value->LineNumber());
 		}break;
 		}
 	}break;
 	case TOKEN_TYPE::OPERATOR_NEGATION:
 	{
 		auto nextValue = lexer->GetToken();
-		switch (nextValue->GetType())
+		switch (nextValue->Type())
 		{
 		case TOKEN_TYPE::LITERAL_BOOL:case TOKEN_TYPE::ID:
 		{
@@ -234,23 +234,23 @@ const std::shared_ptr<TAstNode> TAstNodeOperator::GetValue(TLexer* const lexer)
 		}break;
 		default:
 		{
-			throw TInterpreterException(TInterpreterException::NEGATION_SHOULD_WITH_BOOL, value->GetLineNumber());
+			throw TInterpreterException(TInterpreterException::NEGATION_SHOULD_WITH_BOOL, value->LineNumber());
 		}break;
 		}
 	}break;
 	case TOKEN_TYPE::OPERATOR_LEFT_BRACKET:
 	{
 		auto nextValue = GetAstNode(lexer);
-		if (lexer->GetToken()->GetType() != TOKEN_TYPE::OPERATOR_RIGHT_BRACKET)
+		if (lexer->GetToken()->Type() != TOKEN_TYPE::OPERATOR_RIGHT_BRACKET)
 		{
-			throw TInterpreterException(TInterpreterException::NOT_FIND_RIGHT_BRACKET, value->GetLineNumber());
+			throw TInterpreterException(TInterpreterException::NOT_FIND_RIGHT_BRACKET, value->LineNumber());
 		}
 
 		return nextValue;
 	}break;
 	default:
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, value->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, value->LineNumber());
 	}
 	break;
 	}
@@ -278,7 +278,7 @@ const std::shared_ptr<TAstNode> TAstNodeOperator::PeekOperator(TLexer* const lex
 	auto token = lexer->GetToken();
 	lexer->UnGetToken();
 
-	if (TAstNodeOperator::IsExistOperator(token->GetType()))
+	if (TAstNodeOperator::IsExistOperator(token->Type()))
 	{
 		return GetNode(token);
 	}
@@ -287,13 +287,13 @@ const std::shared_ptr<TAstNode> TAstNodeOperator::PeekOperator(TLexer* const lex
 
 const bool TAstNodeOperator::IsRightExpr(const std::shared_ptr<TAstNode>& leftOper, const std::shared_ptr<TAstNode>& rightOper)
 {
-	if (TAstNodeOperator::IsLeftAssociativity(rightOper->GetToken()->GetType()))
+	if (TAstNodeOperator::IsLeftAssociativity(rightOper->GetToken()->Type()))
 	{
-		return TAstNodeOperator::GetPriority(leftOper->GetToken()->GetType()) > TAstNodeOperator::GetPriority(rightOper->GetToken()->GetType());
+		return TAstNodeOperator::GetPriority(leftOper->GetToken()->Type()) > TAstNodeOperator::GetPriority(rightOper->GetToken()->Type());
 	}
 	else
 	{
-		return TAstNodeOperator::GetPriority(leftOper->GetToken()->GetType()) >= TAstNodeOperator::GetPriority(rightOper->GetToken()->GetType());
+		return TAstNodeOperator::GetPriority(leftOper->GetToken()->Type()) >= TAstNodeOperator::GetPriority(rightOper->GetToken()->Type());
 	}
 }
 
@@ -310,7 +310,7 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetSymbolType(const std::s
 
 const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetNonTerminalSymbol(const std::shared_ptr<TAstNode>& node)
 {
-	switch (node->GetToken()->GetType())
+	switch (node->GetToken()->Type())
 	{
 	case TOKEN_TYPE::OPERATOR_NEGATIVE:
 	{
@@ -318,7 +318,7 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetNonTerminalSymbol(const
 		switch (type)
 		{
 		case SYMBOL_TYPE::TYPE_INTERGER:case SYMBOL_TYPE::TYPE_DOUBLE:return type;
-		default:throw TInterpreterException(TInterpreterException::NEGATIVE_SHOULD_WITH_INT_OR_DOUBLE, node->GetToken()->GetLineNumber());
+		default:throw TInterpreterException(TInterpreterException::NEGATIVE_SHOULD_WITH_INT_OR_DOUBLE, node->GetToken()->LineNumber());
 		}
 	}break;
 	case TOKEN_TYPE::OPERATOR_NEGATION:
@@ -327,7 +327,7 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetNonTerminalSymbol(const
 		{
 			return SYMBOL_TYPE::TYPE_BOOL;
 		}
-		throw TInterpreterException(TInterpreterException::NEGATION_SHOULD_WITH_BOOL, node->GetToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::NEGATION_SHOULD_WITH_BOOL, node->GetToken()->LineNumber());
 	}break;
 	case TOKEN_TYPE::OPERATOR_PLUS:case TOKEN_TYPE::OPERATOR_MINUS:case TOKEN_TYPE::OPERATOR_MULTIPLY:case TOKEN_TYPE::OPERATOR_DIVIDE:
 	case TOKEN_TYPE::OPERATOR_POWER:
@@ -346,7 +346,7 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetNonTerminalSymbol(const
 		}
 		else
 		{
-			throw TInterpreterException(TInterpreterException::ONLY_NUMBER_COULD_TAKE_ARITHMETICAL_OPERATION, node->GetToken()->GetLineNumber());
+			throw TInterpreterException(TInterpreterException::ONLY_NUMBER_COULD_TAKE_ARITHMETICAL_OPERATION, node->GetToken()->LineNumber());
 		}
 	}break;
 	case TOKEN_TYPE::OPERATOR_PERCENT:
@@ -359,7 +359,7 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetNonTerminalSymbol(const
 			return SYMBOL_TYPE::TYPE_INTERGER;
 		}
 
-		throw TInterpreterException(TInterpreterException::ONLY_INTERGER_COULD_TAKE_MOD_OPERATION, node->GetToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::ONLY_INTERGER_COULD_TAKE_MOD_OPERATION, node->GetToken()->LineNumber());
 	}break;
 	case TOKEN_TYPE::OPERATOR_GREATE_THAN:case TOKEN_TYPE::OPERATOR_GREATE_EQUAL:case TOKEN_TYPE::OPERATOR_LESS_THAN:case TOKEN_TYPE::OPERATOR_LESS_EQUAL:
 	case TOKEN_TYPE::OPERATOR_EQUAL: case TOKEN_TYPE::OPERATOR_NOT_EQUAL:
@@ -371,7 +371,7 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetNonTerminalSymbol(const
 		{
 			return SYMBOL_TYPE::TYPE_BOOL;
 		}
-		throw TInterpreterException(TInterpreterException::ONLY_NUMBER_COULD_TAKE_RELATIONAL_OPERATION, node->GetToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::ONLY_NUMBER_COULD_TAKE_RELATIONAL_OPERATION, node->GetToken()->LineNumber());
 	}break;
 	case TOKEN_TYPE::OPERATOR_AND:case TOKEN_TYPE::OPERATOR_OR:
 	{
@@ -381,17 +381,17 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetNonTerminalSymbol(const
 		{
 			return SYMBOL_TYPE::TYPE_BOOL;
 		}
-		throw TInterpreterException(TInterpreterException::ONLY_BOOL_COULD_TAKE_LOGICAL_OPERATION, node->GetToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::ONLY_BOOL_COULD_TAKE_LOGICAL_OPERATION, node->GetToken()->LineNumber());
 	}break;
 	default:
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, node->GetToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, node->GetToken()->LineNumber());
 		break;
 	}
 }
 
 const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetTerminalSymbolType(const std::shared_ptr<TAstNode>& node)
 {
-	switch (node->GetToken()->GetType())
+	switch (node->GetToken()->Type())
 	{
 	case TOKEN_TYPE::LITERAL_INTERGER:return SYMBOL_TYPE::TYPE_INTERGER;
 	case TOKEN_TYPE::LITERAL_DOUBLE:return SYMBOL_TYPE::TYPE_DOUBLE;
@@ -399,8 +399,8 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetTerminalSymbolType(cons
 	case TOKEN_TYPE::LITERAL_STRING:return SYMBOL_TYPE::TYPE_STRING;
 	case TOKEN_TYPE::ID:
 	{
-		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(node->GetScope(),
-			static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue());
+		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(node->GetScope(), node->GetToken()->Name()
+			/*static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue()*/);
 
 		if (var)
 		{
@@ -408,13 +408,13 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetTerminalSymbolType(cons
 		}
 		else
 		{
-			throw TInterpreterException(TInterpreterException::NOT_FIND_VARIATE, node->GetToken()->GetLineNumber(),
-				static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue());
+			throw TInterpreterException(TInterpreterException::NOT_FIND_VARIATE, node->GetToken()->LineNumber(), node->GetToken()->Name()
+				/*static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue()*/);
 		}
 	}break;
 	default:
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, node->GetToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, node->GetToken()->LineNumber());
 	}
 	}
 }

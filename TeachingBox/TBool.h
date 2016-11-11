@@ -9,10 +9,6 @@ class TBool:public TVariate
 	Q_OBJECT
 
 public:
-	const static QString STR_VALUE_TRUE;
-	const static QString STR_VALUE_FALSE;
-
-public:
 	TBool(const QString& scope, const QString& name, const bool value=false);
 	TBool(const TBool& variate);
 	TBool(QDataStream& dataStream);

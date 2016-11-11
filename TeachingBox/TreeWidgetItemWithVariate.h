@@ -1,7 +1,7 @@
 ﻿#ifndef _TEACHING_BOX_TREE_WIDGET_ITEM_WITH_VARIATE_H_
 #define _TEACHING_BOX_TREE_WIDGET_ITEM_WITH_VARIATE_H_
 
-#include "QTreeWidget"
+#include "QTreeWidgetItem"
 
 class TVariate;
 

@@ -25,9 +25,9 @@ const std::shared_ptr<TAstNode> TAstNodeElseIfSentence::GetAstNode(TLexer* const
 {
 	auto token = lexer->GetToken();
 
-	if (token->GetType()!=TOKEN_TYPE::STRUCTURE_ELSE_IF)
+	if (token->Type()!=TOKEN_TYPE::STRUCTURE_ELSE_IF)
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->LineNumber());
 	}
 
 	std::shared_ptr<TAstNode> result(new TAstNodeElseIfSentence(token));
@@ -37,7 +37,7 @@ const std::shared_ptr<TAstNode> TAstNodeElseIfSentence::GetAstNode(TLexer* const
 	AddSentenceNodes(lexer, result);
 
 	result->AddChild(std::shared_ptr<TAstNode>(new TAstNodeEndIfSentence(
-		std::shared_ptr<TToken>(new TToken(TOKEN_TYPE::STURCTURE_END_IF, result->GetEndChild()->GetToken()->GetLineNumber())))));
+		std::shared_ptr<TToken>(new TToken(TOKEN_TYPE::STURCTURE_END_IF, result->GetEndChild()->GetToken()->LineNumber())))));
 
 	return result;
 }
@@ -60,7 +60,7 @@ void TAstNodeElseIfSentence::ParseSemantic() const
 {
 	if (TAstNodeOperator::GetSymbolType(m_firstChild) != TSymbol::TYPE_BOOL)
 	{
-		throw TInterpreterException(TInterpreterException::IF_SENTENCE_SHOULD_WITH_BOOL, m_token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::IF_SENTENCE_SHOULD_WITH_BOOL, m_token->LineNumber());
 	}
 
 	auto child = m_firstChild->GetSibling();

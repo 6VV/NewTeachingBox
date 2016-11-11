@@ -88,7 +88,7 @@ const bool TLexer::CheckPushId(const char c)
 		return true;
 	}
 
-	m_tokens.push_back(std::shared_ptr<TTokenWithValue<QString>>(new TTokenWithValue<QString>(TYPE::ID, m_reader.GetLineNumber(), text)));
+	m_tokens.push_back(std::shared_ptr<TToken>(new TToken(TYPE::ID, m_reader.GetLineNumber(), text)));
 	return true;
 }
 
@@ -149,7 +149,7 @@ void TLexer::PushTokenString()
 	}
 	if (currentChar != '"'){ ThrowException_UnknownToken(text); }
 	else{
-		m_tokens.push_back(std::shared_ptr<TToken>(new TTokenWithValue<QString>(TYPE::LITERAL_STRING, m_reader.GetLineNumber(), text)));
+		m_tokens.push_back(std::shared_ptr<TToken>(new TToken(TYPE::LITERAL_STRING, m_reader.GetLineNumber(), text)));
 	}
 }
 

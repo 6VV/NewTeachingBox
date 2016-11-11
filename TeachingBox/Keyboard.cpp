@@ -430,13 +430,14 @@ void Keyboard::InitSignalSlot()
 /*不同窗口内键盘确认按钮事件*/
 void Keyboard::OnButtonConfirmClicked()
 {
+	this->hide();
+
 	/*若函数不为空*/
 	if (m_keyboardInterface != NULL)
 	{
 		m_keyboardInterface->KeyboardEdit();
 	}
 	Clear();
-	this->hide();
 	return;
 
 	//switch (m_confirmCommand)
@@ -588,7 +589,7 @@ void Keyboard::hideEvent(QHideEvent *event)
 {
 	QWidget::hideEvent(event);
 
-	m_lineEditText->clear();
+	//m_lineEditText->clear();
 }
 
 /*鼠标点击事件*/

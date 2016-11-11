@@ -29,9 +29,9 @@ const std::shared_ptr<TAstNode> TAstNodeProgram::GetAstNode(TLexer* const lexer,
 		SkipEol(lexer);
 	}
 
-	if (lexer->PeekToken()->GetType() != TOKEN_TYPE::SEPARATOR_EOF)
+	if (lexer->PeekToken()->Type() != TOKEN_TYPE::SEPARATOR_EOF)
 	{
-		throw TInterpreterException(TInterpreterException::UNKNOWN_SENTENCE, lexer->PeekToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::UNKNOWN_SENTENCE, lexer->PeekToken()->LineNumber());
 	}
 
 	return result;

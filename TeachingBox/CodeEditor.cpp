@@ -1,8 +1,9 @@
 ﻿#include "stdafx.h"
 #include "CodeEditor.h"
 #include "Context.h"
-#include <assert.h>
 #include "ProjectManager.h"
+#include <assert.h>
+
 
 namespace{
 	LineNumberArea::LineNumberArea(CodeEditor *editor)
@@ -80,7 +81,26 @@ int CodeEditor::GetPCLineNumber()
 
 void CodeEditor::HighlightPCLine(const QString& program, int lineNumber)
 {
-	if (program!=Context::projectContext.ProgramOpened())
+	UpdateTextFromProgram(program);
+
+	HighlightPCLine(lineNumber);
+}
+
+void CodeEditor::HighlightPCLine()
+{
+	HighlightPCLine(textCursor().blockNumber()+1);
+}
+
+void CodeEditor::HighlightPCLine(int lineNumber)
+{
+	Context::interpreterContext.SetLineNumber(lineNumber);
+	m_lineHighlighter.pcLine.lineNumber = lineNumber-1;
+	HighlightAllLines();
+}
+
+void CodeEditor::UpdateTextFromProgram(const QString &program)
+{
+	if (program != Context::projectContext.ProgramOpened())
 	{
 		auto stringList = program.split(".");
 		assert(stringList.size() == 2);
@@ -98,26 +118,19 @@ void CodeEditor::HighlightPCLine(const QString& program, int lineNumber)
 		setPlainText(projectManager.GetFileText(project, file));
 		Context::projectContext.ProgramOpened(program);
 	}
-
-	HighlightPCLine(lineNumber);
-}
-
-void CodeEditor::HighlightPCLine()
-{
-	HighlightPCLine(textCursor().blockNumber()+1);
-}
-
-void CodeEditor::HighlightPCLine(int lineNumber)
-{
-	Context::interpreterContext.SetLineNumber(lineNumber);
-	m_lineHighlighter.pcLine.lineNumber = lineNumber-1;
-	HighlightAllLines();
 }
 
 void CodeEditor::HighlightWrongLine(const int lineNumber)
 {
 	m_lineHighlighter.wrongLine.lineNumber = lineNumber-1;
 	HighlightAllLines();
+}
+
+void CodeEditor::HighlightWrongLine(const QString& program, const int lineNumber)
+{
+	UpdateTextFromProgram(program);
+
+	HighlightWrongLine(lineNumber);
 }
 
 void CodeEditor::HighLightEditLine(const int lineNumber)
@@ -299,15 +312,13 @@ void CodeEditor::InsertTextBeforeLine(const QString& text)
 //	}
 //}
 //
-//void CodeEditor::_UpdateCurrentLine(const QString& text)
-//{
-//	QTextCursor textCursor = this->textCursor();
-//	textCursor.select(QTextCursor::LineUnderCursor);
-//	textCursor.removeSelectedText();
-//	++m_textChangeTime;
-//	textCursor.insertText(text);
-//	++m_textChangeTime;
-//}
+void CodeEditor::UpdateCurrentLine(const QString& text)
+{
+	QTextCursor textCursor = this->textCursor();
+	textCursor.select(QTextCursor::LineUnderCursor);
+	textCursor.removeSelectedText();
+	textCursor.insertText(text);
+}
 //
 //void CodeEditor::_InsertTextBeforeLine(const QString& text)
 //{

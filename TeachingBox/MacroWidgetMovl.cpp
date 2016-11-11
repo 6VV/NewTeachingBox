@@ -1,7 +1,8 @@
 ﻿#include "stdafx.h"
 #include "MacroWidgetMovl.h"
-#include "QBoxLayout"
-#include "QLabel"
+#include "TPosition.h"
+#include "TDynamic.h"
+#include "TOverlap.h"
 
 
 MacroWidgetMovl::MacroWidgetMovl(const QString& macroText, QWidget* parent/*=nullptr*/)
@@ -9,7 +10,6 @@ MacroWidgetMovl::MacroWidgetMovl(const QString& macroText, QWidget* parent/*=nul
 {
 	Init();
 
-	UpdateText();
 }
 
 MacroWidgetMovl::~MacroWidgetMovl()
@@ -18,17 +18,13 @@ MacroWidgetMovl::~MacroWidgetMovl()
 
 void MacroWidgetMovl::Init()
 {
-	AddParameter(SymbolType::TYPE_POSITION,"p1");
-	AddParameter(SymbolType::TYPE_DYNAMIC,"*");
-	AddParameter(SymbolType::TYPE_OVERLAP, "*");
-}
-
-void MacroWidgetMovl::OnConfirm()
-{
+	AddParameter<TPosition>(SymbolType::TYPE_POSITION, 0);
+	AddParameter<TDynamic>(SymbolType::TYPE_DYNAMIC,1);
+	AddParameter<TOverlap>(SymbolType::TYPE_OVERLAP, 2);
 
 }
 
-void MacroWidgetMovl::UpdateText()
+QString MacroWidgetMovl::MacroName()
 {
-	
+	return "MOVL";
 }

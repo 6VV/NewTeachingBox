@@ -7,8 +7,7 @@
 #include "DataStruct.h"
 #include "TOverlapWidget.h"
 
-const QString TOverlap::STR_MODE_ABSOLUTE = "Absolute";
-const QString TOverlap::STR_MODE_RELATIVE = "Relative";
+
 
 TOverlap::TOverlap(const QString& scope, const QString& name, const tOverlapConstraint& value)
 	:TVariate(scope, name, TSymbol::TYPE_OVERLAP)

@@ -51,6 +51,11 @@ void TVariate::Save()
 	UpdateRamAndDatabaseFrom(*this);
 }
 
+void TVariate::ReadContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget)
+{
+	m_variateWidget->ReadContentIntoItem(parentItem, treeWidget);
+}
+
 void TVariate::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget,
 	const TSymbol::SymbolType type)
 {

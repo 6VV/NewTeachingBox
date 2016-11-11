@@ -10,7 +10,7 @@ public:
 	Exception(const QString& info);
 	virtual ~Exception(){};
 	
-	virtual QString GetInfo();
+	virtual QString Info();
 
 private:
 	QString m_info;

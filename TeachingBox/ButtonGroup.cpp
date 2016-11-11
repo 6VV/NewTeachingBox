@@ -4,7 +4,6 @@
 #include "TeachingBoxContext.h"
 
 
-
 ButtonGroup::ButtonGroup(QList<Button*>& btnlist, Button* parentButton)
 	:QWidget(parentButton)
 	, m_btnList(btnlist)
@@ -43,6 +42,5 @@ void ButtonGroup::Init()
 
 	m_layout->setMargin(0);
 	m_layout->setSpacing(0);
-
 }
 

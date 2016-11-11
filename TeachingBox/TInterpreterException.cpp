@@ -1,6 +1,6 @@
 ﻿#include "stdafx.h"
 #include "TInterpreterException.h"
-
+#include "Context.h"
 
 const QMap<int, QString> TInterpreterException::Exception_TEXT
 {
@@ -34,19 +34,35 @@ TInterpreterException::TInterpreterException(const InterpreterExceptionCode id, 
 
 }
 
-QString TInterpreterException::GetInfo()
+QString TInterpreterException::Info()
 {
-	QString text = "Information: " + Exception_TEXT[m_id] + "\nLine Number: " + QString::number(m_lineNumber);
+	const int SIZE_ADDED = 2;
+
+	QString text = Format("Information:", SIZE_ADDED) + Exception_TEXT[m_id] + "\n"
+		+ Format("Program:", SIZE_ADDED) + Context::projectContext.ProgramLoading() + "\n"
+		+ Format("Line Number:", SIZE_ADDED) + QString::number(m_lineNumber);
 
 	if (m_text.size() > 0)
 	{
-		text.append("\nText: " + m_text);
+		text.append("\n" + Format("Text:", SIZE_ADDED) + m_text);
 	}
 	return text;
 }
 
-int TInterpreterException::GetLineNumber() const
+int TInterpreterException::LineNumber() const
 {
 	return m_lineNumber;
+}
+
+inline
+QString TInterpreterException::Format(const QString& text, int size)
+{
+	QString result{ text };
+	for (int i = 0; i < size;++i)
+	{
+		result.append(" ");
+	}
+
+	return result;
 }
 

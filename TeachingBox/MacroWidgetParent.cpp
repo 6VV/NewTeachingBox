@@ -1,16 +1,9 @@
 ﻿#include "stdafx.h"
 #include "MacroWidgetParent.h"
-#include "QBoxLayout"
 #include "Button.h"
-#include "QTreeWidget"
-#include "QStringList"
-#include "TVariateManager.h"
-#include "Context.h"
-#include "TPosition.h"
-#include "QIcon"
-#include "QPixmap"
-#include <assert.h>
-
+#include "TVariate.h"
+#include "WarningManager.h"
+#include "CodeEditor.h"
 
 
 const QString MacroWidgetParent::IMAGE_LOGO_SYSTEM{ ":/new/image/Resources/Image/S.PNG" };
@@ -43,6 +36,10 @@ MacroWidgetParent::MacroWidgetParent(const QString& macroText, QWidget* parent /
 	UpdateText();
 }
 
+MacroWidgetParent::~MacroWidgetParent()
+{
+}
+
 void MacroWidgetParent::UpdateText()
 {
 	m_treeWidget->setHeaderLabels(QStringList{ tr("Name"), tr("Value") });
@@ -68,7 +65,7 @@ void MacroWidgetParent::InitMacroText(const QString& macroText)
 		return;
 	}
 
-	m_macroParameterText = macroText.right(m_macroName.size()).simplified();
+	m_macroParameterList = macroText.right(macroText.size() - m_macroName.size()).simplified().split(",");
 }
 
 inline
@@ -120,9 +117,9 @@ QMap<QString, QStringList> MacroWidgetParent::GetVariateMap(SymbolType type) con
 	return result;
 }
 
-QComboBox* MacroWidgetParent::GetComboBox(SymbolType type) const
+ComboBoxWithParentItem* MacroWidgetParent::GetComboBox(SymbolType type) const
 {
-	auto variateComboBox = new QComboBox(m_treeWidget);
+	auto variateComboBox = new ComboBoxWithParentItem(m_treeWidget);
 	auto variates = GetVariateMap(type);
 
 	for (auto iter = variates.begin(); iter != variates.end(); ++iter)
@@ -161,45 +158,40 @@ QComboBox* MacroWidgetParent::GetComboBox(SymbolType type) const
 	return variateComboBox;
 }
 
-void MacroWidgetParent::AddPosition(const QString& name)
-{
-	auto variateComboBox = GetComboBox(SymbolType::TYPE_POSITION);
-
-	/*if (variateComboBox->findText(name)>=0)
-	{
-		variateComboBox->setCurrentText(name);
-	}
-	else
-	{
-		auto suggestName = GetSuggestName(SymbolType::TYPE_POSITION);
-		variateComboBox->addItem(QPixmap(IMAGE_LOGO_LOCAL), suggestName);
-		variateComboBox->setCurrentText(suggestName);
-	}*/
-
-	variateComboBox->setCurrentText(name);
-
-	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(), variateComboBox->currentText());
-
-	assert(variate != nullptr);
-
-	/*if (variate == nullptr)
-	{
-	TPosition position(Context::projectContext.ProgramOpened(), "");
-	position.ReadTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
-	}
-	else
-	{
-	variate->ReadTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
-	}*/
-	variate->ReadTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
-
-	auto item = m_treeWidget->topLevelItem(m_treeWidget->topLevelItemCount() - 1);
-
-	m_treeWidget->setItemWidget(item, 1, variateComboBox);
-}
-
 void MacroWidgetParent::SlotOnButtonConfirmClicked()
 {
+	for (auto comboBox:m_parameterComboBoxes)
+	{
+		/*若未存储该变量*/
+		if (TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(),comboBox ->currentText()) == nullptr)
+		{
+			bool isNewVariate = false;
+			for (auto variate : m_newVariates)
+			{
+				/*若已新建该变量*/
+				if (variate->GetName() == comboBox->currentText())
+				{
+					isNewVariate = true;
+
+					TVariateManager::GetInstance()->AddVariate(*variate);
+
+					/*将节点挂在新变量上，避免因原变量销毁导致指向无效地址*/
+					comboBox->ParentItem()->Variate(TVariateManager::GetInstance()->GetVariateSrollUp(
+						Context::projectContext.ProgramOpened(), variate->GetName()));
+
+					break;
+				}
+			}
+			/*若未新建该变量*/
+			if (!isNewVariate)
+			{
+				WarningManager::Warning(this, tr("Operator failed"));
+				delete this;
+				return;
+			}
+		}
+	}
+
 	OnConfirm();
 
 	delete this;
@@ -207,11 +199,11 @@ void MacroWidgetParent::SlotOnButtonConfirmClicked()
 
 void MacroWidgetParent::SlotOnButtonCancleClicked()
 {
+	for (auto comboBox : m_parameterComboBoxes)
+	{
+		comboBox->ParentItem()->IsSave(false);
+	}
 	delete this;
-}
-
-MacroWidgetParent::~MacroWidgetParent()
-{
 }
 
 QString MacroWidgetParent::GetSuggestName(SymbolType type) const
@@ -246,20 +238,49 @@ QString MacroWidgetParent::GetSuggestName(SymbolType type) const
 	return header + QString::number(suggestNamesExisted.size());
 }
 
-void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
+void MacroWidgetParent::SlotOnParameterChanged()
 {
-	auto variateComboBox = GetComboBox(type);
+	auto comboBox = static_cast<ComboBoxWithParentItem*>(sender());
 
-	variateComboBox->setCurrentText(name);
+	auto parameter = comboBox->currentText();
 
-	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(), variateComboBox->currentText());
+	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(), parameter);
 
-	assert(variate != nullptr);
+	if (variate==nullptr)
+	{
+		return;
+	}
 
-	variate->ReadTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
-
-	auto item = m_treeWidget->topLevelItem(m_treeWidget->topLevelItemCount() - 1);
-
-	m_treeWidget->setItemWidget(item, 1, variateComboBox);
+	auto parentItem = comboBox->ParentItem();
+	variate->ReadContentIntoItem(parentItem, m_treeWidget);
 }
+
+void MacroWidgetParent::OnConfirm()
+{
+	QString text = MacroName()+" ";
+
+	for (int i = 0; i < m_parameterComboBoxes.size(); ++i)
+	{
+		text += m_parameterComboBoxes.at(i)->currentText() + ",";
+	}
+
+	CodeEditor::GetInstance()->UpdateCurrentLine(text.left(text.size() - 1));
+}
+
+//void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
+//{
+//	auto variateComboBox = GetComboBox(type);
+//
+//	variateComboBox->setCurrentText(name);
+//
+//	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(), variateComboBox->currentText());
+//
+//	assert(variate != nullptr);
+//
+//	variate->ReadTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
+//
+//	auto item = m_treeWidget->topLevelItem(m_treeWidget->topLevelItemCount() - 1);
+//
+//	m_treeWidget->setItemWidget(item, 1, variateComboBox);
+//}
 

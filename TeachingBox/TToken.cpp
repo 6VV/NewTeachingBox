@@ -1,9 +1,18 @@
 ﻿#include "stdafx.h"
 #include "TToken.h"
 
-TToken::TToken(const TokenType type, const int lineNumber)
-	:m_type(type), m_lineNumber(lineNumber)
+//TToken::TToken(const TokenType type, const int lineNumber)
+//	:m_type(type), m_lineNumber(lineNumber)
+//{
+//}
+
+
+TToken::TToken(const TokenType type, int lineNumber, const QString& name/*=""*/)
+	: m_type(type)
+	, m_lineNumber(lineNumber)
+	, m_name(name)
 {
+
 }
 
 TToken::~TToken()
@@ -11,18 +20,23 @@ TToken::~TToken()
 
 }
 
-const int TToken::GetLineNumber() const
+int TToken::LineNumber() const
 {
 	return m_lineNumber;
 }
 
-const TToken::TokenType TToken::GetType() const
+QString TToken::Name() const
+{
+	return m_name;
+}
+
+const TToken::TokenType TToken::Type() const
 {
 	return m_type;
 }
 
 
-void TToken::SetType(const TokenType type)
+void TToken::Type(const TokenType type)
 {
 	m_type = type;
 }

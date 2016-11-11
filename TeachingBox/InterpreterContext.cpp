@@ -4,6 +4,24 @@
 #include "TAstNode.h"
 
 
+TAstNode* InterpreterContext::CurrentProgramNode() const
+{
+	if (m_nextNode == nullptr || m_nextNode->GetParentNode()==nullptr)
+	{
+		return nullptr;
+	}
+
+	auto result = m_nextNode;
+
+	while (result->GetParentNode()->GetParentNode() != nullptr)
+	{
+		result = result->GetParentNode();
+	}
+
+	return result;
+
+}
+
 //QString InterpreterContext::GetCurrentScope() const
 //{
 //	return m_currentScope;

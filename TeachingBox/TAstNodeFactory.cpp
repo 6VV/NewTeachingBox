@@ -9,11 +9,11 @@
 #include "TAstNodeRoot.h"
 #include "TAstNodeIfSentence.h"
 #include "TAstNodeMovlSentence.h"
-#include "TTokenWithValue.h"
 #include "TAstNodeProgram.h"
 #include "ProjectManager.h"
 #include "Context.h"
 #include "TAstNodeGosubSentence.h"
+#include "TToken.h"
 
 const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QString& project)
 {
@@ -22,11 +22,11 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QStr
 	QList<QString> fileNames = projectManager.GetProjectFiles(project);
 	for (const QString& var : fileNames)
 	{
-		
+		Context::projectContext.ProgramLoading(var);
 		QString fileText=projectManager.GetFileText(project,var.split(".").at(1));
 
 		TLexer lexer(fileText);
-		std::shared_ptr<TToken> token(new TTokenWithValue<QString>(TYPE::ID, 0, var));
+		std::shared_ptr<TToken> token(new TToken(TYPE::ID, 0, var));
 
 		result->AddChild(TAstNodeProgram::GetAstNode(&lexer, token));
 	}
@@ -40,7 +40,7 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::GetNode(TLexer* const lexer)
 {
 	auto token = lexer->PeekToken();
 
-	switch (token->GetType())
+	switch (token->Type())
 	{
 	case TYPE::ID:
 	{

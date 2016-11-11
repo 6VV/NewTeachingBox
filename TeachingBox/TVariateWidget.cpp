@@ -13,8 +13,7 @@ TVariateWidget::TVariateWidget(TVariate* variate)
 
 TVariateWidget::~TVariateWidget()
 {
-	delete m_variate;
-	m_variate = nullptr;
+
 }
 
 void TVariateWidget::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
@@ -26,7 +25,16 @@ void TVariateWidget::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget
 
 void TVariateWidget::ReadContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget)
 {
+	m_itemVariateHeader = parentItem;
 	parentItem->Variate(m_variate);
+
+	auto childItem = parentItem->child(0);
+	while (childItem != nullptr)
+	{
+		parentItem->removeChild(childItem);
+		delete childItem;
+		childItem = parentItem->child(0);
+	}
 
 	ReadContentTreeWidgetItem(parentItem, treeWidget);
 }

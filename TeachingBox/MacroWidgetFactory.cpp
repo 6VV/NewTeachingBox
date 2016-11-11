@@ -4,6 +4,8 @@
 #include "QWidget"
 #include "QString"
 #include "MacroWidgetMovl.h"
+#include "MacroWidgetMovc.h"
+#include "MacroWidgetGosub.h"
 
 QWidget* MacroWidgetFactory::CreateMacroWidget(const QString& macro, QWidget* parent /*= nullptr*/)
 {
@@ -22,7 +24,11 @@ QWidget* MacroWidgetFactory::CreateMacroWidget(const QString& macro, QWidget* pa
 	}
 	else if (macroName==Macro::MACRO_MOVC)
 	{
-		return nullptr;
+		return new MacroWidgetMovc(macro,parent);
+	}
+	else if (macroName==Macro::MACRO_GOSUB)
+	{
+		return new MacroWidgetGosub(macro, parent);
 	}
 
 	return nullptr;

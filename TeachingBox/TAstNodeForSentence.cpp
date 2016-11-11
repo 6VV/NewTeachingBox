@@ -35,7 +35,8 @@ TAstNode::ValueReturned TAstNodeForSentence::Execute() const
 	//auto thirdValue = thirdChild->Execute();
 
 	auto scope = GetScope();
-	auto name = static_cast<TTokenWithValue<QString>*>(m_firstChild->GetFirstChild()->GetToken().get())->GetValue();
+	auto name = m_firstChild->GetFirstChild()->GetToken()->Name();
+		//static_cast<TTokenWithValue<QString>*>(m_firstChild->GetFirstChild()->GetToken().get())->GetValue();
 	auto type = TVariateManager::GetInstance()->GetVariateSrollUp(scope, name)->GetType();
 
 	UpdateValue(type, scope, name, firstValue.value);
@@ -79,9 +80,9 @@ double TAstNodeForSentence::GetValue(SYMBOL_TYPE type, const QString& scope, con
 const std::shared_ptr<TAstNode> TAstNodeForSentence::GetAstNode(TLexer* const lexer)
 {
 	auto token = lexer->GetToken();
-	if (token->GetType()!=TOKEN_TYPE::STRUCTURE_FOR)
+	if (token->Type()!=TOKEN_TYPE::STRUCTURE_FOR)
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->LineNumber());
 	}
 
 	std::shared_ptr<TAstNode> result(new TAstNodeForSentence(token));
@@ -102,9 +103,9 @@ const std::shared_ptr<TAstNode> TAstNodeForSentence::GetAstNode(TLexer* const le
 
 void TAstNodeForSentence::AddStepNode(TLexer* const lexer, std::shared_ptr<TToken> token, std::shared_ptr<TAstNode> result)
 {
-	if (lexer->GetToken()->GetType() != TOKEN_TYPE::STRUCTURE_STEP)
+	if (lexer->GetToken()->Type() != TOKEN_TYPE::STRUCTURE_STEP)
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->LineNumber());
 	}
 
 	result->AddChild(TAstNodeOperator::GetAstNode(lexer));
@@ -112,9 +113,9 @@ void TAstNodeForSentence::AddStepNode(TLexer* const lexer, std::shared_ptr<TToke
 
 void TAstNodeForSentence::AddToNode(TLexer* const lexer, std::shared_ptr<TToken> token, std::shared_ptr<TAstNode> result)
 {
-	if (lexer->GetToken()->GetType() != TOKEN_TYPE::STRUCTURE_TO)
+	if (lexer->GetToken()->Type() != TOKEN_TYPE::STRUCTURE_TO)
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->LineNumber());
 	}
 
 	result->AddChild(TAstNodeOperator::GetAstNode(lexer));
@@ -130,7 +131,7 @@ void TAstNodeForSentence::ParseSemantic() const
 		|| (type2 != SYMBOL_TYPE::TYPE_INTERGER && type2 != SYMBOL_TYPE::TYPE_DOUBLE)
 		|| (type3 != SYMBOL_TYPE::TYPE_INTERGER && type3 != SYMBOL_TYPE::TYPE_DOUBLE))
 	{
-		throw TInterpreterException(TInterpreterException::FOR_SENTENCE_SHOULD_USE_INTERGER_OR_DOUBLE, m_firstChild->GetToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::FOR_SENTENCE_SHOULD_USE_INTERGER_OR_DOUBLE, m_firstChild->GetToken()->LineNumber());
 	}
 
 	auto child = m_firstChild->GetSibling()->GetSibling()->GetSibling();

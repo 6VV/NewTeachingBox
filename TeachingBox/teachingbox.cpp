@@ -13,6 +13,7 @@
 #include "WarningManager.h"
 #include "TcpManager.h"
 #include "CodeEditor.h"
+#include "DynamicController.h"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -22,7 +23,6 @@ TeachingBox::TeachingBox(QWidget *parent)
 
 TeachingBox::~TeachingBox()
 {
-
 }
 
 void TeachingBox::paintEvent(QPaintEvent *e)
@@ -60,6 +60,15 @@ void TeachingBox::InitVertical()
 	InitBottom(bottomLayout);
 }
 
+/*************************************************
+//  Function: 		TeachingBox::InitTop(QLayout* layout)
+//  Description: 	生成示教器顶部控件，包括切换调试按钮、急停
+//  Calls:		 	TeachingBox::SlotOnModelChanged()
+//  Called By: 		TeachingBox::InitVertical()
+//  Parameter:      QLayout* layout
+//  Return: 		void
+//  Others: 		// 其它说明
+*************************************************/
 void TeachingBox::InitTop(QLayout* layout)
 {
 	QHBoxLayout* realLayout = dynamic_cast<QHBoxLayout*>(layout);
@@ -117,6 +126,12 @@ void TeachingBox::InitBottom(QLayout* layout)
 	mainLayout->addWidget(btnVPlus);
 
 	mainLayout->setSpacing(0);
+
+	connect(btnVMinus, &Button::pressed, DynamicController::GetInstance(), &DynamicController::Decelerate);
+	connect(btnVMinus, &Button::released, DynamicController::GetInstance(), &DynamicController::Stop);
+	connect(btnVPlus, &Button::pressed, DynamicController::GetInstance(), &DynamicController::Accelerate);
+	connect(btnVPlus, &Button::released, DynamicController::GetInstance(), &DynamicController::Stop);
+
 }
 
 void TeachingBox::InitCenter(QLayout* layout)
@@ -320,8 +335,8 @@ void TeachingBox::SlotOnStartButtonPressed()
 		}
 	}
 	catch (TInterpreterException& e){
-		CodeEditor::GetInstance()->HighlightWrongLine(e.GetLineNumber());
-		WarningManager::Warning(this, e.GetInfo());
+		CodeEditor::GetInstance()->HighlightWrongLine(Context::projectContext.ProgramLoading(),e.LineNumber());
+		WarningManager::Warning(this, e.Info());
 		return;
 	}
 }

@@ -9,10 +9,6 @@ class TOverlap:public TVariate
 	Q_OBJECT
 
 public:
-	static const QString STR_MODE_ABSOLUTE;
-	static const QString STR_MODE_RELATIVE;
-
-public:
 	TOverlap(const QString& scope, const QString& name, const tOverlapConstraint& value = tOverlapConstraint{});
 	TOverlap(const TOverlap& variate);
 	TOverlap(QDataStream& dataStream);

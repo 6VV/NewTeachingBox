@@ -84,20 +84,17 @@ void RemoteParser::SendNextCommand() const
 
 void RemoteParser::RefreshLineNumber(const tTeachCmdAttribute& attribute) const
 {
-	auto program=dynamic_cast<TTokenWithValue<QString>*>(
-		reinterpret_cast<TAstNode*>(attribute.m_programAddress)->GetToken().get())->GetValue();
+	auto program = reinterpret_cast<TAstNode*>(attribute.m_programAddress)->GetToken()->Name();
+		//dynamic_cast<TTokenWithValue<QString>*>(
+		//reinterpret_cast<TAstNode*>(attribute.m_programAddress)->GetToken().get())->GetValue();
 	int lineNumber = attribute.m_LineNumber;
 
 	CodeEditor::GetInstance()->HighlightPCLine(program, lineNumber);
-	//TAstNode* programNode = (TAstNode*)attribute.m_programAddress;
-	//CScreenProject::GetInstance()->RefreshProgramLineNumber(
-	//	dynamic_cast<TTokenWithValue<QString>*>(programNode->GetToken().get())->GetValue(), attribute.m_LineNumber);
+
 }
 
 void RemoteParser::OnResivePosition(QByteArray& command) const
 {
 	command;
-	//tAxesAllPositions position;
-	//position = *(tAxesAllPositions*)(command.data() + COMMAND_HEAD_LENGTH);
-	//emit(SignalOnResivePosition(position));
+
 }

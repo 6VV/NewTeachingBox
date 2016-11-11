@@ -26,12 +26,10 @@ namespace TeachingBoxContext
 
 	QString GetLanguage();
 	User GetUser();
-
 	QRect GetScreenRect();
 
 	void SetTeachingBoxRect(const QRect& rect);
 	void SetScreenRect(const QRect& rect);
-
 	void SetLanguage(const QString& language);
 	void SetUser(const User& user);
 }

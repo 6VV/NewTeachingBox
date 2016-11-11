@@ -118,9 +118,16 @@ public:
 	void HighlightPCLine(const QString& program, int lineNumber);
 	void HighlightPCLine();	/*高亮显示PC行*/
 	void HighlightPCLine(int lineNumber);
+
+	void UpdateTextFromProgram(const QString &program);
+
 	void HighlightWrongLine(const int lineNumber);	/*高亮显示错误行*/
+	void HighlightWrongLine(const QString& program,const int lineNumber);	/*高亮显示错误行*/
 
 	void InsertTextBeforeLine(const QString& text);	/*插入文本*/
+
+	void UpdateCurrentLine(const QString& text);
+
 	//void InsertTextBeforeLineUnsafely(const QString& strText);	/*插入文本（不进行语法检查）*/
 
 	//void SaveFile();	/*保存文件*/
@@ -156,7 +163,6 @@ private:
 	void PaintLineNumberArea(QPaintEvent *event);	/*绘制左侧行号区域*/
 
 	//void _DeleteCurrentLine();
-	//void _UpdateCurrentLine(const QString& text);
 	//void _InsertTextBeforeLine(const QString& text);
 
 	//void OperatorText(OperatorType operatorType, const QString& text = QString{});	/*操作文本*/

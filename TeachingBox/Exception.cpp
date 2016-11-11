@@ -13,7 +13,7 @@ Exception::Exception()
 
 }
 
-QString Exception::GetInfo()
+QString Exception::Info()
 {
 	return m_info;
 }

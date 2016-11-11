@@ -39,9 +39,12 @@ private:
 public:
 	TInterpreterException(const InterpreterExceptionCode id,const int lineNumber,const QString& text="");
 
-	virtual QString GetInfo() override;
+	virtual QString Info() override;
 
-	int GetLineNumber() const;
+	int LineNumber() const;
+
+private:
+	QString Format(const QString& text, int size);
 
 private:
 	InterpreterExceptionCode m_id;

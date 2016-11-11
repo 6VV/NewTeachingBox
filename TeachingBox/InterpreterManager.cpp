@@ -85,7 +85,8 @@ TAstNode* InterpreterManager::GetProgramNode(const QString& program)
 	auto childNode = rootNode->GetFirstChild();
 	while (childNode!=nullptr)
 	{
-		auto nodeText = dynamic_cast<TTokenWithValue<QString>*>(childNode->GetToken().get())->GetValue();
+		auto nodeText = childNode->GetToken()->Name();
+			//dynamic_cast<TTokenWithValue<QString>*>(childNode->GetToken().get())->GetValue();
 
 		if (nodeText==program)
 		{
@@ -105,7 +106,7 @@ TAstNode* InterpreterManager::GetNodeOnLineFromProgram(TAstNode* programNode, in
 	{
 		return nullptr;
 	}
-	else if (currentNode->GetToken()->GetLineNumber() == lineNumber)
+	else if (currentNode->GetToken()->LineNumber() == lineNumber)
 	{
 		return currentNode.get();
 	}
@@ -113,11 +114,11 @@ TAstNode* InterpreterManager::GetNodeOnLineFromProgram(TAstNode* programNode, in
 	/*查询最后一个不大于起始行的子节点*/
 	while (currentNode->GetSibling() != nullptr)
 	{
-		if (currentNode->GetSibling()->GetToken()->GetLineNumber() < lineNumber)
+		if (currentNode->GetSibling()->GetToken()->LineNumber() < lineNumber)
 		{
 			currentNode = currentNode->GetSibling();
 		}
-		else if (currentNode->GetSibling()->GetToken()->GetLineNumber() == lineNumber)
+		else if (currentNode->GetSibling()->GetToken()->LineNumber() == lineNumber)
 		{
 			return currentNode->GetSibling().get();
 		}

@@ -34,11 +34,13 @@ public:
 public:
 	ProjectContext();
 
-	QStringList GetScopes();
-	const QStringList& GetPrograms() const;
+	QStringList AllCurrentScopes();
+	const QStringList& Programs() const;
 	QString GetProjectLoaded();
-	QString ProgramOpened();
-	void ProgramOpened(const QString& file);
+	QString ProgramOpened() const;
+	void ProgramOpened(const QString& program);
+	void ProgramLoading(const QString& program);
+	QString ProgramLoading() const;
 
 	void SetLoadedProject(const QString& project, const QStringList& programs);
 
@@ -55,6 +57,7 @@ private:
 	QString m_project{};
 	QStringList m_programs{};
 	QString m_programOpened{};
+	QString m_programLoading{};
 };
 
 #endif

@@ -29,12 +29,12 @@ ProjectContext::ProjectContext()
 	m_currentScopes.append(SCOPE_ORI);
 }
 
-QStringList ProjectContext::GetScopes()
+QStringList ProjectContext::AllCurrentScopes()
 {
 	return m_currentScopes;
 }
 
-const QStringList& ProjectContext::GetPrograms() const
+const QStringList& ProjectContext::Programs() const
 {
 	return m_programs;
 }
@@ -44,11 +44,21 @@ QString ProjectContext::GetProjectLoaded()
 	return m_project;
 }
 
-QString ProjectContext::ProgramOpened()
+QString ProjectContext::ProgramOpened() const
 {
 	return m_programOpened;
 }
 
+
+void ProjectContext::ProgramLoading(const QString& program)
+{
+	m_programLoading = program;
+}
+
+QString ProjectContext::ProgramLoading() const
+{
+	return m_programLoading;
+}
 
 void ProjectContext::SetLoadedProject(const QString& project, const QStringList& programs)
 {

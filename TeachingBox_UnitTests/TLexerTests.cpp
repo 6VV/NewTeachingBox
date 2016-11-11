@@ -16,20 +16,20 @@ TEST_F(TLexerTests, Parse_ParseDigit_Equal)
 		{ TYPE::LITERAL_DOUBLE, 1.232 }};
 
 		auto ptr = lexer.GetToken();
-		EXPECT_EQ(ptr->GetType(), num[0][0]) << "Not Interger";
+		EXPECT_EQ(ptr->Type(), num[0][0]) << "Not Interger";
 		EXPECT_EQ(static_cast<TTokenWithValue<int>*>(ptr.get())->GetValue(), num[0][1]);
 
 		ptr = lexer.GetToken();
-		EXPECT_EQ(ptr->GetType(), num[1][0]) << "Not Interger";
+		EXPECT_EQ(ptr->Type(), num[1][0]) << "Not Interger";
 		EXPECT_EQ(static_cast<TTokenWithValue<int>*>(ptr.get())->GetValue(), num[1][1]);
 
 		ptr = lexer.GetToken();
-		EXPECT_EQ(ptr->GetType(), num[2][0]) << "Not Double";
+		EXPECT_EQ(ptr->Type(), num[2][0]) << "Not Double";
 		EXPECT_EQ(static_cast<TTokenWithValue<double>*>(ptr.get())->GetValue(), num[2][1]);
 	}
 	catch (TInterpreterException& e)
 	{
-		FAIL() << e.GetInfo().toStdString();
+		FAIL() << e.Info().toStdString();
 	}
 }
 
@@ -42,10 +42,11 @@ TEST_F(TLexerTests, Parse_ParseId_Equal)
 
 		auto ptr = lexer.GetToken();
 		int index = 0;
-		while (ptr->GetType() != TYPE::SEPARATOR_EOF)
+		while (ptr->Type() != TYPE::SEPARATOR_EOF)
 		{
-			EXPECT_EQ(ptr->GetType(), TYPE::ID) << "Not ID";
-			QString c = dynamic_cast<TTokenWithValue<QString>*>(ptr.get())->GetValue();
+			EXPECT_EQ(ptr->Type(), TYPE::ID) << "Not ID";
+			QString c = ptr->Name();
+				//dynamic_cast<TTokenWithValue<QString>*>(ptr.get())->GetValue();
 			EXPECT_STREQ(c.toStdString().c_str(), strList.at(index).toStdString().c_str());
 			++index;
 			ptr = lexer.GetToken();
@@ -53,7 +54,7 @@ TEST_F(TLexerTests, Parse_ParseId_Equal)
 	}
 	catch (TInterpreterException& e)
 	{
-		FAIL() << e.GetInfo().toStdString();
+		FAIL() << e.Info().toStdString();
 	}
 }
 
@@ -65,15 +66,15 @@ TEST_F(TLexerTests, Parse_ParseKeyWord_Equal)
 		QStringList strList{  "IF", "NEXT" };
 
 		auto ptr = lexer.GetToken();
-		EXPECT_EQ(ptr->GetType(), TYPE::STRUCTURE_IF) << "Not IF";
+		EXPECT_EQ(ptr->Type(), TYPE::STRUCTURE_IF) << "Not IF";
 
 		ptr = lexer.GetToken();
-		EXPECT_EQ(ptr->GetType(), TYPE::STRUCTURE_NEXT) << "Not NEXT";
+		EXPECT_EQ(ptr->Type(), TYPE::STRUCTURE_NEXT) << "Not NEXT";
 
 	}
 	catch (TInterpreterException& e)
 	{
-		FAIL() << e.GetInfo().toStdString();
+		FAIL() << e.Info().toStdString();
 	}
 }
 
@@ -91,16 +92,16 @@ TEST_F(TLexerTests, Parse_ParseOtherWord_Equal)
 		TLexer lexer(text);
 		int index = 0;
 		auto ptr = lexer.GetToken();
-		while (ptr->GetType() != TYPE::SEPARATOR_EOF)
+		while (ptr->Type() != TYPE::SEPARATOR_EOF)
 		{
-			EXPECT_EQ(ptr->GetType(), test[index]);
+			EXPECT_EQ(ptr->Type(), test[index]);
 			++index;
 			ptr = lexer.GetToken();
 		}
 	}
 	catch (TInterpreterException& e)
 	{
-		FAIL() << e.GetInfo().toStdString();
+		FAIL() << e.Info().toStdString();
 	}
 
 }
@@ -115,11 +116,11 @@ TEST_F(TLexerTests, Parse_ParseString_Equal)
 		TLexer lexer(text);
 		auto ptr = lexer.GetToken();
 
-		EXPECT_STREQ(strVerify.toStdString().c_str(), (static_cast<TTokenWithValue<QString>*>(ptr.get()))->GetValue().toStdString().c_str());
+		EXPECT_STREQ(strVerify.toStdString().c_str(), /*(static_cast<TTokenWithValue<QString>*>(ptr.get()))->GetValue()*/ptr->Name().toStdString().c_str());
 	}
 	catch (TInterpreterException& e)
 	{
-		FAIL() << e.GetInfo().toStdString().c_str();
+		FAIL() << e.Info().toStdString().c_str();
 	}
 
 }
@@ -133,14 +134,14 @@ TEST_F(TLexerTests, Parse_ParseNote_Skip)
 		TLexer lexer(text);
 		auto ptr = lexer.GetToken();
 
-		if (ptr->GetType() != TYPE::SEPARATOR_EOF)
+		if (ptr->Type() != TYPE::SEPARATOR_EOF)
 		{
 			FAIL() << "Not nullptr";
 		}
 	}
 	catch (TInterpreterException& e)
 	{
-		FAIL() << e.GetInfo().toStdString().c_str();
+		FAIL() << e.Info().toStdString().c_str();
 	}
 }
 
@@ -151,19 +152,19 @@ TEST_F(TLexerTests, Parse_ParseForbid_Skip)
 		QString text1("#hello world");
 		TLexer lexer1(text1);
 
-		if (lexer1.GetToken()->GetType() != TYPE::SEPARATOR_EOF)
+		if (lexer1.GetToken()->Type() != TYPE::SEPARATOR_EOF)
 		{
 			FAIL() << "Not nullptr";
 		}
 
 		QString text2("#hello \nworld");
 		TLexer lexer2(text2);
-		EXPECT_EQ(lexer2.GetToken()->GetType(), TYPE::SEPARATOR_EOL);
-		EXPECT_EQ(lexer2.GetToken()->GetType(), TYPE::ID);
+		EXPECT_EQ(lexer2.GetToken()->Type(), TYPE::SEPARATOR_EOL);
+		EXPECT_EQ(lexer2.GetToken()->Type(), TYPE::ID);
 	}
 	catch (TInterpreterException& e)
 	{
-		FAIL() << e.GetInfo().toStdString().c_str();
+		FAIL() << e.Info().toStdString().c_str();
 	}
 }
 
@@ -174,11 +175,11 @@ TEST_F(TLexerTests, Parse_ParseReserveValue_Equal)
 		QString text("TRUE FALSE");
 		TLexer lexer(text);
 
-		EXPECT_EQ(lexer.GetToken()->GetType(), TYPE::LITERAL_VALUE_TRUE);
-		EXPECT_EQ(lexer.GetToken()->GetType(), TYPE::LITERAL_VALUE_FALSE);
+		EXPECT_EQ(lexer.GetToken()->Type(), TYPE::LITERAL_VALUE_TRUE);
+		EXPECT_EQ(lexer.GetToken()->Type(), TYPE::LITERAL_VALUE_FALSE);
 	}
 	catch (TInterpreterException& e)
 	{
-		FAIL() << e.GetInfo().toStdString().c_str();
+		FAIL() << e.Info().toStdString().c_str();
 	}
 }

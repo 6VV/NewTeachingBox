@@ -4,6 +4,7 @@
 #include "TSymbol.h"
 
 class TVariateWidget;
+class TreeWidgetItemWithVariate;
 
 class TVariate:public QObject
 {
@@ -27,6 +28,8 @@ public:
 
 	void SetName(const QString& name);
 	void Save();
+
+	void ReadContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget);
 
 	void ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget);
 	void ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget, 

@@ -3,8 +3,6 @@
 #include "TreeWidgetItemWithVariate.h"
 #include "TBoolWidget.h"
 
-const QString TBool::STR_VALUE_TRUE = "TRUE";
-const QString TBool::STR_VALUE_FALSE = "FALSE";
 
 TBool::TBool(const QString& scope, const QString& name, const bool value)
 	:TVariate(scope, name, TSymbol::TYPE_BOOL), m_value(value)

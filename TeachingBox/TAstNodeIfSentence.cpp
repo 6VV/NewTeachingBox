@@ -25,9 +25,9 @@ TAstNodeIfSentence::~TAstNodeIfSentence()
 const std::shared_ptr<TAstNode> TAstNodeIfSentence::GetAstNode(TLexer* const lexer)
 {
 	auto token = lexer->GetToken();
-	if (token->GetType() != TOKEN_TYPE::STRUCTURE_IF)
+	if (token->Type() != TOKEN_TYPE::STRUCTURE_IF)
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->LineNumber());
 	}
 
 	std::shared_ptr<TAstNode> result(new TAstNodeIfSentence(token));
@@ -47,7 +47,7 @@ const std::shared_ptr<TAstNode> TAstNodeIfSentence::GetAstNode(TLexer* const lex
 void TAstNodeIfSentence::AddContent(TLexer* const lexer, std::shared_ptr<TAstNode> result)
 {
 	int type = 0;
-	while ((type = lexer->PeekToken()->GetType()) != TOKEN_TYPE::STURCTURE_END_IF)
+	while ((type = lexer->PeekToken()->Type()) != TOKEN_TYPE::STURCTURE_END_IF)
 	{
 		switch (type)
 		{
@@ -62,7 +62,7 @@ void TAstNodeIfSentence::AddContent(TLexer* const lexer, std::shared_ptr<TAstNod
 		}break;
 		default:
 		{
-			throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, lexer->PeekToken()->GetLineNumber());
+			throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, lexer->PeekToken()->LineNumber());
 		}break;
 		}
 	}
@@ -70,7 +70,7 @@ void TAstNodeIfSentence::AddContent(TLexer* const lexer, std::shared_ptr<TAstNod
 
 void TAstNodeIfSentence::AddThenChild(TLexer* const lexer, std::shared_ptr<TAstNode> result)
 {
-	std::shared_ptr<TAstNode> thenNode(new TAstNode(std::shared_ptr<TToken>(new TToken(TOKEN_TYPE::STRUCTURE_THEN, result->GetToken()->GetLineNumber()))));
+	std::shared_ptr<TAstNode> thenNode(new TAstNode(std::shared_ptr<TToken>(new TToken(TOKEN_TYPE::STRUCTURE_THEN, result->GetToken()->LineNumber()))));
 	result->AddChild(thenNode);
 
 	std::shared_ptr<TAstNode> childNode{};
@@ -82,11 +82,11 @@ void TAstNodeIfSentence::AddThenChild(TLexer* const lexer, std::shared_ptr<TAstN
 	int lineNumber=0;
 	if (thenNode->GetEndChild()==nullptr)
 	{
-		lineNumber = thenNode->GetToken()->GetLineNumber();
+		lineNumber = thenNode->GetToken()->LineNumber();
 	}
 	else
 	{
-		lineNumber = thenNode->GetEndChild()->GetToken()->GetLineNumber();
+		lineNumber = thenNode->GetEndChild()->GetToken()->LineNumber();
 	}
 	thenNode->AddChild(std::shared_ptr<TAstNode>(new TAstNodeEndIfSentence(
 		std::shared_ptr<TToken>(new TToken(TOKEN_TYPE::STURCTURE_END_IF, lineNumber)))));
@@ -110,7 +110,7 @@ void TAstNodeIfSentence::ParseSemantic() const
 {
 	if (TAstNodeOperator::GetSymbolType(m_firstChild)!=TSymbol::TYPE_BOOL)
 	{
-		throw TInterpreterException(TInterpreterException::IF_SENTENCE_SHOULD_WITH_BOOL, m_token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::IF_SENTENCE_SHOULD_WITH_BOOL, m_token->LineNumber());
 	}
 
 	ParseChildren(m_firstChild->GetSibling()->GetFirstChild());

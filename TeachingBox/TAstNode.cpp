@@ -94,17 +94,17 @@ void TAstNode::AddSentenceNodes(TLexer* const lexer, std::shared_ptr<TAstNode> p
 
 void TAstNode::CheckLineBreak(TLexer* const lexer)
 {
-	if (lexer->GetToken()->GetType() != TOKEN_TYPE::SEPARATOR_EOL)
+	if (lexer->GetToken()->Type() != TOKEN_TYPE::SEPARATOR_EOL)
 	{
-		throw TInterpreterException(TInterpreterException::SENTENCE_SHOULD_END_WITH_LINE_BREAK, lexer->GetToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::SENTENCE_SHOULD_END_WITH_LINE_BREAK, lexer->GetToken()->LineNumber());
 	}
 }
 
 void TAstNode::CheckEofEol(TLexer* const lexer)
 {
-	if (!IsEofOrEol(lexer->GetToken()->GetType()))
+	if (!IsEofOrEol(lexer->GetToken()->Type()))
 	{
-		throw TInterpreterException(TInterpreterException::SENTENCE_NOT_END_WITH_ABNORMAL_END, lexer->GetToken()->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::SENTENCE_NOT_END_WITH_ABNORMAL_END, lexer->GetToken()->LineNumber());
 	}
 
 }
@@ -122,7 +122,8 @@ QString TAstNode::GetScope() const
 		programNode = programNode->GetParentNode();
 	}
 
-	return static_cast<TTokenWithValue<QString>*>(programNode->GetToken().get())->GetValue();
+	return programNode->GetToken()->Name();
+		//static_cast<TTokenWithValue<QString>*>(programNode->GetToken().get())->GetValue();
 }
 
 bool TAstNode::IsEofOrEol(const int type)
@@ -137,7 +138,7 @@ bool TAstNode::IsEofOrEol(const int type)
 
 void TAstNode::SkipEol(TLexer* const lexer)
 {
-	while (lexer->PeekToken()->GetType() == TOKEN_TYPE::SEPARATOR_EOL)
+	while (lexer->PeekToken()->Type() == TOKEN_TYPE::SEPARATOR_EOL)
 	{
 		lexer->GetToken();
 	}
@@ -148,7 +149,7 @@ TAstNode* TAstNode::FindNextValidNode() const
 	if (m_siblingNode != nullptr)
 	{
 		/*若兄弟节点与当前节点在同一行，则继续寻找下一节点*/
-		if (m_siblingNode->GetToken()->GetLineNumber() == m_token->GetLineNumber())
+		if (m_siblingNode->GetToken()->LineNumber() == m_token->LineNumber())
 		{
 			return m_siblingNode->FindNextValidNode();
 		}

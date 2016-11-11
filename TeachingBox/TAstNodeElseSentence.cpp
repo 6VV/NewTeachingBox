@@ -23,9 +23,9 @@ const std::shared_ptr<TAstNode> TAstNodeElseSentence::GetAstNode(TLexer* const l
 {
 	auto token = lexer->GetToken();
 
-	if (token->GetType()!=TOKEN_TYPE::STURCTURE_ELSE)
+	if (token->Type()!=TOKEN_TYPE::STURCTURE_ELSE)
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->LineNumber());
 	}
 	
 	CheckLineBreak(lexer);
@@ -35,7 +35,7 @@ const std::shared_ptr<TAstNode> TAstNodeElseSentence::GetAstNode(TLexer* const l
 	AddSentenceNodes(lexer, result);
 
 	result->AddChild(std::shared_ptr<TAstNode>(new TAstNodeEndIfSentence(
-		std::shared_ptr<TToken>(new TToken(TOKEN_TYPE::STURCTURE_END_IF, result->GetEndChild()->GetToken()->GetLineNumber())))));
+		std::shared_ptr<TToken>(new TToken(TOKEN_TYPE::STURCTURE_END_IF, result->GetEndChild()->GetToken()->LineNumber())))));
 
 	return result;
 }

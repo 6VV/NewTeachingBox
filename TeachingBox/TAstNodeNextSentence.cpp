@@ -24,7 +24,8 @@ TAstNode::ValueReturned TAstNodeNextSentence::Execute() const
 	auto thirdChild = m_parentNode->GetFirstChild()->GetSibling()->GetSibling();
 
 	auto scope = GetScope();
-	auto name = static_cast<TTokenWithValue<QString>*>(m_parentNode->GetFirstChild()->GetFirstChild()->GetToken().get())->GetValue();
+	auto name = m_parentNode->GetFirstChild()->GetFirstChild()->GetToken()->Name();
+		//static_cast<TTokenWithValue<QString>*>(m_parentNode->GetFirstChild()->GetFirstChild()->GetToken().get())->GetValue();
 	auto type = TVariateManager::GetInstance()->GetVariateSrollUp(scope, name)->GetType();
 
 	auto newValue = TAstNodeForSentence::GetValue(type, scope, name) + thirdChild->Execute().value;
@@ -47,9 +48,9 @@ TAstNode::ValueReturned TAstNodeNextSentence::Execute() const
 const std::shared_ptr<TAstNode> TAstNodeNextSentence::GetAstNode(TLexer* const lexer)
 {
 	auto token = lexer->GetToken();
-	if (token->GetType()!=TOKEN_TYPE::STRUCTURE_NEXT)
+	if (token->Type()!=TOKEN_TYPE::STRUCTURE_NEXT)
 	{
-		throw TInterpreterException(TInterpreterException::FOR_SENTENCE_SHOULD_END_WITH_NEXT, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::FOR_SENTENCE_SHOULD_END_WITH_NEXT, token->LineNumber());
 	}
 
 	std::shared_ptr<TAstNode> result(new TAstNodeNextSentence(token));

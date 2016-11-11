@@ -33,6 +33,7 @@ public:
 
 public:
 	//QString GetCurrentScope() const;
+	TAstNode* CurrentProgramNode() const;
 	TAstNode* GetNextNode() const;
 	ExecuteMode GetExecuteMode() const;
 	std::shared_ptr<TAstNode> GetRootNode() const;

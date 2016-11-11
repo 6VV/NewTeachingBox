@@ -9,16 +9,21 @@ protected:
 	typedef TTokenType::Type TokenType;
 
 public:
-	TToken(const TokenType type, const int lineNumber);
+	//TToken(const TokenType type, const int lineNumber);
+	TToken(const TokenType type, int lineNumber, const QString& name="");
 	virtual ~TToken();
 
-	const int GetLineNumber() const;
-	const TokenType GetType() const;
-	void SetType(const TokenType type);
+	int LineNumber() const;
+
+	QString Name() const;
+
+	const TokenType Type() const;
+	void Type(const TokenType type);
 
 private:
 	TokenType m_type;
 	int m_lineNumber;
+	QString m_name;
 };
 
 #endif

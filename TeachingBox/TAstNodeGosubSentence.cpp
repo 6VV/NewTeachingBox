@@ -17,16 +17,16 @@ TAstNodeGosubSentence::TAstNodeGosubSentence(const std::shared_ptr<TToken> token
 const std::shared_ptr<TAstNode> TAstNodeGosubSentence::GetAstNode(TLexer* const lexer)
 {
 	auto token = lexer->GetToken();
-	if (token->GetType() != TOKEN_TYPE::STURCTURE_GOSUB)
+	if (token->Type() != TOKEN_TYPE::STURCTURE_GOSUB)
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->LineNumber());
 	}
 	std::shared_ptr<TAstNode> result(new TAstNodeGosubSentence(token));
 
 	auto childToken = lexer->GetToken();
-	if (childToken->GetType()!=TOKEN_TYPE::ID)
+	if (childToken->Type()!=TOKEN_TYPE::ID)
 	{
-		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::WRONG_GRAMMAR, token->LineNumber());
 	}
 
 	result->AddChild(std::shared_ptr<TAstNode>(new TAstNode(childToken)));
@@ -41,7 +41,8 @@ TAstNode::ValueReturned TAstNodeGosubSentence::Execute() const
 	auto programNode = Context::interpreterContext.GetRootNode()->GetFirstChild();
 	while (programNode!=nullptr)
 	{
-		if (dynamic_cast<TTokenWithValue<QString>*>(programNode->GetToken().get())->GetValue() == desProgramName)
+		if (/*dynamic_cast<TTokenWithValue<QString>*>(programNode->GetToken().get())->GetValue()*/
+			programNode->GetToken()->Name()== desProgramName)
 		{
 			break;
 		}
@@ -50,7 +51,7 @@ TAstNode::ValueReturned TAstNodeGosubSentence::Execute() const
 
 	if (programNode==nullptr)
 	{
-		throw TInterpreterException(TInterpreterException::NOT_PROGRAM_NAME, m_token->GetLineNumber(),desProgramName);
+		throw TInterpreterException(TInterpreterException::NOT_PROGRAM_NAME, m_token->LineNumber(),desProgramName);
 	}
 
 	Context::interpreterContext.SetNextNode(programNode.get());
@@ -63,16 +64,17 @@ void TAstNodeGosubSentence::ParseSemantic() const
 	auto programName = GetDestinationProgramNode();
 
 
-	auto programs = Context::projectContext.GetPrograms();
+	auto programs = Context::projectContext.Programs();
 
 	if (!programs.contains(programName))
 	{
-		throw TInterpreterException(TInterpreterException::NOT_PROGRAM_NAME, m_token->GetLineNumber());
+		throw TInterpreterException(TInterpreterException::NOT_PROGRAM_NAME, m_token->LineNumber());
 	}
 }
 
 inline
 QString TAstNodeGosubSentence::GetDestinationProgramNode() const
 {
-	return Context::projectContext.GetProjectLoaded() + "." + dynamic_cast<TTokenWithValue<QString>*>(m_firstChild->GetToken().get())->GetValue();
+	return Context::projectContext.GetProjectLoaded() + "." + m_firstChild->GetToken()->Name();
+		//dynamic_cast<TTokenWithValue<QString>*>(m_firstChild->GetToken().get())->GetValue();
 }
