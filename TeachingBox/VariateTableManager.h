@@ -2,7 +2,6 @@
 #define _TEACHING_BOX_VARIATE_TABLE_MANAGER_H_
 
 #include "QObject"
-#include <memory>
 #include "TVariate.h"
 
 class QTableWidget;
@@ -12,6 +11,7 @@ class QComboBox;
 class TVariate;
 
 namespace VariateWidget{
+	class WidgetManagerNewVariate;
 
 	class VariateTableManager:public QObject
 	{
@@ -35,25 +35,12 @@ namespace VariateWidget{
 		void ChangeToType(const QString& type);
 
 	private:
-		std::unique_ptr<TVariate> GetInterger(const QString& name, const QString& scope);
-		std::unique_ptr<TVariate> GetDouble(const QString& name, const QString& scope);
-		std::unique_ptr<TVariate> GetBool(const QString& name, const QString& scope);
-		std::unique_ptr<TVariate> GetString(const QString& name, const QString& scope);
-		std::unique_ptr<TVariate> GetPosition(const QString& name, const QString& scope);
-		std::unique_ptr<TVariate> GetDynamic(const QString& name, const QString& scope);
-		std::unique_ptr<TVariate> GetOverlap(const QString& name, const QString& scope);
-
-		void InitIntParameter();
-		void InitDoubleParameter();
-		void InitBoolParameter();
-		void InitStringParameter();
-		void InitPositionParameter();
-		void InitDynamicParameter();
-		void InitOverlapParameter();
+		std::unique_ptr<WidgetManagerNewVariate> GetWidgetManager(const QString& type) const;
 
 		bool IsValidName();
-
 	private:
+		std::unique_ptr<WidgetManagerNewVariate> m_currentWidgetManager;
+
 		QTableWidget* m_tableWidget;
 
 		QLineEdit* m_lineEidtName;

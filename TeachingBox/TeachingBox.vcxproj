@@ -127,6 +127,9 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_ScreenProject.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenReferenceSystem.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TBoolWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -163,6 +166,9 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_TVariateWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_WidgetManagerNewVariate.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_CodeEditor.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -194,6 +200,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ScreenProject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenReferenceSystem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_TBoolWidget.cpp">
@@ -232,6 +241,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_TVariateWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_WidgetManagerNewVariate.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="InterpreterContext.cpp" />
     <ClCompile Include="InterpreterManager.cpp" />
     <ClCompile Include="Macro.cpp" />
@@ -244,8 +256,11 @@
     <ClCompile Include="ProjectContext.cpp" />
     <ClCompile Include="RemoteManager.cpp" />
     <ClCompile Include="RemoteParser.cpp" />
+    <ClCompile Include="ScreenCoordinate.cpp" />
     <ClCompile Include="ScreenProgram.cpp" />
     <ClCompile Include="ScreenProject.cpp" />
+    <ClCompile Include="ScreenReferenceSystem.cpp" />
+    <ClCompile Include="ScreenTeachReferenceSystem.cpp" />
     <ClCompile Include="TAstNode.cpp" />
     <ClCompile Include="TAstNodeAssignSentence.cpp" />
     <ClCompile Include="TAstNodeElseIfSentence.cpp" />
@@ -273,6 +288,8 @@
     <ClCompile Include="TLexer.cpp" />
     <ClCompile Include="TOverlapWidget.cpp" />
     <ClCompile Include="TPositionWidget.cpp" />
+    <ClCompile Include="TRefSys.cpp" />
+    <ClCompile Include="TRefSysWidget.cpp" />
     <ClCompile Include="TScope.cpp" />
     <ClCompile Include="DialogNewVariate.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_ComboBoxInTree.cpp">
@@ -482,9 +499,20 @@
     <ClCompile Include="VariateDatabase.cpp" />
     <ClCompile Include="VariateTableManager.cpp" />
     <ClCompile Include="TVariateType.cpp" />
+    <ClCompile Include="VariateWidgetProducer.cpp" />
     <ClCompile Include="WarningLight.cpp" />
     <ClCompile Include="WarningManager.cpp" />
+    <ClCompile Include="WidgetManagerNewBool.cpp" />
+    <ClCompile Include="WidgetManagerNewDouble.cpp" />
+    <ClCompile Include="WidgetManagerNewDynamic.cpp" />
+    <ClCompile Include="WidgetManagerNewOverlap.cpp" />
+    <ClCompile Include="WidgetManagerNewPosition.cpp" />
+    <ClCompile Include="WidgetManagerNewRefSys.cpp" />
+    <ClCompile Include="WidgetManagerNewString.cpp" />
+    <ClCompile Include="WidgetManagerNewVariateFactory.cpp" />
     <ClCompile Include="WidgetItemInTree.cpp" />
+    <ClCompile Include="WidgetManagerNewInteger.cpp" />
+    <ClCompile Include="WidgetManagerNewVariate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="stdafx.h">
@@ -559,6 +587,14 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonGroup.h" />
+    <ClInclude Include="WidgetManagerNewBool.h" />
+    <ClInclude Include="WidgetManagerNewDouble.h" />
+    <ClInclude Include="WidgetManagerNewDynamic.h" />
+    <ClInclude Include="WidgetManagerNewInteger.h" />
+    <ClInclude Include="WidgetManagerNewOverlap.h" />
+    <ClInclude Include="WidgetManagerNewPosition.h" />
+    <ClInclude Include="WidgetManagerNewRefSys.h" />
+    <ClInclude Include="WidgetManagerNewString.h" />
     <CustomBuild Include="ComboBoxInTree.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing ComboBoxInTree.h...</Message>
@@ -666,6 +702,17 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../MacroWidgetMovc.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
     </CustomBuild>
     <ClInclude Include="MacroWidgetGosub.h" />
+    <CustomBuild Include="WidgetManagerNewVariate.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing WidgetManagerNewVariate.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../WidgetManagerNewVariate.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing WidgetManagerNewVariate.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../WidgetManagerNewVariate.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
+    </CustomBuild>
+    <ClInclude Include="WidgetManagerNewVariateFactory.h" />
     <ClInclude Include="ProjectManager.h" />
     <ClInclude Include="ProjectContext.h" />
     <CustomBuild Include="ScreenProject.h">
@@ -710,6 +757,18 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../RemoteParser.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
     </CustomBuild>
+    <ClInclude Include="ScreenCoordinate.h" />
+    <CustomBuild Include="ScreenReferenceSystem.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing ScreenReferenceSystem.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../ScreenReferenceSystem.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing ScreenReferenceSystem.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../ScreenReferenceSystem.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
+    </CustomBuild>
+    <ClInclude Include="ScreenTeachReferenceSystem.h" />
     <ClInclude Include="TAstNode.h" />
     <ClInclude Include="TAstNodeAssignSentence.h" />
     <ClInclude Include="TAstNodeElseIfSentence.h" />
@@ -817,6 +876,8 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../TOverlapWidget.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
     </CustomBuild>
+    <ClInclude Include="TRefSys.h" />
+    <ClInclude Include="TRefSysWidget.h" />
     <ClInclude Include="TScope.h" />
     <ClInclude Include="IEditVariate.h" />
     <ClInclude Include="KeyboardButton.h" />
@@ -868,6 +929,7 @@
     </CustomBuild>
     <ClInclude Include="VariateDatabase.h" />
     <ClInclude Include="TVariateType.h" />
+    <ClInclude Include="VariateWidgetProducer.h" />
     <ClInclude Include="WarningManager.h" />
     <ClInclude Include="WidgetItemInTree.h" />
     <CustomBuild Include="TVariate.h">

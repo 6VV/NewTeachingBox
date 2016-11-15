@@ -35,9 +35,7 @@ public:
 	tAxesAllPositions Value() const;
 
 private:
-	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
-
-private:
+	virtual void WriteContentToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 	virtual void OnValueChanged() override;
 
 

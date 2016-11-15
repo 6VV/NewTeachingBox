@@ -10,7 +10,7 @@ const QString TOverlapWidget::STR_MODE_ABSOLUTE{ "Absolute" };
 const QString TOverlapWidget::STR_MODE_RELATIVE{ "Relative" };
 
 
-void TOverlapWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
+void TOverlapWidget::WriteContentToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	ComboBoxInTree* modeBox = new ComboBoxInTree(parentItem, treeWidget);
 	modeBox->addItem(STR_MODE_ABSOLUTE);

@@ -19,7 +19,7 @@ public:
 	void SetValue(const tOverlapConstraint& value);
 
 protected:
-	virtual void ReadValueStream(QDataStream& dataStream) const override;
+	virtual void WriteValueToStream(QDataStream& dataStream) const override;
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
 	void WriteValueSteam(QDataStream& dataStream);

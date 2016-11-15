@@ -33,6 +33,7 @@
 
 #pragma warning(pop)
 
+#include <array>
 #include <mutex>
 #include <memory>
 #include <vector>

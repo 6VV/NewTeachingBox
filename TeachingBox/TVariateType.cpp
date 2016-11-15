@@ -16,6 +16,8 @@ const QString TVariateType::STR_BOOL_FALSE = "FALSE";
 const QString TVariateType::STR_TRANSITION_MODE_ABSOLUTE = "ABSOLUTE";
 const QString TVariateType::STR_TRANSITION_MODE_RELATIVE = "RELATIVE";
 
+const QString TVariateType::STR_TYPE_REF_SYS="RefSys";
+
 const QStringList TVariateType::TYPE_COLLECTION{
 	STR_TYPE_INT,
 	STR_TYPE_DOUBLE,
@@ -23,7 +25,8 @@ const QStringList TVariateType::TYPE_COLLECTION{
 	STR_TYPE_BOOL,
 	STR_TYPE_POSITION,
 	STR_TYPE_DYNAMIC,
-	STR_TYPE_OVERLAP };
+	STR_TYPE_OVERLAP,
+	STR_TYPE_REF_SYS};
 
 TVariateType::TVariateType()
 {

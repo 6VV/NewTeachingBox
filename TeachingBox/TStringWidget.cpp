@@ -20,7 +20,7 @@ void TStringWidget::UpdateVariate()
 	static_cast<TString*>(m_variate)->SetValue(m_value);
 }
 
-void TStringWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
+void TStringWidget::WriteContentToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	QTreeWidgetItem* item = new QTreeWidgetItem(parentItem, QStringList("Value"));
 

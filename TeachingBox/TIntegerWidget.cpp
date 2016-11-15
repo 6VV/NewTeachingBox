@@ -21,7 +21,7 @@ void TIntegerWidget::UpdateVariate()
 	static_cast<TInteger*>(m_variate)->SetValue(m_value);
 }
 
-void TIntegerWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
+void TIntegerWidget::WriteContentToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	QTreeWidgetItem* item = new QTreeWidgetItem(parentItem, QStringList{ "Value" });
 

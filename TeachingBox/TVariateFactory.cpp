@@ -7,6 +7,8 @@
 #include "TPosition.h"
 #include "TDynamic.h"
 #include "TOverlap.h"
+#include <assert.h>
+#include "TRefSys.h"
 
 
 
@@ -45,8 +47,13 @@ TVariate* TVariateFactory::CreateVariate(QByteArray& dataBytes)
 	{
 		return new TOverlap(dataStream);
 	}break;
+	case TSymbol::TYPE_REF_SYS:
+	{
+		return new TRefSys(dataStream);
+	}
 	default:
 	{
+		assert(!"Create variate failed\nNot find variate class");
 		return nullptr;
 	}break;
 	}

@@ -183,6 +183,7 @@ void TeachingBox::InitOption(QLayout* layout)
 	connect(btnVariate, SIGNAL(clicked()), this, SLOT(SlotOnVariateButtonClicked()));
 	connect(btnProject, SIGNAL(clicked()), this, SLOT(SlotOnProjectButtonClicked()));
 	connect(btnProgram, SIGNAL(clicked()), this, SLOT(SlotOnProgramButtonClicked()));
+	connect(btnCoordinate, &QPushButton::clicked, this, &TeachingBox::SlotOnCoordianteButtonClicked);
 }
 
 void TeachingBox::InitMovement(QLayout* layout)
@@ -344,4 +345,9 @@ void TeachingBox::SlotOnStartButtonPressed()
 void TeachingBox::SlotOnStopButtonClicked()
 {
 	InterpreterManager::GetInstance()->StopExecute();
+}
+
+void TeachingBox::SlotOnCoordianteButtonClicked()
+{
+	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::COORDINATE);
 }

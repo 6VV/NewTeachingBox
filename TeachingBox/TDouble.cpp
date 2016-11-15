@@ -38,7 +38,7 @@ void TDouble::SetValue(const double value)
 	m_value = value;
 }
 
-void TDouble::ReadValueStream(QDataStream& dataStream)const
+void TDouble::WriteValueToStream(QDataStream& dataStream)const
 {
 	dataStream << m_value;
 }

@@ -7,8 +7,8 @@
 class Language
 {
 public:
-	static const QString ENGLISH;
-	static const QString CHINESE;
+	static const QString English();
+	static const QString Chinese();
 
 	static const std::map<QString, QString> LANGUAGES;
 };

@@ -23,6 +23,8 @@
 #include "TVariateManager.h"
 #include "Context.h"
 #include "TreeWidgetItemWithVariate.h"
+#include <memory>
+#include "VariateWidgetProducer.h"
 
 
 class Button;
@@ -30,21 +32,13 @@ class QHBoxLayout;
 class QTreeWidget;
 
 class TVariate;
+class VariateWidgetProducer;
 
 class MacroWidgetParent :public DialogParent
 {
 	Q_OBJECT
 
 	typedef TSymbol::SymbolType SymbolType;
-
-private:
-	static const QString IMAGE_LOGO_SYSTEM;
-	static const QString IMAGE_LOGO_COORPERATER;
-	static const QString IMAGE_LOGO_GLOBAL;
-	static const QString IMAGE_LOGO_PROJECT;
-	static const QString IMAGE_LOGO_LOCAL;
-
-	static const QMap<SymbolType, QString> TYPE_HEADER_MAP;
 
 public:
 	MacroWidgetParent(const QString& macroText,QWidget* parent = nullptr);
@@ -70,19 +64,13 @@ private slots:
 private:
 	virtual void UpdateText() override;
 
-	QMap<QString, QStringList> GetVariateMap(SymbolType type) const;
-	ComboBoxWithParentItem* GetComboBox(SymbolType type) const;
-
 	void InitMacroText(const QString& macroText);
 	void InitLayout();
 	void InitSignalSlot();
 
-	QString GetSuggestName(SymbolType type) const;
-
 protected:
 	QString m_macroName{};
 	QStringList m_macroParameterList{};
-	//QString m_macroParameterText{};
 
 	QVector<ComboBoxWithParentItem*> m_parameterComboBoxes;		/*保存所有参数选择控件*/
 
@@ -91,7 +79,7 @@ protected:
 private:
 	QMap<QString, QVector<TVariate*>> m_variatesMap;		/*保存本作用域中所有有效变量*/
 	QVector<std::shared_ptr<TVariate>> m_newVariates{};	/*保存所有新建变量*/
-
+	std::unique_ptr<VariateWidgetProducer> m_variateWidgetProducer;	/*用于生成各各变量的相应控件*/
 
 	Button* m_btnConfirm;
 	Button* m_btnCancle;
@@ -100,7 +88,7 @@ private:
 template<typename T>
 void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
 {
-		auto variateComboBox = GetComboBox(type);
+		auto variateComboBox = m_variateWidgetProducer->GetComboBox(type,m_variatesMap,m_treeWidget);
 		m_parameterComboBoxes.append(variateComboBox);
 
 		variateComboBox->setCurrentText(name);
@@ -109,15 +97,15 @@ void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
 	
 		if (variate==nullptr)
 		{
-			auto name = GetSuggestName(type);
-			variateComboBox->addItem(QPixmap(IMAGE_LOGO_LOCAL), name);
+			auto name = m_variateWidgetProducer->GetSuggestName(type, m_variatesMap);
+			variateComboBox->addItem(QPixmap(VariateWidgetProducer::IMAGE_LOGO_LOCAL), name);
 			std::shared_ptr<TVariate> newVariate(new T(Context::projectContext.ProgramOpened(), name));
 			m_newVariates.append(newVariate);
-			newVariate->ReadTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
+			newVariate->WriteToTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
 		}
 		else
 		{
-			variate->ReadTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
+			variate->WriteToTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
 		}
 	
 		auto item = m_treeWidget->topLevelItem(m_treeWidget->topLevelItemCount() - 1);

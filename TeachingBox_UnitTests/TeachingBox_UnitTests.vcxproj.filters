@@ -27,9 +27,17 @@
     <ClCompile Include="TLexerTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
+    <ClCompile Include="TRefSysTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TLexerTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TRefSysTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

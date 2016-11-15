@@ -23,7 +23,7 @@ void TBoolWidget::UpdateVariate()
 	static_cast<TBool*>(m_variate)->SetValue(m_value);
 }
 
-void TBoolWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
+void TBoolWidget::WriteContentToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	QTreeWidgetItem* item = new QTreeWidgetItem(parentItem, QStringList("Value"));
 

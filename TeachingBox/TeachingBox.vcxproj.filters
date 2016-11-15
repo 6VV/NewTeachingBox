@@ -257,11 +257,38 @@
     <Filter Include="Source Files\Variate\VariateWidget">
       <UniqueIdentifier>{4abc844e-b120-41c0-9e77-8a071f0364b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Screen\ScreenCoordinate">
+      <UniqueIdentifier>{ddb85546-139d-4402-8937-8b75b75a6e67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenCoordinate">
+      <UniqueIdentifier>{95344555-df71-4c6a-9697-e52e75022941}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Variate\Variate\Base">
+      <UniqueIdentifier>{a222d69d-0cee-4c84-8def-5ae33216d67d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Variate\Variate\Coordinate">
+      <UniqueIdentifier>{991f054a-3f7a-49a6-9e1b-690589c65122}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Variate\Variate\Base">
+      <UniqueIdentifier>{14344c0a-be76-4c2a-83e1-dadca04614f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Variate\Variate\Coordinate">
+      <UniqueIdentifier>{0f0b144a-ac85-4f35-afb0-a2d29f41ed95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Variate\VariateWidget\Base">
+      <UniqueIdentifier>{2a2d4973-2a7c-4d4c-b0fd-57590ab49c2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Variate\VariateWidget\Coordinate">
+      <UniqueIdentifier>{e0bba9c0-d2dc-45d4-a379-7094ed5ded5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Variate\VariateWidget\Base">
+      <UniqueIdentifier>{cbe51e31-04e6-414e-a3a8-a33aff0ef883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Variate\VariateWidget\Coordinate">
+      <UniqueIdentifier>{4445c1ca-db29-4026-b537-17c5267f0e8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -550,18 +577,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ScreenProject.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="TBool.cpp">
-      <Filter>Source Files\Variate\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TDouble.cpp">
-      <Filter>Source Files\Variate\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TDynamic.cpp">
-      <Filter>Source Files\Variate\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TInteger.cpp">
-      <Filter>Source Files\Variate\Variate</Filter>
-    </ClCompile>
     <ClCompile Include="TOverlap.cpp">
       <Filter>Source Files\Variate\Variate</Filter>
     </ClCompile>
@@ -569,9 +584,6 @@
       <Filter>Source Files\Variate\Variate</Filter>
     </ClCompile>
     <ClCompile Include="TVariate.cpp">
-      <Filter>Source Files\Variate\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TString.cpp">
       <Filter>Source Files\Variate\Variate</Filter>
     </ClCompile>
     <ClCompile Include="ScreenProject.cpp">
@@ -817,9 +829,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_TStringWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="ComboBoxWithParentTreeItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_MacroWidgetMovc.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -832,22 +841,10 @@
     <ClCompile Include="MacroWidgetMovc.cpp">
       <Filter>Source Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
     </ClCompile>
-    <ClCompile Include="TBoolWidget.cpp">
-      <Filter>Source Files\Variate\VariateWidget</Filter>
-    </ClCompile>
-    <ClCompile Include="TDoubleWidget.cpp">
-      <Filter>Source Files\Variate\VariateWidget</Filter>
-    </ClCompile>
     <ClCompile Include="TDynamicWidget.cpp">
       <Filter>Source Files\Variate\VariateWidget</Filter>
     </ClCompile>
-    <ClCompile Include="TIntegerWidget.cpp">
-      <Filter>Source Files\Variate\VariateWidget</Filter>
-    </ClCompile>
     <ClCompile Include="TOverlapWidget.cpp">
-      <Filter>Source Files\Variate\VariateWidget</Filter>
-    </ClCompile>
-    <ClCompile Include="TStringWidget.cpp">
       <Filter>Source Files\Variate\VariateWidget</Filter>
     </ClCompile>
     <ClCompile Include="TVariateWidget.cpp">
@@ -861,6 +858,99 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_DynamicController.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenCoordinate.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboBoxWithParentTreeItem.cpp">
+      <Filter>Source Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenReferenceSystem.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenReferenceSystem.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenReferenceSystem.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenTeachReferenceSystem.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="TBool.cpp">
+      <Filter>Source Files\Variate\Variate\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TDouble.cpp">
+      <Filter>Source Files\Variate\Variate\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TDynamic.cpp">
+      <Filter>Source Files\Variate\Variate\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TInteger.cpp">
+      <Filter>Source Files\Variate\Variate\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TString.cpp">
+      <Filter>Source Files\Variate\Variate\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TRefSys.cpp">
+      <Filter>Source Files\Variate\Variate\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="VariateWidgetProducer.cpp">
+      <Filter>Source Files\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetManagerNewInteger.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetManagerNewVariate.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetManagerNewDouble.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetManagerNewVariateFactory.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetManagerNewBool.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetManagerNewString.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_WidgetManagerNewVariate.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_WidgetManagerNewVariate.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetManagerNewDynamic.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetManagerNewOverlap.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetManagerNewPosition.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetManagerNewRefSys.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClCompile>
+    <ClCompile Include="TBoolWidget.cpp">
+      <Filter>Source Files\Variate\VariateWidget\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TDoubleWidget.cpp">
+      <Filter>Source Files\Variate\VariateWidget\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TIntegerWidget.cpp">
+      <Filter>Source Files\Variate\VariateWidget\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TStringWidget.cpp">
+      <Filter>Source Files\Variate\VariateWidget\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TRefSysWidget.cpp">
+      <Filter>Source Files\Variate\VariateWidget\Coordinate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -918,25 +1008,10 @@
     <CustomBuild Include="TVariateManager.h">
       <Filter>Header Files\Variate</Filter>
     </CustomBuild>
-    <CustomBuild Include="TBool.h">
-      <Filter>Header Files\Variate\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TDouble.h">
-      <Filter>Header Files\Variate\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TDynamic.h">
-      <Filter>Header Files\Variate\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TInteger.h">
-      <Filter>Header Files\Variate\Variate</Filter>
-    </CustomBuild>
     <CustomBuild Include="TOverlap.h">
       <Filter>Header Files\Variate\Variate</Filter>
     </CustomBuild>
     <CustomBuild Include="TPosition.h">
-      <Filter>Header Files\Variate\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TString.h">
       <Filter>Header Files\Variate\Variate</Filter>
     </CustomBuild>
     <CustomBuild Include="TVariate.h">
@@ -996,23 +1071,44 @@
     <CustomBuild Include="TDynamicWidget.h">
       <Filter>Header Files\Variate\VariateWidget</Filter>
     </CustomBuild>
-    <CustomBuild Include="TBoolWidget.h">
-      <Filter>Header Files\Variate\VariateWidget</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TDoubleWidget.h">
-      <Filter>Header Files\Variate\VariateWidget</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TIntegerWidget.h">
-      <Filter>Header Files\Variate\VariateWidget</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TStringWidget.h">
-      <Filter>Header Files\Variate\VariateWidget</Filter>
-    </CustomBuild>
     <CustomBuild Include="MacroWidgetMovc.h">
       <Filter>Header Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
     </CustomBuild>
     <CustomBuild Include="DynamicController.h">
       <Filter>Header Files\TeachingBox</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ScreenReferenceSystem.h">
+      <Filter>Header Files\Screen\ScreenCoordinate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TBool.h">
+      <Filter>Header Files\Variate\Variate\Base</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TDouble.h">
+      <Filter>Header Files\Variate\Variate\Base</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TInteger.h">
+      <Filter>Header Files\Variate\Variate\Base</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TString.h">
+      <Filter>Header Files\Variate\Variate\Base</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TBoolWidget.h">
+      <Filter>Header Files\Variate\VariateWidget\Base</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TDoubleWidget.h">
+      <Filter>Header Files\Variate\VariateWidget\Base</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TIntegerWidget.h">
+      <Filter>Header Files\Variate\VariateWidget\Base</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TStringWidget.h">
+      <Filter>Header Files\Variate\VariateWidget\Base</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TDynamic.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="WidgetManagerNewVariate.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1206,6 +1302,48 @@
     </ClInclude>
     <ClInclude Include="MacroWidgetGosub.h">
       <Filter>Header Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenCoordinate.h">
+      <Filter>Header Files\Screen\ScreenCoordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenTeachReferenceSystem.h">
+      <Filter>Header Files\Screen\ScreenCoordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="TRefSys.h">
+      <Filter>Header Files\Variate\Variate\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="TRefSysWidget.h">
+      <Filter>Header Files\Variate\VariateWidget\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="VariateWidgetProducer.h">
+      <Filter>Header Files\Variate</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetManagerNewInteger.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetManagerNewVariateFactory.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetManagerNewDouble.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetManagerNewString.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetManagerNewBool.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetManagerNewPosition.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetManagerNewDynamic.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetManagerNewOverlap.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetManagerNewRefSys.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

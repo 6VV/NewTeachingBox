@@ -186,7 +186,7 @@ void TVariateManager::AddInDatabase(TVariate* const object)
 {
 	QByteArray data;
 	QDataStream dataStream(&data, QIODevice::ReadWrite);
-	object->ReadDataStream(dataStream);
+	object->WriteDataToStream(dataStream);
 	dataStream.device()->seek(0);
 	VariateDatabase::InsertVariate(dataStream);
 }
@@ -229,7 +229,7 @@ void TVariateManager::UpdateInDatabase(const QString& scope, const QString& name
 {
 	QByteArray data;
 	QDataStream dataStream(&data, QIODevice::ReadWrite);
-	newVariate.ReadDataStream(dataStream);
+	newVariate.WriteDataToStream(dataStream);
 	VariateDatabase::UpdateVariate(scope, name, dataStream);
 }
 

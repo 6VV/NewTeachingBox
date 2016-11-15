@@ -22,7 +22,7 @@ void TDynamicWidget::UpdateVariate()
 	static_cast<TDynamic*>(m_variate)->SetValue(m_value);
 }
 
-void TDynamicWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
+void TDynamicWidget::WriteContentToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	QStringList variateNames = QStringList{ "Velocity", "Acceleration", "Deceleration",
 		"PostureVelocity", "PostureAcceleration", "PostureDeceleration" };

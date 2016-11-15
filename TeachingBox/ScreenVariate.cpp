@@ -150,7 +150,7 @@ void ScreenVariate::InitTreeWidget()
 		auto variates = TVariateManager::GetInstance()->GetVariatesFromScope(scope);
 		for (auto variate : variates)
 		{
-			variate->ReadTreeWidgetItem(treeItem, m_treeWidget);
+			variate->WriteToTreeWidgetItem(treeItem, m_treeWidget);
 		}
 	}
 }
@@ -204,6 +204,6 @@ void ScreenVariate::UpdateText()
 
 void ScreenVariate::OnNewVariate(TVariate& variate)
 {
-	variate.ReadTreeWidgetItem(FindScopeItem(variate.GetScope()), m_treeWidget);
+	variate.WriteToTreeWidgetItem(FindScopeItem(variate.GetScope()), m_treeWidget);
 
 }

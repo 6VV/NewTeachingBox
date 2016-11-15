@@ -21,7 +21,7 @@ void TDoubleWidget::UpdateVariate()
 	static_cast<TDouble*>(m_variate)->SetValue(m_value);
 }
 
-void TDoubleWidget::ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
+void TDoubleWidget::WriteContentToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	QTreeWidgetItem* item = new QTreeWidgetItem(parentItem, QStringList("Value"));
 

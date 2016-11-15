@@ -25,6 +25,9 @@ public:
 	/*过渡类型*/
 	static const QString STR_TYPE_OVERLAP;
 
+	/*参考坐标系*/
+	static const QString STR_TYPE_REF_SYS;
+
 	/*布尔值*/
 	static const QString STR_BOOL_TRUE;
 	static const QString STR_BOOL_FALSE;
@@ -32,6 +35,8 @@ public:
 	/*过渡模式*/
 	static const QString STR_TRANSITION_MODE_ABSOLUTE;
 	static const QString STR_TRANSITION_MODE_RELATIVE;
+
+
 
 	static const QStringList TYPE_COLLECTION;
 

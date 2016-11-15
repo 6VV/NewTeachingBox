@@ -35,7 +35,7 @@ void TBool::SetValue(const bool value)
 	m_value = value;
 }
 
-void TBool::ReadValueStream(QDataStream& dataStream)const
+void TBool::WriteValueToStream(QDataStream& dataStream)const
 {
 	dataStream << m_value;
 }

@@ -18,7 +18,7 @@ public:
 	void SetValue(const double value);
 
 protected:
-	virtual void ReadValueStream(QDataStream& dataStream) const override;
+	virtual void WriteValueToStream(QDataStream& dataStream) const override;
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
 

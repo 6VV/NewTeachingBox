@@ -83,8 +83,8 @@ void DialogEidtUser::InitLayout()
 		m_comboBoxAuthority->addItem(QString::number(i));
 	}
 
-	m_comboBoxLanguage->addItem(Language::ENGLISH);
-	m_comboBoxLanguage->addItem(Language::CHINESE);
+	m_comboBoxLanguage->addItem(Language::English());
+	m_comboBoxLanguage->addItem(Language::Chinese());
 	m_comboBoxLanguage->setCurrentText(user.GetLanguage());
 
 	/*布局*/

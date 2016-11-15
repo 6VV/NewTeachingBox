@@ -19,6 +19,7 @@ public:
 		TYPE_POSITION,
 		TYPE_DYNAMIC,
 		TYPE_OVERLAP,
+		TYPE_REF_SYS,
 	};
 
 	enum SymbolCategory
@@ -64,6 +65,7 @@ private:
 			mapType.insert(TYPE_POSITION, "POSITION");
 			mapType.insert(TYPE_DYNAMIC, "DYNAMIC");
 			mapType.insert(TYPE_OVERLAP, "OVERLAP");
+			mapType.insert(TYPE_REF_SYS, "REF_SYS");
 		}
 	};
 	static CInitMap m_init;

@@ -34,9 +34,9 @@ public:
 	
 	virtual void UpdateVariate()=0;
 
-	void ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget);
+	void WriteToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget);	/*将变量读入到控件中*/
 
-	void ReadContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget);
+	void WriteContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget);	/*将变量值读入到控件中，该操作会删除原有控件内容*/
 
 
 protected slots:
@@ -46,7 +46,7 @@ protected:
 	virtual void OnValueChanged()=0;
 
 private:
-	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) = 0;
+	virtual void WriteContentToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) = 0;/*将变量值读入到控件中*/
 
 protected:
 	TVariate* m_variate;

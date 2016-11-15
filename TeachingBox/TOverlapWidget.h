@@ -39,7 +39,7 @@ public:
 	tOverlapConstraint Value() const;
 
 private:
-	virtual void ReadContentTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
+	virtual void WriteContentToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget) override;
 
 private:
 	virtual void OnValueChanged() override;

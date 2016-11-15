@@ -62,7 +62,7 @@ TVariate* TDynamic::Clone() const
 	return new TDynamic(*this);
 }
 
-void TDynamic::ReadValueStream(QDataStream& dataStream)const
+void TDynamic::WriteValueToStream(QDataStream& dataStream)const
 {
 	dataStream << m_value.m_Velocity;
 	dataStream << m_value.m_Acceleration;

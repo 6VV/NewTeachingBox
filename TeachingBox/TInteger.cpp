@@ -41,7 +41,7 @@ void TInteger::SetValue(const int value)
 	m_value = value;
 }
 
-void TInteger::ReadValueStream(QDataStream& dataStream)const
+void TInteger::WriteValueToStream(QDataStream& dataStream)const
 {
 	dataStream << m_value;
 }

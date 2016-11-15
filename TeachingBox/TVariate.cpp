@@ -5,7 +5,8 @@
 #include "TVariateWidget.h"
 
 
-TVariate::TVariate(QDataStream& dataStream) : m_symbol(dataStream)
+TVariate::TVariate(QDataStream& dataStream) 
+	: m_symbol(dataStream)
 {
 }
 
@@ -51,33 +52,33 @@ void TVariate::Save()
 	UpdateRamAndDatabaseFrom(*this);
 }
 
-void TVariate::ReadContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget)
+void TVariate::WriteContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget)
 {
-	m_variateWidget->ReadContentIntoItem(parentItem, treeWidget);
+	m_variateWidget->WriteContentIntoItem(parentItem, treeWidget);
 }
 
-void TVariate::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget,
+void TVariate::WriteToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget,
 	const TSymbol::SymbolType type)
 {
 	if (m_symbol.GetType() == type)
 	{
-		this->ReadTreeWidgetItem(parentItem, treeWidget);
+		this->WriteToTreeWidgetItem(parentItem, treeWidget);
 	}
 }
 
-void TVariate::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
+void TVariate::WriteToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
-	m_variateWidget->ReadTreeWidgetItem(parentItem, treeWidget);
+	m_variateWidget->WriteToTreeWidgetItem(parentItem, treeWidget);
 }
 
-void TVariate::ReadDataStream(QDataStream& dataStream) const
+void TVariate::WriteDataToStream(QDataStream& dataStream) const
 {
 	m_symbol.ReadDataStream(dataStream);
 
-	ReadValueStream(dataStream);
+	WriteValueToStream(dataStream);
 }
 
-void TVariate::ReadCollection(SET& collection, const TSymbol::SymbolType type)
+void TVariate::WriteToCollection(SET& collection, const TSymbol::SymbolType type)
 {
 	if (m_symbol.GetType()==type)
 	{

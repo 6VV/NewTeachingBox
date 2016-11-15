@@ -73,7 +73,7 @@ private slots:
 	void SlotOnStartButtonReleased();
 	void SlotOnStartButtonPressed();
 	void SlotOnStopButtonClicked();
-
+	void SlotOnCoordianteButtonClicked();
 
 
 private:

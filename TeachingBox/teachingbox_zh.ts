@@ -87,171 +87,222 @@
     </message>
 </context>
 <context>
-    <name>QObject</name>
+    <name>MacroWidgetParent</name>
     <message>
-        <location filename="VariateTableManager.cpp" line="28"/>
-        <location filename="VariateTableManager.cpp" line="159"/>
+        <location filename="MacroWidgetParent.cpp" line="45"/>
         <source>Name</source>
         <translation type="unfinished">名字</translation>
     </message>
     <message>
-        <location filename="VariateTableManager.cpp" line="29"/>
-        <source>Scope</source>
-        <translation type="unfinished">作用域</translation>
-    </message>
-    <message>
-        <location filename="VariateTableManager.cpp" line="30"/>
-        <source>Type</source>
-        <translation type="unfinished">类型</translation>
-    </message>
-    <message>
-        <location filename="VariateTableManager.cpp" line="159"/>
-        <location filename="VariateTableManager.cpp" line="175"/>
-        <location filename="VariateTableManager.cpp" line="184"/>
-        <location filename="VariateTableManager.cpp" line="193"/>
-        <location filename="VariateTableManager.cpp" line="205"/>
-        <location filename="VariateTableManager.cpp" line="259"/>
+        <location filename="MacroWidgetParent.cpp" line="45"/>
         <source>Value</source>
         <translation type="unfinished">值</translation>
     </message>
     <message>
-        <location filename="VariateTableManager.cpp" line="240"/>
+        <location filename="MacroWidgetParent.cpp" line="47"/>
+        <source>Confirm</source>
+        <translation type="unfinished">确认</translation>
+    </message>
+    <message>
+        <location filename="MacroWidgetParent.cpp" line="48"/>
+        <source>Cancle</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <location filename="MacroWidgetParent.cpp" line="188"/>
+        <source>Operator failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="VariateTableManager.cpp" line="30"/>
+        <location filename="VariateTableManager.cpp" line="175"/>
+        <source>Name</source>
+        <translation type="unfinished">名字</translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="31"/>
+        <source>Scope</source>
+        <translation type="unfinished">作用域</translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="32"/>
+        <source>Type</source>
+        <translation type="unfinished">类型</translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="175"/>
+        <location filename="VariateTableManager.cpp" line="191"/>
+        <location filename="VariateTableManager.cpp" line="200"/>
+        <location filename="VariateTableManager.cpp" line="209"/>
+        <location filename="VariateTableManager.cpp" line="221"/>
+        <location filename="VariateTableManager.cpp" line="275"/>
+        <source>Value</source>
+        <translation type="unfinished">值</translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="256"/>
         <source>Velocity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="VariateTableManager.cpp" line="241"/>
+        <location filename="VariateTableManager.cpp" line="257"/>
         <source>Acceleration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="VariateTableManager.cpp" line="242"/>
+        <location filename="VariateTableManager.cpp" line="258"/>
         <source>Deceleration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="VariateTableManager.cpp" line="243"/>
+        <location filename="VariateTableManager.cpp" line="259"/>
         <source>PostureVelocity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="VariateTableManager.cpp" line="244"/>
+        <location filename="VariateTableManager.cpp" line="260"/>
         <source>PostureAcceleration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="VariateTableManager.cpp" line="245"/>
+        <location filename="VariateTableManager.cpp" line="261"/>
         <source>PostureDeceleration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="VariateTableManager.cpp" line="258"/>
+        <location filename="VariateTableManager.cpp" line="274"/>
         <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="VariateTableManager.cpp" line="289"/>
+        <source>Base Sys</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ScreenCoordiante</name>
+    <message>
+        <location filename="ScreenCoordinate.cpp" line="32"/>
+        <source>Ref System</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ScreenNetwork</name>
     <message>
-        <location filename="ScreenNetwork.cpp" line="29"/>
+        <location filename="ScreenNetwork.cpp" line="31"/>
         <source>Add</source>
         <translation type="unfinished">添加</translation>
     </message>
     <message>
-        <location filename="ScreenNetwork.cpp" line="30"/>
+        <location filename="ScreenNetwork.cpp" line="32"/>
         <source>Delete</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="ScreenNetwork.cpp" line="31"/>
+        <location filename="ScreenNetwork.cpp" line="33"/>
         <source>Connect</source>
         <translation type="unfinished">连接</translation>
+    </message>
+    <message>
+        <location filename="ScreenNetwork.cpp" line="89"/>
+        <source>Please select an address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ScreenNetwork.cpp" line="96"/>
+        <source>Not valid address</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ScreenProgram</name>
     <message>
-        <location filename="ScreenProgram.cpp" line="107"/>
+        <location filename="ScreenProgram.cpp" line="120"/>
         <source>Modify</source>
         <translation type="unfinished">修改</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="108"/>
+        <location filename="ScreenProgram.cpp" line="121"/>
         <source>Macro</source>
         <translation type="unfinished">宏</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="109"/>
+        <location filename="ScreenProgram.cpp" line="122"/>
         <source>New</source>
         <translation type="unfinished">新建</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="110"/>
+        <location filename="ScreenProgram.cpp" line="123"/>
         <source>SetPC</source>
         <translation type="unfinished">设置PC</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="115"/>
+        <location filename="ScreenProgram.cpp" line="128"/>
         <source>Keyboard</source>
         <translation type="unfinished">键盘</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="116"/>
+        <location filename="ScreenProgram.cpp" line="129"/>
         <source>SubProgram</source>
         <translation type="unfinished">子程序</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="117"/>
+        <location filename="ScreenProgram.cpp" line="130"/>
         <source>Format</source>
         <translation type="unfinished">格式化</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="118"/>
+        <location filename="ScreenProgram.cpp" line="131"/>
         <source>Search</source>
         <translation type="unfinished">查找</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="119"/>
+        <location filename="ScreenProgram.cpp" line="132"/>
         <source>Note</source>
         <translation type="unfinished">注释</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="120"/>
+        <location filename="ScreenProgram.cpp" line="133"/>
         <source>Invalidate</source>
         <translation type="unfinished">无效化</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="123"/>
+        <location filename="ScreenProgram.cpp" line="136"/>
         <source>SelectAll</source>
         <translation type="unfinished">选择全部</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="124"/>
+        <location filename="ScreenProgram.cpp" line="137"/>
         <source>Cut</source>
         <translation type="unfinished">剪切</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="125"/>
+        <location filename="ScreenProgram.cpp" line="138"/>
         <source>Copy</source>
         <translation type="unfinished">复制</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="126"/>
+        <location filename="ScreenProgram.cpp" line="139"/>
         <source>Paste</source>
         <translation type="unfinished">粘贴</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="127"/>
+        <location filename="ScreenProgram.cpp" line="140"/>
         <source>Delete</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="128"/>
+        <location filename="ScreenProgram.cpp" line="141"/>
         <source>Undo</source>
         <translation type="unfinished">撤销</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="129"/>
+        <location filename="ScreenProgram.cpp" line="142"/>
         <source>Redo</source>
         <translation type="unfinished">重做</translation>
     </message>
@@ -260,12 +311,12 @@
         <translation type="obsolete">设置PC</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="111"/>
+        <location filename="ScreenProgram.cpp" line="124"/>
         <source>Edit</source>
         <translation type="unfinished">编辑</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="112"/>
+        <location filename="ScreenProgram.cpp" line="125"/>
         <source>Addvance</source>
         <translation type="unfinished">高级</translation>
     </message>
@@ -304,7 +355,7 @@
         <translation type="unfinished">请选择一个程序</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="210"/>
+        <location filename="ScreenProject.cpp" line="212"/>
         <source>Already load project</source>
         <translation type="unfinished"></translation>
     </message>
@@ -372,6 +423,61 @@
         <location filename="ScreenProject.cpp" line="368"/>
         <source>Invalid Item</source>
         <translation type="unfinished">无效的节点</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenReferenceSystem</name>
+    <message>
+        <location filename="ScreenReferenceSystem.cpp" line="22"/>
+        <source>Add</source>
+        <translation type="unfinished">添加</translation>
+    </message>
+    <message>
+        <location filename="ScreenReferenceSystem.cpp" line="23"/>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
+    <message>
+        <location filename="ScreenReferenceSystem.cpp" line="24"/>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <location filename="ScreenReferenceSystem.cpp" line="26"/>
+        <source>Actual Tcp values of robot in this reference system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ScreenReferenceSystem.cpp" line="27"/>
+        <source>Position and orientation offset relative to base</source>
+        <translation type="unfinished">相对于基坐标系的偏移值</translation>
+    </message>
+    <message>
+        <location filename="ScreenReferenceSystem.cpp" line="18"/>
+        <source>Offset</source>
+        <translation type="unfinished">偏移值</translation>
+    </message>
+    <message>
+        <location filename="ScreenReferenceSystem.cpp" line="19"/>
+        <source>Coordinate System</source>
+        <translation type="unfinished">坐标系</translation>
+    </message>
+    <message>
+        <location filename="ScreenReferenceSystem.cpp" line="56"/>
+        <source>Reference Coordinate System</source>
+        <oldsource>Reference System</oldsource>
+        <translation type="unfinished">参考坐标系</translation>
+    </message>
+    <message>
+        <location filename="ScreenReferenceSystem.cpp" line="60"/>
+        <source>Base Coordinate System</source>
+        <oldsource>Base System</oldsource>
+        <translation type="unfinished">基坐标系</translation>
+    </message>
+    <message>
+        <location filename="ScreenReferenceSystem.cpp" line="20"/>
+        <source>Tcp Values</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -483,6 +589,34 @@
         <location filename="ScreenSetting.cpp" line="46"/>
         <source>Lock</source>
         <translation type="unfinished">锁定</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenTeachReferenceSystem</name>
+    <message>
+        <location filename="ScreenTeachReferenceSystem.cpp" line="21"/>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ScreenTeachReferenceSystem.cpp" line="24"/>
+        <source>Reference System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ScreenTeachReferenceSystem.cpp" line="46"/>
+        <source>Select teach method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ScreenTeachReferenceSystem.cpp" line="53"/>
+        <source>Tool for teaching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ScreenTeachReferenceSystem.cpp" line="60"/>
+        <source>Illustration</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -647,23 +781,23 @@
         <translation type="unfinished">错误的变量</translation>
     </message>
     <message>
-        <location filename="DialogNewVariate.cpp" line="88"/>
+        <location filename="DialogNewVariate.cpp" line="76"/>
         <source>Type</source>
         <translation type="unfinished">类型</translation>
     </message>
     <message>
-        <location filename="DialogNewVariate.cpp" line="91"/>
+        <location filename="DialogNewVariate.cpp" line="79"/>
         <source>Confirm</source>
         <translation type="unfinished">确认</translation>
     </message>
     <message>
-        <location filename="DialogNewVariate.cpp" line="92"/>
+        <location filename="DialogNewVariate.cpp" line="80"/>
         <source>Cancle</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="DialogNewVariate.cpp" line="172"/>
-        <location filename="DialogNewVariate.cpp" line="194"/>
+        <location filename="DialogNewVariate.cpp" line="164"/>
+        <location filename="DialogNewVariate.cpp" line="186"/>
         <source>New Variate</source>
         <translation type="unfinished">新建变量</translation>
     </message>

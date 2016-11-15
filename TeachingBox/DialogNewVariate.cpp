@@ -71,18 +71,6 @@ namespace VariateWidget{
 		m_variateTableManager->ChangeToType(currentType);
 	}
 
-	//void DialogNewVariate::showEvent(QShowEvent *)
-	//{
-	//	QRect screenRect = TeachingBoxContext::GetScreenRect();
-	//	/*设置固定大小*/
-	//	this->setFixedSize(screenRect.width() * 2 / 3, screenRect.height() * 2 / 3);
-
-	//	/*移动到屏幕中央*/
-	//	this->move(screenRect.left() + screenRect.width() / 2 - this->width() / 2,
-	//		screenRect.top() + screenRect.height() / 2 - this->height() / 2);
-
-	//}
-
 	void DialogNewVariate::UpdateText()
 	{
 		m_treeWidget->setHeaderLabel(tr("Type"));
@@ -122,7 +110,6 @@ namespace VariateWidget{
 		layout->setStretch(0, 1);
 		layout->setStretch(1, 2);
 
-
 		return layout;
 	}
 
@@ -149,12 +136,17 @@ namespace VariateWidget{
 		QTreeWidgetItem* itemOverlap = new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_OVERLAP });
 		itemOverlap->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_OVERLAP }));
 
+		/*添加坐标系类型*/
+		QTreeWidgetItem* itemRefSys = new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_REF_SYS });
+		itemRefSys->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_REF_SYS }));
+
 		m_treeWidget = new QTreeWidget(this);
 
 		m_treeWidget->addTopLevelItem(itemBase);
 		m_treeWidget->addTopLevelItem(itemPosition);
 		m_treeWidget->addTopLevelItem(itemDynamic);
 		m_treeWidget->addTopLevelItem(itemOverlap);
+		m_treeWidget->addTopLevelItem(itemRefSys);
 
 		return m_treeWidget;
 	}
@@ -166,9 +158,6 @@ namespace VariateWidget{
 
 	void DialogNewVariate::Init()
 	{
-		//this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint);
-		////setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
-		//this->setWindowModality(Qt::ApplicationModal);
 		setWindowTitle(tr("New Variate"));
 
 		InitLayout();

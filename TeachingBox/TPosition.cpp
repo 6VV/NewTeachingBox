@@ -46,7 +46,7 @@ void TPosition::SetValue(const tAxesAllPositions& value)
 	m_value = value;
 }
 
-void TPosition::ReadValueStream(QDataStream& dataStream)const
+void TPosition::WriteValueToStream(QDataStream& dataStream)const
 {
 	for (int i = 0; i < AXIS_SIZE;++i)
 	{
@@ -58,25 +58,6 @@ void TPosition::UpdateFromValue(const TVariate& variate)
 {
 	m_value = static_cast<const TPosition&>(variate).m_value;
 }
-
-//void TPosition::SlotOnTextChanged()
-//{
-//	LineEditInTree* currentWidget = static_cast<LineEditInTree*>(sender());
-//	QTreeWidgetItem* parentItem = currentWidget->GetParentItem();
-//	QTreeWidget* treeWidget = currentWidget->GetTreeWidget();
-//
-//	tAxesAllPositions position{};
-//	for (int i = 0; i < parentItem->childCount();++i)
-//	{
-//		QLineEdit* lineEdit=static_cast<QLineEdit*>(treeWidget->itemWidget(parentItem->child(i), 1));
-//		position.m_AxisPosition[i] = lineEdit->text().toDouble();
-//	}
-//
-//	m_value = position;
-//
-//	m_itemVariate->IsSave(true);
-//	//UpdateRamAndDatabaseFrom(*this);
-//}
 
 void TPosition::Init()
 {

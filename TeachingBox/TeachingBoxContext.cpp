@@ -7,7 +7,7 @@
 namespace
 {
 	User g_user{};
-	QString g_language = Language::ENGLISH;
+	QString g_language = Language::English();
 	QPoint g_screenPos{};
 	QPoint g_teachingBoxPos{};
 	QSize g_screenSize{};

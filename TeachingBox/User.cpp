@@ -8,7 +8,7 @@ User::User()
 	:m_name("")
 	, m_password("")
 	, m_authority(1)
-	, m_language(Language::ENGLISH)
+	, m_language(Language::English())
 {
 
 }

@@ -16,14 +16,14 @@ TVariateWidget::~TVariateWidget()
 
 }
 
-void TVariateWidget::ReadTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
+void TVariateWidget::WriteToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
 {
 	m_itemVariateHeader = new TreeWidgetItemWithVariate(parentItem, m_variate);
 
-	ReadContentIntoItem(m_itemVariateHeader, treeWidget);
+	WriteContentIntoItem(m_itemVariateHeader, treeWidget);
 }
 
-void TVariateWidget::ReadContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget)
+void TVariateWidget::WriteContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget)
 {
 	m_itemVariateHeader = parentItem;
 	parentItem->Variate(m_variate);
@@ -36,7 +36,7 @@ void TVariateWidget::ReadContentIntoItem(TreeWidgetItemWithVariate* parentItem, 
 		childItem = parentItem->child(0);
 	}
 
-	ReadContentTreeWidgetItem(parentItem, treeWidget);
+	WriteContentToTreeWidgetItem(parentItem, treeWidget);
 }
 
 void TVariateWidget::SlotOnValueChanged()

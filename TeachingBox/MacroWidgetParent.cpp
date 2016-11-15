@@ -4,29 +4,15 @@
 #include "TVariate.h"
 #include "WarningManager.h"
 #include "CodeEditor.h"
+#include "VariateWidgetProducer.h"
 
-
-const QString MacroWidgetParent::IMAGE_LOGO_SYSTEM{ ":/new/image/Resources/Image/S.PNG" };
-
-const QString MacroWidgetParent::IMAGE_LOGO_COORPERATER{ ":/new/image/Resources/Image/C.PNG" };
-
-const QString MacroWidgetParent::IMAGE_LOGO_GLOBAL{":/new/image/Resources/Image/G.PNG"};
-
-const QString MacroWidgetParent::IMAGE_LOGO_PROJECT{ ":/new/image/Resources/Image/P.PNG" };
-
-const QString MacroWidgetParent::IMAGE_LOGO_LOCAL{ ":/new/image/Resources/Image/L.PNG" };
-
-const QMap<MacroWidgetParent::SymbolType, QString> MacroWidgetParent::TYPE_HEADER_MAP{
-	{ SymbolType::TYPE_POSITION, "p" },
-	{ SymbolType::TYPE_DYNAMIC, "dyn" },
-	{ SymbolType::TYPE_OVERLAP, "ovl" },
-};
 
 MacroWidgetParent::MacroWidgetParent(const QString& macroText, QWidget* parent /*= nullptr*/)
 	:DialogParent(parent)
 	, m_treeWidget(new QTreeWidget(this))
 	, m_btnConfirm(new Button(this))
 	, m_btnCancle(new Button(this))
+	, m_variateWidgetProducer(new VariateWidgetProducer())
 	, m_variatesMap(std::move(TVariateManager::GetInstance()->GetVariatesMapFromScope(Context::projectContext.ProgramOpened())))
 {
 	InitMacroText(macroText);
@@ -96,68 +82,6 @@ void MacroWidgetParent::InitSignalSlot()
 }
 
 
-QMap<QString, QStringList> MacroWidgetParent::GetVariateMap(SymbolType type) const
-{
-	QMap<QString, QStringList> result;
-
-	for (auto iter = m_variatesMap.begin(); iter != m_variatesMap.end(); ++iter)
-	{
-		QStringList variateNames;
-		for (auto variate:iter.value())
-		{
-			if (variate->GetType() == type)
-			{
-				variateNames.append(variate->GetName());
-			}
-		}
-
-		result[iter.key()] = variateNames;
-	}
-
-	return result;
-}
-
-ComboBoxWithParentItem* MacroWidgetParent::GetComboBox(SymbolType type) const
-{
-	auto variateComboBox = new ComboBoxWithParentItem(m_treeWidget);
-	auto variates = GetVariateMap(type);
-
-	for (auto iter = variates.begin(); iter != variates.end(); ++iter)
-	{
-		QIcon icon;
-		if (iter.key() == ProjectContext::ScopeSystem())
-		{
-			icon.addPixmap(QPixmap(IMAGE_LOGO_SYSTEM));
-		}
-		else if (iter.key() == ProjectContext::ScopeCooperate())
-		{
-			icon.addPixmap(QPixmap(IMAGE_LOGO_COORPERATER));
-		}
-		else if (iter.key() == ProjectContext::ScopeGlobal())
-		{
-			icon.addPixmap(QPixmap(IMAGE_LOGO_GLOBAL));
-		}
-		else
-		{
-			if (iter.key().contains("."))
-			{
-				icon.addPixmap(QPixmap(IMAGE_LOGO_LOCAL));
-			}
-			else
-			{
-				icon.addPixmap(QPixmap(IMAGE_LOGO_PROJECT));
-			}
-		}
-
-		for (auto var : iter.value())
-		{
-			variateComboBox->addItem(icon, var);
-		}
-	}
-
-	return variateComboBox;
-}
-
 void MacroWidgetParent::SlotOnButtonConfirmClicked()
 {
 	for (auto comboBox:m_parameterComboBoxes)
@@ -206,38 +130,6 @@ void MacroWidgetParent::SlotOnButtonCancleClicked()
 	delete this;
 }
 
-QString MacroWidgetParent::GetSuggestName(SymbolType type) const
-{
-	std::vector<int> suggestNamesExisted;
-
-	auto header = TYPE_HEADER_MAP[type];
-
-	QRegExp regExp("^" + header+"([0 - 9] + )$");
-	for (auto iter = m_variatesMap.begin(); iter != m_variatesMap.end(); ++iter)
-	{
-		for (auto variate : iter.value())
-		{
-			if (regExp.exactMatch(variate->GetName()))
-			{
-				suggestNamesExisted.push_back(regExp.capturedTexts().at(1).toInt());
-			}
-		}
-	}
-
-	std::sort(suggestNamesExisted.begin(), suggestNamesExisted.end());
-
-	int size = suggestNamesExisted.size();
-	for (int i = 0; i < size; ++i)
-	{
-		if (suggestNamesExisted.at(i) != i)
-		{
-			return header + QString::number(i);
-		}
-	}
-
-	return header + QString::number(suggestNamesExisted.size());
-}
-
 void MacroWidgetParent::SlotOnParameterChanged()
 {
 	auto comboBox = static_cast<ComboBoxWithParentItem*>(sender());
@@ -252,7 +144,7 @@ void MacroWidgetParent::SlotOnParameterChanged()
 	}
 
 	auto parentItem = comboBox->ParentItem();
-	variate->ReadContentIntoItem(parentItem, m_treeWidget);
+	variate->WriteContentIntoItem(parentItem, m_treeWidget);
 }
 
 void MacroWidgetParent::OnConfirm()
@@ -266,21 +158,4 @@ void MacroWidgetParent::OnConfirm()
 
 	CodeEditor::GetInstance()->UpdateCurrentLine(text.left(text.size() - 1));
 }
-
-//void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
-//{
-//	auto variateComboBox = GetComboBox(type);
-//
-//	variateComboBox->setCurrentText(name);
-//
-//	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(), variateComboBox->currentText());
-//
-//	assert(variate != nullptr);
-//
-//	variate->ReadTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
-//
-//	auto item = m_treeWidget->topLevelItem(m_treeWidget->topLevelItemCount() - 1);
-//
-//	m_treeWidget->setItemWidget(item, 1, variateComboBox);
-//}
 

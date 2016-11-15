@@ -41,7 +41,7 @@ void TOverlap::SetValue(const tOverlapConstraint& value)
 	m_value = value;
 }
 
-void TOverlap::ReadValueStream(QDataStream& dataStream)const
+void TOverlap::WriteValueToStream(QDataStream& dataStream)const
 {
 	dataStream << m_value.m_TransitionMode;
 	dataStream << m_value.m_TransitionParameter;

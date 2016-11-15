@@ -40,7 +40,7 @@ void TString::SetValue(const QString& value)
 
 
 
-void TString::ReadValueStream(QDataStream& dataStream)const
+void TString::WriteValueToStream(QDataStream& dataStream)const
 {
 	dataStream << m_value;
 }

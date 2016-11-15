@@ -3,6 +3,7 @@
 #include <QtWidgets/QApplication>
 #include "QTranslator"
 
+#include "TRefSys.h"
 
 int main(int argc, char *argv[])
 {
