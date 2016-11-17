@@ -34,12 +34,27 @@ QStringList ProjectContext::AllCurrentScopes()
 	return m_currentScopes;
 }
 
+QString ProjectContext::CurrentScope()
+{
+	if (!m_programOpened.isEmpty())
+	{
+		return m_programOpened;
+	}
+
+	if (!m_project.isEmpty())
+	{
+		return m_project;
+	}
+
+	return ScopeGlobal();
+}
+
 const QStringList& ProjectContext::Programs() const
 {
 	return m_programs;
 }
 
-QString ProjectContext::GetProjectLoaded()
+QString ProjectContext::ProjectLoaded()
 {
 	return m_project;
 }

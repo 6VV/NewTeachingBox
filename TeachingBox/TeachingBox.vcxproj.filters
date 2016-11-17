@@ -877,9 +877,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScreenTeachReferenceSystem.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate</Filter>
-    </ClCompile>
     <ClCompile Include="TBool.cpp">
       <Filter>Source Files\Variate\Variate\Base</Filter>
     </ClCompile>
@@ -951,6 +948,42 @@
     </ClCompile>
     <ClCompile Include="TRefSysWidget.cpp">
       <Filter>Source Files\Variate\VariateWidget\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenCoordinate.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenCoordinate.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenToolSystem.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenToolSystem.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogTeachReferenceSystem.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DialogTeachReferenceSystem.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DialogTeachReferenceSystem.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenToolSystem.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogTeachToolSystem.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="TToolSys.cpp">
+      <Filter>Source Files\Variate\Variate\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="TToolSysWidget.cpp">
+      <Filter>Source Files\Variate\VariateWidget\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetManagerNewToolSys.cpp">
+      <Filter>Source Files\Screen\ScreenVariate\NewVariate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1109,6 +1142,15 @@
     </CustomBuild>
     <CustomBuild Include="WidgetManagerNewVariate.h">
       <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ScreenCoordinate.h">
+      <Filter>Header Files\Screen\ScreenCoordinate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ScreenToolSystem.h">
+      <Filter>Header Files\Screen\ScreenCoordinate</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DialogTeachReferenceSystem.h">
+      <Filter>Header Files\Screen\ScreenCoordinate</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1303,12 +1345,6 @@
     <ClInclude Include="MacroWidgetGosub.h">
       <Filter>Header Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
     </ClInclude>
-    <ClInclude Include="ScreenCoordinate.h">
-      <Filter>Header Files\Screen\ScreenCoordinate</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenTeachReferenceSystem.h">
-      <Filter>Header Files\Screen\ScreenCoordinate</Filter>
-    </ClInclude>
     <ClInclude Include="TRefSys.h">
       <Filter>Header Files\Variate\Variate\Coordinate</Filter>
     </ClInclude>
@@ -1343,6 +1379,18 @@
       <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
     </ClInclude>
     <ClInclude Include="WidgetManagerNewRefSys.h">
+      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogTeachToolSystem.h">
+      <Filter>Header Files\Screen\ScreenCoordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="TToolSys.h">
+      <Filter>Header Files\Variate\Variate\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="TToolSysWidget.h">
+      <Filter>Header Files\Variate\VariateWidget\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetManagerNewToolSys.h">
       <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
     </ClInclude>
   </ItemGroup>

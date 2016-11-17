@@ -9,6 +9,8 @@ class TSymbol:public QObject
 {
 	Q_OBJECT
 public:
+	/*变量类型
+	修改变量类型时需同时更新该枚举类型及CInitMap类*/
 	enum SymbolType
 	{
 		TYPE_VOID,
@@ -20,6 +22,7 @@ public:
 		TYPE_DYNAMIC,
 		TYPE_OVERLAP,
 		TYPE_REF_SYS,
+		TYPE_TOOL_SYS,
 	};
 
 	enum SymbolCategory
@@ -50,26 +53,6 @@ protected:
 	QString m_name;
 	int m_type=TYPE_VOID;
 	SymbolCategory m_category=CATEGORY_VARIABLE;
-
-private:
-	class CInitMap
-	{
-	public:
-		CInitMap(QHash<TSymbol::SymbolType, QString>& mapType)
-		{
-			mapType.insert(TYPE_VOID, "VOID");
-			mapType.insert(TYPE_INTERGER, "INTERGER");
-			mapType.insert(TYPE_DOUBLE, "DOUBLE");
-			mapType.insert(TYPE_STRING, "STRING");
-			mapType.insert(TYPE_BOOL, "BOOL");
-			mapType.insert(TYPE_POSITION, "POSITION");
-			mapType.insert(TYPE_DYNAMIC, "DYNAMIC");
-			mapType.insert(TYPE_OVERLAP, "OVERLAP");
-			mapType.insert(TYPE_REF_SYS, "REF_SYS");
-		}
-	};
-	static CInitMap m_init;
-
 
 };
 

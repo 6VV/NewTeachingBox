@@ -23,6 +23,7 @@
 class Button;
 class QLineEdit;
 class VariateWidgetProducer;
+class TRefSys;
 
 class ScreenReferenceSystem :public InternationalWidget
 {
@@ -32,27 +33,32 @@ public:
 	ScreenReferenceSystem(QWidget* parent=nullptr);
 
 private:
+	virtual void showEvent(QShowEvent *) override;
 	virtual void UpdateText() override;
 
-	QLayout* GetButtonLayout();
-	QWidget* GetDataWidget();
+	QWidget* GetButtonWidget();
+	QWidget* GetOffsetDataWidget();
 	QWidget* GetSystemWidget();
 	QWidget* GetTcpValueWidget();
 	QLayout* GetValuesWidget(std::array<QLineEdit*,6> widgets,bool enabled);
 	QLabel* GetValuesIllustrateWidget();
-	QString GetCurrentScope();	/*获取当前作用域*/
+	TRefSys* GetVariate();
+	QString GetVariateName();
+	QString GetVariateScope();
 
 	void Init();
 
 	void OnAddButtonClicked();
 	void OnEditButtonClicked();
 	void OnDeleteButtonClicked();
+	void OnSaveButtonClicked();
 
 	void OnRefSysChanged();
 	
 private:
 	std::unique_ptr<VariateWidgetProducer> m_variateWidgetProducer;
 
+	Button* m_btnSave;
 	Button* m_btnEdit;
 	Button* m_btnAdd;
 	Button* m_btnDelete;

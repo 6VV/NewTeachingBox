@@ -206,7 +206,7 @@ void ScreenProject::SlotOnButtonLoadClicked()
 		return;
 	}
 
-	QString projectLoaded = Context::projectContext.GetProjectLoaded();
+	QString projectLoaded = Context::projectContext.ProjectLoaded();
 	if (!projectLoaded.isEmpty())
 	{
 		WarningManager::Warning(this, tr("Already load project") + ":\n" + projectLoaded);

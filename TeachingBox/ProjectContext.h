@@ -35,8 +35,19 @@ public:
 	ProjectContext();
 
 	QStringList AllCurrentScopes();
+
+	/*************************************************
+	//  Method:        QString CurrentScope()
+	//  Description:   获取当前有效的最近作用域，若打开有程序，则选择程序作用域，若打开有项目，则选择项目作用域，否则选择全局作用域
+	//  Author:        刘巍 
+	//  Date:          2016/11/16
+	//  Returns:       QString：当前可选的最近作用域
+	//  Parameter:     void
+	//  History:       
+	*************************************************/
+	QString CurrentScope();
 	const QStringList& Programs() const;
-	QString GetProjectLoaded();
+	QString ProjectLoaded();
 	QString ProgramOpened() const;
 	void ProgramOpened(const QString& program);
 	void ProgramLoading(const QString& program);

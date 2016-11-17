@@ -19,10 +19,17 @@
 
 #include "ScreenMainParent.h"
 
-class Layout;
-
 class ScreenCoordiante:public ScreenMainParent
 {
+	Q_OBJECT
+
+private:
+	enum ScreenType
+	{
+		REFERENCE_SYSTEM,
+		TOOL_SYSTEM,
+	};
+
 public:
 	ScreenCoordiante(QWidget* parent=nullptr);
 
@@ -31,9 +38,14 @@ private:
 	virtual QLayout* GetMainLayout() override;
 	virtual void UpdateText() override;
 
+	void ChangeType(ScreenType screenType);
 
 private:
+	QLayout* m_mainLayout;
+	QWidget* m_currentWidget;
+
 	Button* m_btnReferenceSystem;
+	Button* m_btnToolSystem;
 };
 
 #endif

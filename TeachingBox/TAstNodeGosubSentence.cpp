@@ -75,6 +75,6 @@ void TAstNodeGosubSentence::ParseSemantic() const
 inline
 QString TAstNodeGosubSentence::GetDestinationProgramNode() const
 {
-	return Context::projectContext.GetProjectLoaded() + "." + m_firstChild->GetToken()->Name();
+	return Context::projectContext.ProjectLoaded() + "." + m_firstChild->GetToken()->Name();
 		//dynamic_cast<TTokenWithValue<QString>*>(m_firstChild->GetToken().get())->GetValue();
 }

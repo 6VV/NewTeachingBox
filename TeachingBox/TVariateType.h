@@ -27,6 +27,7 @@ public:
 
 	/*参考坐标系*/
 	static const QString STR_TYPE_REF_SYS;
+	static const QString STR_TYPE_TOOL_SYS;
 
 	/*布尔值*/
 	static const QString STR_BOOL_TRUE;

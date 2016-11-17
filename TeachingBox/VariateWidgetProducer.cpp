@@ -32,7 +32,7 @@ VariateWidgetProducer::~VariateWidgetProducer()
 
 }
 
-QMap<QString, QStringList> VariateWidgetProducer::GetVariateMap(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap) const
+QMap<QString, QStringList> VariateWidgetProducer::GetVariateMap(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap)
 {
 	QMap<QString, QStringList> result;
 
@@ -53,49 +53,7 @@ QMap<QString, QStringList> VariateWidgetProducer::GetVariateMap(SymbolType type,
 	return result;
 }
 
-ComboBoxWithParentItem* VariateWidgetProducer::GetComboBox(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap, QWidget* parent/*=nullptr*/) const
-{
-
-	auto variateComboBox = new ComboBoxWithParentItem(parent);
-	auto variates = GetVariateMap(type, variateMap);
-
-	for (auto iter = variates.begin(); iter != variates.end(); ++iter)
-	{
-		QIcon icon;
-		if (iter.key() == ProjectContext::ScopeSystem())
-		{
-			icon.addPixmap(QPixmap(IMAGE_LOGO_SYSTEM));
-		}
-		else if (iter.key() == ProjectContext::ScopeCooperate())
-		{
-			icon.addPixmap(QPixmap(IMAGE_LOGO_COORPERATER));
-		}
-		else if (iter.key() == ProjectContext::ScopeGlobal())
-		{
-			icon.addPixmap(QPixmap(IMAGE_LOGO_GLOBAL));
-		}
-		else
-		{
-			if (iter.key().contains("."))
-			{
-				icon.addPixmap(QPixmap(IMAGE_LOGO_LOCAL));
-			}
-			else
-			{
-				icon.addPixmap(QPixmap(IMAGE_LOGO_PROJECT));
-			}
-		}
-
-		for (auto var : iter.value())
-		{
-			variateComboBox->addItem(icon, var);
-		}
-	}
-
-	return variateComboBox;
-}
-
-QString VariateWidgetProducer::GetSuggestName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap) const
+QString VariateWidgetProducer::GetSuggestName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap) 
 {
 	std::vector<int> suggestNamesExisted;
 
@@ -125,5 +83,50 @@ QString VariateWidgetProducer::GetSuggestName(SymbolType type, const QMap<QStrin
 	}
 
 	return header + QString::number(suggestNamesExisted.size());
+}
+
+
+
+void VariateWidgetProducer::UpdateComboBoxWithWholeName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap, QComboBox* comboBox) 
+{
+	comboBox->clear();
+
+	auto variates = std::move(GetVariateMap(type, variateMap));
+
+	for (auto iter = variates.begin(); iter != variates.end(); ++iter)
+	{
+		for (auto var : iter.value())
+		{
+			comboBox->addItem(QIcon(GetIconPath(iter.key())), iter.key()+"."+var);
+		}
+	}
+
+}
+
+QString VariateWidgetProducer::GetIconPath(const QString& scope)
+{
+	if (scope == ProjectContext::ScopeSystem())
+	{
+		return IMAGE_LOGO_SYSTEM;
+	}
+	else if (scope == ProjectContext::ScopeCooperate())
+	{
+		return IMAGE_LOGO_COORPERATER;
+	}
+	else if (scope == ProjectContext::ScopeGlobal())
+	{
+		return IMAGE_LOGO_GLOBAL;
+	}
+	else
+	{
+		if (scope.contains("."))
+		{
+			return IMAGE_LOGO_LOCAL;
+		}
+		else
+		{
+			return IMAGE_LOGO_PROJECT;
+		}
+	}
 }
 

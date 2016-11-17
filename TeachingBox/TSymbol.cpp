@@ -67,6 +67,16 @@ void TSymbol::ReadDataStream(QDataStream& dataStream) const
 	dataStream << m_type;
 }
 
-QHash<TSymbol::SymbolType, QString> TSymbol::Map_Type = QHash<TSymbol::SymbolType, QString>{};
+QHash<TSymbol::SymbolType, QString> TSymbol::Map_Type = QHash<TSymbol::SymbolType, QString>{
+	{TYPE_VOID, "VOID"},
+	{ TYPE_INTERGER, "INTERGER" },
+	{TYPE_DOUBLE, "DOUBLE"},
+	{TYPE_STRING, "STRING"},
+	{ TYPE_BOOL, "BOOL" },
+	{ TYPE_POSITION, "POSITION" },
+	{ TYPE_DYNAMIC, "DYNAMIC" },
+	{TYPE_OVERLAP, "OVERLAP"},
+	{TYPE_REF_SYS, "REF_SYS"},
+	{TYPE_TOOL_SYS, "TOOL_SYS"}, 
+};
 
-TSymbol::CInitMap TSymbol::m_init = TSymbol::CInitMap{Map_Type};

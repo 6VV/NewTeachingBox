@@ -9,6 +9,7 @@
 #include "TOverlap.h"
 #include <assert.h>
 #include "TRefSys.h"
+#include "TToolSys.h"
 
 
 
@@ -50,6 +51,10 @@ TVariate* TVariateFactory::CreateVariate(QByteArray& dataBytes)
 	case TSymbol::TYPE_REF_SYS:
 	{
 		return new TRefSys(dataStream);
+	}
+	case TSymbol::TYPE_TOOL_SYS:
+	{
+		return new TToolSys(dataStream);
 	}
 	default:
 	{

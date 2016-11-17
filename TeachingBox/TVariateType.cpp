@@ -18,6 +18,8 @@ const QString TVariateType::STR_TRANSITION_MODE_RELATIVE = "RELATIVE";
 
 const QString TVariateType::STR_TYPE_REF_SYS="RefSys";
 
+const QString TVariateType::STR_TYPE_TOOL_SYS="ToolSys";
+
 const QStringList TVariateType::TYPE_COLLECTION{
 	STR_TYPE_INT,
 	STR_TYPE_DOUBLE,
@@ -26,7 +28,9 @@ const QStringList TVariateType::TYPE_COLLECTION{
 	STR_TYPE_POSITION,
 	STR_TYPE_DYNAMIC,
 	STR_TYPE_OVERLAP,
-	STR_TYPE_REF_SYS};
+	STR_TYPE_REF_SYS,
+	STR_TYPE_TOOL_SYS
+};
 
 TVariateType::TVariateType()
 {

@@ -312,7 +312,7 @@ void TeachingBox::SlotOnStartButtonReleased()
 
 void TeachingBox::SlotOnStartButtonPressed()
 {
-	if (Context::projectContext.GetProjectLoaded().isEmpty())
+	if (Context::projectContext.ProjectLoaded().isEmpty())
 	{
 		WarningManager::Warning(this, WarningManager::PleaseLoadProject);
 		return;

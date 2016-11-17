@@ -25,7 +25,7 @@ void InterpreterManager::LoadProject(const QString& project)
 void InterpreterManager::AutoExecute()
 {
 	SaveFile();
-	LoadProject(Context::projectContext.GetProjectLoaded());
+	LoadProject(Context::projectContext.ProjectLoaded());
 	UpdateStartNode();
 
 	Context::interpreterContext.IsAllowExecute(true);
@@ -36,7 +36,7 @@ void InterpreterManager::AutoExecute()
 void InterpreterManager::StepExecute()
 {
 	SaveFile();
-	LoadProject(Context::projectContext.GetProjectLoaded());
+	LoadProject(Context::projectContext.ProjectLoaded());
 	UpdateStartNode();
 
 	Context::interpreterContext.IsAllowExecute(true);

@@ -61,10 +61,10 @@ namespace VariateWidget
 	void WidgetManagerNewRefSys::OnScopeChanged(const QString& scope)
 	{
 		VariateWidgetProducer producer;
-		auto box = producer.GetComboBox(TSymbol::TYPE_REF_SYS,
-			std::move(TVariateManager::GetInstance()->GetVariatesMapFromScope(scope)));
+		auto box = static_cast<QComboBox*>(m_tableWidget->cellWidget(m_startRowCount, 1));
+		producer.UpdateComboBoxWithWholeName(TSymbol::TYPE_REF_SYS,
+			std::move(TVariateManager::GetInstance()->GetVariatesMapScollUp(scope)), box);
 		box->setCurrentText("WORLD");
-		m_tableWidget->setCellWidget(m_startRowCount, 1,box);
 
 	}
 

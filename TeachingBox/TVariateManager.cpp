@@ -109,7 +109,7 @@ QVector<TVariate*> TVariateManager::GetVariatesFromScope(const QString& scope)
 	return variates;
 }
 
-QMap<QString, QVector<TVariate*>> TVariateManager::GetVariatesMapFromScope(const QString& scope)
+QMap<QString, QVector<TVariate*>> TVariateManager::GetVariatesMapScollUp(const QString& scope)
 {
 	QMap<QString, QVector<TVariate*>> result;
 

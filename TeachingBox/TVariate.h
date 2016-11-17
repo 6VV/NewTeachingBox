@@ -17,8 +17,12 @@
 		ReadContentIntoItem：根据变量更新控件显示数据
 		ReadCollection：将变量添加到集合中
 		ReadDataStream：从数据流中更新变量
+	需子类实现的功能：
+		virtual TVariate* Clone() const=0
+		virtual void WriteValueToStream(QDataStream& dataStream) const=0;
+		virtual void UpdateFromValue(const TVariate& variate) =0;
 
-//  Others:
+//  Others:	m_variateWidget需有子类重新赋值，才能生成正确的显示控件
 //  Function List:
 //  History:
 //    <author>      刘巍 

@@ -137,8 +137,9 @@ namespace VariateWidget{
 		itemOverlap->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_OVERLAP }));
 
 		/*添加坐标系类型*/
-		QTreeWidgetItem* itemRefSys = new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_REF_SYS });
-		itemRefSys->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_REF_SYS }));
+		QTreeWidgetItem* itemCoordinateSys = new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_REF_SYS });
+		itemCoordinateSys->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_REF_SYS }));
+		itemCoordinateSys->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_TOOL_SYS }));
 
 		m_treeWidget = new QTreeWidget(this);
 
@@ -146,7 +147,7 @@ namespace VariateWidget{
 		m_treeWidget->addTopLevelItem(itemPosition);
 		m_treeWidget->addTopLevelItem(itemDynamic);
 		m_treeWidget->addTopLevelItem(itemOverlap);
-		m_treeWidget->addTopLevelItem(itemRefSys);
+		m_treeWidget->addTopLevelItem(itemCoordinateSys);
 
 		return m_treeWidget;
 	}

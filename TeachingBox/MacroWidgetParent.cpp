@@ -13,7 +13,7 @@ MacroWidgetParent::MacroWidgetParent(const QString& macroText, QWidget* parent /
 	, m_btnConfirm(new Button(this))
 	, m_btnCancle(new Button(this))
 	, m_variateWidgetProducer(new VariateWidgetProducer())
-	, m_variatesMap(std::move(TVariateManager::GetInstance()->GetVariatesMapFromScope(Context::projectContext.ProgramOpened())))
+	, m_variatesMap(std::move(TVariateManager::GetInstance()->GetVariatesMapScollUp(Context::projectContext.ProgramOpened())))
 {
 	InitMacroText(macroText);
 	InitLayout();

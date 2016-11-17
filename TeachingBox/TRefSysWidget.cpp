@@ -45,6 +45,7 @@ void TRefSysWidget::WriteContentToTreeWidgetItem(QTreeWidgetItem* parentItem, QT
 	ComboBoxInTree* baseSysComboBox = new ComboBoxInTree(parentItem, treeWidget);
 	baseSysComboBox->addItem(value.baseSys);
 	treeWidget->setItemWidget(baseSysItem, 1, baseSysComboBox);
+	connect(baseSysComboBox, &QComboBox::currentTextChanged, this, &TRefSysWidget::SlotOnValueChanged);
 
 	QStringList offsets{ "x", "y", "z", "a", "b", "c" };
 	for (int i = 0; i < offsets.length();++i)
@@ -54,6 +55,7 @@ void TRefSysWidget::WriteContentToTreeWidgetItem(QTreeWidgetItem* parentItem, QT
 
 		LineEditInTree* lineEdit = new LineEditInTree(parentItem, treeWidget,
 			QString::number(value.offset[i]), RegExp::STR_REG_FLOAT);
+		connect(lineEdit, &QLineEdit::textChanged, this, &TRefSysWidget::SlotOnValueChanged);
 
 		treeWidget->setItemWidget(treeItem, 1, lineEdit);
 	}
