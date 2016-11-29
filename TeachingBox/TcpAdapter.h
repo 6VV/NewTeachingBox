@@ -7,7 +7,8 @@
 //  Author:			刘巍      
 //  Version: 		1.0     
 //  Date: 			2016/10/08
-//  Description:	TCP适配器，用于将TCP线程分离开来，通过信号、槽机制控制指令的传输
+//  Description:	TCP适配器，为防止因线程原因导致的TCP传输失败，采用本适配器的信号与实际的TCP传输函数进行连接，
+		使得能够通过调用本适配器的相应函数跨线程进行数据传输
 //  Others:
 //  Function List:
 //  History:
@@ -17,19 +18,22 @@
 //    <desc>        build this moudle     
 *************************************************/
 
-#include "QObject"
+#include "RemoteAdapter.h"
 
-class TcpAdapter:public QObject
+class TcpAdapter:public RemoteAdapter
 {
 	Q_OBJECT
+
+	friend class RemoteAdapterFactory;
+
 public:
-	TcpAdapter(QObject* parent = 0);
+	virtual void SendData(const QByteArray& data) override;
+
+private:
+	TcpAdapter();
+	TcpAdapter(const TcpAdapter&);
+	TcpAdapter& operator=(const TcpAdapter&);
 	~TcpAdapter();
-
-	void SendData(const QByteArray& data);
-
-signals:
-	void SignalSendData(const QByteArray& data);
 
 private:
 	void Init();

@@ -45,7 +45,7 @@ namespace VariateWidget
 		dynamic.m_PostureAcceleration = values[4];
 		dynamic.m_PostureDeceleration = values[5];
 
-		return std::unique_ptr<TVariate>(new TDynamic(scope, name, dynamic));
+		return std::unique_ptr<TVariate>(new TDynamic({scope, name}, dynamic));
 	}
 
 	void WidgetManagerNewDynamic::InitParameter()

@@ -6,6 +6,7 @@
 #include "Context.h"
 #include "InterpreterManager.h"
 #include "CodeEditor.h"
+#include "RemoteFeedbackController.h"
 
 
 RemoteParser::RemoteParser(QObject* parent/*=nullptr*/)
@@ -46,7 +47,7 @@ void RemoteParser::ParseOneCommand(QByteArray& command) const
 	}break;
 	case COMMAND_ID::ROBOT_POSITION:
 	{
-		OnResivePosition(command);
+		OnReceivePosition(command);
 	}break;
 	default:
 		break;
@@ -76,25 +77,22 @@ void RemoteParser::SplitCommand(QList<QByteArray>& commandList, QByteArray& comm
 
 void RemoteParser::SendNextCommand() const
 {
-	qDebug() << "Send Next Command";
 	Context::interpreterContext.IsAllowSendCommandData(true);
 	InterpreterManager::GetInstance()->ExecuteNextCommand();
-	//CInterpreterManager::GetInstance()->InterpreteNextCommand();
 }
 
 void RemoteParser::RefreshLineNumber(const tTeachCmdAttribute& attribute) const
 {
 	auto program = reinterpret_cast<TAstNode*>(attribute.m_programAddress)->GetToken()->Name();
-		//dynamic_cast<TTokenWithValue<QString>*>(
-		//reinterpret_cast<TAstNode*>(attribute.m_programAddress)->GetToken().get())->GetValue();
 	int lineNumber = attribute.m_LineNumber;
 
 	CodeEditor::GetInstance()->HighlightPCLine(program, lineNumber);
+	//RemoteFeedbackController::GetInstance()->RefreshLineNumber(program, lineNumber);
 
 }
 
-void RemoteParser::OnResivePosition(QByteArray& command) const
+void RemoteParser::OnReceivePosition(QByteArray& command) const
 {
-	command;
-
+	tAxesAllPositions position = *(reinterpret_cast<tAxesAllPositions*>(command.data() + sizeof(tTeachCmdAttribute)));
+	RemoteFeedbackController::GetInstance()->OnReseivePosition(position);
 }

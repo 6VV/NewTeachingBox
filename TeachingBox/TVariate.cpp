@@ -3,6 +3,7 @@
 #include "TVariateManager.h"
 #include "TreeWidgetItemWithVariate.h"
 #include "TVariateWidget.h"
+#include <assert.h>
 
 
 TVariate::TVariate(QDataStream& dataStream) 
@@ -10,20 +11,31 @@ TVariate::TVariate(QDataStream& dataStream)
 {
 }
 
-TVariate::TVariate(const QString& scope, const QString& name, TSymbol::SymbolType type)
-	: m_symbol(scope, name, TSymbol::CATEGORY_VARIABLE, type)
-{
-
-}
+//TVariate::TVariate(const QString& scope, const QString& name, TSymbol::SymbolType type)
+//	: m_symbol(scope, name, type, TSymbol::CATEGORY_VARIABLE)
+//{
+//
+//}
 
 TVariate::TVariate(const TVariate& variate)
 	: m_symbol(variate.m_symbol)
 {
 }
 
+TVariate::TVariate(const TSymbol& symbol)
+	: m_symbol(symbol)
+{
+
+}
+
 TVariate::~TVariate()
 {
 	delete m_variateWidget;
+}
+
+TSymbol TVariate::GetSymbol() const
+{
+	return m_symbol;
 }
 
 QString TVariate::GetScope() const
@@ -41,10 +53,15 @@ TSymbol::SymbolType TVariate::GetType() const
 	return m_symbol.GetType();
 }
 
-void TVariate::SetName(const QString& name)
+QString TVariate::GetTypeName() const
 {
-	m_symbol.SetName(name);
+	return m_symbol.GetTypeName();
 }
+
+//void TVariate::SetName(const QString& name)
+//{
+//	m_symbol.SetName(name);
+//}
 
 void TVariate::Save()
 {
@@ -73,21 +90,15 @@ void TVariate::WriteToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* t
 
 void TVariate::WriteDataToStream(QDataStream& dataStream) const
 {
-	m_symbol.ReadDataStream(dataStream);
+	m_symbol.WriteToStream(dataStream);
 
 	WriteValueToStream(dataStream);
 }
 
-void TVariate::WriteToCollection(SET& collection, const TSymbol::SymbolType type)
-{
-	if (m_symbol.GetType()==type)
-	{
-		collection.insert(this);
-	}
-}
 
 void TVariate::UpdateFromVariate(const TVariate& variate)
 {
+	assert(typeid(variate) == typeid(*this));
 	m_symbol = variate.m_symbol;
 	UpdateFromValue(variate);
 }

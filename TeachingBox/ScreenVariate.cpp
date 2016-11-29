@@ -9,6 +9,7 @@
 #include "TVariateManager.h"
 #include "QMessageBox"
 #include "Button.h"
+#include "VariateTreeWidgetManager.h"
 
 ScreenVariate::ScreenVariate(QWidget* parent /*= 0*/)
 	:ScreenMainParent(parent)
@@ -17,7 +18,6 @@ ScreenVariate::ScreenVariate(QWidget* parent /*= 0*/)
 	, m_btnTeach (new Button(this))
 	, m_btnCheck(new Button(this))
 	, m_btnClearUnused (new Button(this))
-
 {
 	Init();
 }
@@ -85,6 +85,11 @@ void ScreenVariate::SlotOnNewVariateButtonClicked()
 	(new VariateWidget::DialogNewVariate(scopeItem->text(0),this,this))->show();
 }
 
+void ScreenVariate::SlotOnTeachButtonClicked()
+{
+	WarningManager::GetInstance()->Warning(this, QStringLiteral("未实现"));
+}
+
 QList<QPushButton*> ScreenVariate::GetButtonList()
 {
 	QList<QPushButton*> btnList;
@@ -150,6 +155,7 @@ void ScreenVariate::InitTreeWidget()
 		auto variates = TVariateManager::GetInstance()->GetVariatesFromScope(scope);
 		for (auto variate : variates)
 		{
+			//VariateTreeWidgetManager::InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, treeItem);
 			variate->WriteToTreeWidgetItem(treeItem, m_treeWidget);
 		}
 	}
@@ -180,6 +186,7 @@ void ScreenVariate::InitSignalSlot()
 	connect(m_btnVariate, SIGNAL(clicked()), this, SLOT(SlotOnVariateButtonClicked()));
 	connect(m_btnNew, SIGNAL(clicked()), this, SLOT(SlotOnNewVariateButtonClicked()));
 	connect(m_btnDelete, SIGNAL(clicked()), this, SLOT(SlotOnDeleteVariateButtonClicked()));
+	connect(m_btnTeach, &QPushButton::clicked, this, &ScreenVariate::SlotOnTeachButtonClicked);
 }
 
 void ScreenVariate::UpdateText()

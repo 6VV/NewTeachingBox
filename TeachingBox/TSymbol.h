@@ -31,10 +31,13 @@ public:
 		CATEGORY_VARIABLE,
 	};
 
-	static QHash<SymbolType, QString> Map_Type;
+	typedef QString TypeNameType;
+
+	//static QHash<SymbolType, QString> Map_Type;
 
 public:
-	TSymbol(const QString& scope, const QString& name, const SymbolCategory category, const SymbolType type);
+	TSymbol(const QString& scope="", const QString& name="", const SymbolType type = SymbolType::TYPE_VOID,
+		const QString& typeName="",const SymbolCategory category = SymbolCategory::CATEGORY_VARIABLE);
 	TSymbol(QDataStream& dataStream);
 	TSymbol(const TSymbol& symbol);
 	TSymbol& operator=(const TSymbol& symbol);
@@ -43,14 +46,16 @@ public:
 	SymbolCategory GetCategory() const;
 	QString GetName() const;
 	QString GetScope() const;
+	QString GetTypeName() const;
 
-	void SetName(const QString& name);
+	//void SetName(const QString& name);
 
-	void ReadDataStream(QDataStream& dataStream) const;
+	void WriteToStream(QDataStream& dataStream) const;
 
 protected:
 	QString m_scope;
 	QString m_name;
+	QString m_typeName;
 	int m_type=TYPE_VOID;
 	SymbolCategory m_category=CATEGORY_VARIABLE;
 

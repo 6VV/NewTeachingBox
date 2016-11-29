@@ -21,7 +21,7 @@ namespace VariateWidget
 
 	std::unique_ptr<TVariate> WidgetManagerNewPosition::GetVariate(const QString& name, const QString& scope)
 	{
-		tAxesAllPositions position;
+		tAxesAllPositions position{};
 
 		for (int i = m_startRowCount; i < m_startRowCount + AXIS_SIZE; ++i)
 		{
@@ -37,7 +37,7 @@ namespace VariateWidget
 		}
 
 
-		return std::unique_ptr<TVariate>(new TPosition(scope, name, position));
+		return std::unique_ptr<TVariate>(new TPosition({scope, name}, position));
 	}
 
 	void WidgetManagerNewPosition::InitParameter()

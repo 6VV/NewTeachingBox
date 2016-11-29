@@ -74,13 +74,12 @@ void TAstNodeMovlSentence::ParseSemantic() const
 
 void TAstNodeMovlSentence::CheckParameterType(std::shared_ptr<TAstNode> node,int type) const
 {
-	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), node->GetToken()->Name()
-		/*static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue()*/);
+	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), node->GetToken()->Name());
 
 	if (variate==nullptr)
 	{
 		throw TInterpreterException(TInterpreterException::UNKNOW_TOKEN, node->GetToken()->LineNumber()
-			, node->GetToken()->Name()/*static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue()*/);
+			, node->GetToken()->Name());
 	}
 
 	if (variate->GetType() != type)

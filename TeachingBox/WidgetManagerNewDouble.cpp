@@ -29,7 +29,7 @@ namespace VariateWidget
 			return nullptr;
 		}
 
-		return std::unique_ptr<TVariate>(new TDouble(scope, name, value));
+		return std::unique_ptr<TVariate>(new TDouble({scope, name}, value));
 	}
 
 	void VariateWidget::WidgetManagerNewDouble::InitParameter()

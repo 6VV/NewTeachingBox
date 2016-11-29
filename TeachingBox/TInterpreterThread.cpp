@@ -35,6 +35,7 @@ void TInterpreterThread::SlotExecuteNextCommand()
 	}
 }
 
+inline
 void TInterpreterThread::SendEndCommand()
 {
 	RemoteManager::GetInstance()->SendEndCommand();

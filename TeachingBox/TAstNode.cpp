@@ -117,7 +117,7 @@ QString TAstNode::GetScope() const
 	}
 
 	auto programNode = m_parentNode;
-	while (programNode->GetParentNode()->GetParentNode()!=NULL)
+	while (programNode->GetParentNode()->GetParentNode() != nullptr)
 	{
 		programNode = programNode->GetParentNode();
 	}

@@ -8,14 +8,19 @@
 #include "TIntegerWidget.h"
 
 
-
-TInteger::TInteger(const QString& scope, const QString& name, const int value)
-	:TVariate(scope,name,TSymbol::TYPE_INTERGER)
+inline
+QString TInteger::TypeName()
 {
-	m_value = value;
-
-	Init();
+	return "Integer";
 }
+
+//TInteger::TInteger(const QString& scope, const QString& name, const int value)
+//	:TVariate(scope,name,TSymbol::TYPE_INTERGER)
+//{
+//	m_value = value;
+//
+//	Init();
+//}
 
 TInteger::TInteger(QDataStream& dataStream) :TVariate(dataStream)
 {
@@ -27,6 +32,13 @@ TInteger::TInteger(QDataStream& dataStream) :TVariate(dataStream)
 TInteger::TInteger(const TInteger& variate)
 	: TVariate(variate)
 	, m_value(variate.m_value)
+{
+	Init();
+}
+
+TInteger::TInteger(const TSymbol& symbol, ValueType value /*= 0*/)
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_INTERGER,TypeName() })
+	, m_value(value)
 {
 	Init();
 }
@@ -56,6 +68,7 @@ void TInteger::Init()
 {
 	m_variateWidget = new TIntegerWidget(this);
 }
+
 
 TVariate* TInteger::Clone() const
 {

@@ -30,7 +30,7 @@ namespace VariateWidget
 			return nullptr;
 		}
 
-		return std::unique_ptr<TVariate>(new TInteger(scope, name, value));
+		return std::unique_ptr<TVariate>(new TInteger({scope, name}, value));
 	}
 
 	void WidgetManagerNewInteger::InitParameter()

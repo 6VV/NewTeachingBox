@@ -144,6 +144,8 @@ void MacroWidgetParent::SlotOnParameterChanged()
 	}
 
 	auto parentItem = comboBox->ParentItem();
+
+	//VariateTreeWidgetManager::UpdateWidget(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, parentItem);
 	variate->WriteContentIntoItem(parentItem, m_treeWidget);
 }
 

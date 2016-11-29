@@ -10,15 +10,19 @@ class TPosition:public TVariate
 	Q_OBJECT
 
 public:
-	TPosition(const QString& scope, const QString& name, const tAxesAllPositions& value = tAxesAllPositions{});
+	typedef tAxesAllPositions ValueType;
+	static QString TypeName();
+
+public:
+	TPosition(const TSymbol& symbol, ValueType value = ValueType{});
 	TPosition(const TPosition& variate);
 	TPosition(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
 
-	const tAxesAllPositions GetValue() const;
+	const ValueType GetValue() const;
 
-	void SetValue(const tAxesAllPositions& value);
+	void SetValue(const ValueType& value);
 
 
 private:
@@ -29,8 +33,9 @@ private:
 private:
 	void Init();
 
+
 private:
-	tAxesAllPositions m_value;
+	ValueType m_value;
 };
 
 #endif

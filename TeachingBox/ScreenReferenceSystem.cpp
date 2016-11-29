@@ -268,7 +268,7 @@ void ScreenReferenceSystem::OnSaveButtonClicked()
 	}
 
 	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetVariateScope(), GetVariateName());
-	TVariateManager::GetInstance()->UpdateVariate(variate->GetScope(), variate->GetName(), TRefSys{ variate->GetScope(), variate->GetName(), value });
+	TVariateManager::GetInstance()->UpdateVariate(variate->GetScope(), variate->GetName(), TRefSys{ {variate->GetScope(), variate->GetName()}, value });
 }
 
 void ScreenReferenceSystem::OnRefSysChanged()

@@ -25,6 +25,8 @@
 #include "TreeWidgetItemWithVariate.h"
 #include <memory>
 #include "VariateWidgetProducer.h"
+#include "VariateTreeWidgetManager.h"
+#include <assert.h>
 
 
 class Button;
@@ -89,7 +91,7 @@ template<typename T>
 void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
 {
 	ComboBoxWithParentItem* variateComboBox = new ComboBoxWithParentItem(m_treeWidget);
-	m_variateWidgetProducer->UpdateComboBoxWithWholeName(type, m_variatesMap, variateComboBox);
+	m_variateWidgetProducer->UpdateComboBoxWithSimpleName(type, m_variatesMap, variateComboBox);
 	//auto variateComboBox = m_variateWidgetProducer->GetComboBox(type,m_variatesMap,m_treeWidget);
 	m_parameterComboBoxes.append(variateComboBox);
 
@@ -101,18 +103,22 @@ void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
 	{
 		auto name = m_variateWidgetProducer->GetSuggestName(type, m_variatesMap);
 		variateComboBox->addItem(QPixmap(VariateWidgetProducer::IMAGE_LOGO_LOCAL), name);
-		std::shared_ptr<TVariate> newVariate(new T(Context::projectContext.ProgramOpened(), name));
+		std::shared_ptr<TVariate> newVariate(new T(TSymbol{Context::projectContext.ProgramOpened(), name}));
 		m_newVariates.append(newVariate);
+
+		//VariateTreeWidgetManager::InsertVariate(newVariate, m_treeWidget, m_treeWidget->invisibleRootItem());
 		newVariate->WriteToTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
 	}
 	else
 	{
+		//VariateTreeWidgetManager::InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, m_treeWidget->invisibleRootItem());
 		variate->WriteToTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
 	}
 
 	auto item = m_treeWidget->topLevelItem(m_treeWidget->topLevelItemCount() - 1);
 
 	m_treeWidget->setItemWidget(item, 1, variateComboBox);
+	assert(typeid(*item) == typeid(TreeWidgetItemWithVariate));
 	variateComboBox->ParentItem(dynamic_cast<TreeWidgetItemWithVariate*>(item));
 
 	connect(variateComboBox, SIGNAL(currentTextChanged(const QString&)), this, SLOT(SlotOnParameterChanged()));

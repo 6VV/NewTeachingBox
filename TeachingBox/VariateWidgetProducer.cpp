@@ -103,6 +103,21 @@ void VariateWidgetProducer::UpdateComboBoxWithWholeName(SymbolType type, const Q
 
 }
 
+void VariateWidgetProducer::UpdateComboBoxWithSimpleName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap, QComboBox* comboBox)
+{
+	comboBox->clear();
+
+	auto variates = std::move(GetVariateMap(type, variateMap));
+
+	for (auto iter = variates.begin(); iter != variates.end(); ++iter)
+	{
+		for (auto var : iter.value())
+		{
+			comboBox->addItem(QIcon(GetIconPath(iter.key())),var);
+		}
+	}
+}
+
 QString VariateWidgetProducer::GetIconPath(const QString& scope)
 {
 	if (scope == ProjectContext::ScopeSystem())

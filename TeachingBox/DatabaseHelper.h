@@ -28,7 +28,7 @@ namespace Database{
 
 	public:
 		static DatabaseHelper* GetInstance();
-		const QSqlDatabase& GetDatabase();
+		const QSqlDatabase* GetDatabase();
 
 	private:
 		DatabaseHelper();

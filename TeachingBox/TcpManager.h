@@ -7,7 +7,9 @@
 //  Author:			刘巍      
 //  Version: 		1.0     
 //  Date: 			2016/10/08
-//  Description:	用于与远程控制器建立连接，并发送指令
+//  Description:	通过TCP与远程控制器建立连接，并发送指令，
+		发送接收过程不可在子线程中进行，未避免因线程原因到时发送接收失败，可在主线程中初始化本类对象，
+		并通过一适配器的信号与本类的相应函数进行连接，进而实现数据传输功能。
 //  Others:
 //  Function List:
 //  History:
@@ -18,7 +20,7 @@
 *************************************************/
 
 #include "QObject"
-#include "SingleTon.h"
+#include <memory>
 
 class QHostAddress;
 class QTcpSocket;
@@ -27,8 +29,6 @@ class RemoteParser;
 class TcpManager:public QObject
 {
 	Q_OBJECT;
-
-	friend SingleTon<TcpManager>;
 
 	static const int PORT = 1234;
 
@@ -47,9 +47,6 @@ public:
 	void SendData(const QByteArray& data);
 	void ConnectAddress(const QString& address);
 
-public slots:
-	void SlotSendData(const QByteArray& data);
-
 private slots:
 	void SlotOnReceiveData();
 	void SlotOnConnect();
@@ -61,8 +58,7 @@ private:
 
 private:
 	QTcpSocket *m_tcpSocket = nullptr;
-
-	RemoteParser *m_remoteParser=nullptr;
+	std::unique_ptr<RemoteParser> m_remoteParser;
 };
 
 #endif

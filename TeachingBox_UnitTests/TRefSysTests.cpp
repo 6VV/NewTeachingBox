@@ -7,7 +7,7 @@
 
 void TRefSysTests::SetUp()
 {
-	m_refSys = new TRefSys("scope", "name",
+	m_refSys = new TRefSys({"scope", "name"},
 		TRefSys::ValueType{ 
 		TRefSys::BaseSysType{ "baseName"}, 
 		TRefSys::OffsetType{ { 1, 2, 3, 4, 5, 6 } }});

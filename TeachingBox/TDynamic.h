@@ -9,14 +9,19 @@ class TDynamic:public TVariate
 	Q_OBJECT
 
 public:
-	TDynamic(const QString& scope, const QString& name, const tDynamicConstraint& value = tDynamicConstraint{});
+	typedef tDynamicConstraint ValueType;
+	static QString TypeName();
+
+public:
+	TDynamic(const TSymbol& symbol, ValueType value = ValueType{});
+	//TDynamic(const QString& scope, const QString& name, const ValueType& value = tDynamicConstraint{});
 	TDynamic(const TDynamic& variate);
 	TDynamic(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
 
-	const tDynamicConstraint& GetValue() const;
-	void SetValue(const tDynamicConstraint& value);
+	const ValueType& GetValue() const;
+	void SetValue(const ValueType& value);
 
 
 protected:
@@ -29,8 +34,9 @@ protected:
 private:
 	void Init();
 
+
 private:
-	tDynamicConstraint m_value;
+	ValueType m_value;
 };
 
 #endif

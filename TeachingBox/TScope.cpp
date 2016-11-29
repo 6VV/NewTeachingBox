@@ -219,7 +219,7 @@ TScope::~TScope()
 
 void TScope::AddVariate(const TVariate* variate)
 {
-	TSymbol* symbol = new TSymbol(variate->GetScope(), variate->GetName(), TSymbol::CATEGORY_VARIABLE, variate->GetType());
+	TSymbol* symbol = new TSymbol(variate->GetScope(), variate->GetName(), variate->GetType());
 	TScope* scopeFound = FindScopeScrollDown(variate->GetScope());
 
 	if (scopeFound)
@@ -239,7 +239,7 @@ void TScope::DeleteVariate(const QString& scope, const QString& name)
 
 void TScope::UpdateVariate(const QString& scope, const QString& name, const TVariate* variate)
 {
-	TSymbol* symbol = new TSymbol(variate->GetScope(), variate->GetName(), TSymbol::CATEGORY_VARIABLE, variate->GetType());
+	TSymbol* symbol = new TSymbol(variate->GetScope(), variate->GetName(), variate->GetType());
 	TScope* scopeFound = FindScopeScrollDown(scope);
 	if (scopeFound)
 	{

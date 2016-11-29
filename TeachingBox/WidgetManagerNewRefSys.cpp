@@ -39,7 +39,7 @@ namespace VariateWidget
 			resultValue.offset[i - m_startRowCount - 1] = value;
 		}
 
-		return std::unique_ptr<TVariate>(new TRefSys(scope, name, resultValue));
+		return std::unique_ptr<TVariate>(new TRefSys({scope, name}, resultValue));
 	}
 
 	void WidgetManagerNewRefSys::InitParameter()

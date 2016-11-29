@@ -4,13 +4,18 @@
 #include "TRefSysWidget.h"
 
 
-
-TRefSys::TRefSys(const QString& scope, const QString& name, const ValueType& value)
-	:TVariate(scope, name, TSymbol::TYPE_REF_SYS)
-	, m_value(value)
+inline
+QString TRefSys::TypeName()
 {
-	Init();
+	return "TRefSys";
 }
+
+//TRefSys::TRefSys(const QString& scope, const QString& name, const ValueType& value)
+//	:TVariate(scope, name, TSymbol::TYPE_REF_SYS)
+//	, m_value(value)
+//{
+//	Init();
+//}
 
 TRefSys::TRefSys(const TRefSys& refSys)
 	:TVariate(refSys)
@@ -30,6 +35,14 @@ TRefSys::TRefSys(QDataStream& dataStream)
 		dataStream >> value;
 	}
 
+	Init();
+}
+
+
+TRefSys::TRefSys(const TSymbol& symbol, ValueType value )
+	:TVariate(TSymbol{symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_REF_SYS,TypeName()})
+	, m_value(value)
+{
 	Init();
 }
 

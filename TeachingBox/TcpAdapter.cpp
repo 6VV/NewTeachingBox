@@ -1,10 +1,11 @@
 ﻿#include "stdafx.h"
 #include "TcpAdapter.h"
 #include "TcpManager.h"
+#include "RemoteParser.h"
 
 
 
-TcpAdapter::TcpAdapter(QObject* parent /*= 0*/) :QObject(parent)
+TcpAdapter::TcpAdapter() 
 {
 	Init();
 }
@@ -19,7 +20,8 @@ void TcpAdapter::SendData(const QByteArray& data)
 	emit(SignalSendData(data));
 }
 
+
 void TcpAdapter::Init()
 {
-	connect(this, SIGNAL(SignalSendData(const QByteArray&)), TcpManager::GetInstance(), SLOT(SlotSendData(const QByteArray&)));
+	connect(this, &TcpAdapter::SignalSendData, TcpManager::GetInstance(), &TcpManager::SendData);
 }

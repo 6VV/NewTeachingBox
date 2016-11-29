@@ -1,5 +1,5 @@
-#include <QtCore/QCoreApplication>
 #include <gtest/gtest.h>
+#include "QApplication"
 
 int main(int argc, char *argv[])
 {

@@ -44,6 +44,7 @@ private slots:
 	void SlotOnDeleteVariateButtonClicked();
 	void SlotOnVariateButtonClicked();
 	void SlotOnNewVariateButtonClicked();
+	void SlotOnTeachButtonClicked();
 
 private:
 	virtual QList<QPushButton*> GetButtonList() override;

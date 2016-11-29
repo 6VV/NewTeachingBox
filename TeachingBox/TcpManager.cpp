@@ -7,7 +7,8 @@
 
 TcpManager* TcpManager::GetInstance()
 {
-	return SingleTon<TcpManager>::GetInstance();
+	static TcpManager tcpManager;
+	return &tcpManager;
 }
 
 TcpManager::TcpManager()
@@ -21,7 +22,6 @@ TcpManager::~TcpManager()
 {
 	m_tcpSocket->close();
 	delete m_tcpSocket;
-	delete m_remoteParser;
 
 	m_tcpSocket = nullptr;
 	m_remoteParser = nullptr;
@@ -42,11 +42,6 @@ void TcpManager::ConnectAddress(const QString& address)
 	QHostAddress hostAddress;
 	hostAddress.setAddress(address);
 	m_tcpSocket->connectToHost(hostAddress, PORT);
-}
-
-void TcpManager::SlotSendData(const QByteArray& data)
-{
-	SendData(data);
 }
 
 void TcpManager::SlotOnReceiveData()

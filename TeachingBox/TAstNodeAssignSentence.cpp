@@ -37,17 +37,17 @@ TAstNode::ValueReturned TAstNodeAssignSentence::Execute() const
 	{
 	case TSymbol::TYPE_INTERGER:
 	{
-		TVariateManager::GetInstance()->UpdateInMapScollUp(var->GetScope(), var->GetName(), TInteger(var->GetScope(), var->GetName(), static_cast<int>(value.value)));
+		TVariateManager::GetInstance()->UpdateInMapScollUp(var->GetScope(), var->GetName(), TInteger({var->GetScope(), var->GetName()}, static_cast<int>(value.value)));
 		result.type = TSymbol::TYPE_INTERGER;
 	}break;
 	case TSymbol::TYPE_DOUBLE:
 	{
-		TVariateManager::GetInstance()->UpdateInMapScollUp(var->GetScope(), var->GetName(), TDouble(var->GetScope(), var->GetName(), value.value));
+		TVariateManager::GetInstance()->UpdateInMapScollUp(var->GetScope(), var->GetName(), TDouble({var->GetScope(), var->GetName()}, value.value));
 		result.type = TSymbol::TYPE_DOUBLE;
 	}break;
 	case TSymbol::TYPE_BOOL:
 	{
-		TVariateManager::GetInstance()->UpdateInMapScollUp(var->GetScope(), var->GetName(), TBool(var->GetScope(), var->GetName(), value.value != 0));
+		TVariateManager::GetInstance()->UpdateInMapScollUp(var->GetScope(), var->GetName(), TBool(TSymbol{ var->GetScope(), var->GetName() }, value.value != 0));
 		result.type = TSymbol::TYPE_BOOL;
 	}break;
 	default:

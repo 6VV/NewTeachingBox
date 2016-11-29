@@ -8,14 +8,18 @@ class TString:public TVariate
 	Q_OBJECT
 
 public:
-	TString(const QString& scope, const QString& name, const QString& value="");
+	typedef QString ValueType;
+	static QString TypeName();
+
+public:
+	TString(const TSymbol& symbol, ValueType value = "");
 	TString(const TString& variate);
 	TString(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
 
-	const QString& GetValue() const;
-	void SetValue(const QString& value);
+	const ValueType GetValue() const;
+	void SetValue(const ValueType& value);
 
 
 protected:
@@ -25,8 +29,9 @@ protected:
 private:
 	void  Init();
 
+
 private:
-	QString m_value;
+	ValueType m_value;
 };
 
 #endif

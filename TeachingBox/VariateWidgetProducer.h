@@ -54,6 +54,19 @@ public:
 	//  History:
 	*************************************************/
 	static void UpdateComboBoxWithWholeName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap,QComboBox* comboBox);
+
+	/*************************************************
+	//  Method:        VariateWidgetProducer::UpdateComboBox(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap, QComboBox* comboBox)
+	//  Description:   更新某类型变量的comboBox控件,显示该类型的简单变量名（不包括作用域）
+	//  Author:        刘巍
+	//  Date:          2016/11/16
+	//  Returns:       void
+	//  Parameter:     SymbolType：变量类型
+			const QMap<QString, QVector<TVariate*>>&：变量集合，key指作用域，QVector<TVariate*>指该作用域内的变量集合
+			QComboBox*：需要更新的控件
+	//  History:
+	*************************************************/
+	static void UpdateComboBoxWithSimpleName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap, QComboBox* comboBox);
 	
 	/*************************************************
 	//  Method:		static QString GetSuggestName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap)

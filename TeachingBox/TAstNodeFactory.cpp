@@ -26,6 +26,7 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QStr
 		QString fileText=projectManager.GetFileText(project,var.split(".").at(1));
 
 		TLexer lexer(fileText);
+		lexer.Parse();
 		std::shared_ptr<TToken> token(new TToken(TYPE::ID, 0, var));
 
 		result->AddChild(TAstNodeProgram::GetAstNode(&lexer, token));

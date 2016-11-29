@@ -9,14 +9,18 @@ class TOverlap:public TVariate
 	Q_OBJECT
 
 public:
-	TOverlap(const QString& scope, const QString& name, const tOverlapConstraint& value = tOverlapConstraint{});
+	typedef tOverlapConstraint ValueType;
+	static QString TypeName();
+
+public:
+	TOverlap(const TSymbol& symbol, ValueType value = ValueType{});
 	TOverlap(const TOverlap& variate);
 	TOverlap(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
 
-	const tOverlapConstraint& GetValue() const;
-	void SetValue(const tOverlapConstraint& value);
+	const ValueType& GetValue() const;
+	void SetValue(const ValueType& value);
 
 protected:
 	virtual void WriteValueToStream(QDataStream& dataStream) const override;
@@ -28,8 +32,9 @@ protected:
 private:
 	void Init();
 
+
 private:
-	tOverlapConstraint m_value;
+	ValueType m_value;
 };
 
 #endif

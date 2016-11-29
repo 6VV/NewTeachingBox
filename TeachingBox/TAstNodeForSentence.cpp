@@ -36,7 +36,6 @@ TAstNode::ValueReturned TAstNodeForSentence::Execute() const
 
 	auto scope = GetScope();
 	auto name = m_firstChild->GetFirstChild()->GetToken()->Name();
-		//static_cast<TTokenWithValue<QString>*>(m_firstChild->GetFirstChild()->GetToken().get())->GetValue();
 	auto type = TVariateManager::GetInstance()->GetVariateSrollUp(scope, name)->GetType();
 
 	UpdateValue(type, scope, name, firstValue.value);
@@ -57,11 +56,11 @@ void TAstNodeForSentence::UpdateValue(SYMBOL_TYPE type, const QString& scope, co
 {
 	if (type == SYMBOL_TYPE::TYPE_INTERGER)
 	{
-		TVariateManager::GetInstance()->UpdateInMapScollUp(scope, name, TInteger(scope, name, static_cast<int>(value)));
+		TVariateManager::GetInstance()->UpdateInMapScollUp(scope, name, TInteger({scope, name}, static_cast<int>(value)));
 	}
 	else
 	{
-		TVariateManager::GetInstance()->UpdateInMapScollUp(scope, name, TDouble(scope, name, value));
+		TVariateManager::GetInstance()->UpdateInMapScollUp(scope, name, TDouble({scope, name}, value));
 	}
 }
 

@@ -6,6 +6,12 @@
 #include "TPositionWidget.h"
 
 
+inline
+QString TPosition::TypeName()
+{
+	return "Position";
+}
+
 TPosition::TPosition(QDataStream& dataStream) : TVariate(dataStream)
 {
 	double value;
@@ -20,19 +26,26 @@ TPosition::TPosition(QDataStream& dataStream) : TVariate(dataStream)
 	Init();
 }
 
-TPosition::TPosition(const QString& scope, const QString& name, const tAxesAllPositions& value)
-	:TVariate(scope, name, TSymbol::TYPE_POSITION)
-{
-	m_value = value;
-
-	Init();
-}
+//TPosition::TPosition(const QString& scope, const QString& name, const tAxesAllPositions& value)
+//	:TVariate(scope, name, TSymbol::TYPE_POSITION)
+//{
+//	m_value = value;
+//
+//	Init();
+//}
 
 TPosition::TPosition(const TPosition& variate)
 	: TVariate(variate)
 {
 	m_value = variate.m_value;
 
+	Init();
+}
+
+TPosition::TPosition(const TSymbol& symbol, ValueType value)
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_POSITION ,TypeName()})
+	, m_value(value)
+{
 	Init();
 }
 
@@ -63,6 +76,7 @@ void TPosition::Init()
 {
 	m_variateWidget = new TPositionWidget(this);
 }
+
 
 TVariate* TPosition::Clone() const
 {

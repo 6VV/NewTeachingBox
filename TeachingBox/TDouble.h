@@ -8,14 +8,18 @@ class TDouble:public TVariate
 	Q_OBJECT
 
 public:
-	TDouble(const QString& scope, const QString& name, const double value=0);
+	typedef double ValueType;
+	static QString TypeName();
+
+public:
+	TDouble(const TSymbol& symbol, ValueType value = 0);
 	TDouble(const TDouble& variate);
 	TDouble(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
 
-	double GetValue();
-	void SetValue(const double value);
+	ValueType GetValue();
+	void SetValue(const ValueType value);
 
 protected:
 	virtual void WriteValueToStream(QDataStream& dataStream) const override;
@@ -25,8 +29,9 @@ protected:
 private:
 	void Init();
 
+
 private:
-	double m_value;
+	ValueType m_value;
 };
 
 #endif

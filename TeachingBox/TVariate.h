@@ -15,7 +15,7 @@
 		Save：保存值并更新显示控件；
 		ReadTreeWidgetItem：将变量添加到树形控件中
 		ReadContentIntoItem：根据变量更新控件显示数据
-		ReadCollection：将变量添加到集合中
+		WriteToCollection：将变量添加到集合中
 		ReadDataStream：从数据流中更新变量
 	需子类实现的功能：
 		virtual TVariate* Clone() const=0
@@ -35,16 +35,15 @@
 
 class TVariateWidget;
 class TreeWidgetItemWithVariate;
+class QTreeWidgetItem;
+class QTreeWidget;
 
 class TVariate:public QObject
 {
 	Q_OBJECT
 
 public:
-	typedef QSet<TVariate*> SET;
-
-public:
-	TVariate(const QString& scope, const QString& name,TSymbol::SymbolType type);
+	TVariate(const TSymbol& symbol);
 	TVariate(const TVariate& variate);
 	TVariate(QDataStream& dataStream);
 	virtual ~TVariate();
@@ -52,11 +51,12 @@ public:
 public:
 	virtual TVariate* Clone() const = 0;
 
+	TSymbol GetSymbol() const;
 	QString GetScope() const;
 	QString GetName() const;
-	TSymbol::SymbolType GetType() const;
+	TSymbol::SymbolType GetType() const;	/*获取变量类型*/
+	QString GetTypeName() const;	/*获取变量类型名*/
 
-	void SetName(const QString& name);
 	void Save();
 
 	void WriteContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget);	/*利用值更新控件内容*/
@@ -66,7 +66,7 @@ public:
 		const TSymbol::SymbolType type);/*当变量类型与需求类型相同时，将变量添加到控件中*/
 
 	void WriteDataToStream(QDataStream& dataStream) const;	/*将变量读入到数据流中*/
-	void WriteToCollection(SET& collection, const TSymbol::SymbolType type);	/*当变量类型与需求类型相同时，将变量添加到集合中*/
+	//void WriteToCollection(SET& collection, const TSymbol::SymbolType type);	/*当变量类型与需求类型相同时，将变量添加到集合中*/
 
 	void UpdateFromVariate(const TVariate& variate);	/*更新变量值*/
 
@@ -74,11 +74,11 @@ protected:
 	virtual void WriteValueToStream(QDataStream& dataStream) const=0;
 	virtual void UpdateFromValue(const TVariate& variate) =0;
 
+private:
 	void UpdateRamAndDatabaseFrom(const TVariate& variate) const;
 
 protected:
 	TSymbol m_symbol;
-
 	TVariateWidget* m_variateWidget=nullptr;
 };
 

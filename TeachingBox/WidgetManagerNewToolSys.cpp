@@ -37,7 +37,7 @@ namespace VariateWidget
 		}
 
 
-		return std::unique_ptr<TVariate>(new TToolSys(scope, name, resultValue));
+		return std::unique_ptr<TVariate>(new TToolSys({scope, name}, resultValue));
 	}
 
 	void WidgetManagerNewToolSys::InitParameter()

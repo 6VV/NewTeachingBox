@@ -8,7 +8,11 @@ class TInteger:public TVariate
 	Q_OBJECT
 
 public:
-	TInteger(const QString& scope, const QString& name,const int value=0);
+	typedef int ValueType;
+	static QString TypeName();
+
+public:
+	TInteger(const TSymbol& symbol, ValueType value = 0);
 	TInteger(const TInteger& variate);
 	TInteger(QDataStream& dataStream);
 
@@ -23,6 +27,7 @@ protected:
 
 private:
 	void Init();
+
 
 private:
 	int m_value;

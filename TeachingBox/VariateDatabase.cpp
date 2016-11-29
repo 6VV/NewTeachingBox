@@ -15,7 +15,7 @@ namespace Database{
 	void VariateDatabase::InsertVariate(QDataStream& dataStream)
 	{
 		dataStream.device()->seek(0);
-		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 
 		query.prepare("insert into " + VARIATE_TABLE_NAME + " values(?,?,?)");
 
@@ -43,7 +43,7 @@ namespace Database{
 	{
 		QVector<QByteArray> result;
 
-		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 
 		query.prepare(QString("select * from %1")
 			.arg(VARIATE_TABLE_NAME));
@@ -63,7 +63,7 @@ namespace Database{
 
 	void VariateDatabase::UpdateVariate(const QString& scope, const QString& name, QDataStream& dataStream)
 	{
-		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		query.prepare("update " + VARIATE_TABLE_NAME + " set "
 			+ VARIATE_COLUMN_SCOPE + "=?,"
 			+ VARIATE_COLUMN_NAME + "=?,"
@@ -97,7 +97,7 @@ namespace Database{
 
 	void VariateDatabase::DeleteVariate(const QString& scope, const QString& name)
 	{
-		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		QString oper = QString("delete from %1 where %2='%3' and %4='%5'")
 			.arg(VARIATE_TABLE_NAME)
 			.arg(VARIATE_COLUMN_SCOPE).arg(scope)
@@ -112,7 +112,7 @@ namespace Database{
 
 	void VariateDatabase::DeleteVariate(const QString& scope)
 	{
-		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		QString oper = QString("delete from %1 where %2='%3'")
 			.arg(VARIATE_TABLE_NAME)
 			.arg(VARIATE_COLUMN_SCOPE).arg(scope);

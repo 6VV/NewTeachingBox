@@ -4,6 +4,7 @@
 #include "QDebug"
 #include "TcpAdapter.h"
 #include "Context.h"
+#include "RemoteAdapterFactory.h"
 
 
 RemoteManager* RemoteManager::GetInstance()
@@ -15,21 +16,21 @@ void RemoteManager::SendMovlCommand(const char* commandData, int commandLength, 
 {
 	Context::interpreterContext.IsAllowSendCommandData(false);
 
-	m_tcpAdapter->SendData(std::move(ContructNormalCommand(COMMAND_ID::MOVL, commandData, commandLength, lineNumber, programAddress)));
+	RemoteAdapterFactory::GetRemoteAdapter()->SendData(std::move(ContructNormalCommand(COMMAND_ID::MOVL, commandData, commandLength, lineNumber, programAddress)));
 }
 
 void RemoteManager::SendStopCommand()
 {
-	m_tcpAdapter->SendData(std::move(ContructSpecialCommand(COMMAND_ID::STOP_EXECUTE)));
+	RemoteAdapterFactory::GetRemoteAdapter()->SendData(std::move(ContructSpecialCommand(COMMAND_ID::STOP_EXECUTE)));
 }
 
 
 void RemoteManager::SendEndCommand()
 {
-	m_tcpAdapter->SendData(std::move(ContructNormalCommand(COMMAND_ID::END)));
+	RemoteAdapterFactory::GetRemoteAdapter()->SendData(std::move(ContructNormalCommand(COMMAND_ID::END)));
 }
 
-RemoteManager::RemoteManager() :m_tcpAdapter(new TcpAdapter())
+RemoteManager::RemoteManager()
 {
 
 }

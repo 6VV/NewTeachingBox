@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoolValueTreeWidgetItem.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonGroup.cpp" />
     <ClCompile Include="CodeEditor.cpp" />
@@ -94,7 +95,9 @@
     <ClCompile Include="DialogNewMacro.cpp" />
     <ClCompile Include="DialogParent.cpp" />
     <ClCompile Include="DialogTeachToolSystem.cpp" />
+    <ClCompile Include="DoubleValueTreeWidgetItem.cpp" />
     <ClCompile Include="DynamicController.cpp" />
+    <ClCompile Include="DynamicValueTreeWidgetItem.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_CodeEditor.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -120,6 +123,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_MacroWidgetParent.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RemoteAdapter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_RemoteParser.cpp">
@@ -206,6 +212,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_MacroWidgetParent.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RemoteAdapter.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_RemoteParser.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -263,6 +272,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_WidgetManagerNewVariate.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="IntegerValueTreeWidgetItem.cpp" />
     <ClCompile Include="InterpreterContext.cpp" />
     <ClCompile Include="InterpreterManager.cpp" />
     <ClCompile Include="Macro.cpp" />
@@ -271,8 +281,12 @@
     <ClCompile Include="MacroWidgetMovl.cpp" />
     <ClCompile Include="MacroWidgetParent.cpp" />
     <ClCompile Include="MacroWidgetFactory.cpp" />
+    <ClCompile Include="OverlapValueTreeWidgetItem.cpp" />
+    <ClCompile Include="PositionValueTreeWidgetItem.cpp" />
     <ClCompile Include="ProjectManager.cpp" />
     <ClCompile Include="ProjectContext.cpp" />
+    <ClCompile Include="RemoteAdapterFactory.cpp" />
+    <ClCompile Include="RemoteFeedbackController.cpp" />
     <ClCompile Include="RemoteManager.cpp" />
     <ClCompile Include="RemoteParser.cpp" />
     <ClCompile Include="ScreenCoordinate.cpp" />
@@ -281,6 +295,7 @@
     <ClCompile Include="ScreenReferenceSystem.cpp" />
     <ClCompile Include="DialogTeachReferenceSystem.cpp" />
     <ClCompile Include="ScreenToolSystem.cpp" />
+    <ClCompile Include="StringValueTreeWidgetItem.cpp" />
     <ClCompile Include="TAstNode.cpp" />
     <ClCompile Include="TAstNodeAssignSentence.cpp" />
     <ClCompile Include="TAstNodeElseIfSentence.cpp" />
@@ -308,6 +323,7 @@
     <ClCompile Include="TLexer.cpp" />
     <ClCompile Include="TOverlapWidget.cpp" />
     <ClCompile Include="TPositionWidget.cpp" />
+    <ClCompile Include="TreeWidgetItemWithSymbol.cpp" />
     <ClCompile Include="TRefSys.cpp" />
     <ClCompile Include="TRefSysWidget.cpp" />
     <ClCompile Include="TScope.cpp" />
@@ -513,6 +529,7 @@
     <ClCompile Include="TToolSys.cpp" />
     <ClCompile Include="TToolSysWidget.cpp" />
     <ClCompile Include="TVariate.cpp" />
+    <ClCompile Include="TVariateContextNode.cpp" />
     <ClCompile Include="TVariateFactory.cpp" />
     <ClCompile Include="TVariateManager.cpp" />
     <ClCompile Include="TVariateWidget.cpp" />
@@ -521,6 +538,8 @@
     <ClCompile Include="VariateDatabase.cpp" />
     <ClCompile Include="VariateTableManager.cpp" />
     <ClCompile Include="TVariateType.cpp" />
+    <ClCompile Include="VariateTreeWidgetManager.cpp" />
+    <ClCompile Include="VariateValueTreeWidgetItem.cpp" />
     <ClCompile Include="VariateWidgetProducer.cpp" />
     <ClCompile Include="WarningLight.cpp" />
     <ClCompile Include="WarningManager.cpp" />
@@ -608,6 +627,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoolValueTreeWidgetItem.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonGroup.h" />
     <CustomBuild Include="DialogTeachReferenceSystem.h">
@@ -641,8 +661,32 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../ScreenToolSystem.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
     </CustomBuild>
     <ClInclude Include="DialogTeachToolSystem.h" />
+    <CustomBuild Include="RemoteAdapter.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing RemoteAdapter.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../RemoteAdapter.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing RemoteAdapter.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../RemoteAdapter.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
+    </CustomBuild>
+    <ClInclude Include="DoubleValueTreeWidgetItem.h" />
+    <ClInclude Include="DynamicValueTreeWidgetItem.h" />
+    <ClInclude Include="IntegerValueTreeWidgetItem.h" />
+    <ClInclude Include="IRemoteFeedbackListener.h" />
+    <ClInclude Include="OverlapValueTreeWidgetItem.h" />
+    <ClInclude Include="PositionValueTreeWidgetItem.h" />
+    <ClInclude Include="RemoteAdapterFactory.h" />
+    <ClInclude Include="RemoteFeedbackController.h" />
+    <ClInclude Include="StringValueTreeWidgetItem.h" />
+    <ClInclude Include="TreeWidgetItemWithSymbol.h" />
     <ClInclude Include="TToolSys.h" />
     <ClInclude Include="TToolSysWidget.h" />
+    <ClInclude Include="TVariateContextNode.h" />
+    <ClInclude Include="VariateValueTreeWidgetBuilder.h" />
+    <ClInclude Include="VariateValueTreeWidgetItem.h" />
+    <ClInclude Include="VariateTreeWidgetManager.h" />
     <ClInclude Include="WidgetManagerNewBool.h" />
     <ClInclude Include="WidgetManagerNewDouble.h" />
     <ClInclude Include="WidgetManagerNewDynamic.h" />

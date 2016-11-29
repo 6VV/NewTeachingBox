@@ -2,6 +2,8 @@
 #pragma warning(push)
 #pragma warning(disable:4127)
 
+#include <QWidget>
+
 #include <QButtonGroup>
 #include <QCheckBox>
 #include <QComboBox>

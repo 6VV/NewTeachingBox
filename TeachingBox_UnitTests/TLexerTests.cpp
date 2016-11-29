@@ -5,12 +5,14 @@
 #include "..\TeachingBox\TTokenWithValue.h"
 #include <gtest\gtest.h>
 
+
 TEST_F(TLexerTests, Parse_ParseDigit_Equal)
 {
 	try
 	{
 		QString text("123  231\t1.232");
 		TLexer lexer(text);
+		lexer.Parse();
 		double num[3][2]{{TYPE::LITERAL_INTERGER, 123},
 		{ TYPE::LITERAL_INTERGER, 231 },
 		{ TYPE::LITERAL_DOUBLE, 1.232 }};
@@ -38,6 +40,7 @@ TEST_F(TLexerTests, Parse_ParseId_Equal)
 	try{
 		QString text("abc _de d21");
 		TLexer lexer(text);
+		lexer.Parse();
 		QStringList strList{ "abc", "_de", "d21" };
 
 		auto ptr = lexer.GetToken();
@@ -90,6 +93,7 @@ TEST_F(TLexerTests, Parse_ParseOtherWord_Equal)
 			TYPE::OPERATOR_ASSIGN, TYPE::OPERATOR_EQUAL,TYPE::OPERATOR_LEFT_BRACKET, TYPE::OPERATOR_RIGHT_BRACKET};
 
 		TLexer lexer(text);
+		lexer.Parse();
 		int index = 0;
 		auto ptr = lexer.GetToken();
 		while (ptr->Type() != TYPE::SEPARATOR_EOF)
@@ -114,6 +118,7 @@ TEST_F(TLexerTests, Parse_ParseString_Equal)
 		QString strVerify("hello world");
 
 		TLexer lexer(text);
+		lexer.Parse();
 		auto ptr = lexer.GetToken();
 
 		EXPECT_STREQ(strVerify.toStdString().c_str(), /*(static_cast<TTokenWithValue<QString>*>(ptr.get()))->GetValue()*/ptr->Name().toStdString().c_str());
@@ -132,6 +137,7 @@ TEST_F(TLexerTests, Parse_ParseNote_Skip)
 		QString text("\\\\hello world");
 
 		TLexer lexer(text);
+		lexer.Parse();
 		auto ptr = lexer.GetToken();
 
 		if (ptr->Type() != TYPE::SEPARATOR_EOF)
@@ -151,7 +157,7 @@ TEST_F(TLexerTests, Parse_ParseForbid_Skip)
 	{
 		QString text1("#hello world");
 		TLexer lexer1(text1);
-
+		lexer1.Parse();
 		if (lexer1.GetToken()->Type() != TYPE::SEPARATOR_EOF)
 		{
 			FAIL() << "Not nullptr";
@@ -159,6 +165,7 @@ TEST_F(TLexerTests, Parse_ParseForbid_Skip)
 
 		QString text2("#hello \nworld");
 		TLexer lexer2(text2);
+		lexer2.Parse();
 		EXPECT_EQ(lexer2.GetToken()->Type(), TYPE::SEPARATOR_EOL);
 		EXPECT_EQ(lexer2.GetToken()->Type(), TYPE::ID);
 	}
@@ -174,7 +181,7 @@ TEST_F(TLexerTests, Parse_ParseReserveValue_Equal)
 	{
 		QString text("TRUE FALSE");
 		TLexer lexer(text);
-
+		lexer.Parse();
 		EXPECT_EQ(lexer.GetToken()->Type(), TYPE::LITERAL_VALUE_TRUE);
 		EXPECT_EQ(lexer.GetToken()->Type(), TYPE::LITERAL_VALUE_FALSE);
 	}

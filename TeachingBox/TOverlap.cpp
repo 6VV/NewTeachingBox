@@ -8,13 +8,18 @@
 #include "TOverlapWidget.h"
 
 
-
-TOverlap::TOverlap(const QString& scope, const QString& name, const tOverlapConstraint& value)
-	:TVariate(scope, name, TSymbol::TYPE_OVERLAP)
-	, m_value(value)
+inline
+QString TOverlap::TypeName()
 {
-	Init();
+	return "Overlap";
 }
+
+//TOverlap::TOverlap(const QString& scope, const QString& name, const tOverlapConstraint& value)
+//	:TVariate(scope, name, TSymbol::TYPE_OVERLAP)
+//	, m_value(value)
+//{
+//	Init();
+//}
 
 TOverlap::TOverlap(QDataStream& dataStream) : TVariate(dataStream)
 {
@@ -28,6 +33,13 @@ TOverlap::TOverlap(const TOverlap& variate)
 {
 	m_value = variate.m_value;
 
+	Init();
+}
+
+TOverlap::TOverlap(const TSymbol& symbol, ValueType value)
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_OVERLAP,TypeName() })
+	, m_value(value)
+{
 	Init();
 }
 

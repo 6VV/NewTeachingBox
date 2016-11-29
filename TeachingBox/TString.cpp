@@ -4,14 +4,19 @@
 #include "TStringWidget.h"
 
 
-
-TString::TString(const QString& scope, const QString& name, const QString& value)
-	:TVariate(scope,name,TSymbol::TYPE_STRING)
+inline
+QString TString::TypeName()
 {
-	m_value = value;
-
-	Init();
+	return "String";
 }
+
+//TString::TString(const QString& scope, const QString& name, const QString& value)
+//	:TVariate(scope,name,TSymbol::TYPE_STRING)
+//{
+//	m_value = value;
+//
+//	Init();
+//}
 
 TString::TString(QDataStream& dataStream) : TVariate(dataStream)
 {
@@ -28,12 +33,19 @@ TString::TString(const TString& variate)
 	Init();
 }
 
-const QString& TString::GetValue() const
+TString::TString(const TSymbol& symbol, ValueType value /*= 0*/)
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_STRING,TypeName() })
+	, m_value(value)
+{
+	Init();
+}
+
+const TString::ValueType TString::GetValue() const
 {
 	return m_value;
 }
 
-void TString::SetValue(const QString& value)
+void TString::SetValue(const ValueType& value)
 {
 	m_value = value;
 }
@@ -55,6 +67,7 @@ void TString::Init()
 {
 	m_variateWidget = new TStringWidget(this);
 }
+
 
 TVariate* TString::Clone() const
 {

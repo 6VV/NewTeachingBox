@@ -25,7 +25,6 @@ TAstNode::ValueReturned TAstNodeNextSentence::Execute() const
 
 	auto scope = GetScope();
 	auto name = m_parentNode->GetFirstChild()->GetFirstChild()->GetToken()->Name();
-		//static_cast<TTokenWithValue<QString>*>(m_parentNode->GetFirstChild()->GetFirstChild()->GetToken().get())->GetValue();
 	auto type = TVariateManager::GetInstance()->GetVariateSrollUp(scope, name)->GetType();
 
 	auto newValue = TAstNodeForSentence::GetValue(type, scope, name) + thirdChild->Execute().value;

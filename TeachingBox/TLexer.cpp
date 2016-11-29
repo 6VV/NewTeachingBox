@@ -175,6 +175,7 @@ void TLexer::PushTokenGreat()
 	}
 }
 
+inline
 void TLexer::PushTokenNot()
 {
 	switch (m_reader.GetNextChar()){
@@ -185,6 +186,7 @@ void TLexer::PushTokenNot()
 	}
 }
 
+inline
 void TLexer::PushTokenEqual()
 {
 	if (m_reader.PeekChar(1) == '='){
@@ -196,22 +198,26 @@ void TLexer::PushTokenEqual()
 	}
 }
 
+inline
 void TLexer::SkipCharInSameLine()
 {
 	while (IsEofOrEol(m_reader.GetNextChar())){}
 	m_reader.UnGetChar();
 }
 
+inline
 bool TLexer::IsEofOrEol(char c)
 {
 	return c != 0 && c != '\n';
 }
 
+inline
 void TLexer::ThrowException_UnknownToken(const QString& text)
 {
 	throw TInterpreterException(TInterpreterException::UNKNOW_TOKEN, m_reader.GetLineNumber(), text);
 }
 
+inline
 void TLexer::GetInterger(QString &text)
 {
 	char currentChar;
@@ -222,6 +228,7 @@ void TLexer::GetInterger(QString &text)
 	}
 }
 
+inline
 void TLexer::GetId(QString& text)
 {
 	char currentChar;
@@ -231,21 +238,25 @@ void TLexer::GetId(QString& text)
 	}
 }
 
+inline
 const bool TLexer::IsDigit(const char c) const
 {
 	return c >= '0'&& c <= '9';
 }
 
+inline
 const bool TLexer::IsLetter(const char c) const
 {
 	return c >= 'a'&& c <= 'z' || c >= 'A'&& c <= 'Z';
 }
 
+inline
 const bool TLexer::IsIdText(const char c) const
 {
 	return IsLetter(c) || c == '_' || IsDigit(c);
 }
 
+inline
 const bool TLexer::CheckPushKeyword(const QString& text)
 {
 	auto iter = TTokenType::KEY_MAP.find(text);
@@ -263,6 +274,7 @@ const bool TLexer::CheckPushKeyword(const QString& text)
 	return true;
 }
 
+inline
 const bool TLexer::CheckPushReserveValue(const TYPE type)
 {
 	bool value = false;
@@ -278,6 +290,7 @@ const bool TLexer::CheckPushReserveValue(const TYPE type)
 	return true;
 }
 
+inline
 void TLexer::Parse()
 {
 	char c;
@@ -307,6 +320,7 @@ TLexer::Reader::Reader(const QString& text) :m_text(&text)
 	const_cast<QString*>(m_text)->append(QChar('\0'));
 }
 
+inline
 const char TLexer::Reader::GetNextChar()
 {
 	if (GetCurrentChar()=='\n')
@@ -358,6 +372,7 @@ const char TLexer::Reader::PeekChar(const int index) const
 	return m_text->at(m_index + index).toLatin1();
 }
 
+inline
 void TLexer::Reader::SkipBlank()
 {
 	while (IsBlank(m_text->at(m_index).toLatin1()))
@@ -366,6 +381,7 @@ void TLexer::Reader::SkipBlank()
 	}
 }
 
+inline
 void TLexer::Reader::UnGetChar()
 {
 	if (m_index==0)
@@ -379,6 +395,7 @@ void TLexer::Reader::UnGetChar()
 	}
 }
 
+inline
 const bool TLexer::Reader::IsBlank(const char c) const
 {
 	return c > 0 && c <= ' ' && c != '\n';

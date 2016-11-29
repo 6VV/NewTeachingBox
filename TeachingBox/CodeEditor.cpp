@@ -291,6 +291,7 @@ void CodeEditor::InsertTextBeforeLine(const QString& text)
 	insertPlainText(text + "\n");
 	++m_textChangeTime;
 }
+
 //
 //void CodeEditor::InsertTextBeforeLineUnsafely(const QString& strText)
 //{

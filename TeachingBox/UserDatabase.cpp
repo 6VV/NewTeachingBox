@@ -36,7 +36,7 @@ namespace Database{
 
 	void UserDatabase::InsertUserInfo(const User& user)
 	{
-		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		query.prepare("insert into " + TABLE_USER + " values(?,?,?,?)");
 
 		query.bindValue(0, user.GetName());
@@ -52,7 +52,7 @@ namespace Database{
 
 	QList<User> UserDatabase::SelectAllUsers()
 	{
-		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		query.prepare(QString("select * from %1").arg(TABLE_USER));
 		QList<User> users;
 
@@ -73,7 +73,7 @@ namespace Database{
 
 	User UserDatabase::SelectUser(const QString& name)
 	{
-		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		query.prepare(QString("select * from %1 where %2='%3'")
 			.arg(TABLE_USER)
 			.arg(TABLE_COLUMN_NAME)
@@ -96,7 +96,7 @@ namespace Database{
 
 	void UserDatabase::UpdateUserInfo(const QString& oldUserName, const User& user)
 	{
-		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		query.prepare("update " + TABLE_USER + " set " + TABLE_COLUMN_NAME + "=?,"
 			+ TABLE_COLUMN_USER_PASSWORD + "=?,"
 			+ TABLE_COLUMN_USER_AUTHORITY + "=?,"
@@ -117,7 +117,7 @@ namespace Database{
 
 	void UserDatabase::DeleteUserInfo(const QString& userName)
 	{
-		QSqlQuery query(DatabaseHelper::GetInstance()->GetDatabase());
+		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		query.prepare(QString("delete from %1 where %2='%3'").arg(TABLE_USER).arg(TABLE_COLUMN_NAME).arg(userName));
 
 		if (!query.exec())

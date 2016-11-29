@@ -38,8 +38,11 @@ public:
 		OffsetType offset;
 	} ValueType;
 
+	static QString TypeName();
+
 public:
-	TRefSys(const QString& scope, const QString& name, const ValueType& value = ValueType{});
+	TRefSys(const TSymbol& symbol, ValueType value = ValueType{});
+	//TRefSys(const QString& scope, const QString& name, const ValueType& value = ValueType{});
 	TRefSys(const TRefSys& refSys);
 	TRefSys(QDataStream& dataStream);
 	~TRefSys();
@@ -54,6 +57,7 @@ private:
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
 	void Init();
+
 
 private:
 	ValueType m_value{};	/*位置偏移及姿态*/

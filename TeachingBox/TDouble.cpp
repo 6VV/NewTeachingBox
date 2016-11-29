@@ -5,13 +5,20 @@
 #include "LineEditWithRegExpAndKeyboard.h"
 #include "TDoubleWidget.h"
 
-TDouble::TDouble(const QString& scope, const QString& name, const double value)
-	:TVariate(scope, name, TSymbol::TYPE_DOUBLE)
-{
-	m_value = value;
 
-	Init();
+inline
+QString TDouble::TypeName()
+{
+	return "Double";
 }
+
+//TDouble::TDouble(const QString& scope, const QString& name, const double value)
+//	:TVariate(scope, name, TSymbol::TYPE_DOUBLE)
+//{
+//	m_value = value;
+//
+//	Init();
+//}
 
 TDouble::TDouble(QDataStream& dataStream) : TVariate(dataStream)
 {
@@ -25,6 +32,13 @@ TDouble::TDouble(const TDouble& variate)
 {
 	m_value = variate.m_value;
 
+	Init();
+}
+
+TDouble::TDouble(const TSymbol& symbol, ValueType value /*= false*/)
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_DOUBLE,TypeName() })
+	, m_value(value)
+{
 	Init();
 }
 

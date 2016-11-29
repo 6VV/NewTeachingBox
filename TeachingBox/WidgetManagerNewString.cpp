@@ -21,7 +21,7 @@ namespace VariateWidget
 	{
 		QString valueString = dynamic_cast<QLineEdit*>(m_tableWidget->cellWidget(m_startRowCount, 1))->text();
 
-		return std::unique_ptr<TVariate>(new TString(scope, name, valueString));
+		return std::unique_ptr<TVariate>(new TString({scope, name}, valueString));
 	}
 
 	void VariateWidget::WidgetManagerNewString::InitParameter()

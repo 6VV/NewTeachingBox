@@ -29,7 +29,7 @@ namespace VariateWidget
 			value = true;
 		}
 
-		return std::unique_ptr<TVariate>(new TBool(scope, name, value));
+		return std::unique_ptr<TVariate>(new TBool(TSymbol{scope, name}, value));
 	}
 
 	void WidgetManagerNewBool::InitParameter()

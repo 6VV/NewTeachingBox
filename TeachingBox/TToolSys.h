@@ -25,9 +25,10 @@ class TToolSys:public TVariate
 {
 public:
 	typedef std::array<double, 6> ValueType;
+	static QString TypeName();
 
 public:
-	TToolSys(const QString& scope, const QString& name, ValueType value={});
+	TToolSys(const TSymbol& symbol, ValueType value = ValueType{});
 	TToolSys(const TToolSys& variate);
 	TToolSys(QDataStream& dataStream);
 	~TToolSys();
@@ -42,6 +43,7 @@ private:
 	virtual void UpdateFromValue(const TVariate& variate) override;
 	
 	void Init();
+
 
 private:
 	ValueType m_value;

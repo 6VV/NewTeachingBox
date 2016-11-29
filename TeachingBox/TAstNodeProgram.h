@@ -15,7 +15,6 @@ public:
 
 	virtual void ParseSemantic() const override;
 
-private:
 };
 
 #endif

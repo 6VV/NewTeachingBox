@@ -37,7 +37,7 @@ private:
 
 	void SendNextCommand() const;		/*发送下一条指令*/
 	void RefreshLineNumber(const tTeachCmdAttribute& attribute) const;	/*命令反馈*/
-	void OnResivePosition(QByteArray& command) const;	/*获取位置*/
+	void OnReceivePosition(QByteArray& command) const;	/*获取位置*/
 };
 
 #endif

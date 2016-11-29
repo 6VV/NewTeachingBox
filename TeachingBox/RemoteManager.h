@@ -22,7 +22,6 @@
 #include <memory>
 #include "DataStruct.h"
 
-class TcpAdapter;
 
 class RemoteManager
 {
@@ -49,9 +48,6 @@ private:
 	QByteArray ContructNormalCommand(int commandId, const char* commandData, int commandLength, int lineNumber, long long programAddress);
 	QByteArray ContructNormalCommand(int commandId);
 	QByteArray ContructSpecialCommand(int commandId);
-
-private:
-	std::unique_ptr<TcpAdapter> m_tcpAdapter;
 };
 
 #endif

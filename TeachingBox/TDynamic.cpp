@@ -6,14 +6,19 @@
 #include "TDynamicWidget.h"
 
 
-
-TDynamic::TDynamic(const QString& scope, const QString& name, const tDynamicConstraint& value)
-	:TVariate(scope,name,TSymbol::TYPE_DYNAMIC)
+inline
+QString TDynamic::TypeName()
 {
-	m_value = value;
-
-	Init();
+	return "Dynamic";
 }
+
+//TDynamic::TDynamic(const QString& scope, const QString& name, const tDynamicConstraint& value)
+//	:TVariate(scope,name,TSymbol::TYPE_DYNAMIC)
+//{
+//	m_value = value;
+//
+//	Init();
+//}
 
 TDynamic::TDynamic(QDataStream& dataStream) : TVariate(dataStream)
 {
@@ -27,6 +32,13 @@ TDynamic::TDynamic(const TDynamic& variate)
 {
 	m_value = variate.m_value;
 
+	Init();
+}
+
+TDynamic::TDynamic(const TSymbol& symbol, ValueType value )
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_DYNAMIC,TypeName() })
+	, m_value(value)
+{
 	Init();
 }
 

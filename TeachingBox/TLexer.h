@@ -18,6 +18,8 @@ public:
 	
 	const std::shared_ptr<TToken> GetToken() const;
 	const std::shared_ptr<TToken> PeekToken() const;
+	void Parse();
+
 	void UnGetToken();
 
 private:
@@ -28,7 +30,6 @@ private:
 	const bool IsLetter(const char c) const;
 	const bool IsIdText(const char c) const;
 
-	void Parse();
 	void PushToken(const TYPE type);
 	const bool CheckPushDigit(const char c);
 	const bool CheckPushId(const char c);

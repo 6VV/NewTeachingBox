@@ -45,7 +45,7 @@ namespace VariateWidget
 			overlap.m_TransitionMode = static_cast<int>(tTransitionMode::kTransitionModeRelative);
 		}
 
-		return std::unique_ptr<TVariate>(new TOverlap(scope, name, overlap));
+		return std::unique_ptr<TVariate>(new TOverlap({scope, name}, overlap));
 	}
 
 	void WidgetManagerNewOverlap::InitParameter()

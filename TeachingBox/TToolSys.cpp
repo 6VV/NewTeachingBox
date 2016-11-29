@@ -4,12 +4,18 @@
 #include "TToolSysWidget.h"
 
 
-TToolSys::TToolSys(const QString& scope, const QString& name, ValueType value/* = {}*/)
-	:TVariate(scope,name,TSymbol::TYPE_TOOL_SYS)
-	, m_value(value)
+inline
+QString TToolSys::TypeName()
 {
-	Init();
+	return "ToolSys";
 }
+
+//TToolSys::TToolSys(const QString& scope, const QString& name, ValueType value/* = {}*/)
+//	:TVariate(scope,name,TSymbol::TYPE_TOOL_SYS)
+//	, m_value(value)
+//{
+//	Init();
+//}
 
 
 TToolSys::TToolSys(const TToolSys& variate)
@@ -28,6 +34,13 @@ TToolSys::TToolSys(QDataStream& dataStream)
 		dataStream >> value;
 	}
 
+	Init();
+}
+
+TToolSys::TToolSys(const TSymbol& symbol, ValueType value /*= ValueType{}*/)
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_TOOL_SYS ,TypeName()})
+	, m_value(value)
+{
 	Init();
 }
 
@@ -68,3 +81,4 @@ void TToolSys::Init()
 {
 	m_variateWidget = new TToolSysWidget(this);
 }
+
