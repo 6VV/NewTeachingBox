@@ -32,12 +32,24 @@
     <ClCompile Include="TRefSysTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TVariateContextNodeTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TVariateContextTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TLexerTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TRefSysTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TVariateContextNodeTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TVariateContextTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

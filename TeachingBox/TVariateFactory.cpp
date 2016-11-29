@@ -63,3 +63,54 @@ TVariate* TVariateFactory::CreateVariate(QByteArray& dataBytes)
 	}break;
 	}
 }
+
+std::shared_ptr<TVariate> TVariateFactory::GetVariate(QByteArray& dataBytes)
+{
+	QDataStream dataStream(&dataBytes, QIODevice::ReadOnly);
+	TSymbol symbol(dataStream);
+	dataStream.device()->seek(0);
+	switch (symbol.GetType())
+	{
+	case TSymbol::TYPE_INTERGER:
+	{
+		return std::shared_ptr<TVariate>(new TInteger(dataStream));
+	}break;
+	case TSymbol::TYPE_DOUBLE:
+	{
+		return std::shared_ptr<TVariate>(new TDouble(dataStream));
+	}break;
+	case TSymbol::TYPE_BOOL:
+	{
+		return std::shared_ptr<TVariate>(new TBool(dataStream));
+	}break;
+	case TSymbol::TYPE_STRING:
+	{
+		return std::shared_ptr<TVariate>(new TString(dataStream));
+	}break;
+	case TSymbol::TYPE_POSITION:
+	{
+		return std::shared_ptr<TVariate>(new TPosition(dataStream));
+	}break;
+	case TSymbol::TYPE_DYNAMIC:
+	{
+		return std::shared_ptr<TVariate>(new TDynamic(dataStream));
+	}break;
+	case TSymbol::TYPE_OVERLAP:
+	{
+		return std::shared_ptr<TVariate>(new TOverlap(dataStream));
+	}break;
+	case TSymbol::TYPE_REF_SYS:
+	{
+		return std::shared_ptr<TVariate>(new TRefSys(dataStream));
+	}
+	case TSymbol::TYPE_TOOL_SYS:
+	{
+		return std::shared_ptr<TVariate>(new TToolSys(dataStream));
+	}
+	default:
+	{
+		assert(!"Create variate failed\nNot find variate class");
+		return nullptr;
+	}break;
+	}
+}

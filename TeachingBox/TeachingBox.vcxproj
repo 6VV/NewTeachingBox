@@ -16,7 +16,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -529,7 +529,8 @@
     <ClCompile Include="TToolSys.cpp" />
     <ClCompile Include="TToolSysWidget.cpp" />
     <ClCompile Include="TVariate.cpp" />
-    <ClCompile Include="TVariateContextNode.cpp" />
+    <ClCompile Include="TVariateContext.cpp" />
+    <ClCompile Include="TVariateScopeNode.cpp" />
     <ClCompile Include="TVariateFactory.cpp" />
     <ClCompile Include="TVariateManager.cpp" />
     <ClCompile Include="TVariateWidget.cpp" />
@@ -683,7 +684,8 @@
     <ClInclude Include="TreeWidgetItemWithSymbol.h" />
     <ClInclude Include="TToolSys.h" />
     <ClInclude Include="TToolSysWidget.h" />
-    <ClInclude Include="TVariateContextNode.h" />
+    <ClInclude Include="TVariateContext.h" />
+    <ClInclude Include="TVariateScopeNode.h" />
     <ClInclude Include="VariateValueTreeWidgetBuilder.h" />
     <ClInclude Include="VariateValueTreeWidgetItem.h" />
     <ClInclude Include="VariateTreeWidgetManager.h" />

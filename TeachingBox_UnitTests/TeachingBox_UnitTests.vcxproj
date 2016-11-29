@@ -82,10 +82,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TLexerTests.cpp" />
     <ClCompile Include="TRefSysTests.cpp" />
+    <ClCompile Include="TVariateContextNodeTests.cpp" />
+    <ClCompile Include="TVariateContextTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TLexerTests.h" />
     <ClInclude Include="TRefSysTests.h" />
+    <ClInclude Include="TVariateContextNodeTests.h" />
+    <ClInclude Include="TVariateContextTests.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TeachingBox\TeachingBox.vcxproj">

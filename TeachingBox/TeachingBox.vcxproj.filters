@@ -1045,7 +1045,10 @@
     <ClCompile Include="DynamicValueTreeWidgetItem.cpp">
       <Filter>Source Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClCompile>
-    <ClCompile Include="TVariateContextNode.cpp">
+    <ClCompile Include="TVariateContext.cpp">
+      <Filter>Source Files\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="TVariateScopeNode.cpp">
       <Filter>Source Files\Variate</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1501,7 +1504,10 @@
     <ClInclude Include="DynamicValueTreeWidgetItem.h">
       <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClInclude>
-    <ClInclude Include="TVariateContextNode.h">
+    <ClInclude Include="TVariateContext.h">
+      <Filter>Header Files\Variate</Filter>
+    </ClInclude>
+    <ClInclude Include="TVariateScopeNode.h">
       <Filter>Header Files\Variate</Filter>
     </ClInclude>
   </ItemGroup>

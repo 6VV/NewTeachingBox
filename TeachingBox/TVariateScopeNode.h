@@ -19,17 +19,25 @@
 
 #include "QVector"
 #include "QMap"
+#include <memory>
 
 class TVariate;
 
-class TVariateContextNode
+class TVariateScopeNode
 {
 public:
-	void AddChild(std::shared_ptr<TVariateContextNode> node);
+	TVariateScopeNode(const QString& socpeName="");
+
+	void AddChild(std::shared_ptr<TVariateScopeNode> node);
 	void AddVariate(std::shared_ptr<TVariate> variate);
 
+	QString GetName() const;
+
+	std::shared_ptr<TVariateScopeNode> FindScope(const QString& scopeName);
+
 private:
-	QVector<std::shared_ptr<TVariateContextNode>> m_childScopes;
+	QString m_name;
+	QMap<QString, std::shared_ptr<TVariateScopeNode>> m_childScopes;
 	QMap<QString, std::shared_ptr<TVariate>> m_variates;
 };
 

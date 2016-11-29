@@ -58,7 +58,7 @@ namespace Database{
 			result.append(query.value(2).toByteArray());
 		}
 
-		return result;
+		return std::move(result);
 	}
 
 	void VariateDatabase::UpdateVariate(const QString& scope, const QString& name, QDataStream& dataStream)

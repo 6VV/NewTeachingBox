@@ -12,7 +12,7 @@ public:
 	static QString TypeName();
 
 public:
-	TInteger(const TSymbol& symbol, ValueType value = 0);
+	TInteger(const TSymbol& symbol=TSymbol{}, ValueType value = 0);
 	TInteger(const TInteger& variate);
 	TInteger(QDataStream& dataStream);
 
