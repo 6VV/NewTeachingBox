@@ -4,7 +4,7 @@
 
 const QMap<int, QString> TInterpreterException::Exception_TEXT
 {
-	{ UNKNOW_TOKEN, "unknown token" },
+	{ UNKNOWN_TOKEN, "unknown token" },
 	{ WRONG_GRAMMAR, "wrong grammar" },
 	{ NOT_FIND_RIGHT_BRACKET, "not find right bracket" },
 	{ NEGATION_SHOULD_WITH_BOOL, "\"!\" should with bool" },
@@ -26,6 +26,7 @@ const QMap<int, QString> TInterpreterException::Exception_TEXT
 	{ LOSE_COMMA, "lose comma" },
 	{ NOT_PROGRAM_NAME, "not program name" },
 	{ UNKNOWN_SENTENCE, "unknown sentence" },
+	{ UNKNOWN_VARIATE, "unknown variate" },
 };
 
 TInterpreterException::TInterpreterException(const InterpreterExceptionCode id, const int lineNumber, const QString& text/*=""*/)

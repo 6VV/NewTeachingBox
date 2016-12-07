@@ -34,11 +34,114 @@ private:
 	~TVariateContext() = default;
 
 public:
+	/*************************************************
+	//  Method:        void AddVariate(std::shared_ptr<TVariate> variate)
+	//  Description:   添加变量
+	//  Author:        刘巍 
+	//  Date:          2016/12/07
+	//  Returns:       void
+	//  Parameter:     std::shared_ptr<TVariate> variate：将要添加的变量
+	//  History:       
+	*************************************************/
 	void AddVariate(std::shared_ptr<TVariate> variate);
+
+	/*************************************************
+	//  Method:        void AddScope(const QString& scope)
+	//  Description:   添加作用域节点，若已存在该作用域，则返回
+	//  Author:        刘巍 
+	//  Date:          2016/12/07
+	//  Returns:       void
+	//  Parameter:     const QString& scope：作用域名
+	//  History:       
+	*************************************************/
+	void AddScope(const QString& scope);
+
+	/*************************************************
+	//  Method:        void Clear()
+	//  Description:   清除所用项目作用域，以及初始作用域中的所有变量
+	//  Author:        刘巍 
+	//  Date:          2016/12/07
+	//  Returns:       
+	//  Parameter:     
+	//  History:       
+	*************************************************/
+	void Clear();
+
+	/*************************************************
+	//  Method:        void DeleteVariate(const QString& scope, const QString& name)
+	//  Description:   删除变量
+	//  Author:        刘巍 
+	//  Date:          2016/12/07
+	//  Returns:       void
+	//  Parameter:     const QString& scope:变量作用域
+			const QString& name：变量名
+	//  History:       
+	*************************************************/
+	void DeleteVariate(const QString& scope, const QString& name);
+
+	/*************************************************
+	//  Method:        std::shared_ptr<TVariate> GetVariate(const QString& scope, const QString& name) const
+	//  Description:   查找特定作用内的变量，若未找到则返回nullptr
+	//  Author:        刘巍 
+	//  Date:          2016/12/07
+	//  Returns:       std::shared_ptr<TVariate>：找到的变量
+	//  Parameter:     const QString& scope：作用域
+			const QString& name：变量名
+	//  History:       
+	*************************************************/
+	std::shared_ptr<TVariate> GetVariate(const QString& scope, const QString& name) const;
+
+	/*************************************************
+	//  Method:        std::shared_ptr<TVariate> FindVariateScollUp(const QString& scope, const QString& name) const
+	//  Description:   从作用域向上翻滚查找变量
+	//  Author:        刘巍 
+	//  Date:          2016/12/07
+	//  Returns:       std::shared_ptr<TVariate>：查找到的变量指针
+	//  Parameter:     const QString& scope：作用域；
+			const QString& name：变量名
+	//  History:       
+	*************************************************/
+	std::shared_ptr<TVariate> GetVariateScollUp(const QString& scope, const QString& name) const;
+
+	/*************************************************
+	//  Method:        QVector<std::shared_ptr<TVariate>> GetAllVariateFromScope(const QString& scope) const
+	//  Description:   从作用域中获取所有变量
+	//  Author:        刘巍 
+	//  Date:          2016/12/07
+	//  Returns:       QVector<std::shared_ptr<TVariate>>：变量集合
+	//  Parameter:     const QString& scope：作用域名
+	//  History:       
+	*************************************************/
+	QVector<std::shared_ptr<TVariate>> GetAllVariateFromScope(const QString& scope) const;
+
+	/*************************************************
+	//  Method:        QMap<QString, QVector<TVariate*>> GetVariatesMapScollUp(const QString& scope) const
+	//  Description:   获取从某作用域起开始向上，所有变量的集合
+	//  Author:        刘巍 
+	//  Date:          2016/12/07
+	//  Returns:       QMap<QString, QVector<TVariate*>>：变量集合
+	//  Parameter:     const QString& scope：起始作用域
+	//  History:       
+	*************************************************/
+	QMap<QString, QVector<std::shared_ptr<TVariate>>> GetVariatesMapScollUp(const QString& scope) const;
+
+	/*************************************************
+	//  Method:        void UpdateVariate(std::shared_ptr<TVariate> newVariate)
+	//  Description:   更新变量
+	//  Author:        刘巍 
+	//  Date:          2016/12/07
+	//  Returns:       void
+	//  Parameter:     std::shared_ptr<TVariate> newVariate：新变量的指针
+	//  History:       
+	*************************************************/
+	void UpdateVariate(std::shared_ptr<TVariate> newVariate);
 
 private:
 	void AddProjectScopeNode(const QString& nodeName);
 	void AddProgramScopeNode(const QString& nodeName);
+	void AddScopeWithoutCheck(const QString& scope);	/*不经检查直接添加作用域节点*/
+
+	void InitScope();	/*初始化作用域，包括系统作用域、协作作用域、全局作用域*/
 
 private:
 	std::shared_ptr<TVariateScopeNode> m_rootNode;

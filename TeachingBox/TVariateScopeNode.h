@@ -29,14 +29,23 @@ public:
 	TVariateScopeNode(const QString& socpeName="");
 
 	void AddChild(std::shared_ptr<TVariateScopeNode> node);
-	void AddVariate(std::shared_ptr<TVariate> variate);
+	void AddOrUpdateVariate(std::shared_ptr<TVariate> variate);
 
+	void DeleteVariate(const QString& name);
+
+	QVector<std::shared_ptr<TVariate>> GetAllVariates() const;
 	QString GetName() const;
+	TVariateScopeNode* GetParentNode() const;
 
-	std::shared_ptr<TVariateScopeNode> FindScope(const QString& scopeName);
+	std::shared_ptr<TVariateScopeNode> FindScope(const QString& scopeName) const;
+	std::shared_ptr<TVariate> FindVariate(const QString& name) const;
+
+private:
+	void SetParentNode(TVariateScopeNode* parentNode);
 
 private:
 	QString m_name;
+	TVariateScopeNode* m_parentNode=nullptr;
 	QMap<QString, std::shared_ptr<TVariateScopeNode>> m_childScopes;
 	QMap<QString, std::shared_ptr<TVariate>> m_variates;
 };

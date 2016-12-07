@@ -66,6 +66,7 @@ TEST_F(TLexerTests, Parse_ParseKeyWord_Equal)
 	try{
 		QString text(" IF NEXT");
 		TLexer lexer(text);
+		lexer.Parse();
 		QStringList strList{  "IF", "NEXT" };
 
 		auto ptr = lexer.GetToken();

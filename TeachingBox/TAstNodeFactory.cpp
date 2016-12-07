@@ -14,6 +14,7 @@
 #include "Context.h"
 #include "TAstNodeGosubSentence.h"
 #include "TToken.h"
+#include "TVariateContext.h"
 
 const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QString& project)
 {
@@ -23,7 +24,9 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QStr
 	for (const QString& var : fileNames)
 	{
 		Context::projectContext.ProgramLoading(var);
-		QString fileText=projectManager.GetFileText(project,var.split(".").at(1));
+		TVariateContext::GetInstance()->AddScope(var);	/*添加作用域节点*/
+
+		QString fileText = projectManager.GetFileText(project, var.split(".").at(1));
 
 		TLexer lexer(fileText);
 		lexer.Parse();

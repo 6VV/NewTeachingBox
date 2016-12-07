@@ -46,6 +46,7 @@ TAstNode::ValueReturned TAstNodeProgram::Execute() const
 
 void TAstNodeProgram::ParseSemantic() const
 {
+	Context::projectContext.ProgramLoading(m_token->Name());
 	auto child = m_firstChild;
 
 	while (child)

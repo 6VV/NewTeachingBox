@@ -78,7 +78,7 @@ void TAstNodeMovlSentence::CheckParameterType(std::shared_ptr<TAstNode> node,int
 
 	if (variate==nullptr)
 	{
-		throw TInterpreterException(TInterpreterException::UNKNOW_TOKEN, node->GetToken()->LineNumber()
+		throw TInterpreterException(TInterpreterException::UNKNOWN_VARIATE, node->GetToken()->LineNumber()
 			, node->GetToken()->Name());
 	}
 
@@ -101,14 +101,14 @@ tMovLParam TAstNodeMovlSentence::GetMovlParameter() const
 	tMovLParam movlParam;
 
 	std::shared_ptr<TAstNode> firstChild = this->GetFirstChild();
-	tAxesAllPositions position = GetPosition(firstChild->GetToken()->Name()/*static_cast<TTokenWithValue<QString>*>(firstChild->GetToken().get())->GetValue()*/);
+	tAxesAllPositions position = GetPosition(firstChild->GetToken()->Name());
 
 
 	std::shared_ptr<TAstNode> secondChild = firstChild->GetSibling();
-	tDynamicConstraint dynamic = GetDynamic(secondChild->GetToken()->Name()/*static_cast<TTokenWithValue<QString>*>(secondChild->GetToken().get())->GetValue()*/);
+	tDynamicConstraint dynamic = GetDynamic(secondChild->GetToken()->Name());
 
 	std::shared_ptr<TAstNode> thirdChild = secondChild->GetSibling();
-	tOverlapConstraint overlap = GetOverlap(thirdChild->GetToken()->Name()/*static_cast<TTokenWithValue<QString>*>(thirdChild->GetToken().get())->GetValue()*/);
+	tOverlapConstraint overlap = GetOverlap(thirdChild->GetToken()->Name());
 
 	movlParam.m_Destination = position;
 	movlParam.m_Dynamic = dynamic;

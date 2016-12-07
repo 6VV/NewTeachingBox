@@ -9,12 +9,8 @@
 
 
 TVariateContext::TVariateContext()
-	:m_rootNode(new TVariateScopeNode(ProjectContext::ScopeSystem()))
 {
-	auto cooperateNode = std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode(ProjectContext::ScopeCooperate()));
-	cooperateNode->AddChild(std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode(ProjectContext::ScopeGlobal())));
-
-	m_rootNode->AddChild(cooperateNode);
+	InitScope();
 }
 
 TVariateContext* TVariateContext::GetInstance()
@@ -30,23 +26,86 @@ void TVariateContext::AddVariate(std::shared_ptr<TVariate> variate)
 
 	if (scopeNode!=nullptr)
 	{
-		scopeNode->AddVariate(variate);
+		scopeNode->AddOrUpdateVariate(variate);
 	}
 	else
 	{
-		/*若为项目作用域*/
-		if (variateScope.split(".").size()<=1)
-		{
-			AddProjectScopeNode(variateScope);
-		}
-		/*若为程序作用域*/
-		else
-		{
-			AddProgramScopeNode(variateScope);
-		}
+		AddScopeWithoutCheck(variateScope);
 		
-		m_rootNode->FindScope(variateScope)->AddVariate(variate);
+		m_rootNode->FindScope(variateScope)->AddOrUpdateVariate(variate);
 	}
+}
+
+void TVariateContext::AddScope(const QString& scope)
+{
+	if (m_rootNode->FindScope(scope)==nullptr)
+	{
+		AddScopeWithoutCheck(scope);
+	}
+}
+
+void TVariateContext::Clear()
+{
+	m_rootNode = nullptr;
+	InitScope();
+}
+
+void TVariateContext::DeleteVariate(const QString& scope, const QString& name)
+{
+	m_rootNode->FindScope(scope)->DeleteVariate(name);
+}
+
+std::shared_ptr<TVariate> TVariateContext::GetVariate(const QString& scope, const QString& name) const
+{
+	return m_rootNode->FindScope(scope)->FindVariate(name);
+}
+
+std::shared_ptr<TVariate> TVariateContext::GetVariateScollUp(const QString& scope, const QString& name) const
+{
+	auto currentScope=m_rootNode->FindScope(scope).get();
+	while (currentScope!=nullptr)
+	{
+		auto variate = currentScope->FindVariate(name);
+		if (variate==nullptr)
+		{
+			currentScope = currentScope->GetParentNode();
+			continue;
+		}
+
+		return variate;
+	}
+
+	return nullptr;
+}
+
+QVector<std::shared_ptr<TVariate>> TVariateContext::GetAllVariateFromScope(const QString& scope) const
+{
+	auto node = m_rootNode->FindScope(scope);
+	if (node==nullptr)
+	{
+		return {};
+	}
+
+	return node->GetAllVariates();
+}
+
+QMap<QString, QVector<std::shared_ptr<TVariate>>> TVariateContext::GetVariatesMapScollUp(const QString& scope) const
+{
+	QMap<QString, QVector<std::shared_ptr<TVariate>>> result;
+
+	auto scopeNode = m_rootNode->FindScope(scope).get();
+	while (scopeNode != nullptr)
+	{
+		result[scopeNode->GetName()] = std::move(GetAllVariateFromScope(scopeNode->GetName()));
+		scopeNode = scopeNode->GetParentNode();
+	}
+
+	return result;
+}
+
+void TVariateContext::UpdateVariate(std::shared_ptr<TVariate> newVariate)
+{
+	m_rootNode->FindScope(newVariate->GetScope())->AddOrUpdateVariate(newVariate);
 }
 
 inline
@@ -72,5 +131,28 @@ void TVariateContext::AddProgramScopeNode(const QString& nodeName)
 	}
 
 	projectNode->AddChild(std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode(nodeName)));
+}
+
+void TVariateContext::AddScopeWithoutCheck(const QString& scope)
+{
+	/*若为项目作用域*/
+	if (scope.split(".").size() <= 1)
+	{
+		AddProjectScopeNode(scope);
+	}
+	/*若为程序作用域*/
+	else
+	{
+		AddProgramScopeNode(scope);
+	}
+}
+
+void TVariateContext::InitScope()
+{
+	m_rootNode = std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode(ProjectContext::ScopeSystem()));
+	auto cooperateNode = std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode(ProjectContext::ScopeCooperate()));
+	cooperateNode->AddChild(std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode(ProjectContext::ScopeGlobal())));
+
+	m_rootNode->AddChild(cooperateNode);
 }
 

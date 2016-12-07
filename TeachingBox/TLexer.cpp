@@ -6,7 +6,7 @@
 
 TLexer::TLexer(const QString& text) :m_reader(text)
 {
-	Parse();
+	//Parse();
 }
 
 TLexer::~TLexer()
@@ -214,7 +214,7 @@ bool TLexer::IsEofOrEol(char c)
 inline
 void TLexer::ThrowException_UnknownToken(const QString& text)
 {
-	throw TInterpreterException(TInterpreterException::UNKNOW_TOKEN, m_reader.GetLineNumber(), text);
+	throw TInterpreterException(TInterpreterException::UNKNOWN_TOKEN, m_reader.GetLineNumber(), text);
 }
 
 inline
@@ -290,7 +290,6 @@ const bool TLexer::CheckPushReserveValue(const TYPE type)
 	return true;
 }
 
-inline
 void TLexer::Parse()
 {
 	char c;

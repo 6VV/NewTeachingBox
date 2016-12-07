@@ -5,6 +5,9 @@
 
 class TVariateContextTests :public testing::Test
 {
+public:
+	void SetUp() override;
+	void TearDown() override;
 };
 
 #endif
