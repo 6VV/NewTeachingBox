@@ -21,7 +21,7 @@ namespace VariateWidget
 
 	}
 
-	std::unique_ptr<TVariate> WidgetManagerNewOverlap::GetVariate(const QString& name, const QString& scope)
+	std::shared_ptr<TVariate> WidgetManagerNewOverlap::GetVariate(const QString& name, const QString& scope)
 	{
 		QString valueString = dynamic_cast<QLineEdit*>(m_tableWidget->cellWidget(m_startRowCount + 1, 1))->text();
 
@@ -45,7 +45,7 @@ namespace VariateWidget
 			overlap.m_TransitionMode = static_cast<int>(tTransitionMode::kTransitionModeRelative);
 		}
 
-		return std::unique_ptr<TVariate>(new TOverlap({scope, name}, overlap));
+		return std::shared_ptr<TVariate>(new TOverlap({ scope, name }, overlap));
 	}
 
 	void WidgetManagerNewOverlap::InitParameter()

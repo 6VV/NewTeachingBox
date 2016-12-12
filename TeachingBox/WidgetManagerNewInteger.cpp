@@ -19,7 +19,7 @@ namespace VariateWidget
 
 	}
 
-	std::unique_ptr<TVariate> WidgetManagerNewInteger::GetVariate(const QString& name, const QString& scope)
+	std::shared_ptr<TVariate> WidgetManagerNewInteger::GetVariate(const QString& name, const QString& scope)
 	{
 		QString valueString = dynamic_cast<QLineEdit*>(m_tableWidget->cellWidget(m_startRowCount, 1))->text();
 
@@ -30,7 +30,7 @@ namespace VariateWidget
 			return nullptr;
 		}
 
-		return std::unique_ptr<TVariate>(new TInteger({scope, name}, value));
+		return std::shared_ptr<TVariate>(new TInteger({ scope, name }, value));
 	}
 
 	void WidgetManagerNewInteger::InitParameter()

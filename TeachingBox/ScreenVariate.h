@@ -20,7 +20,7 @@
 #include "ScreenMainParent.h"
 #include "IEditVariate.h"
 
-class Button;
+class QPushButton;
 class QTreeWidget;
 class ButtonGroup;
 class QTreeWidgetItem;
@@ -63,18 +63,19 @@ private:
 private:
 	QTreeWidget* m_treeWidget;
 
-	Button* m_btnVariate;
-	Button* m_btnTeach;
-	Button* m_btnClearUnused;
-	Button* m_btnCheck;
+	QPushButton* m_btnVariate;
+	QPushButton* m_btnTeach;
+	QPushButton* m_btnClearUnused;
+	QPushButton* m_btnCheck;
 
 	ButtonGroup* m_btnGroupVariate;
-	Button* m_btnCopy;
-	Button* m_btnCut;
-	Button* m_btnPaste;
-	Button* m_btnRename;
-	Button* m_btnNew;
-	Button* m_btnDelete;
+	QPushButton* m_btnCopy;
+	QPushButton* m_btnCut;
+	QPushButton* m_btnPaste;
+	QPushButton* m_btnRename;
+	QPushButton* m_btnNew;
+	QPushButton* m_btnDelete;
+	QPushButton* m_btnSave;
 };
 
 #endif

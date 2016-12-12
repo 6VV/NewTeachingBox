@@ -12,6 +12,7 @@
 #include "ScreenManager.h"
 #include "InterpreterManager.h"
 #include "TInterpreterException.h"
+#include "TVariateContext.h"
 
 
 ScreenProject::ScreenProject(QWidget* parent)
@@ -234,7 +235,15 @@ void ScreenProject::SlotOnButtonLoadClicked()
 void ScreenProject::UpdateLoadProjectState(QTreeWidgetItem* projectItem)
 {
 	QString project = projectItem->text(0);
-	Context::projectContext.SetLoadedProject(project, m_projectManager->GetProjectFiles(project));
+	auto programs = std::move(m_projectManager->GetProjectFiles(project));
+	Context::projectContext.SetLoadedProject(project, programs);
+
+	/*添加作用域节点，添加节点的主要作用在于防止因部分作用域下不含变量，导致未能在添加变量时将该作用域添加到变量环境中*/
+	TVariateContext::GetInstance()->AddScope(project);
+	for (auto program:programs)
+	{
+		TVariateContext::GetInstance()->AddScope(program);	
+	}
 
 	SetLoadState(projectItem, LoadState::LOADED);
 }
@@ -250,7 +259,7 @@ void ScreenProject::Init()
 
 void ScreenProject::InitButtonGroup()
 {
-	QList<Button*> btnList;
+	QList<QPushButton*> btnList;
 	btnList.append(m_btnNewProject);
 	btnList.append(m_btnNewProgram);
 	btnList.append(m_btnDelete); 

@@ -149,10 +149,12 @@ void TVariateContext::AddScopeWithoutCheck(const QString& scope)
 
 void TVariateContext::InitScope()
 {
-	m_rootNode = std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode(ProjectContext::ScopeSystem()));
+	m_rootNode = std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode());
+	auto systemNode= std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode(ProjectContext::ScopeSystem()));
 	auto cooperateNode = std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode(ProjectContext::ScopeCooperate()));
-	cooperateNode->AddChild(std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode(ProjectContext::ScopeGlobal())));
 
-	m_rootNode->AddChild(cooperateNode);
+	m_rootNode->AddChild(systemNode);
+	systemNode->AddChild(cooperateNode);
+	cooperateNode->AddChild(std::shared_ptr<TVariateScopeNode>(new TVariateScopeNode(ProjectContext::ScopeGlobal())));
 }
 

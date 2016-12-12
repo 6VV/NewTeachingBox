@@ -20,267 +20,107 @@ TVariateManager* TVariateManager::GetInstance()
 TVariateManager::TVariateManager()
 	:m_scopeRoot(new TScope())
 {
-	//InitScope();
-
 	LoadInitDataFromDatabase();
 }
 
-//void TVariateManager::InitScope()
-//{
-//	auto systemScope = new TScope(ProjectContext::ScopeSystem());
-//	m_scopeRoot->PushScope(systemScope);
-//
-//	auto synergicScope = new TScope(ProjectContext::ScopeCooperate());
-//	systemScope->PushScope(synergicScope);
-//
-//	auto globalScope = new TScope(ProjectContext::ScopeGlobal());
-//	synergicScope->PushScope(globalScope);
-//
-//	ProjectManager projectManager;
-//	auto fileMap = projectManager.GetFileMap();
-//
-//	for (auto iterProject = fileMap.begin(); iterProject != fileMap.end(); ++iterProject)
-//	{
-//		auto projectScope = new TScope(iterProject.key());
-//		globalScope->PushScope(projectScope);
-//
-//		for (auto file : iterProject.value())
-//		{
-//			projectScope->PushScope(new TScope(file));
-//		}
-//	}
-//}
-
 TVariateManager::~TVariateManager()
 {
-	ClearMap();
 }
 
-void TVariateManager::AddVariate(const TVariate& object)
+void TVariateManager::AddVariate(std::shared_ptr<TVariate> variate)
 {
-	TVariate* variate = object.Clone();
-	//AddInMemory(variate);
 	AddInDatabase(variate);
-
-	//TODO delete this
-	TVariateContext::GetInstance()->AddVariate(std::shared_ptr<TVariate>(object.Clone()));
+	TVariateContext::GetInstance()->AddVariate(std::shared_ptr<TVariate>(variate));
 }
 
 void TVariateManager::DeleteVariate(const QString& scope, const QString& name)
 {
-	//delete m_objectMap.value(scope).value(name);
-	//m_objectMap[scope].remove(name);
-	//m_scopeRoot->DeleteVariate(scope, name);
-
-	//TODO 切换注释
 	TVariateContext::GetInstance()->DeleteVariate(scope, name);
-
-	VariateDatabase::DeleteVariate(scope, name);
+	VariateDatabase::DeleteScope(scope, name);
 }
 
 void TVariateManager::DeleteProjectVariates(const QStringList& names)
 {
 	for (auto name:names)
 	{
-		VariateDatabase::DeleteVariate(name);
+		VariateDatabase::DeleteScope(name);
 	}
 	
+	TVariateContext::GetInstance()->Clear();
 	LoadInitDataFromDatabase();
 }
 
 void TVariateManager::DeleteProgramVariates(const QString& program)
 {
-	VariateDatabase::DeleteVariate(program);
+	VariateDatabase::DeleteScope(program);
 
+	TVariateContext::GetInstance()->Clear();
 	LoadInitDataFromDatabase();
 }
 
-QVector<TVariate*> TVariateManager::GetVariatesFromScope(const QString& scope)
+QVector<std::shared_ptr<TVariate>> TVariateManager::GetVariatesFromScope(const QString& scope)
 {
-	QVector<TVariate*> variates;
-
-	//auto iterVariate=m_objectMap.find(scope);
-
-	//if (iterVariate == m_objectMap.end())
-	//{
-	//	return variates;
-	//}
-	//
-	//auto values=iterVariate.value();
-
-	//for (auto value:values)
-	//{
-	//	variates.append(value);
-	//}
-
-	//TODO 切换注释
-	auto vec = TVariateContext::GetInstance()->GetAllVariateFromScope(scope);
-	for (auto variate:vec)
-	{
-		variates.push_back(variate.get());
-	}
-
-	return variates;
+	return TVariateContext::GetInstance()->GetAllVariateFromScope(scope);
 }
 
-QMap<QString, QVector<TVariate*>> TVariateManager::GetVariatesMapScollUp(const QString& scope)
+QMap<QString, QVector<std::shared_ptr<TVariate>>> TVariateManager::GetVariatesMapScollUp(const QString& scope)
 {
-	QMap<QString, QVector<TVariate*>> result;
-
-	//auto scopeNode = m_scopeRoot->FindScopeScrollDown(scope);
-	//while (scopeNode != nullptr)
-	//{
-	//	result[scopeNode->ScopeName()] = std::move(GetVariatesFromScope(scopeNode->ScopeName()));
-	//	scopeNode = scopeNode->ParentScope();
-	//}
-
-	//TODO 切换注释
-	auto map = TVariateContext::GetInstance()->GetVariatesMapScollUp(scope);
-	for (auto iter = map.begin(); iter != map.end();++iter)
-	{
-		QVector<TVariate*> vec;
-		for (auto variate:iter.value())
-		{
-			vec.push_back(variate.get());
-		}
-
-		result[iter.key()] = vec;
-	}
-
-	return result;
-
+	return TVariateContext::GetInstance()->GetVariatesMapScollUp(scope);
 }
 
 
-TVariate* TVariateManager::GetVariate(const QString& scope, const QString& name)
+std::shared_ptr<TVariate> TVariateManager::GetVariate(const QString& scope, const QString& name)
 {
-	//auto iterMap = m_objectMap.find(scope);
-	//if (iterMap == m_objectMap.end())
-	//{
-	//	return nullptr;
-	//}
-	//auto iterVar = iterMap.value().find(name);
-	//if (iterVar == iterMap.value().end())
-	//{
-	//	return nullptr;
-	//}
-	//return iterVar.value();
-
-	//TODO 切换注释
-	return TVariateContext::GetInstance()->GetVariate(scope, name).get();
+	return TVariateContext::GetInstance()->GetVariate(scope, name);
 }
 
-TVariate* TVariateManager::GetVariateSrollUp(const QString& scope, const QString& name)
+std::shared_ptr<TVariate> TVariateManager::GetVariateSrollUp(const QString& scope, const QString& name)
 {
-	//TScope* currentScope = m_scopeRoot->FindScopeScrollDown(scope);
-	//if (!currentScope)
-	//{
-	//	return nullptr;
-	//}
-	//TSymbol* symbol = currentScope->FindSymbolScrollUp(name);
-	//if (!symbol)
-	//{
-	//	return nullptr;
-	//}
-	//return GetVariate(symbol->GetScope(), symbol->GetName());
-
-
-	//TODO 切换注释
-	return TVariateContext::GetInstance()->GetVariateScollUp(scope, name).get();
+	return TVariateContext::GetInstance()->GetVariateScollUp(scope, name);
 }
 
 void TVariateManager::LoadInitDataFromDatabase()
 {
-	//ClearMap();
-	//m_scopeRoot->ClearSelf();
-
-	//TODO delete this
-	TVariateContext::GetInstance()->Clear();
-
 	auto variates = VariateDatabase::SelectAllVariates();
 	for (auto var : variates)
 	{
-		auto variate = TVariateFactory::CreateVariate(var);
-		//AddInMemory(variate);
-
-		//TODO delete this
-		TVariateContext::GetInstance()->AddVariate(std::shared_ptr<TVariate>(variate->Clone()));
+		TVariateContext::GetInstance()->AddVariate(std::shared_ptr<TVariate>(TVariateFactory::CreateVariate(var)));
 	}
 }
 
 
-void TVariateManager::UpdateVariate(const QString& scope, const QString& name, const TVariate& newVariate)
-{
-	//UpdateInMap(scope, name, newVariate);
-	//m_scopeRoot->UpdateVariate(scope, name, &newVariate);
-	//TODO 切换注释
-	UpdateInMapScollUp(scope, name, newVariate);
+//void TVariateManager::UpdateVariate(const QString& scope, const QString& name, std::shared_ptr<TVariate> newVariate)
+//{
+//	UpdateInMapScollUp(newVariate);
+//	UpdateInDatabase(scope, name, newVariate);
+//}
 
-	UpdateInDatabase(scope, name, newVariate);
+
+void TVariateManager::UpdateVariate(std::shared_ptr<TVariate> newVariate)
+{
+	UpdateInMapScollUp(newVariate);
+	UpdateInDatabase(newVariate->GetScope(), newVariate->GetName(), newVariate);
 }
 
-void TVariateManager::AddInMemory(TVariate* const object)
-{
-	m_objectMap[object->GetScope()][object->GetName()] = object;
-	m_scopeRoot->AddVariate(object);
-}
-
-void TVariateManager::AddInDatabase(TVariate* const object)
+void TVariateManager::AddInDatabase(std::shared_ptr<TVariate> variate)
 {
 	QByteArray data;
 	QDataStream dataStream(&data, QIODevice::ReadWrite);
-	object->WriteDataToStream(dataStream);
+	variate->WriteDataToStream(dataStream);
 	dataStream.device()->seek(0);
 	VariateDatabase::InsertVariate(dataStream);
 }
 
-void TVariateManager::ClearMap()
+void TVariateManager::UpdateInMapScollUp(std::shared_ptr<TVariate> newVariate)
 {
-	for (auto iterMap = m_objectMap.begin(); iterMap != m_objectMap.end(); iterMap++)
-	{
-		for (auto iterVar = iterMap.value().begin(); iterVar != iterMap.value().end(); iterVar++)
-		{
-			delete iterVar.value();
-		}
-	}
-	m_objectMap.clear();
+	TVariateContext::GetInstance()->UpdateVariate(newVariate);
 }
 
-void TVariateManager::UpdateInMap(const QString& scope, const QString& name, const TVariate& newVariate)
-{
-	auto iterMap = m_objectMap.find(scope);
-	auto iterVar = iterMap.value().find(name);
-
-	auto ptrVariate = iterVar.value();
-	ptrVariate->UpdateFromVariate(newVariate);
-
-	iterMap.value().erase(iterVar);
-
-	m_objectMap[scope][newVariate.GetName()] = ptrVariate;
-}
-
-void TVariateManager::UpdateInMapScollUp(const QString& scope, const QString& name, const TVariate& newVariate)
-{
-	//auto currentScope = m_scopeRoot->FindScopeScrollDown(scope);
-	//auto symbol = currentScope->FindSymbolScrollUp(name);
-	//auto scopeName = symbol->GetScope();
-
-	//UpdateInMap(scopeName, name, newVariate);
-
-	//TODO delete this
-	TVariateContext::GetInstance()->UpdateVariate(std::shared_ptr<TVariate>(newVariate.Clone()));
-}
-
-void TVariateManager::UpdateInMapScollUp(const TVariate& newVariate)
-{
-	TVariateContext::GetInstance()->UpdateVariate(std::shared_ptr<TVariate>(newVariate.Clone()));
-}
-
-void TVariateManager::UpdateInDatabase(const QString& scope, const QString& name, const TVariate& newVariate)
+void TVariateManager::UpdateInDatabase(const QString& scope, const QString& name, std::shared_ptr<TVariate> variate)
 {
 	QByteArray data;
 	QDataStream dataStream(&data, QIODevice::ReadWrite);
-	newVariate.WriteDataToStream(dataStream);
+	variate->WriteDataToStream(dataStream);
 	VariateDatabase::UpdateVariate(scope, name, dataStream);
 }
 

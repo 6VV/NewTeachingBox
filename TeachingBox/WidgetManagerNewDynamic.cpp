@@ -21,7 +21,7 @@ namespace VariateWidget
 
 	}
 
-	std::unique_ptr<TVariate> WidgetManagerNewDynamic::GetVariate(const QString& name, const QString& scope)
+	std::shared_ptr<TVariate> WidgetManagerNewDynamic::GetVariate(const QString& name, const QString& scope)
 	{
 		double values[6]{};
 
@@ -45,7 +45,7 @@ namespace VariateWidget
 		dynamic.m_PostureAcceleration = values[4];
 		dynamic.m_PostureDeceleration = values[5];
 
-		return std::unique_ptr<TVariate>(new TDynamic({scope, name}, dynamic));
+		return std::shared_ptr<TVariate>(new TDynamic({ scope, name }, dynamic));
 	}
 
 	void WidgetManagerNewDynamic::InitParameter()

@@ -3,7 +3,7 @@
 
 /*************************************************
 //  Copyright (C), 2015-2016, CS&S. Co., Ltd.
-//  File name: 	    VariateTreeWidgetManager.h
+//  File name: 	    VariateManagerWithHorizonHeader.h
 //  Author:			刘巍      
 //  Version: 		1.0     
 //  Date: 			2016/11/29
@@ -25,7 +25,7 @@ class QTreeWidget;
 class QTreeWidgetItem;
 class VariateValueTreeWidgetItem;
 
-class VariateTreeWidgetManager
+class VariateManagerWithHorizonHeader
 {
 private:
 	typedef std::map<QString, std::shared_ptr<VariateValueTreeWidgetItem>> VariateWidgetMapType;

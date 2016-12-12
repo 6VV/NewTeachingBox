@@ -32,7 +32,7 @@ VariateWidgetProducer::~VariateWidgetProducer()
 
 }
 
-QMap<QString, QStringList> VariateWidgetProducer::GetVariateMap(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap)
+QMap<QString, QStringList> VariateWidgetProducer::GetVariateMap(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap)
 {
 	QMap<QString, QStringList> result;
 
@@ -53,7 +53,7 @@ QMap<QString, QStringList> VariateWidgetProducer::GetVariateMap(SymbolType type,
 	return result;
 }
 
-QString VariateWidgetProducer::GetSuggestName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap) 
+QString VariateWidgetProducer::GetSuggestName(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap)
 {
 	std::vector<int> suggestNamesExisted;
 
@@ -87,7 +87,7 @@ QString VariateWidgetProducer::GetSuggestName(SymbolType type, const QMap<QStrin
 
 
 
-void VariateWidgetProducer::UpdateComboBoxWithWholeName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap, QComboBox* comboBox) 
+void VariateWidgetProducer::UpdateComboBoxWithWholeName(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap, QComboBox* comboBox)
 {
 	comboBox->clear();
 
@@ -103,7 +103,7 @@ void VariateWidgetProducer::UpdateComboBoxWithWholeName(SymbolType type, const Q
 
 }
 
-void VariateWidgetProducer::UpdateComboBoxWithSimpleName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap, QComboBox* comboBox)
+void VariateWidgetProducer::UpdateComboBoxWithSimpleName(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap, QComboBox* comboBox)
 {
 	comboBox->clear();
 

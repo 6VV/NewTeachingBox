@@ -50,7 +50,7 @@ namespace VariateWidget{
 		return m_tableWidget;
 	}
 
-	std::unique_ptr<TVariate> VariateTableManager::GetVariate()
+	std::shared_ptr<TVariate> VariateTableManager::GetVariate()
 	{
 		/*若为无效名，则返回nullptr*/
 		if (!IsValidName())

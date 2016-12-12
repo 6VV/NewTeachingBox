@@ -1021,9 +1021,6 @@
     <ClCompile Include="IntegerValueTreeWidgetItem.cpp">
       <Filter>Source Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClCompile>
-    <ClCompile Include="VariateTreeWidgetManager.cpp">
-      <Filter>Source Files\Variate\VariateWidget\NewWidget</Filter>
-    </ClCompile>
     <ClCompile Include="VariateValueTreeWidgetItem.cpp">
       <Filter>Source Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClCompile>
@@ -1050,6 +1047,15 @@
     </ClCompile>
     <ClCompile Include="TVariateScopeNode.cpp">
       <Filter>Source Files\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="VariateManagerWithHorizonHeader.cpp">
+      <Filter>Source Files\Variate\VariateWidget\NewWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_VariateValueTreeWidgetItem.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_VariateValueTreeWidgetItem.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1220,6 +1226,15 @@
     </CustomBuild>
     <CustomBuild Include="TVariateWidget.h">
       <Filter>Header Files\Variate\VariateWidget\OldWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="VariateValueTreeWidgetItem.h">
+      <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="VariateManagerWithHorizonHeader.h">
+      <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TreeWidgetItemWithSymbol.h">
+      <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1470,15 +1485,6 @@
     </ClInclude>
     <ClInclude Include="RemoteFeedbackController.h">
       <Filter>Header Files\Remote</Filter>
-    </ClInclude>
-    <ClInclude Include="VariateTreeWidgetManager.h">
-      <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
-    </ClInclude>
-    <ClInclude Include="TreeWidgetItemWithSymbol.h">
-      <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
-    </ClInclude>
-    <ClInclude Include="VariateValueTreeWidgetItem.h">
-      <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClInclude>
     <ClInclude Include="IntegerValueTreeWidgetItem.h">
       <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>

@@ -148,7 +148,7 @@ QWidget* ScreenToolSystem::GetButtonWidget()
 inline
 TToolSys* ScreenToolSystem::GetVariate()
 {
-	return static_cast<TToolSys*>(TVariateManager::GetInstance()->GetVariateSrollUp(GetVariateScope(), GetVariateName()));	/*获取当前参考坐标系变量*/
+	return std::static_pointer_cast<TToolSys>(TVariateManager::GetInstance()->GetVariateSrollUp(GetVariateScope(), GetVariateName())).get();	/*获取当前参考坐标系变量*/
 }
 
 inline
@@ -191,7 +191,7 @@ void ScreenToolSystem::OnDataChanged()
 
 	assert(variate != nullptr);
 
-	auto values = dynamic_cast<TToolSys*>(variate)->GetValue();
+	auto values = std::static_pointer_cast<TToolSys>(variate)->GetValue();
 	
 	assert(values.size() == static_cast<size_t>(m_dataLineEditList.size()));
 

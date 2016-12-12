@@ -43,6 +43,10 @@ void BoolValueTreeWidgetItem::InsertVariateValue(const std::shared_ptr<TVariate>
 	comboBox->setCurrentText(valueName);
 
 	treeWidget->setItemWidget(valueItem, 1, comboBox);
+
+	connect(comboBox, &QComboBox::currentTextChanged, [this]{
+		emit(SignalValueChanged());
+	});
 }
 
 void BoolValueTreeWidgetItem::UpdateWidgetValue(const std::shared_ptr<TVariate> newVariate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)

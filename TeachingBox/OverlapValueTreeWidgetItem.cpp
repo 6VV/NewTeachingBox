@@ -51,6 +51,8 @@ void OverlapValueTreeWidgetItem::InsertModeValue(int mode,QTreeWidget* treeWidge
 	}
 
 	comboBox->setCurrentText(modeName);
+
+	connect(comboBox, &QComboBox::currentTextChanged, [this]{emit(SignalValueChanged()); });
 }
 
 void OverlapValueTreeWidgetItem::UpdateWidgetValue(const std::shared_ptr<TVariate> newVariate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)

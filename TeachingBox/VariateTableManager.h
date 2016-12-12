@@ -25,7 +25,7 @@ namespace VariateWidget{
 		VariateTableManager(QWidget* parent);
 
 		QTableWidget* GetTableWidget(const QString& scope);
-		std::unique_ptr<TVariate> GetVariate();
+		std::shared_ptr<TVariate> GetVariate();
 
 		void UpdateText();
 

@@ -22,7 +22,7 @@ namespace VariateWidget
 
 	}
 
-	std::unique_ptr<TVariate> WidgetManagerNewRefSys::GetVariate(const QString& name, const QString& scope)
+	std::shared_ptr<TVariate> WidgetManagerNewRefSys::GetVariate(const QString& name, const QString& scope)
 	{
 		TRefSys::ValueType resultValue;
 
@@ -39,7 +39,7 @@ namespace VariateWidget
 			resultValue.offset[i - m_startRowCount - 1] = value;
 		}
 
-		return std::unique_ptr<TVariate>(new TRefSys({scope, name}, resultValue));
+		return std::shared_ptr<TVariate>(new TRefSys({ scope, name }, resultValue));
 	}
 
 	void WidgetManagerNewRefSys::InitParameter()

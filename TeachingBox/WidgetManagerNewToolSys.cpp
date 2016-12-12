@@ -20,7 +20,7 @@ namespace VariateWidget
 
 	}
 
-	std::unique_ptr<TVariate> WidgetManagerNewToolSys::GetVariate(const QString& name, const QString& scope)
+	std::shared_ptr<TVariate> WidgetManagerNewToolSys::GetVariate(const QString& name, const QString& scope)
 	{
 		TToolSys::ValueType resultValue{};
 
@@ -37,7 +37,7 @@ namespace VariateWidget
 		}
 
 
-		return std::unique_ptr<TVariate>(new TToolSys({scope, name}, resultValue));
+		return std::shared_ptr<TVariate>(new TToolSys({ scope, name }, resultValue));
 	}
 
 	void WidgetManagerNewToolSys::InitParameter()

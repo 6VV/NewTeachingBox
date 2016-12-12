@@ -56,11 +56,11 @@ void TAstNodeForSentence::UpdateValue(SYMBOL_TYPE type, const QString& scope, co
 {
 	if (type == SYMBOL_TYPE::TYPE_INTERGER)
 	{
-		TVariateManager::GetInstance()->UpdateInMapScollUp(scope, name, TInteger({scope, name}, static_cast<int>(value)));
+		TVariateManager::GetInstance()->UpdateInMapScollUp(std::shared_ptr<TInteger>(new TInteger({scope, name}, static_cast<int>(value))));
 	}
 	else
 	{
-		TVariateManager::GetInstance()->UpdateInMapScollUp(scope, name, TDouble({scope, name}, value));
+		TVariateManager::GetInstance()->UpdateInMapScollUp(std::shared_ptr<TDouble>(new TDouble({ scope, name }, value)));
 	}
 }
 
@@ -68,11 +68,11 @@ double TAstNodeForSentence::GetValue(SYMBOL_TYPE type, const QString& scope, con
 {
 	if (type == SYMBOL_TYPE::TYPE_INTERGER)
 	{
-		return static_cast<TInteger*>(TVariateManager::GetInstance()->GetVariateSrollUp(scope, name))->GetValue();
+		return std::static_pointer_cast<TInteger>(TVariateManager::GetInstance()->GetVariateSrollUp(scope, name))->GetValue();
 	}
 	else
 	{
-		return static_cast<TDouble*>(TVariateManager::GetInstance()->GetVariateSrollUp(scope, name))->GetValue();
+		return std::static_pointer_cast<TDouble>(TVariateManager::GetInstance()->GetVariateSrollUp(scope, name))->GetValue();
 	}
 }
 

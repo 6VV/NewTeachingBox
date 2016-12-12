@@ -105,6 +105,6 @@ void TVariate::UpdateFromVariate(const TVariate& variate)
 
 void TVariate::UpdateRamAndDatabaseFrom(const TVariate& variate) const
 {
-	TVariateManager::GetInstance()->UpdateVariate(m_symbol.GetScope(), m_symbol.GetName(), variate);
+	TVariateManager::GetInstance()->UpdateVariate(std::shared_ptr<TVariate>(variate.Clone()));
 }
 

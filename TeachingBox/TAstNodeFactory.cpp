@@ -24,7 +24,6 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QStr
 	for (const QString& var : fileNames)
 	{
 		Context::projectContext.ProgramLoading(var);
-		TVariateContext::GetInstance()->AddScope(var);	/*添加作用域节点*/
 
 		QString fileText = projectManager.GetFileText(project, var.split(".").at(1));
 

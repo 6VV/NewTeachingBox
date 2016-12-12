@@ -19,7 +19,7 @@ namespace VariateWidget
 
 	}
 
-	std::unique_ptr<TVariate> WidgetManagerNewBool::GetVariate(const QString& name, const QString& scope)
+	std::shared_ptr<TVariate> WidgetManagerNewBool::GetVariate(const QString& name, const QString& scope)
 	{
 		QString valueString = dynamic_cast<QComboBox*>(m_tableWidget->cellWidget(m_startRowCount, 1))->currentText();
 
@@ -29,7 +29,7 @@ namespace VariateWidget
 			value = true;
 		}
 
-		return std::unique_ptr<TVariate>(new TBool(TSymbol{scope, name}, value));
+		return std::shared_ptr<TVariate>(new TBool(TSymbol{ scope, name }, value));
 	}
 
 	void WidgetManagerNewBool::InitParameter()

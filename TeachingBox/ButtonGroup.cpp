@@ -4,7 +4,7 @@
 #include "TeachingBoxContext.h"
 
 
-ButtonGroup::ButtonGroup(QList<Button*>& btnlist, Button* parentButton)
+ButtonGroup::ButtonGroup(QList<QPushButton*>& btnlist, QPushButton* parentButton)
 	:QWidget(parentButton)
 	, m_btnList(btnlist)
 	, m_parentButton(parentButton)

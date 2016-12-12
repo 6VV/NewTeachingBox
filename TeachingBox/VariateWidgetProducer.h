@@ -53,7 +53,7 @@ public:
 			QComboBox*：需要更新的控件
 	//  History:
 	*************************************************/
-	static void UpdateComboBoxWithWholeName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap,QComboBox* comboBox);
+	static void UpdateComboBoxWithWholeName(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap,QComboBox* comboBox);
 
 	/*************************************************
 	//  Method:        VariateWidgetProducer::UpdateComboBox(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap, QComboBox* comboBox)
@@ -66,7 +66,7 @@ public:
 			QComboBox*：需要更新的控件
 	//  History:
 	*************************************************/
-	static void UpdateComboBoxWithSimpleName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap, QComboBox* comboBox);
+	static void UpdateComboBoxWithSimpleName(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap, QComboBox* comboBox);
 	
 	/*************************************************
 	//  Method:		static QString GetSuggestName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap)
@@ -78,7 +78,7 @@ public:
 			const QMap<QString, QVector<TVariate*>>&：变量集合，key指作用域，QVector<TVariate*>指该作用域内的变量集合
 	//  History:
 	*************************************************/
-	static QString GetSuggestName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap);
+	static QString GetSuggestName(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap);
 
 	/*************************************************
 	//  Method:		static QString GetIconPath(const QString& scope)
@@ -102,7 +102,7 @@ private:
 			const QMap<QString, QVector<TVariate*>>&：变量集合，key指作用域，QVector<TVariate*>指该作用域内的变量集合
 	//  History:
 	*************************************************/
-	static QMap<QString, QStringList> GetVariateMap(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap);
+	static QMap<QString, QStringList> GetVariateMap(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap);
 
 
 };

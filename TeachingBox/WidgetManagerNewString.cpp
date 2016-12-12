@@ -17,11 +17,11 @@ namespace VariateWidget
 
 	}
 
-	std::unique_ptr<TVariate> VariateWidget::WidgetManagerNewString::GetVariate(const QString& name, const QString& scope)
+	std::shared_ptr<TVariate> VariateWidget::WidgetManagerNewString::GetVariate(const QString& name, const QString& scope)
 	{
 		QString valueString = dynamic_cast<QLineEdit*>(m_tableWidget->cellWidget(m_startRowCount, 1))->text();
 
-		return std::unique_ptr<TVariate>(new TString({scope, name}, valueString));
+		return std::shared_ptr<TVariate>(new TString({ scope, name }, valueString));
 	}
 
 	void VariateWidget::WidgetManagerNewString::InitParameter()

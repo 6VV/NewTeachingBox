@@ -150,7 +150,7 @@ void ScreenProgram::InitButtonGroup()
 
 void ScreenProgram::InitEditGroup()
 {
-	QList<Button*> btnGroupEdit;
+	QList<QPushButton*> btnGroupEdit;
 	btnGroupEdit.append(m_btnSelectAll);
 	btnGroupEdit.append(m_btnCut);
 	btnGroupEdit.append(m_btnCopy);
@@ -164,7 +164,7 @@ void ScreenProgram::InitEditGroup()
 
 void ScreenProgram::InitAddvanceGroup()
 {
-	QList<Button*> btnGroupAddvance;
+	QList<QPushButton*> btnGroupAddvance;
 	btnGroupAddvance.append(m_btnKeyboard);
 	btnGroupAddvance.append(m_btnSubProgram);
 	btnGroupAddvance.append(m_btnFormat);

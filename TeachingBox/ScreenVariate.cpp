@@ -9,7 +9,9 @@
 #include "TVariateManager.h"
 #include "QMessageBox"
 #include "Button.h"
-#include "VariateTreeWidgetManager.h"
+#include "VariateManagerWithHorizonHeader.h"
+#include "TreeWidgetItemWithSymbol.h"
+#include <assert.h>
 
 ScreenVariate::ScreenVariate(QWidget* parent /*= 0*/)
 	:ScreenMainParent(parent)
@@ -18,6 +20,7 @@ ScreenVariate::ScreenVariate(QWidget* parent /*= 0*/)
 	, m_btnTeach (new Button(this))
 	, m_btnCheck(new Button(this))
 	, m_btnClearUnused (new Button(this))
+	, m_btnSave(new Button(this))
 {
 	Init();
 }
@@ -97,6 +100,7 @@ QList<QPushButton*> ScreenVariate::GetButtonList()
 	btnList.push_back(m_btnTeach);
 	btnList.push_back(m_btnClearUnused);
 	btnList.push_back(m_btnCheck);
+	btnList.push_back(m_btnSave);
 
 	return btnList;
 }
@@ -155,8 +159,8 @@ void ScreenVariate::InitTreeWidget()
 		auto variates = TVariateManager::GetInstance()->GetVariatesFromScope(scope);
 		for (auto variate : variates)
 		{
-			//VariateTreeWidgetManager::InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, treeItem);
-			variate->WriteToTreeWidgetItem(treeItem, m_treeWidget);
+			VariateManagerWithHorizonHeader::InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, treeItem);
+			//variate->WriteToTreeWidgetItem(treeItem, m_treeWidget);
 		}
 	}
 }
@@ -170,7 +174,7 @@ void ScreenVariate::InitButtonWidget()
 	m_btnNew = new Button(this);
 	m_btnDelete = new Button(this);
 
-	QList<Button*> btnList;
+	QList<QPushButton*> btnList;
 	btnList.append(m_btnCopy);
 	btnList.append(m_btnCut);
 	btnList.append(m_btnPaste);
@@ -187,6 +191,23 @@ void ScreenVariate::InitSignalSlot()
 	connect(m_btnNew, SIGNAL(clicked()), this, SLOT(SlotOnNewVariateButtonClicked()));
 	connect(m_btnDelete, SIGNAL(clicked()), this, SLOT(SlotOnDeleteVariateButtonClicked()));
 	connect(m_btnTeach, &QPushButton::clicked, this, &ScreenVariate::SlotOnTeachButtonClicked);
+	connect(m_btnSave, &QPushButton::clicked, [this]{
+		for (int i = 0; i < m_treeWidget->topLevelItemCount(); ++i)
+		{
+			auto scopeItem = m_treeWidget->topLevelItem(i);
+
+			for (int j = 0; j < scopeItem->childCount(); ++j)
+			{
+				auto variateItem = scopeItem->child(j);
+				assert(typeid(*variateItem) == typeid(TreeWidgetItemWithSymbol));
+				auto item = dynamic_cast<TreeWidgetItemWithSymbol*>(variateItem);
+				if (item->IsSave())
+				{
+					TVariateManager::GetInstance()->UpdateVariate(VariateManagerWithHorizonHeader::GetVariate(m_treeWidget, variateItem));
+				}
+			}
+		}
+	});
 }
 
 void ScreenVariate::UpdateText()
@@ -195,6 +216,7 @@ void ScreenVariate::UpdateText()
 	m_btnTeach->setText(tr("Teach"));
 	m_btnClearUnused->setText(tr("Clear Unused"));
 	m_btnCheck->setText(tr("Check"));
+	m_btnSave->setText(tr("Save"));
 
 	m_btnCopy->setText(tr("Copy"));
 	m_btnCut->setText(tr("Cut"));
@@ -211,6 +233,6 @@ void ScreenVariate::UpdateText()
 
 void ScreenVariate::OnNewVariate(TVariate& variate)
 {
-	variate.WriteToTreeWidgetItem(FindScopeItem(variate.GetScope()), m_treeWidget);
-
+	VariateManagerWithHorizonHeader::InsertVariate(std::shared_ptr<TVariate>(variate.Clone()), m_treeWidget, FindScopeItem(variate.GetScope()));
+	//variate.WriteToTreeWidgetItem(FindScopeItem(variate.GetScope()), m_treeWidget);
 }

@@ -95,7 +95,7 @@ namespace Database{
 		}
 	}
 
-	void VariateDatabase::DeleteVariate(const QString& scope, const QString& name)
+	void VariateDatabase::DeleteScope(const QString& scope, const QString& name)
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		QString oper = QString("delete from %1 where %2='%3' and %4='%5'")
@@ -110,7 +110,7 @@ namespace Database{
 		}
 	}
 
-	void VariateDatabase::DeleteVariate(const QString& scope)
+	void VariateDatabase::DeleteScope(const QString& scope)
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		QString oper = QString("delete from %1 where %2='%3'")

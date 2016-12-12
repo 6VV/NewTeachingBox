@@ -44,7 +44,7 @@ namespace VariateWidget{
 			return;
 		}
 		m_iEditVariate->OnNewVariate(*variate);
-		TVariateManager::GetInstance()->AddVariate(*variate);
+		TVariateManager::GetInstance()->AddVariate(variate);
 
 		Destroy();
 	}

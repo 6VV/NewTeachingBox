@@ -20,17 +20,23 @@
 
 #include "TSymbol.h"
 #include "QTreeWidget"
+#include "QObject"
 
 class TreeWidgetItemWithSymbol :public QTreeWidgetItem
 {
 public:
 	TreeWidgetItemWithSymbol(const TSymbol& symbol, QTreeWidgetItem* parentItem);
+	~TreeWidgetItemWithSymbol();
 
 	TSymbol GetSymbol() const;
+	bool IsSave() const;
+
 	void SetSymbol(const TSymbol& symbol);
+	void SetSave(bool isSave);
 
 private:
 	TSymbol m_symbol;
+	bool m_isSave=false;
 };
 
 #endif

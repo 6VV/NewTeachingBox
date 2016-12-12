@@ -97,11 +97,11 @@ void MacroWidgetParent::SlotOnButtonConfirmClicked()
 				{
 					isNewVariate = true;
 
-					TVariateManager::GetInstance()->AddVariate(*variate);
+					TVariateManager::GetInstance()->AddVariate(variate);
 
-					/*将节点挂在新变量上，避免因原变量销毁导致指向无效地址*/
-					comboBox->ParentItem()->Variate(TVariateManager::GetInstance()->GetVariateSrollUp(
-						Context::projectContext.ProgramOpened(), variate->GetName()));
+					///*将节点挂在新变量上，避免因原变量销毁导致指向无效地址*/
+					//comboBox->ParentItem()->Variate(TVariateManager::GetInstance()->GetVariateSrollUp(
+					//	Context::projectContext.ProgramOpened(), variate->GetName()).get());
 
 					break;
 				}
@@ -116,6 +116,11 @@ void MacroWidgetParent::SlotOnButtonConfirmClicked()
 		}
 	}
 
+	for (int i = 0; i < m_treeWidget->topLevelItemCount();++i)
+	{
+		TVariateManager::GetInstance()->UpdateVariate(VariateManagerWithHorizonHeader::GetVariate(m_treeWidget, m_treeWidget->topLevelItem(i)));
+	}
+
 	OnConfirm();
 
 	delete this;
@@ -123,31 +128,31 @@ void MacroWidgetParent::SlotOnButtonConfirmClicked()
 
 void MacroWidgetParent::SlotOnButtonCancleClicked()
 {
-	for (auto comboBox : m_parameterComboBoxes)
+	/*for (auto comboBox : m_parameterComboBoxes)
 	{
 		comboBox->ParentItem()->IsSave(false);
-	}
+	}*/
 	delete this;
 }
 
-void MacroWidgetParent::SlotOnParameterChanged()
-{
-	auto comboBox = static_cast<ComboBoxWithParentItem*>(sender());
-
-	auto parameter = comboBox->currentText();
-
-	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(), parameter);
-
-	if (variate==nullptr)
-	{
-		return;
-	}
-
-	auto parentItem = comboBox->ParentItem();
-
-	//VariateTreeWidgetManager::UpdateWidget(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, parentItem);
-	variate->WriteContentIntoItem(parentItem, m_treeWidget);
-}
+//void MacroWidgetParent::SlotOnParameterChanged()
+//{
+//	auto comboBox = static_cast<ComboBoxWithParentItem*>(sender());
+//
+//	auto parameter = comboBox->currentText();
+//
+//	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(), parameter);
+//
+//	if (variate==nullptr)
+//	{
+//		return;
+//	}
+//
+//	auto parentItem = comboBox->ParentItem();
+//
+//	VariateManagerWithHorizonHeader::UpdateWidget(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, parentItem);
+//	//variate->WriteContentIntoItem(parentItem, m_treeWidget);
+//}
 
 void MacroWidgetParent::OnConfirm()
 {

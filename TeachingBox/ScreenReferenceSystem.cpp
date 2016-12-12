@@ -182,7 +182,7 @@ QLabel* ScreenReferenceSystem::GetValuesIllustrateWidget()
 inline
 TRefSys* ScreenReferenceSystem::GetVariate()
 {
-	return static_cast<TRefSys*>(TVariateManager::GetInstance()->GetVariateSrollUp(GetVariateScope(), GetVariateName()));	/*获取当前参考坐标系变量*/
+	return std::static_pointer_cast<TRefSys>(TVariateManager::GetInstance()->GetVariateSrollUp(GetVariateScope(), GetVariateName())).get();	/*获取当前参考坐标系变量*/
 }
 
 inline
@@ -268,7 +268,7 @@ void ScreenReferenceSystem::OnSaveButtonClicked()
 	}
 
 	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetVariateScope(), GetVariateName());
-	TVariateManager::GetInstance()->UpdateVariate(variate->GetScope(), variate->GetName(), TRefSys{ {variate->GetScope(), variate->GetName()}, value });
+	TVariateManager::GetInstance()->UpdateVariate(std::shared_ptr<TVariate>(new TRefSys{ {variate->GetScope(), variate->GetName()}, value }));
 }
 
 void ScreenReferenceSystem::OnRefSysChanged()

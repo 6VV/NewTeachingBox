@@ -3,14 +3,29 @@
 #include "LineEditWithRegExpAndKeyboard.h"
 #include "RegExp.h"
 #include "TSymbol.h"
+#include "TreeWidgetItemWithSymbol.h"
+#include "TVariateManager.h"
+#include <assert.h>
 
 
 
 VariateValueTreeWidgetItem::~VariateValueTreeWidgetItem()
 {
-
 }
 
+
+void VariateValueTreeWidgetItem::InsertVariate(const std::shared_ptr<TVariate> variate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
+{
+	/*断开直接建立的所有连接*/
+	disconnect(this, 0, 0, 0);
+
+	assert(variateItem!=nullptr && typeid(*variateItem) == typeid(TreeWidgetItemWithSymbol));
+	InsertVariateValue(variate, treeWidget, variateItem);
+
+	connect(this, &VariateValueTreeWidgetItem::SignalValueChanged, [variateItem]{
+		dynamic_cast<TreeWidgetItemWithSymbol*>(variateItem)->SetSave(true);
+	});
+}
 
 void VariateValueTreeWidgetItem::InsertInt(const QString& valueName, int value, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem)
 {
@@ -38,5 +53,9 @@ void VariateValueTreeWidgetItem::InsertLineEdit(const QString& valueName, const 
 {
 	QTreeWidgetItem* valueItem = new QTreeWidgetItem(parentItem);
 	valueItem->setText(0, valueName);
-	treeWidget->setItemWidget(valueItem, 1, new LineEditWithRegExpAndKeyboard(value, regExp));
+	auto lineEdit = new LineEditWithRegExpAndKeyboard(value, regExp);
+	treeWidget->setItemWidget(valueItem, 1, lineEdit);
+	connect(lineEdit, &QLineEdit::textChanged, [this]{
+		emit(SignalValueChanged());
+	});
 }

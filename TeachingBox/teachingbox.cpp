@@ -336,7 +336,7 @@ void TeachingBox::SlotOnStartButtonPressed()
 		}
 	}
 	catch (TInterpreterException& e){
-		CodeEditor::GetInstance()->HighlightWrongLine(Context::projectContext.ProgramLoading(),e.LineNumber());
+		CodeEditor::GetInstance()->HighlightWrongLine(Context::projectContext.ProgramLoading(), e.LineNumber());
 		WarningManager::Warning(this, e.Info());
 		return;
 	}

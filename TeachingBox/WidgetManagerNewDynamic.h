@@ -28,7 +28,7 @@ namespace VariateWidget
 		WidgetManagerNewDynamic(QTableWidget* tableWidget, int startRowCount);
 		~WidgetManagerNewDynamic();
 
-		virtual std::unique_ptr<TVariate> GetVariate(const QString& name, const QString& scope) override;
+		virtual std::shared_ptr<TVariate> GetVariate(const QString& name, const QString& scope) override;
 
 		virtual void InitParameter() override;
 

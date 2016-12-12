@@ -119,18 +119,18 @@ tMovLParam TAstNodeMovlSentence::GetMovlParameter() const
 
 tAxesAllPositions TAstNodeMovlSentence::GetPosition(const QString& name) const
 {
-	return static_cast<TPosition*>(TVariateManager::GetInstance()
+	return std::static_pointer_cast < TPosition>(TVariateManager::GetInstance()
 		->GetVariateSrollUp(GetScope(), name))->GetValue();
 }
 
 tDynamicConstraint TAstNodeMovlSentence::GetDynamic(const QString& name) const
 {
-	return static_cast<TDynamic*>(TVariateManager::GetInstance()
+	return std::static_pointer_cast<TDynamic>(TVariateManager::GetInstance()
 		->GetVariateSrollUp(GetScope(), name))->GetValue();
 }
 
 tOverlapConstraint TAstNodeMovlSentence::GetOverlap(const QString& name) const
 {
-	return static_cast<TOverlap*>(TVariateManager::GetInstance()
+	return std::static_pointer_cast<TOverlap>(TVariateManager::GetInstance()
 		->GetVariateSrollUp(GetScope(), name))->GetValue();
 }

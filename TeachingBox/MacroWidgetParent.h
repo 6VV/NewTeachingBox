@@ -19,13 +19,12 @@
 
 #include "DialogParent.h"
 #include "TSymbol.h"
-#include "ComboBoxWithParentTreeItem.h"
 #include "TVariateManager.h"
 #include "Context.h"
 #include "TreeWidgetItemWithVariate.h"
 #include <memory>
 #include "VariateWidgetProducer.h"
-#include "VariateTreeWidgetManager.h"
+#include "VariateManagerWithHorizonHeader.h"
 #include <assert.h>
 
 
@@ -61,7 +60,7 @@ protected:
 	void SlotOnButtonConfirmClicked();
 	void SlotOnButtonCancleClicked();
 
-	void SlotOnParameterChanged();
+	//void SlotOnParameterChanged();
 
 private:
 	virtual void UpdateText() override;
@@ -74,12 +73,12 @@ protected:
 	QString m_macroName{};
 	QStringList m_macroParameterList{};
 
-	QVector<ComboBoxWithParentItem*> m_parameterComboBoxes;		/*保存所有参数选择控件*/
+	QVector<QComboBox*> m_parameterComboBoxes;		/*保存所有参数选择控件*/
 
 	QTreeWidget* m_treeWidget;
 
 private:
-	QMap<QString, QVector<TVariate*>> m_variatesMap;		/*保存本作用域中所有有效变量*/
+	QMap<QString, QVector<std::shared_ptr<TVariate>>> m_variatesMap;		/*保存本作用域中所有有效变量*/
 	QVector<std::shared_ptr<TVariate>> m_newVariates{};	/*保存所有新建变量*/
 	std::unique_ptr<VariateWidgetProducer> m_variateWidgetProducer;	/*用于生成各各变量的相应控件*/
 
@@ -90,9 +89,8 @@ private:
 template<typename T>
 void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
 {
-	ComboBoxWithParentItem* variateComboBox = new ComboBoxWithParentItem(m_treeWidget);
+	auto variateComboBox = new QComboBox(m_treeWidget);
 	m_variateWidgetProducer->UpdateComboBoxWithSimpleName(type, m_variatesMap, variateComboBox);
-	//auto variateComboBox = m_variateWidgetProducer->GetComboBox(type,m_variatesMap,m_treeWidget);
 	m_parameterComboBoxes.append(variateComboBox);
 
 	variateComboBox->setCurrentText(name);
@@ -103,25 +101,24 @@ void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
 	{
 		auto name = m_variateWidgetProducer->GetSuggestName(type, m_variatesMap);
 		variateComboBox->addItem(QPixmap(VariateWidgetProducer::IMAGE_LOGO_LOCAL), name);
-		std::shared_ptr<TVariate> newVariate(new T(TSymbol{Context::projectContext.ProgramOpened(), name}));
-		m_newVariates.append(newVariate);
+		variate=std::shared_ptr<TVariate>(new T(TSymbol{ Context::projectContext.ProgramOpened(), name }));
+		m_newVariates.append(variate);
+	}
 
-		//VariateTreeWidgetManager::InsertVariate(newVariate, m_treeWidget, m_treeWidget->invisibleRootItem());
-		newVariate->WriteToTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
-	}
-	else
-	{
-		//VariateTreeWidgetManager::InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, m_treeWidget->invisibleRootItem());
-		variate->WriteToTreeWidgetItem(m_treeWidget->invisibleRootItem(), m_treeWidget);
-	}
+	VariateManagerWithHorizonHeader::InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, m_treeWidget->invisibleRootItem());
 
 	auto item = m_treeWidget->topLevelItem(m_treeWidget->topLevelItemCount() - 1);
-
 	m_treeWidget->setItemWidget(item, 1, variateComboBox);
-	assert(typeid(*item) == typeid(TreeWidgetItemWithVariate));
-	variateComboBox->ParentItem(dynamic_cast<TreeWidgetItemWithVariate*>(item));
 
-	connect(variateComboBox, SIGNAL(currentTextChanged(const QString&)), this, SLOT(SlotOnParameterChanged()));
+	connect(variateComboBox, &QComboBox::currentTextChanged, [item, this](const QString& text){
+		auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(), text);
+		if (variate == nullptr)
+		{
+			return;
+		}
+
+		VariateManagerWithHorizonHeader::UpdateWidget(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, item);
+	});
 }
 
 template<typename T>

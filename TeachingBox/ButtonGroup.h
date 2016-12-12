@@ -3,13 +3,13 @@
 
 #include "QWidget"
 
-class Button;
+class QPushButton;
 class QVBoxLayout;
 
 class ButtonGroup:public QWidget
 {
 public:
-	ButtonGroup(QList<Button*>& btnlist, Button* parentButton);
+	ButtonGroup(QList<QPushButton*>& btnlist, QPushButton* parentButton);
 	~ButtonGroup();
 
 private:
@@ -18,9 +18,9 @@ private:
 	void Init();
 
 private:
-	QList<Button*> m_btnList;
+	QList<QPushButton*> m_btnList;
 	QVBoxLayout* m_layout;
-	Button* m_parentButton;
+	QPushButton* m_parentButton;
 };
 
 #endif

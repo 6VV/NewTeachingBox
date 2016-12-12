@@ -57,17 +57,17 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnTerminalValue(const TAst
 		{
 		case SYMBOL_TYPE::TYPE_INTERGER:
 		{
-			result.value = static_cast<TInteger*>(var)->GetValue();
+			result.value = std::static_pointer_cast<TInteger>(var)->GetValue();
 			result.type = SYMBOL_TYPE::TYPE_INTERGER;
 		}break;
 		case SYMBOL_TYPE::TYPE_DOUBLE:
 		{
-			result.value = static_cast<TDouble*>(var)->GetValue();
+			result.value = std::static_pointer_cast<TDouble>(var)->GetValue();
 			result.type = SYMBOL_TYPE::TYPE_DOUBLE;
 		}break;
 		case SYMBOL_TYPE::TYPE_BOOL:
 		{
-			result.value = static_cast<TBool*>(var)->GetValue();
+			result.value = std::static_pointer_cast<TBool>(var)->GetValue();
 			result.type = SYMBOL_TYPE::TYPE_BOOL;
 		}break;
 		default:

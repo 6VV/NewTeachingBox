@@ -19,7 +19,7 @@ namespace VariateWidget
 
 	}
 
-	std::unique_ptr<TVariate> WidgetManagerNewPosition::GetVariate(const QString& name, const QString& scope)
+	std::shared_ptr<TVariate> WidgetManagerNewPosition::GetVariate(const QString& name, const QString& scope)
 	{
 		tAxesAllPositions position{};
 
@@ -37,7 +37,7 @@ namespace VariateWidget
 		}
 
 
-		return std::unique_ptr<TVariate>(new TPosition({scope, name}, position));
+		return std::shared_ptr<TVariate>(new TPosition({ scope, name }, position));
 	}
 
 	void WidgetManagerNewPosition::InitParameter()
