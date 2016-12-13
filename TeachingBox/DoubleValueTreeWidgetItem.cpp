@@ -6,9 +6,9 @@
 
 VariateValueTreeWidgetBuilder<DoubleValueTreeWidgetItem> DoubleValueTreeWidgetItem::buidler(TDouble::TypeName());
 
-std::shared_ptr<TVariate> DoubleValueTreeWidgetItem::GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
+std::shared_ptr<TVariate> DoubleValueTreeWidgetItem::GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem,int index)
 {
-	auto value = GetDouble(treeWidget, variateItem->child(0));
+	auto value = GetDouble(treeWidget, variateItem->child(index));
 	return std::shared_ptr<TDouble>(new TDouble(symbol, value));
 }
 

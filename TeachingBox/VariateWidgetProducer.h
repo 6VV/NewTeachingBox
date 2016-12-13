@@ -24,7 +24,6 @@
 #include "TSymbol.h"
 
 class TVariate;
-class ComboBoxWithParentItem;
 
 class VariateWidgetProducer
 {

@@ -18,8 +18,8 @@
 //    <desc>        build this moudle     
 *************************************************/
 
-#include "VariateManagerWithHorizonHeader.h"
 #include <memory>
+#include "VariateWidgetMap.h"
 
 template<typename T>
 class VariateValueTreeWidgetBuilder
@@ -31,7 +31,7 @@ public:
 template<typename T>
 VariateValueTreeWidgetBuilder<T>::VariateValueTreeWidgetBuilder(const QString& type)
 {
-	VariateManagerWithHorizonHeader::VaraiteWidgetMap()[type] = std::shared_ptr<T>(new T);
+	VariateWidgetMap::VaraiteWidgetMap()[type] = std::shared_ptr<T>(new T);
 }
 
 #endif

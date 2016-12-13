@@ -47,7 +47,8 @@ public:
 	virtual ~MacroWidgetParent();
 
 protected:
-	virtual void OnConfirm();
+	virtual void SlotOnButtonConfirmClicked();
+
 	virtual QString MacroName() = 0;
 
 	template<typename T>
@@ -57,13 +58,13 @@ protected:
 	void AddParameter(SymbolType type, int index);
 
 	private slots:
-	void SlotOnButtonConfirmClicked();
 	void SlotOnButtonCancleClicked();
 
 	//void SlotOnParameterChanged();
 
 private:
 	virtual void UpdateText() override;
+	void OnConfirm();
 
 	void InitMacroText(const QString& macroText);
 	void InitLayout();
@@ -105,7 +106,7 @@ void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
 		m_newVariates.append(variate);
 	}
 
-	VariateManagerWithHorizonHeader::InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, m_treeWidget->invisibleRootItem());
+	VariateManagerWithHorizonHeader::GetInstance()->InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, m_treeWidget->invisibleRootItem());
 
 	auto item = m_treeWidget->topLevelItem(m_treeWidget->topLevelItemCount() - 1);
 	m_treeWidget->setItemWidget(item, 1, variateComboBox);
@@ -117,7 +118,7 @@ void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
 			return;
 		}
 
-		VariateManagerWithHorizonHeader::UpdateWidget(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, item);
+		VariateManagerWithHorizonHeader::GetInstance()->UpdateWidget(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, item);
 	});
 }
 

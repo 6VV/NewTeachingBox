@@ -35,3 +35,4 @@ void TreeWidgetItemWithSymbol::SetSave(bool isSave)
 {
 	m_isSave = isSave;
 }
+

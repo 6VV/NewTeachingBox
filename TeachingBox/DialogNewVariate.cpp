@@ -13,6 +13,18 @@
 #include "IEditVariate.h"
 #include "VariateDatabase.h"
 #include "TVariateManager.h"
+#include "VariateManagerWithVerticalHeader.h"
+#include "TInteger.h"
+#include <memory>
+#include "TVariateFactory.h"
+#include "TString.h"
+#include "TBool.h"
+#include "TDouble.h"
+#include "TPosition.h"
+#include "TDynamic.h"
+#include "TOverlap.h"
+#include "TRefSys.h"
+#include "TToolSys.h"
 
 namespace VariateWidget{
 
@@ -20,7 +32,6 @@ namespace VariateWidget{
 		:DialogParent(parent)
 		, m_scope(scope)
 		, m_iEditVariate(iEditVariate)
-		, m_variateTableManager(new VariateTableManager(this))
 	{
 		Init();
 	}
@@ -32,20 +43,26 @@ namespace VariateWidget{
 
 	void DialogNewVariate::SlotOnConfrimButtonClicked()
 	{
-		if (!m_variateTableManager->IsValidVariate())
-		{
-			WarningManager::Warning(this, tr("Wrong Variate"));
-			return;
-		}
+		//if (!m_variateTableManager->IsValidVariate())
+		//{
+		//	WarningManager::Warning(this, tr("Wrong Variate"));
+		//	return;
+		//}
 
-		auto variate = m_variateTableManager->GetVariate();
+		//auto variate = m_variateTableManager->GetVariate();
+		auto variate = VariateManagerWithVerticalHeader::GetInstance()->GetVariate(m_variateTree, m_variateTree->invisibleRootItem());
 		if (variate==nullptr)
 		{
 			return;
 		}
+		if (!CheckNameValid(variate->GetName()))
+		{
+			return;
+		}
+
 		m_iEditVariate->OnNewVariate(*variate);
 		TVariateManager::GetInstance()->AddVariate(variate);
-
+	
 		Destroy();
 	}
 
@@ -56,28 +73,43 @@ namespace VariateWidget{
 
 	void DialogNewVariate::SlotOnTypeChanged(QTreeWidgetItem* item)
 	{
-
 		/*若当前节点无效或为顶部节点*/
 		if (item == nullptr || item->parent() == nullptr)
 		{
 			return;
 		}
 
-		UpdateVariateWidget(item->text(0));
+		m_variateTree->clear();
+		VariateManagerWithVerticalHeader::GetInstance()->InsertVariate(
+			TVariateFactory::CreateVariate(TSymbol{ m_scope, "", TSymbol::TYPE_VOID, item->text(0) }), m_variateTree, m_variateTree->invisibleRootItem());
+		//UpdateVariateWidget(item->text(0));
 	}
 
-	void DialogNewVariate::UpdateVariateWidget(const QString& currentType)
-	{
-		m_variateTableManager->ChangeToType(currentType);
-	}
+	//void DialogNewVariate::UpdateVariateWidget(const QString& currentType)
+	//{
+	//	m_variateTableManager->ChangeToType(currentType);
+	//}
 
 	void DialogNewVariate::UpdateText()
 	{
 		m_treeWidget->setHeaderLabel(tr("Type"));
-		m_variateTableManager->UpdateText();
+		//m_variateTableManager->UpdateText();
 
 		m_btnConfrim->setText(tr("Confirm"));
 		m_btnCancle->setText(tr("Cancle"));
+	}
+
+	bool DialogNewVariate::CheckNameValid(const QString& name)
+	{
+		QRegExp regExp(RegExp::STR_REG_STRING_NAME);
+
+		if (name.isEmpty() || !regExp.exactMatch(name))
+		{
+			WarningManager::Warning(this, tr("Invalid name"));
+			return false;
+		}
+
+		return true;
 	}
 
 	void DialogNewVariate::Destroy()
@@ -119,27 +151,27 @@ namespace VariateWidget{
 		QTreeWidgetItem* itemBase = new QTreeWidgetItem(QStringList{ TVariateType::STR_CATEGORY_BASE });
 		QStringList strListBase;
 
-		itemBase->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_INT }));
-		itemBase->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_DOUBLE }));
-		itemBase->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_BOOL }));
-		itemBase->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_STRING }));
+		itemBase->addChild(new QTreeWidgetItem(QStringList{ TInteger::TypeName() }));
+		itemBase->addChild(new QTreeWidgetItem(QStringList{ TDouble::TypeName() }));
+		itemBase->addChild(new QTreeWidgetItem(QStringList{ TBool::TypeName() }));
+		itemBase->addChild(new QTreeWidgetItem(QStringList{ TString::TypeName() }));
 
 		/*添加位置类型*/
-		QTreeWidgetItem* itemPosition = new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_POSITION });
-		itemPosition->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_POSITION }));
+		QTreeWidgetItem* itemPosition = new QTreeWidgetItem(QStringList{ TPosition::TypeName() });
+		itemPosition->addChild(new QTreeWidgetItem(QStringList{ TPosition::TypeName() }));
 
 		/*添加动态类型*/
-		QTreeWidgetItem* itemDynamic = new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_DYNAMIC });
-		itemDynamic->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_DYNAMIC }));
+		QTreeWidgetItem* itemDynamic = new QTreeWidgetItem(QStringList{ TDynamic::TypeName() });
+		itemDynamic->addChild(new QTreeWidgetItem(QStringList{ TDynamic::TypeName() }));
 
 		/*添加过渡类型*/
-		QTreeWidgetItem* itemOverlap = new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_OVERLAP });
-		itemOverlap->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_OVERLAP }));
+		QTreeWidgetItem* itemOverlap = new QTreeWidgetItem(QStringList{ TOverlap::TypeName() });
+		itemOverlap->addChild(new QTreeWidgetItem(QStringList{ TOverlap::TypeName() }));
 
 		/*添加坐标系类型*/
 		QTreeWidgetItem* itemCoordinateSys = new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_REF_SYS });
-		itemCoordinateSys->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_REF_SYS }));
-		itemCoordinateSys->addChild(new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_TOOL_SYS }));
+		itemCoordinateSys->addChild(new QTreeWidgetItem(QStringList{ TRefSys::TypeName() }));
+		itemCoordinateSys->addChild(new QTreeWidgetItem(QStringList{ TToolSys::TypeName() }));
 
 		m_treeWidget = new QTreeWidget(this);
 
@@ -154,7 +186,12 @@ namespace VariateWidget{
 
 	QWidget* DialogNewVariate::GetVariateSettingWidget()
 	{
-		return m_variateTableManager->GetTableWidget(m_scope);
+		m_variateTree = new QTreeWidget(this);
+		m_variateTree->setHeaderLabels(QStringList{ "Name", "Value" });
+		m_variateTree->header()->setSectionResizeMode(QHeaderView::Stretch);	//平均分布各列
+		VariateManagerWithVerticalHeader::GetInstance()->InsertVariate(std::make_shared<TInteger>(TSymbol{ m_scope }, 0), m_variateTree, m_variateTree->invisibleRootItem());
+		return m_variateTree; 
+		//return m_variateTableManager->GetTableWidget(m_scope);
 	}
 
 	void DialogNewVariate::Init()

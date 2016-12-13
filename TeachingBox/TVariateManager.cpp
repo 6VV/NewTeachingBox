@@ -84,7 +84,7 @@ void TVariateManager::LoadInitDataFromDatabase()
 	auto variates = VariateDatabase::SelectAllVariates();
 	for (auto var : variates)
 	{
-		TVariateContext::GetInstance()->AddVariate(std::shared_ptr<TVariate>(TVariateFactory::CreateVariate(var)));
+		TVariateContext::GetInstance()->AddVariate(std::shared_ptr<TVariate>(TVariateFactory::GetVariate(var)));
 	}
 }
 

@@ -4,12 +4,13 @@
 #include <memory>
 
 class TVariate;
+class TSymbol;
 
 class TVariateFactory
 {
 public:
-	static TVariate* CreateVariate(QByteArray& dataBytes);
 	static std::shared_ptr<TVariate> GetVariate(QByteArray& dataBytes);
+	static std::shared_ptr<TVariate> CreateVariate(const TSymbol& symbol);
 };
 
 #endif

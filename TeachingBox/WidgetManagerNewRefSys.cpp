@@ -5,7 +5,6 @@
 #include "LineEditWithRegExpAndKeyboard.h"
 #include "VariateWidgetProducer.h"
 #include "TVariateManager.h"
-#include "ComboBoxWithParentTreeItem.h"
 
 
 namespace VariateWidget

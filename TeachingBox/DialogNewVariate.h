@@ -18,7 +18,6 @@
 *************************************************/
 
 #include <memory>
-#include "VariateTableManager.h"
 #include "DialogParent.h"
 
 class Button;
@@ -29,7 +28,6 @@ class QTableWidget;
 class QLineEdit;
 class QTreeWidgetItem;
 class QComboBox;
-class VariateTableManager;
 class IEditVariate;
 
 namespace VariateWidget{
@@ -47,11 +45,13 @@ namespace VariateWidget{
 		void SlotOnCancleButtonClicked();
 		void SlotOnTypeChanged(QTreeWidgetItem* item);
 
-		void UpdateVariateWidget(const QString& currentType);
+		//void UpdateVariateWidget(const QString& currentType);
 
 	private:
 		//void showEvent(QShowEvent *) override;
 		void UpdateText() override;
+
+		bool CheckNameValid(const QString& name);
 
 		void Destroy();
 
@@ -71,11 +71,11 @@ namespace VariateWidget{
 		IEditVariate* m_iEditVariate;
 
 		QTreeWidget* m_treeWidget;
+		QTreeWidget* m_variateTree;
 
 		Button* m_btnConfrim;
 		Button* m_btnCancle;
 
-		std::unique_ptr<VariateTableManager> m_variateTableManager;
 	};
 }
 #endif

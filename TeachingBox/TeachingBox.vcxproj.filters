@@ -868,9 +868,6 @@
     <ClCompile Include="ScreenCoordinate.cpp">
       <Filter>Source Files\Screen\ScreenCoordinate</Filter>
     </ClCompile>
-    <ClCompile Include="ComboBoxWithParentTreeItem.cpp">
-      <Filter>Source Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
-    </ClCompile>
     <ClCompile Include="ScreenReferenceSystem.cpp">
       <Filter>Source Files\Screen\ScreenCoordinate</Filter>
     </ClCompile>
@@ -1055,6 +1052,24 @@
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_VariateValueTreeWidgetItem.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="VariateWidgetMap.cpp">
+      <Filter>Source Files\Variate\VariateWidget\NewWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="VariateManagerWithVerticalHeader.cpp">
+      <Filter>Source Files\Variate\VariateWidget\NewWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TreeWidgetItemWithSymbol.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TreeWidgetItemWithSymbol.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_VariateManagerWithHorizonHeader.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_VariateManagerWithHorizonHeader.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1423,9 +1438,6 @@
     <ClInclude Include="Macro.h">
       <Filter>Header Files\Screen\ScreenProgram\Macro\MacroSeletor</Filter>
     </ClInclude>
-    <ClInclude Include="ComboBoxWithParentTreeItem.h">
-      <Filter>Header Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
-    </ClInclude>
     <ClInclude Include="MacroWidgetGosub.h">
       <Filter>Header Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
     </ClInclude>
@@ -1515,6 +1527,12 @@
     </ClInclude>
     <ClInclude Include="TVariateScopeNode.h">
       <Filter>Header Files\Variate</Filter>
+    </ClInclude>
+    <ClInclude Include="VariateManagerWithVerticalHeader.h">
+      <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="VariateWidgetMap.h">
+      <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

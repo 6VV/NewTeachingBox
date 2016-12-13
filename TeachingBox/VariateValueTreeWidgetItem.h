@@ -30,12 +30,12 @@ class VariateValueTreeWidgetItem:public QObject
 	Q_OBJECT
 
 signals:
-	void SignalValueChanged();
+	void SignalValueChanged(QTreeWidgetItem* variateItem);
 
 public:
 	virtual ~VariateValueTreeWidgetItem();
 
-	virtual std::shared_ptr<TVariate> GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)=0;
+	virtual std::shared_ptr<TVariate> GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem,int index=0)=0;
 	virtual void UpdateWidgetValue(const std::shared_ptr<TVariate> newVariate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)=0;
 
 	void InsertVariate(const std::shared_ptr<TVariate> variate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem);
@@ -43,6 +43,7 @@ public:
 protected:
 	virtual void InsertVariateValue(const std::shared_ptr<TVariate> variate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem) = 0;
 
+	void InsertComboBox(const QString& valueName, const QStringList& itemTexts, const QString& currentText, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem);
 	void InsertInt(const QString& valueName, int value, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem);
 	void InsertDouble(const QString& valueName, double value, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem);
 	void InsertLineEdit(const QString& valueName, const QString& value, const QString& regExp, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem);

@@ -16,7 +16,7 @@ public:
 
 private:
 	virtual QString MacroName() override;
-	virtual void OnConfirm() override;
+	virtual void SlotOnButtonConfirmClicked() override;
 
 private:
 	QComboBox* m_programComboBox;;

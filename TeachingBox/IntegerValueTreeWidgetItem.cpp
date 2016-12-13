@@ -24,9 +24,9 @@ void IntegerValueTreeWidgetItem::UpdateWidgetValue(const std::shared_ptr<TVariat
 	dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(0), 1))->setText(QString::number(value));
 }
 
-std::shared_ptr<TVariate> IntegerValueTreeWidgetItem::GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
+std::shared_ptr<TVariate> IntegerValueTreeWidgetItem::GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem,int index)
 {
-	int value = GetInt(treeWidget, variateItem->child(0));
+	int value = GetInt(treeWidget, variateItem->child(index));
 	return std::shared_ptr<TInteger>(new TInteger(symbol,value));
 }
 

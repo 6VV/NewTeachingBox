@@ -1,7 +1,6 @@
 ﻿#include "stdafx.h"
 #include "VariateWidgetProducer.h"
 #include "TVariate.h"
-#include "ComboBoxWithParentTreeItem.h"
 #include "ProjectContext.h"
 
 

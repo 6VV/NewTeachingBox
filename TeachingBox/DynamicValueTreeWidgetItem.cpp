@@ -7,16 +7,16 @@
 
 VariateValueTreeWidgetBuilder<DynamicValueTreeWidgetItem> DynamicValueTreeWidgetItem::buidler(TDynamic::TypeName());
 
-std::shared_ptr<TVariate> DynamicValueTreeWidgetItem::GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
+std::shared_ptr<TVariate> DynamicValueTreeWidgetItem::GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem,int index)
 {
 	tDynamicConstraint value{};
 
-	value.m_Velocity = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(0), 1))->text().toDouble();
-	value.m_Acceleration = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(1), 1))->text().toDouble();
-	value.m_Deceleration = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(2), 1))->text().toDouble();
-	value.m_PostureVelocity = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(3), 1))->text().toDouble();
-	value.m_PostureAcceleration = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(4), 1))->text().toDouble();
-	value.m_PostureDeceleration = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(5), 1))->text().toDouble();
+	value.m_Velocity = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(0+index), 1))->text().toDouble();
+	value.m_Acceleration = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(1 + index), 1))->text().toDouble();
+	value.m_Deceleration = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(2 + index), 1))->text().toDouble();
+	value.m_PostureVelocity = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(3 + index), 1))->text().toDouble();
+	value.m_PostureAcceleration = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(4 + index), 1))->text().toDouble();
+	value.m_PostureDeceleration = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(5 + index), 1))->text().toDouble();
 
 	return std::shared_ptr<TDynamic>(new TDynamic(symbol, value));
 }

@@ -77,8 +77,8 @@ void MacroWidgetParent::InitLayout()
 inline
 void MacroWidgetParent::InitSignalSlot()
 {
-	connect(m_btnConfirm, SIGNAL(clicked()), this, SLOT(SlotOnButtonConfirmClicked()));
-	connect(m_btnCancle, SIGNAL(clicked()), this, SLOT(SlotOnButtonCancleClicked()));
+	connect(m_btnConfirm, &QPushButton::clicked, this, &MacroWidgetParent::SlotOnButtonConfirmClicked);
+	connect(m_btnCancle, &QPushButton::clicked, this, &MacroWidgetParent::SlotOnButtonCancleClicked);
 }
 
 
@@ -99,10 +99,6 @@ void MacroWidgetParent::SlotOnButtonConfirmClicked()
 
 					TVariateManager::GetInstance()->AddVariate(variate);
 
-					///*将节点挂在新变量上，避免因原变量销毁导致指向无效地址*/
-					//comboBox->ParentItem()->Variate(TVariateManager::GetInstance()->GetVariateSrollUp(
-					//	Context::projectContext.ProgramOpened(), variate->GetName()).get());
-
 					break;
 				}
 			}
@@ -118,7 +114,7 @@ void MacroWidgetParent::SlotOnButtonConfirmClicked()
 
 	for (int i = 0; i < m_treeWidget->topLevelItemCount();++i)
 	{
-		TVariateManager::GetInstance()->UpdateVariate(VariateManagerWithHorizonHeader::GetVariate(m_treeWidget, m_treeWidget->topLevelItem(i)));
+		TVariateManager::GetInstance()->UpdateVariate(VariateManagerWithHorizonHeader::GetInstance()->GetVariate(m_treeWidget, m_treeWidget->topLevelItem(i)));
 	}
 
 	OnConfirm();
@@ -154,6 +150,7 @@ void MacroWidgetParent::SlotOnButtonCancleClicked()
 //	//variate->WriteContentIntoItem(parentItem, m_treeWidget);
 //}
 
+inline
 void MacroWidgetParent::OnConfirm()
 {
 	QString text = MacroName()+" ";

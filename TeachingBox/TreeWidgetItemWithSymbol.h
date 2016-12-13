@@ -22,8 +22,10 @@
 #include "QTreeWidget"
 #include "QObject"
 
-class TreeWidgetItemWithSymbol :public QTreeWidgetItem
+class TreeWidgetItemWithSymbol :public QObject,public QTreeWidgetItem
 {
+	Q_OBJECT
+
 public:
 	TreeWidgetItemWithSymbol(const TSymbol& symbol, QTreeWidgetItem* parentItem);
 	~TreeWidgetItemWithSymbol();

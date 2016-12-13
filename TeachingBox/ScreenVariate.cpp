@@ -12,6 +12,7 @@
 #include "VariateManagerWithHorizonHeader.h"
 #include "TreeWidgetItemWithSymbol.h"
 #include <assert.h>
+#include "TVariate.h"
 
 ScreenVariate::ScreenVariate(QWidget* parent /*= 0*/)
 	:ScreenMainParent(parent)
@@ -159,7 +160,7 @@ void ScreenVariate::InitTreeWidget()
 		auto variates = TVariateManager::GetInstance()->GetVariatesFromScope(scope);
 		for (auto variate : variates)
 		{
-			VariateManagerWithHorizonHeader::InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, treeItem);
+			VariateManagerWithHorizonHeader::GetInstance()->InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, treeItem);
 			//variate->WriteToTreeWidgetItem(treeItem, m_treeWidget);
 		}
 	}
@@ -203,7 +204,7 @@ void ScreenVariate::InitSignalSlot()
 				auto item = dynamic_cast<TreeWidgetItemWithSymbol*>(variateItem);
 				if (item->IsSave())
 				{
-					TVariateManager::GetInstance()->UpdateVariate(VariateManagerWithHorizonHeader::GetVariate(m_treeWidget, variateItem));
+					TVariateManager::GetInstance()->UpdateVariate(VariateManagerWithHorizonHeader::GetInstance()->GetVariate(m_treeWidget, variateItem));
 				}
 			}
 		}
@@ -233,6 +234,6 @@ void ScreenVariate::UpdateText()
 
 void ScreenVariate::OnNewVariate(TVariate& variate)
 {
-	VariateManagerWithHorizonHeader::InsertVariate(std::shared_ptr<TVariate>(variate.Clone()), m_treeWidget, FindScopeItem(variate.GetScope()));
+	VariateManagerWithHorizonHeader::GetInstance()->InsertVariate(std::shared_ptr<TVariate>(variate.Clone()), m_treeWidget, FindScopeItem(variate.GetScope()));
 	//variate.WriteToTreeWidgetItem(FindScopeItem(variate.GetScope()), m_treeWidget);
 }

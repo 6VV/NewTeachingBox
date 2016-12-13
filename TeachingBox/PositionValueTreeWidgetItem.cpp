@@ -7,12 +7,12 @@
 
 VariateValueTreeWidgetBuilder<PositionValueTreeWidgetItem> PositionValueTreeWidgetItem::builder(TPosition::TypeName());
 
-std::shared_ptr<TVariate> PositionValueTreeWidgetItem::GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
+std::shared_ptr<TVariate> PositionValueTreeWidgetItem::GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem,int index)
 {
-	TPosition::ValueType value;
-	for (int i = 0; i < 6;++i)
+	TPosition::ValueType value{};
+	for (int i =index; i < 6 + index; ++i)
 	{
-		value.m_AxisPosition[i] = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(i),1))->text().toDouble();
+		value.m_AxisPosition[i-index] = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(i),1))->text().toDouble();
 	}
 
 	return std::shared_ptr<TPosition>(new TPosition(symbol, value));

@@ -4,7 +4,22 @@
 #include "TVariate.h"
 #include <assert.h>
 #include "VariateValueTreeWidgetItem.h"
+#include "VariateWidgetMap.h"
 
+
+VariateManagerWithHorizonHeader* VariateManagerWithHorizonHeader::GetInstance()
+{
+	static VariateManagerWithHorizonHeader variateManger;
+	return &variateManger;
+}
+
+VariateManagerWithHorizonHeader::VariateManagerWithHorizonHeader()
+{
+	for (auto variateWidget:VariateWidgetMap::VaraiteWidgetMap())
+	{
+		connect(variateWidget.second.get(), &VariateValueTreeWidgetItem::SignalValueChanged, this, &VariateManagerWithHorizonHeader::SetSave);
+	}
+}
 
 void VariateManagerWithHorizonHeader::InsertVariate(const std::shared_ptr<TVariate> variate, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem)
 {
@@ -12,7 +27,7 @@ void VariateManagerWithHorizonHeader::InsertVariate(const std::shared_ptr<TVaria
 	variateItem->setText(0, variate->GetTypeName());
 	variateItem->setText(1, variate->GetName());
 
-	GetVariateWidget(variate->GetTypeName())->InsertVariate(variate, treeWidget, variateItem);
+	VariateWidgetMap::GetVariateWidget(variate->GetTypeName())->InsertVariate(variate, treeWidget, variateItem);
 }
 
 std::shared_ptr<TVariate> VariateManagerWithHorizonHeader::GetVariate(QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
@@ -21,7 +36,7 @@ std::shared_ptr<TVariate> VariateManagerWithHorizonHeader::GetVariate(QTreeWidge
 
 	auto symbol = dynamic_cast<TreeWidgetItemWithSymbol*>(variateItem)->GetSymbol();
 
-	return GetVariateWidget(symbol.GetTypeName())->GetVariate(symbol, treeWidget, variateItem);
+	return VariateWidgetMap::GetVariateWidget(symbol.GetTypeName())->GetVariate(symbol, treeWidget, variateItem);
 }
 
 void VariateManagerWithHorizonHeader::UpdateWidget(const std::shared_ptr<TVariate> newVariate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
@@ -32,19 +47,15 @@ void VariateManagerWithHorizonHeader::UpdateWidget(const std::shared_ptr<TVariat
 	assert(newVariate->GetTypeName() == item->GetSymbol().GetTypeName());
 
 	item->SetSymbol(newVariate->GetSymbol());
-	GetVariateWidget(newVariate->GetTypeName())->UpdateWidgetValue(newVariate, treeWidget, variateItem);
+	VariateWidgetMap::GetVariateWidget(newVariate->GetTypeName())->UpdateWidgetValue(newVariate, treeWidget, variateItem);
 }
 
-VariateManagerWithHorizonHeader::VariateWidgetMapType& VariateManagerWithHorizonHeader::VaraiteWidgetMap()
+void VariateManagerWithHorizonHeader::SetSave(QTreeWidgetItem* variateItem)
 {
-	static VariateWidgetMapType map{};
-	return map;
+	if (variateItem == nullptr || typeid(*variateItem) != typeid(TreeWidgetItemWithSymbol))
+	{
+		return;
+	}
+	dynamic_cast<TreeWidgetItemWithSymbol*>(variateItem)->SetSave(true);
 }
 
-inline
-std::shared_ptr<VariateValueTreeWidgetItem> VariateManagerWithHorizonHeader::GetVariateWidget(const QString& type)
-{
-	auto iter = VaraiteWidgetMap().find(type);
-	assert(iter != VaraiteWidgetMap().end());
-	return iter->second;
-}

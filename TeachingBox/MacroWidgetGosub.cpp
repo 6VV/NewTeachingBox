@@ -51,7 +51,8 @@ QString MacroWidgetGosub::MacroName()
 	return "GOSUB";
 }
 
-void MacroWidgetGosub::OnConfirm()
+void MacroWidgetGosub::SlotOnButtonConfirmClicked()
 {
 	CodeEditor::GetInstance()->UpdateCurrentLine(MacroName()+" "+m_programComboBox->currentText());
+	delete this;
 }

@@ -8,9 +8,9 @@
 
 VariateValueTreeWidgetBuilder<StringValueTreeWidgetItem> StringValueTreeWidgetItem::builder(TString::TypeName());
 
-std::shared_ptr<TVariate> StringValueTreeWidgetItem::GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
+std::shared_ptr<TVariate> StringValueTreeWidgetItem::GetVariate(const TSymbol& symbol, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem,int index)
 {
-	return std::shared_ptr<TString>(new TString(symbol, dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(0), 1))->text()));
+	return std::shared_ptr<TString>(new TString(symbol, dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(index), 1))->text()));
 }
 
 void StringValueTreeWidgetItem::InsertVariateValue(const std::shared_ptr<TVariate> variate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)

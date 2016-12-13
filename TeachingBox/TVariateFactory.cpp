@@ -13,57 +13,6 @@
 
 
 
-TVariate* TVariateFactory::CreateVariate(QByteArray& dataBytes)
-{
-	QDataStream dataStream(&dataBytes, QIODevice::ReadOnly);
-	TSymbol symbol(dataStream);
-	dataStream.device()->seek(0);
-	switch (symbol.GetType())
-	{
-	case TSymbol::TYPE_INTERGER:
-	{
-		return new TInteger(dataStream);
-	}break;
-	case TSymbol::TYPE_DOUBLE:
-	{
-		return new TDouble(dataStream);
-	}break;
-	case TSymbol::TYPE_BOOL:
-	{
-		return new TBool(dataStream);
-	}break;
-	case TSymbol::TYPE_STRING:
-	{
-		return new TString(dataStream);
-	}break;
-	case TSymbol::TYPE_POSITION:
-	{
-		return new TPosition(dataStream);
-	}break;
-	case TSymbol::TYPE_DYNAMIC:
-	{
-		return new TDynamic(dataStream);
-	}break;
-	case TSymbol::TYPE_OVERLAP:
-	{
-		return new TOverlap(dataStream);
-	}break;
-	case TSymbol::TYPE_REF_SYS:
-	{
-		return new TRefSys(dataStream);
-	}
-	case TSymbol::TYPE_TOOL_SYS:
-	{
-		return new TToolSys(dataStream);
-	}
-	default:
-	{
-		assert(!"Create variate failed\nNot find variate class");
-		return nullptr;
-	}break;
-	}
-}
-
 std::shared_ptr<TVariate> TVariateFactory::GetVariate(QByteArray& dataBytes)
 {
 	QDataStream dataStream(&dataBytes, QIODevice::ReadOnly);
@@ -112,5 +61,51 @@ std::shared_ptr<TVariate> TVariateFactory::GetVariate(QByteArray& dataBytes)
 		assert(!"Create variate failed\nNot find variate class");
 		return nullptr;
 	}break;
+	}
+}
+
+std::shared_ptr<TVariate> TVariateFactory::CreateVariate(const TSymbol& symbol)
+{
+	auto type = symbol.GetTypeName();
+	if (type == TInteger::TypeName())
+	{
+		return std::shared_ptr<TVariate>(new TInteger(symbol));
+	}
+	else if (type == TDouble::TypeName())
+	{
+		return std::shared_ptr<TVariate>(new TDouble(symbol));
+	}
+	else if (type == TBool::TypeName())
+	{
+		return std::shared_ptr<TVariate>(new TBool(symbol));
+	}
+	else if (type == TString::TypeName())
+	{
+		return std::shared_ptr<TVariate>(new TString(symbol));
+	}
+	else if (type == TPosition::TypeName())
+	{
+		return std::shared_ptr<TVariate>(new TPosition(symbol));
+	}
+	else if (type == TDynamic::TypeName())
+	{
+		return std::shared_ptr<TVariate>(new TDynamic(symbol));
+	}
+	else if (type == TOverlap::TypeName())
+	{
+		return std::shared_ptr<TVariate>(new TOverlap(symbol));
+	}
+	else if (type == TRefSys::TypeName())
+	{
+		return std::shared_ptr<TVariate>(new TRefSys(symbol));
+	}
+	else if (type == TToolSys::TypeName())
+	{
+		return std::shared_ptr<TVariate>(new TToolSys(symbol));
+	}
+	else
+	{
+		assert(!"Create variate failed\nNot find variate class");
+		return nullptr;
 	}
 }
