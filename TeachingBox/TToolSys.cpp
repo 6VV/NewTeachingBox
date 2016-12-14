@@ -23,25 +23,24 @@ TToolSys::TToolSys(const TToolSys& variate)
 {
 	UpdateFromValue(variate);
 
-	Init();
+	//Init();
 }
 
 TToolSys::TToolSys(QDataStream& dataStream)
 	: TVariate(dataStream)
 {
-	for (auto& value:m_value)
-	{
-		dataStream >> value;
-	}
+	m_value.ReadFromDataStream(dataStream);
+	//for (auto& value:m_value)
+	//{
+	//	dataStream >> value;
+	//}
 
-	Init();
 }
 
 TToolSys::TToolSys(const TSymbol& symbol, ValueType value /*= ValueType{}*/)
-	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_TOOL_SYS ,TypeName()})
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX, TypeName() })
 	, m_value(value)
 {
-	Init();
 }
 
 TToolSys::~TToolSys()
@@ -54,7 +53,7 @@ TVariate* TToolSys::Clone() const
 	return new TToolSys(*this);
 }
 
-TToolSys::ValueType TToolSys::GetValue() const
+TToolSys::ValueType::ValueType TToolSys::GetValue() const
 {
 	return m_value;
 }
@@ -66,19 +65,11 @@ void TToolSys::SetValue(ValueType value)
 
 void TToolSys::WriteValueToStream(QDataStream& dataStream) const
 {
-	for (auto value:m_value)
-	{
-		dataStream << value;
-	}
+	m_value.WriteToDataStream(dataStream);
 }
 
 void TToolSys::UpdateFromValue(const TVariate& variate)
 {
 	m_value = dynamic_cast<const TToolSys&>(variate).m_value;
-}
-
-void TToolSys::Init()
-{
-	m_variateWidget = new TToolSysWidget(this);
 }
 

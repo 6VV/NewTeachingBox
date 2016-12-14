@@ -38,8 +38,11 @@ void ScreenReferenceSystem::showEvent(QShowEvent *)
 	//auto startTime = std::chrono::steady_clock::now();
 
 	/*考虑到不同作用域内可能存在同名坐标系，故在组合框中显示坐标系名时，同时显示作用域名*/
-	m_variateWidgetProducer->UpdateComboBoxWithWholeName(TSymbol::SymbolType::TYPE_REF_SYS, variatesMap, m_comboBoxRefSys);
-	m_variateWidgetProducer->UpdateComboBoxWithWholeName(TSymbol::SymbolType::TYPE_REF_SYS, variatesMap, m_comboBoxBaseSys);
+	//m_variateWidgetProducer->UpdateComboBoxWithWholeName(TSymbol::SymbolType::TYPE_REF_SYS, variatesMap, m_comboBoxRefSys);
+	//m_variateWidgetProducer->UpdateComboBoxWithWholeName(TSymbol::SymbolType::TYPE_REF_SYS, variatesMap, m_comboBoxBaseSys);
+
+	m_variateWidgetProducer->UpdateComboBoxWithWholeName(TRefSys::TypeName(), variatesMap, m_comboBoxRefSys);
+	m_variateWidgetProducer->UpdateComboBoxWithWholeName(TRefSys::TypeName(), variatesMap, m_comboBoxBaseSys);
 
 	//auto endTime = std::chrono::steady_clock::now();
 	//qDebug() << "use time" << std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();

@@ -25,7 +25,6 @@ TOverlap::TOverlap(QDataStream& dataStream) : TVariate(dataStream)
 {
 	WriteValueSteam(dataStream);
 
-	Init();
 }
 
 TOverlap::TOverlap(const TOverlap& variate)
@@ -33,14 +32,12 @@ TOverlap::TOverlap(const TOverlap& variate)
 {
 	m_value = variate.m_value;
 
-	Init();
 }
 
 TOverlap::TOverlap(const TSymbol& symbol, ValueType value)
-	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_OVERLAP,TypeName() })
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX,TypeName() })
 	, m_value(value)
 {
-	Init();
 }
 
 const tOverlapConstraint& TOverlap::GetValue() const
@@ -70,10 +67,8 @@ void TOverlap::WriteValueSteam(QDataStream& dataStream)
 	dataStream >> m_value.m_TransitionParameter;
 }
 
-void TOverlap::Init()
-{
-	m_variateWidget = new TOverlapWidget(this);
-}
+
+TVariateRegister<TOverlap> TOverlap::m_register{ TypeName() };
 
 TVariate* TOverlap::Clone() const
 {

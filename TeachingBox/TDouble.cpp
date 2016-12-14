@@ -24,7 +24,6 @@ TDouble::TDouble(QDataStream& dataStream) : TVariate(dataStream)
 {
 	dataStream >> m_value;
 
-	Init();
 }
 
 TDouble::TDouble(const TDouble& variate)
@@ -32,14 +31,12 @@ TDouble::TDouble(const TDouble& variate)
 {
 	m_value = variate.m_value;
 
-	Init();
 }
 
 TDouble::TDouble(const TSymbol& symbol, ValueType value /*= false*/)
 	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_DOUBLE,TypeName() })
 	, m_value(value)
 {
-	Init();
 }
 
 double TDouble::GetValue()
@@ -62,10 +59,8 @@ void TDouble::UpdateFromValue(const TVariate& variate)
 	m_value = static_cast<const TDouble&>(variate).m_value;
 }
 
-void TDouble::Init()
-{
-	m_variateWidget = new TDoubleWidget(this);
-}
+
+TVariateRegister<TDouble> TDouble::m_register{ "Double" };
 
 TVariate* TDouble::Clone() const
 {

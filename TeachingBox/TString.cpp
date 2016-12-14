@@ -22,7 +22,6 @@ TString::TString(QDataStream& dataStream) : TVariate(dataStream)
 {
 	dataStream >> m_value;
 
-	Init();
 }
 
 TString::TString(const TString& variate)
@@ -30,14 +29,12 @@ TString::TString(const TString& variate)
 {
 	m_value = variate.m_value;
 
-	Init();
 }
 
 TString::TString(const TSymbol& symbol, ValueType value /*= 0*/)
 	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_STRING,TypeName() })
 	, m_value(value)
 {
-	Init();
 }
 
 const TString::ValueType TString::GetValue() const
@@ -63,11 +60,8 @@ void TString::UpdateFromValue(const TVariate& variate)
 }
 
 
-void TString::Init()
-{
-	m_variateWidget = new TStringWidget(this);
-}
 
+TVariateRegister<TString> TString::m_register{ "String" };
 
 TVariate* TString::Clone() const
 {

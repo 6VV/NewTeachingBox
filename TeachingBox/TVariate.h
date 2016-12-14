@@ -57,17 +57,7 @@ public:
 	TSymbol::SymbolType GetType() const;	/*获取变量类型*/
 	QString GetTypeName() const;	/*获取变量类型名*/
 
-	void Save();
-
-	void WriteContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget);	/*利用值更新控件内容*/
-
-	void WriteToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget);	/*将变量添加到控件中*/
-	void WriteToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget,	
-		const TSymbol::SymbolType type);/*当变量类型与需求类型相同时，将变量添加到控件中*/
-
 	void WriteDataToStream(QDataStream& dataStream) const;	/*将变量读入到数据流中*/
-	//void WriteToCollection(SET& collection, const TSymbol::SymbolType type);	/*当变量类型与需求类型相同时，将变量添加到集合中*/
-
 	void UpdateFromVariate(const TVariate& variate);	/*更新变量值*/
 
 protected:
@@ -79,7 +69,6 @@ private:
 
 protected:
 	TSymbol m_symbol;
-	TVariateWidget* m_variateWidget=nullptr;
 };
 
 #endif

@@ -2,6 +2,7 @@
 #define _TEACHING_BOX_TSTRING_H_
 
 #include "TVariate.h"
+#include "TVariateRegister.h"
 
 class TString:public TVariate
 {
@@ -26,12 +27,11 @@ protected:
 	virtual void WriteValueToStream(QDataStream& dataStream) const override;
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
-private:
-	void  Init();
-
 
 private:
 	ValueType m_value;
+
+	static TVariateRegister<TString> m_register;
 };
 
 #endif

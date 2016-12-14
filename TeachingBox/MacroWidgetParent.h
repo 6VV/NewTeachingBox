@@ -51,11 +51,17 @@ protected:
 
 	virtual QString MacroName() = 0;
 
-	template<typename T>
-	void AddParameter(SymbolType type, const QString& name);
+	//template<typename T>
+	//void AddParameter(SymbolType type, const QString& name);
+
+	//template<typename T>
+	//void AddParameter(SymbolType type, int index);
 
 	template<typename T>
-	void AddParameter(SymbolType type, int index);
+	void AddParameter(const QString& typeName, const QString& name);
+
+	template<typename T>
+	void AddParameter(const QString& typeName, int index);
 
 	private slots:
 	void SlotOnButtonCancleClicked();
@@ -86,12 +92,61 @@ private:
 	Button* m_btnConfirm;
 	Button* m_btnCancle;
 };
+//
+//template<typename T>
+//void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
+//{
+//	auto variateComboBox = new QComboBox(m_treeWidget);
+//	m_variateWidgetProducer->UpdateComboBoxWithSimpleName(type, m_variatesMap, variateComboBox);
+//	m_parameterComboBoxes.append(variateComboBox);
+//
+//	variateComboBox->setCurrentText(name);
+//
+//	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(), variateComboBox->currentText());
+//
+//	if (variate == nullptr)
+//	{
+//		auto name = m_variateWidgetProducer->GetSuggestName(type, m_variatesMap);
+//		variateComboBox->addItem(QPixmap(VariateWidgetProducer::IMAGE_LOGO_LOCAL), name);
+//		variate=std::shared_ptr<TVariate>(new T(TSymbol{ Context::projectContext.ProgramOpened(), name }));
+//		m_newVariates.append(variate);
+//	}
+//
+//	VariateManagerWithHorizonHeader::GetInstance()->InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, m_treeWidget->invisibleRootItem());
+//
+//	auto item = m_treeWidget->topLevelItem(m_treeWidget->topLevelItemCount() - 1);
+//	m_treeWidget->setItemWidget(item, 1, variateComboBox);
+//
+//	connect(variateComboBox, &QComboBox::currentTextChanged, [item, this](const QString& text){
+//		auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(), text);
+//		if (variate == nullptr)
+//		{
+//			return;
+//		}
+//
+//		VariateManagerWithHorizonHeader::GetInstance()->UpdateWidget(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, item);
+//	});
+//}
+//
+//template<typename T>
+//inline
+//void MacroWidgetParent::AddParameter(SymbolType type, int index)
+//{
+//	if (m_macroParameterList.size() > index)
+//	{
+//		AddParameter<T>(type, m_macroParameterList.at(index));
+//	}
+//	else
+//	{
+//		AddParameter<T>(type, "");
+//	}
+//}
 
 template<typename T>
-void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
+void MacroWidgetParent::AddParameter(const QString& typeName, const QString& name)
 {
 	auto variateComboBox = new QComboBox(m_treeWidget);
-	m_variateWidgetProducer->UpdateComboBoxWithSimpleName(type, m_variatesMap, variateComboBox);
+	m_variateWidgetProducer->UpdateComboBoxWithSimpleName(typeName, m_variatesMap, variateComboBox);
 	m_parameterComboBoxes.append(variateComboBox);
 
 	variateComboBox->setCurrentText(name);
@@ -100,9 +155,9 @@ void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
 
 	if (variate == nullptr)
 	{
-		auto name = m_variateWidgetProducer->GetSuggestName(type, m_variatesMap);
+		auto name = m_variateWidgetProducer->GetSuggestName(typeName, m_variatesMap);
 		variateComboBox->addItem(QPixmap(VariateWidgetProducer::IMAGE_LOGO_LOCAL), name);
-		variate=std::shared_ptr<TVariate>(new T(TSymbol{ Context::projectContext.ProgramOpened(), name }));
+		variate = std::shared_ptr<TVariate>(new T(TSymbol{ Context::projectContext.ProgramOpened(), name }));
 		m_newVariates.append(variate);
 	}
 
@@ -123,16 +178,15 @@ void MacroWidgetParent::AddParameter(SymbolType type, const QString& name)
 }
 
 template<typename T>
-inline
-void MacroWidgetParent::AddParameter(SymbolType type, int index)
+void MacroWidgetParent::AddParameter(const QString& typeName, int index)
 {
 	if (m_macroParameterList.size() > index)
 	{
-		AddParameter<T>(type, m_macroParameterList.at(index));
+		AddParameter<T>(typeName, m_macroParameterList.at(index));
 	}
 	else
 	{
-		AddParameter<T>(type, "");
+		AddParameter<T>(typeName, "");
 	}
 }
 

@@ -3,6 +3,7 @@
 
 #include "TVariate.h"
 #include "DataStruct.h"
+#include "TVariateRegister.h"
 
 class TOverlap:public TVariate
 {
@@ -30,11 +31,9 @@ protected:
 
 
 private:
-	void Init();
-
-
-private:
 	ValueType m_value;
+
+	static TVariateRegister<TOverlap> m_register;
 };
 
 #endif

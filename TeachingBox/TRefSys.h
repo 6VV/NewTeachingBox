@@ -56,8 +56,6 @@ private:
 	virtual void WriteValueToStream(QDataStream& dataStream) const override;
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
-	void Init();
-
 
 private:
 	ValueType m_value{};	/*位置偏移及姿态*/

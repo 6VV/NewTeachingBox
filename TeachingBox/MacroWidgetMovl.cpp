@@ -18,9 +18,9 @@ MacroWidgetMovl::~MacroWidgetMovl()
 
 void MacroWidgetMovl::Init()
 {
-	AddParameter<TPosition>(SymbolType::TYPE_POSITION, 0);
-	AddParameter<TDynamic>(SymbolType::TYPE_DYNAMIC,1);
-	AddParameter<TOverlap>(SymbolType::TYPE_OVERLAP, 2);
+	AddParameter<TPosition>(TPosition::TypeName(), 0);
+	AddParameter<TDynamic>(TDynamic::TypeName(),1);
+	AddParameter<TOverlap>(TOverlap::TypeName(), 2);
 
 }
 

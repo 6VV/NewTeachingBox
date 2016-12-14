@@ -3,6 +3,7 @@
 #include "LineEditWithRegExpAndKeyboard.h"
 #include "TToolSys.h"
 #include <assert.h>
+#include "DoubleValue.h"
 
 
 
@@ -22,7 +23,7 @@ namespace VariateWidget
 
 	std::shared_ptr<TVariate> WidgetManagerNewToolSys::GetVariate(const QString& name, const QString& scope)
 	{
-		TToolSys::ValueType resultValue{};
+		TToolSys::ValueType::ValueType resultValue{};
 
 		assert(m_tableWidget->rowCount() == m_startRowCount + 6);
 		for (int i = m_startRowCount; i < m_startRowCount + 6; ++i)
@@ -33,7 +34,7 @@ namespace VariateWidget
 			double value = valueString.toDouble(&ok);
 			assert(ok);
 
-			resultValue[i - m_startRowCount] = value;
+			resultValue[i - m_startRowCount] = std::make_shared<NVariateValue::DoubleValue>(value);
 		}
 
 

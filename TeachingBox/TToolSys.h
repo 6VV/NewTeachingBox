@@ -20,11 +20,12 @@
 
 #include "TVariate.h"
 #include <array>
+#include "ComplexValue.h"
 
 class TToolSys:public TVariate
 {
 public:
-	typedef std::array<double, 6> ValueType;
+	typedef NVariateValue::ComplexValue ValueType;
 	static QString TypeName();
 
 public:
@@ -35,15 +36,13 @@ public:
 
 	virtual TVariate* Clone() const override;
 
-	ValueType GetValue() const;
+	ValueType::ValueType GetValue() const;
 	void SetValue(ValueType value);
 
 private:
 	virtual void WriteValueToStream(QDataStream& dataStream) const override;
 	virtual void UpdateFromValue(const TVariate& variate) override;
 	
-	void Init();
-
 
 private:
 	ValueType m_value;

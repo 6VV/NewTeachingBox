@@ -140,9 +140,6 @@
     <Filter Include="Source Files\Screen\ScreenVariate\NewVariate">
       <UniqueIdentifier>{708f8b3f-02a5-4304-ad88-f0793b421812}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Screen\ScreenVariate\NewVariate">
-      <UniqueIdentifier>{2725e29e-968a-43c9-a043-904104b47977}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Variate\Variate">
       <UniqueIdentifier>{a196207d-ed50-41a3-95f4-38f72c9edc91}</UniqueIdentifier>
     </Filter>
@@ -304,6 +301,15 @@
     </Filter>
     <Filter Include="Source Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget">
       <UniqueIdentifier>{c57f88dd-0507-49a2-b850-16abb51ae8db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Variate\VariateValue">
+      <UniqueIdentifier>{1b0ff495-b0c8-444f-8c94-5e968ea7fec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Variate\VariateValue">
+      <UniqueIdentifier>{7d207d37-c9ab-4b92-b007-6307d34540b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\ScreenVariate\OldNewVariate">
+      <UniqueIdentifier>{2725e29e-968a-43c9-a043-904104b47977}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1072,6 +1078,18 @@
     <ClCompile Include="GeneratedFiles\Release\moc_VariateManagerWithHorizonHeader.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="VariateValue.cpp">
+      <Filter>Source Files\Variate\VariateValue</Filter>
+    </ClCompile>
+    <ClCompile Include="DoubleValue.cpp">
+      <Filter>Source Files\Variate\VariateValue</Filter>
+    </ClCompile>
+    <ClCompile Include="IntegerValue.cpp">
+      <Filter>Source Files\Variate\VariateValue</Filter>
+    </ClCompile>
+    <ClCompile Include="ComplexValue.cpp">
+      <Filter>Source Files\Variate\VariateValue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="teachingbox.qrc">
@@ -1119,11 +1137,8 @@
     <CustomBuild Include="LineEditWithRegExpAndKeyboard.h">
       <Filter>Header Files\Widget\Keyboard</Filter>
     </CustomBuild>
-    <CustomBuild Include="DialogNewVariate.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
-    </CustomBuild>
     <CustomBuild Include="VariateTableManager.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </CustomBuild>
     <CustomBuild Include="TVariateManager.h">
       <Filter>Header Files\Variate</Filter>
@@ -1216,7 +1231,7 @@
       <Filter>Header Files\Variate\Variate</Filter>
     </CustomBuild>
     <CustomBuild Include="WidgetManagerNewVariate.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </CustomBuild>
     <CustomBuild Include="ScreenCoordinate.h">
       <Filter>Header Files\Screen\ScreenCoordinate</Filter>
@@ -1250,6 +1265,9 @@
     </CustomBuild>
     <CustomBuild Include="TreeWidgetItemWithSymbol.h">
       <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DialogNewVariate.h">
+      <Filter>Header Files\Screen\ScreenVariate</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1451,31 +1469,31 @@
       <Filter>Header Files\Variate</Filter>
     </ClInclude>
     <ClInclude Include="WidgetManagerNewInteger.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </ClInclude>
     <ClInclude Include="WidgetManagerNewVariateFactory.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </ClInclude>
     <ClInclude Include="WidgetManagerNewDouble.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </ClInclude>
     <ClInclude Include="WidgetManagerNewString.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </ClInclude>
     <ClInclude Include="WidgetManagerNewBool.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </ClInclude>
     <ClInclude Include="WidgetManagerNewPosition.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </ClInclude>
     <ClInclude Include="WidgetManagerNewDynamic.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </ClInclude>
     <ClInclude Include="WidgetManagerNewOverlap.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </ClInclude>
     <ClInclude Include="WidgetManagerNewRefSys.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </ClInclude>
     <ClInclude Include="DialogTeachToolSystem.h">
       <Filter>Header Files\Screen\ScreenCoordinate</Filter>
@@ -1487,7 +1505,7 @@
       <Filter>Header Files\Variate\VariateWidget\OldWidget\Coordinate</Filter>
     </ClInclude>
     <ClInclude Include="WidgetManagerNewToolSys.h">
-      <Filter>Header Files\Screen\ScreenVariate\NewVariate</Filter>
+      <Filter>Header Files\Screen\ScreenVariate\OldNewVariate</Filter>
     </ClInclude>
     <ClInclude Include="RemoteAdapterFactory.h">
       <Filter>Header Files\Remote</Filter>
@@ -1533,6 +1551,21 @@
     </ClInclude>
     <ClInclude Include="VariateWidgetMap.h">
       <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="VariateValue.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
+    </ClInclude>
+    <ClInclude Include="IntegerValue.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
+    </ClInclude>
+    <ClInclude Include="DoubleValue.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
+    </ClInclude>
+    <ClInclude Include="ComplexValue.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TVariateRegister.h">
+      <Filter>Header Files\Variate\Variate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

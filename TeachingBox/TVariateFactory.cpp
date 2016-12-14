@@ -18,7 +18,13 @@ std::shared_ptr<TVariate> TVariateFactory::GetVariate(QByteArray& dataBytes)
 	QDataStream dataStream(&dataBytes, QIODevice::ReadOnly);
 	TSymbol symbol(dataStream);
 	dataStream.device()->seek(0);
-	switch (symbol.GetType())
+
+	auto iter = FunMapGetVariate().find(symbol.GetTypeName());
+
+	assert(iter!=FunMapGetVariate().end() && "Create variate failed\nNot find variate class");
+
+	return (*iter->second)(dataStream);
+	/*switch (symbol.GetType())
 	{
 	case TSymbol::TYPE_INTERGER:
 	{
@@ -61,13 +67,19 @@ std::shared_ptr<TVariate> TVariateFactory::GetVariate(QByteArray& dataBytes)
 		assert(!"Create variate failed\nNot find variate class");
 		return nullptr;
 	}break;
-	}
+	}*/
 }
 
 std::shared_ptr<TVariate> TVariateFactory::CreateVariate(const TSymbol& symbol)
 {
 	auto type = symbol.GetTypeName();
-	if (type == TInteger::TypeName())
+
+	auto iter = FunMapCreateVariate().find(symbol.GetTypeName());
+
+	assert(iter != FunMapCreateVariate().end() && "Create variate failed\nNot find variate class");
+
+	return (*iter->second)(symbol);
+	/*if (type == TInteger::TypeName())
 	{
 		return std::shared_ptr<TVariate>(new TInteger(symbol));
 	}
@@ -107,5 +119,19 @@ std::shared_ptr<TVariate> TVariateFactory::CreateVariate(const TSymbol& symbol)
 	{
 		assert(!"Create variate failed\nNot find variate class");
 		return nullptr;
-	}
+	}*/
+}
+
+std::map<QString, TVariateFactory::FunGetVariate>& TVariateFactory::FunMapGetVariate()
+{
+	static std::map<QString, TVariateFactory::FunGetVariate> map;
+
+	return map;
+}
+
+std::map<QString, TVariateFactory::FunCreateVariate>& TVariateFactory::FunMapCreateVariate()
+{
+	static std::map<QString, TVariateFactory::FunCreateVariate> map;
+
+	return map;
 }

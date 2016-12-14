@@ -21,7 +21,7 @@ private:
 	static const std::shared_ptr<TAstNode> GetParameter(TLexer* const lexer);
 
 	static void CheckComma(TLexer* const lexer);
-	void CheckParameterType(std::shared_ptr<TAstNode> node, int type) const;
+	void CheckParameterType(std::shared_ptr<TAstNode> node, const QString& typeName) const;
 	void SendMovlData() const;
 	tMovLParam GetMovlParameter() const;
 

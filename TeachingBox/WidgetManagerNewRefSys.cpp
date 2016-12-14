@@ -61,7 +61,7 @@ namespace VariateWidget
 	{
 		VariateWidgetProducer producer;
 		auto box = static_cast<QComboBox*>(m_tableWidget->cellWidget(m_startRowCount, 1));
-		producer.UpdateComboBoxWithWholeName(TSymbol::TYPE_REF_SYS,
+		producer.UpdateComboBoxWithWholeName(TRefSys::TypeName(),
 			std::move(TVariateManager::GetInstance()->GetVariatesMapScollUp(scope)), box);
 		box->setCurrentText("WORLD");
 

@@ -2,6 +2,7 @@
 #define _TEACHING_BOX_TDOUBLE_H_
 
 #include "TVariate.h"
+#include "TVariateRegister.h"
 
 class TDouble:public TVariate
 {
@@ -26,12 +27,11 @@ protected:
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
 
-private:
-	void Init();
-
 
 private:
 	ValueType m_value;
+
+	static TVariateRegister<TDouble> m_register;
 };
 
 #endif

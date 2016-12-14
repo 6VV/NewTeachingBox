@@ -4,6 +4,7 @@
 #include "TVariate.h"
 #include "QVector"
 #include "DataStruct.h"
+#include "TVariateRegister.h"
 
 class TPosition:public TVariate
 {
@@ -31,11 +32,9 @@ private:
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
 private:
-	void Init();
-
-
-private:
 	ValueType m_value;
+
+	static TVariateRegister<TPosition> m_register;
 };
 
 #endif

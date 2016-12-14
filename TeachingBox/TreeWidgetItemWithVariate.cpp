@@ -15,7 +15,7 @@ TreeWidgetItemWithVariate::~TreeWidgetItemWithVariate()
 {
 	if (m_variate!=nullptr && m_isSave)
 	{
-		m_variate->Save();
+		//m_variate->Save();
 	}
 }
 

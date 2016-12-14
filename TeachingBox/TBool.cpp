@@ -20,14 +20,12 @@ TBool::TBool(QDataStream& dataStream) : TVariate(dataStream)
 {
 	dataStream >> m_value;
 
-	Init();
 }
 
 TBool::TBool(const TBool& variate)
 	: TVariate(variate)
 	, m_value(variate.m_value)
 {
-	Init();
 }
 
 
@@ -35,7 +33,6 @@ TBool::TBool(const TSymbol& symbol, ValueType value)
 	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_BOOL,TypeName() })
 	, m_value(value)
 {
-	Init();
 }
 
 const TBool::ValueType TBool::GetValue() const
@@ -59,11 +56,8 @@ void TBool::UpdateFromValue(const TVariate& variate)
 }
 
 
-void TBool::Init()
-{
-	m_variateWidget = new TBoolWidget(this);
-}
 
+TVariateRegister<TBool> TBool::m_register{ "Bool" };
 
 TVariate* TBool::Clone() const
 {

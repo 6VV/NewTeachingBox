@@ -21,7 +21,6 @@ TRefSys::TRefSys(const TRefSys& refSys)
 	:TVariate(refSys)
 	, m_value(refSys.m_value)
 {
-	Init();
 }
 
 TRefSys::TRefSys(QDataStream& dataStream)
@@ -35,15 +34,13 @@ TRefSys::TRefSys(QDataStream& dataStream)
 		dataStream >> value;
 	}
 
-	Init();
 }
 
 
 TRefSys::TRefSys(const TSymbol& symbol, ValueType value )
-	:TVariate(TSymbol{symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_REF_SYS,TypeName()})
+	:TVariate(TSymbol{symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX,TypeName()})
 	, m_value(value)
 {
-	Init();
 }
 
 TRefSys::~TRefSys()
@@ -84,7 +81,3 @@ void TRefSys::UpdateFromValue(const TVariate& variate)
 	m_value = static_cast<const TRefSys&>(variate).m_value;
 }
 
-void TRefSys::Init()
-{
-	m_variateWidget = new TRefSysWidget(this);
-}

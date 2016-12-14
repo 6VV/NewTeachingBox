@@ -3,6 +3,7 @@
 
 #include "TVariate.h"
 #include "QString"
+#include "TVariateRegister.h"
 
 class TBool:public TVariate
 {
@@ -28,11 +29,12 @@ protected:
 	virtual void WriteValueToStream(QDataStream& dataStream) const override;
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
-private:
-	void Init();
+
 
 private:
 	ValueType m_value;
+
+	static TVariateRegister<TBool> m_register;
 };
 
 #endif

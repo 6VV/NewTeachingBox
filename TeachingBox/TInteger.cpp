@@ -26,21 +26,18 @@ TInteger::TInteger(QDataStream& dataStream) :TVariate(dataStream)
 {
 	dataStream >> m_value;
 
-	Init();
 }
 
 TInteger::TInteger(const TInteger& variate)
 	: TVariate(variate)
 	, m_value(variate.m_value)
 {
-	Init();
 }
 
 TInteger::TInteger(const TSymbol& symbol, ValueType value /*= 0*/)
 	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_INTERGER,TypeName() })
 	, m_value(value)
 {
-	Init();
 }
 
 int TInteger::GetValue()
@@ -64,11 +61,8 @@ void TInteger::UpdateFromValue(const TVariate& variate)
 }
 
 
-void TInteger::Init()
-{
-	m_variateWidget = new TIntegerWidget(this);
-}
 
+TVariateRegister<TInteger> TInteger::m_register{"Integer"};
 
 TVariate* TInteger::Clone() const
 {

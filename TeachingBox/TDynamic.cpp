@@ -12,19 +12,11 @@ QString TDynamic::TypeName()
 	return "Dynamic";
 }
 
-//TDynamic::TDynamic(const QString& scope, const QString& name, const tDynamicConstraint& value)
-//	:TVariate(scope,name,TSymbol::TYPE_DYNAMIC)
-//{
-//	m_value = value;
-//
-//	Init();
-//}
 
 TDynamic::TDynamic(QDataStream& dataStream) : TVariate(dataStream)
 {
 	WriteValueStream(dataStream);
 
-	Init();
 }
 
 TDynamic::TDynamic(const TDynamic& variate)
@@ -32,14 +24,12 @@ TDynamic::TDynamic(const TDynamic& variate)
 {
 	m_value = variate.m_value;
 
-	Init();
 }
 
 TDynamic::TDynamic(const TSymbol& symbol, ValueType value )
-	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_DYNAMIC,TypeName() })
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX,TypeName() })
 	, m_value(value)
 {
-	Init();
 }
 
 const tDynamicConstraint& TDynamic::GetValue() const
@@ -64,10 +54,7 @@ void TDynamic::WriteValueStream(QDataStream& dataStream)
 }
 
 
-void TDynamic::Init()
-{
-	m_variateWidget = new TDynamicWidget(this);
-}
+TVariateRegister<TDynamic> TDynamic::m_register{ TypeName() };
 
 TVariate* TDynamic::Clone() const
 {

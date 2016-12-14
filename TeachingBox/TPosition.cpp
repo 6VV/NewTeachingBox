@@ -23,7 +23,6 @@ TPosition::TPosition(QDataStream& dataStream) : TVariate(dataStream)
 		//m_value.push_back(value);
 	}
 
-	Init();
 }
 
 //TPosition::TPosition(const QString& scope, const QString& name, const tAxesAllPositions& value)
@@ -39,14 +38,12 @@ TPosition::TPosition(const TPosition& variate)
 {
 	m_value = variate.m_value;
 
-	Init();
 }
 
 TPosition::TPosition(const TSymbol& symbol, ValueType value)
-	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_POSITION ,TypeName()})
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX ,TypeName()})
 	, m_value(value)
 {
-	Init();
 }
 
 const tAxesAllPositions TPosition::GetValue() const
@@ -72,11 +69,8 @@ void TPosition::UpdateFromValue(const TVariate& variate)
 	m_value = static_cast<const TPosition&>(variate).m_value;
 }
 
-void TPosition::Init()
-{
-	m_variateWidget = new TPositionWidget(this);
-}
 
+TVariateRegister<TPosition> TPosition::m_register{ "Position" };
 
 TVariate* TPosition::Clone() const
 {

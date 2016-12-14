@@ -30,7 +30,6 @@ TVariate::TVariate(const TSymbol& symbol)
 
 TVariate::~TVariate()
 {
-	delete m_variateWidget;
 }
 
 TSymbol TVariate::GetSymbol() const
@@ -63,30 +62,6 @@ QString TVariate::GetTypeName() const
 //	m_symbol.SetName(name);
 //}
 
-void TVariate::Save()
-{
-	m_variateWidget->UpdateVariate();
-	UpdateRamAndDatabaseFrom(*this);
-}
-
-void TVariate::WriteContentIntoItem(TreeWidgetItemWithVariate* parentItem, QTreeWidget* treeWidget)
-{
-	m_variateWidget->WriteContentIntoItem(parentItem, treeWidget);
-}
-
-void TVariate::WriteToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget,
-	const TSymbol::SymbolType type)
-{
-	if (m_symbol.GetType() == type)
-	{
-		this->WriteToTreeWidgetItem(parentItem, treeWidget);
-	}
-}
-
-void TVariate::WriteToTreeWidgetItem(QTreeWidgetItem* parentItem, QTreeWidget* treeWidget)
-{
-	m_variateWidget->WriteToTreeWidgetItem(parentItem, treeWidget);
-}
 
 void TVariate::WriteDataToStream(QDataStream& dataStream) const
 {

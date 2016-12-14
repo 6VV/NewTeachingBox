@@ -10,6 +10,7 @@
 #include <assert.h>
 #include "TToolSys.h"
 #include "DialogTeachToolSystem.h"
+#include "IntegerValue.h"
 
 
 
@@ -45,7 +46,7 @@ void ScreenToolSystem::showEvent(QShowEvent *)
 
 	/*更新工具坐标系信息，列出当前所有可选的工具坐标系*/
 	auto scope = Context::projectContext.CurrentScope();
-	VariateWidgetProducer::UpdateComboBoxWithWholeName(TSymbol::TYPE_TOOL_SYS, TVariateManager::GetInstance()->GetVariatesMapScollUp(scope), m_comboBoxTool);
+	VariateWidgetProducer::UpdateComboBoxWithWholeName(TToolSys::TypeName(), TVariateManager::GetInstance()->GetVariatesMapScollUp(scope), m_comboBoxTool);
 
 	OnDataChanged();
 
@@ -197,7 +198,7 @@ void ScreenToolSystem::OnDataChanged()
 
 	for (size_t i = 0; i < values.size();++i)
 	{
-		m_dataLineEditList.at(i)->setText(QString::number(values[i]));
+		m_dataLineEditList.at(i)->setText(QString::number(*std::dynamic_pointer_cast<NVariateValue::IntegerValue>(values[i])));
 	}
 }
 

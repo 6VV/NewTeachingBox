@@ -2,6 +2,9 @@
 #include "VariateWidgetProducer.h"
 #include "TVariate.h"
 #include "ProjectContext.h"
+#include "TPosition.h"
+#include "TDynamic.h"
+#include "TOverlap.h"
 
 
 
@@ -15,11 +18,19 @@ const QString VariateWidgetProducer::IMAGE_LOGO_PROJECT{ ":/new/image/Resources/
 
 const QString VariateWidgetProducer::IMAGE_LOGO_LOCAL{ ":/new/image/Resources/Image/L.PNG" };
 
-const QMap<VariateWidgetProducer::SymbolType, QString> VariateWidgetProducer::TYPE_HEADER_MAP{
-	{ SymbolType::TYPE_POSITION, "p" },
-	{ SymbolType::TYPE_DYNAMIC, "dyn" },
-	{ SymbolType::TYPE_OVERLAP, "ovl" },
+//const QMap<VariateWidgetProducer::SymbolType, QString> VariateWidgetProducer::TYPE_HEADER_MAP{
+//	{ SymbolType::TYPE_POSITION, "p" },
+//	{ SymbolType::TYPE_DYNAMIC, "dyn" },
+//	{ SymbolType::TYPE_OVERLAP, "ovl" },
+//};
+
+
+const QMap<QString, QString> VariateWidgetProducer::TYPE_HEADER_NAME_MAP{
+	{ TPosition::TypeName(), "p" },
+	{ TDynamic::TypeName(), "dyn" },
+	{ TOverlap::TypeName(), "ovl" },
 };
+
 
 VariateWidgetProducer::VariateWidgetProducer()
 {
@@ -51,12 +62,44 @@ QMap<QString, QStringList> VariateWidgetProducer::GetVariateMap(SymbolType type,
 
 	return result;
 }
+//
+//QString VariateWidgetProducer::GetSuggestName(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap)
+//{
+//	std::vector<int> suggestNamesExisted;
+//
+//	auto header = TYPE_HEADER_MAP[type];
+//
+//	QRegExp regExp("^" + header + "([0 - 9] + )$");
+//	for (auto iter = variateMap.begin(); iter != variateMap.end(); ++iter)
+//	{
+//		for (auto variate : iter.value())
+//		{
+//			if (regExp.exactMatch(variate->GetName()))
+//			{
+//				suggestNamesExisted.push_back(regExp.capturedTexts().at(1).toInt());
+//			}
+//		}
+//	}
+//
+//	std::sort(suggestNamesExisted.begin(), suggestNamesExisted.end());
+//
+//	int size = suggestNamesExisted.size();
+//	for (int i = 0; i < size; ++i)
+//	{
+//		if (suggestNamesExisted.at(i) != i)
+//		{
+//			return header + QString::number(i);
+//		}
+//	}
+//
+//	return header + QString::number(suggestNamesExisted.size());
+//}
 
-QString VariateWidgetProducer::GetSuggestName(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap)
+QString VariateWidgetProducer::GetSuggestName(const QString& typeName, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap)
 {
 	std::vector<int> suggestNamesExisted;
 
-	auto header = TYPE_HEADER_MAP[type];
+	auto header = TYPE_HEADER_NAME_MAP[typeName];
 
 	QRegExp regExp("^" + header + "([0 - 9] + )$");
 	for (auto iter = variateMap.begin(); iter != variateMap.end(); ++iter)
@@ -84,35 +127,47 @@ QString VariateWidgetProducer::GetSuggestName(SymbolType type, const QMap<QStrin
 	return header + QString::number(suggestNamesExisted.size());
 }
 
-
-
-void VariateWidgetProducer::UpdateComboBoxWithWholeName(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap, QComboBox* comboBox)
+void VariateWidgetProducer::UpdateComboBoxWithWholeName(const QString& typeName, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap, QComboBox* comboBox)
 {
 	comboBox->clear();
 
-	auto variates = std::move(GetVariateMap(type, variateMap));
+	auto variates = std::move(GetVariateMap(typeName, variateMap));
 
 	for (auto iter = variates.begin(); iter != variates.end(); ++iter)
 	{
 		for (auto var : iter.value())
 		{
-			comboBox->addItem(QIcon(GetIconPath(iter.key())), iter.key()+"."+var);
+			comboBox->addItem(QIcon(GetIconPath(iter.key())), iter.key() + "." + var);
 		}
 	}
-
 }
+//
+//void VariateWidgetProducer::UpdateComboBoxWithSimpleName(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap, QComboBox* comboBox)
+//{
+//	comboBox->clear();
+//
+//	auto variates = std::move(GetVariateMap(type, variateMap));
+//
+//	for (auto iter = variates.begin(); iter != variates.end(); ++iter)
+//	{
+//		for (auto var : iter.value())
+//		{
+//			comboBox->addItem(QIcon(GetIconPath(iter.key())),var);
+//		}
+//	}
+//}
 
-void VariateWidgetProducer::UpdateComboBoxWithSimpleName(SymbolType type, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap, QComboBox* comboBox)
+void VariateWidgetProducer::UpdateComboBoxWithSimpleName(const QString& typeName, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap, QComboBox* comboBox)
 {
 	comboBox->clear();
 
-	auto variates = std::move(GetVariateMap(type, variateMap));
+	auto variates = std::move(GetVariateMap(typeName, variateMap));
 
 	for (auto iter = variates.begin(); iter != variates.end(); ++iter)
 	{
 		for (auto var : iter.value())
 		{
-			comboBox->addItem(QIcon(GetIconPath(iter.key())),var);
+			comboBox->addItem(QIcon(GetIconPath(iter.key())), var);
 		}
 	}
 }
@@ -144,3 +199,23 @@ QString VariateWidgetProducer::GetIconPath(const QString& scope)
 	}
 }
 
+QMap<QString, QStringList> VariateWidgetProducer::GetVariateMap(const QString& typeName, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap)
+{
+	QMap<QString, QStringList> result;
+
+	for (auto iter = variateMap.begin(); iter != variateMap.end(); ++iter)
+	{
+		QStringList variateNames;
+		for (auto variate : iter.value())
+		{
+			if (variate->GetTypeName() == typeName)
+			{
+				variateNames.append(variate->GetName());
+			}
+		}
+
+		result[iter.key()] = variateNames;
+	}
+
+	return result;
+}

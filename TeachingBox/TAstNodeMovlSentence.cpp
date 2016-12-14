@@ -67,22 +67,38 @@ TAstNode::ValueReturned TAstNodeMovlSentence::Execute() const
 
 void TAstNodeMovlSentence::ParseSemantic() const
 {
-	CheckParameterType(m_firstChild, TSymbol::TYPE_POSITION);
-	CheckParameterType(m_firstChild->GetSibling(), TSymbol::TYPE_DYNAMIC);
-	CheckParameterType(m_firstChild->GetSibling()->GetSibling(), TSymbol::TYPE_OVERLAP);
+	CheckParameterType(m_firstChild, TPosition::TypeName());
+	CheckParameterType(m_firstChild->GetSibling(), TDynamic::TypeName());
+	CheckParameterType(m_firstChild->GetSibling()->GetSibling(), TOverlap::TypeName());
 }
 
-void TAstNodeMovlSentence::CheckParameterType(std::shared_ptr<TAstNode> node,int type) const
+//void TAstNodeMovlSentence::CheckParameterType(std::shared_ptr<TAstNode> node,int type) const
+//{
+//	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), node->GetToken()->Name());
+//
+//	if (variate==nullptr)
+//	{
+//		throw TInterpreterException(TInterpreterException::UNKNOWN_VARIATE, node->GetToken()->LineNumber()
+//			, node->GetToken()->Name());
+//	}
+//
+//	if (variate->GetType() != type)
+//	{
+//		throw TInterpreterException(TInterpreterException::MOVL_SHOULD_WITH_POSITOIN_DYNAMIC_OVERLAP, node->GetToken()->LineNumber());
+//	}
+//}
+
+void TAstNodeMovlSentence::CheckParameterType(std::shared_ptr<TAstNode> node, const QString& typeName) const
 {
 	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), node->GetToken()->Name());
 
-	if (variate==nullptr)
+	if (variate == nullptr)
 	{
 		throw TInterpreterException(TInterpreterException::UNKNOWN_VARIATE, node->GetToken()->LineNumber()
 			, node->GetToken()->Name());
 	}
 
-	if (variate->GetType() != type)
+	if (variate->GetTypeName() != typeName)
 	{
 		throw TInterpreterException(TInterpreterException::MOVL_SHOULD_WITH_POSITOIN_DYNAMIC_OVERLAP, node->GetToken()->LineNumber());
 	}

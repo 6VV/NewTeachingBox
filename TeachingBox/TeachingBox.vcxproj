@@ -94,6 +94,7 @@
     <ClCompile Include="DialogNewMacro.cpp" />
     <ClCompile Include="DialogParent.cpp" />
     <ClCompile Include="DialogTeachToolSystem.cpp" />
+    <ClCompile Include="DoubleValue.cpp" />
     <ClCompile Include="DoubleValueTreeWidgetItem.cpp" />
     <ClCompile Include="DynamicController.cpp" />
     <ClCompile Include="DynamicValueTreeWidgetItem.cpp" />
@@ -289,6 +290,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_WidgetManagerNewVariate.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="IntegerValue.cpp" />
     <ClCompile Include="IntegerValueTreeWidgetItem.cpp" />
     <ClCompile Include="InterpreterContext.cpp" />
     <ClCompile Include="InterpreterManager.cpp" />
@@ -299,6 +301,7 @@
     <ClCompile Include="MacroWidgetParent.cpp" />
     <ClCompile Include="MacroWidgetFactory.cpp" />
     <ClCompile Include="OverlapValueTreeWidgetItem.cpp" />
+    <ClCompile Include="ComplexValue.cpp" />
     <ClCompile Include="PositionValueTreeWidgetItem.cpp" />
     <ClCompile Include="ProjectManager.cpp" />
     <ClCompile Include="ProjectContext.cpp" />
@@ -558,6 +561,7 @@
     <ClCompile Include="VariateTableManager.cpp" />
     <ClCompile Include="TVariateType.cpp" />
     <ClCompile Include="VariateManagerWithHorizonHeader.cpp" />
+    <ClCompile Include="VariateValue.cpp" />
     <ClCompile Include="VariateValueTreeWidgetItem.cpp" />
     <ClCompile Include="VariateWidgetMap.cpp" />
     <ClCompile Include="VariateWidgetProducer.cpp" />
@@ -691,11 +695,14 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../RemoteAdapter.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
     </CustomBuild>
+    <ClInclude Include="DoubleValue.h" />
     <ClInclude Include="DoubleValueTreeWidgetItem.h" />
     <ClInclude Include="DynamicValueTreeWidgetItem.h" />
+    <ClInclude Include="IntegerValue.h" />
     <ClInclude Include="IntegerValueTreeWidgetItem.h" />
     <ClInclude Include="IRemoteFeedbackListener.h" />
     <ClInclude Include="OverlapValueTreeWidgetItem.h" />
+    <ClInclude Include="ComplexValue.h" />
     <ClInclude Include="PositionValueTreeWidgetItem.h" />
     <ClInclude Include="RemoteAdapterFactory.h" />
     <ClInclude Include="RemoteFeedbackController.h" />
@@ -713,6 +720,7 @@
     <ClInclude Include="TToolSys.h" />
     <ClInclude Include="TToolSysWidget.h" />
     <ClInclude Include="TVariateContext.h" />
+    <ClInclude Include="TVariateRegister.h" />
     <ClInclude Include="TVariateScopeNode.h" />
     <CustomBuild Include="VariateManagerWithHorizonHeader.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing VariateManagerWithHorizonHeader.h...</Message>
@@ -725,6 +733,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="VariateManagerWithVerticalHeader.h" />
+    <ClInclude Include="VariateValue.h" />
     <ClInclude Include="VariateValueTreeWidgetBuilder.h" />
     <CustomBuild Include="VariateValueTreeWidgetItem.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

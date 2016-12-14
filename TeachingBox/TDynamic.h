@@ -3,6 +3,7 @@
 
 #include "TVariate.h"
 #include "DataStruct.h"
+#include "TVariateRegister.h"
 
 class TDynamic:public TVariate
 {
@@ -14,7 +15,6 @@ public:
 
 public:
 	TDynamic(const TSymbol& symbol, ValueType value = ValueType{});
-	//TDynamic(const QString& scope, const QString& name, const ValueType& value = tDynamicConstraint{});
 	TDynamic(const TDynamic& variate);
 	TDynamic(QDataStream& dataStream);
 
@@ -30,13 +30,10 @@ protected:
 
 	void WriteValueStream(QDataStream& dataStream);
 
-
-private:
-	void Init();
-
-
 private:
 	ValueType m_value;
+
+	static TVariateRegister<TDynamic> m_register;
 };
 
 #endif

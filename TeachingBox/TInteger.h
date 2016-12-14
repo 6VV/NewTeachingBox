@@ -2,6 +2,7 @@
 #define _TEACHING_BOX_TINTEGER_H_
 
 #include "TVariate.h"
+#include "TVariateRegister.h"
 
 class TInteger:public TVariate
 {
@@ -25,12 +26,12 @@ protected:
 	virtual void WriteValueToStream(QDataStream& dataStream) const override;
 	virtual void UpdateFromValue(const TVariate& variate) override;
 
-private:
-	void Init();
 
 
 private:
-	int m_value;
+	ValueType m_value;
+
+	static TVariateRegister<TInteger> m_register;
 };
 
 #endif
