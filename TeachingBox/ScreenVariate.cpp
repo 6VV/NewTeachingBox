@@ -13,6 +13,8 @@
 #include "TreeWidgetItemWithSymbol.h"
 #include <assert.h>
 #include "TVariate.h"
+#include "TPosition.h"
+#include "RemoteFeedbackController.h"
 
 ScreenVariate::ScreenVariate(QWidget* parent /*= 0*/)
 	:ScreenMainParent(parent)
@@ -120,6 +122,26 @@ void ScreenVariate::showEvent(QShowEvent *e)
 	InitTreeWidget();
 }
 
+
+
+void ScreenVariate::OnReseivePosition(const tAxesAllPositions& position)
+{
+	if (typeid(*m_treeWidget->currentItem())!=typeid(TreeWidgetItemWithSymbol))
+	{
+		return;
+	}
+	auto item = dynamic_cast<TreeWidgetItemWithSymbol*>(m_treeWidget->currentItem());
+	if (item->GetSymbol().GetTypeName()!=TPosition::TypeName())
+	{
+		return;
+	}
+
+	auto variate = VariateManagerWithHorizonHeader::GetInstance()->GetVariate(m_treeWidget, item);
+	assert(typeid(*variate) == typeid(TPosition));
+	std::dynamic_pointer_cast<TPosition>(variate)->SetValue(position);
+	VariateManagerWithHorizonHeader::GetInstance()->UpdateWidget(variate, m_treeWidget, item);
+}
+
 QTreeWidgetItem* ScreenVariate::FindScopeItem(const QString& scope)
 {
 	for (int i = 0; i < m_treeWidget->topLevelItemCount();++i)
@@ -141,6 +163,8 @@ void ScreenVariate::Init()
 	InitButtonWidget();
 	InitSignalSlot();
 
+	m_btnTeach->setEnabled(false);
+
 	UpdateText();
 }
 
@@ -161,9 +185,21 @@ void ScreenVariate::InitTreeWidget()
 		for (auto variate : variates)
 		{
 			VariateManagerWithHorizonHeader::GetInstance()->InsertVariate(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, treeItem);
-			//variate->WriteToTreeWidgetItem(treeItem, m_treeWidget);
 		}
 	}
+	connect(m_treeWidget, &QTreeWidget::currentItemChanged, [this](QTreeWidgetItem *current, QTreeWidgetItem *){
+		if (typeid(*current) == typeid(TreeWidgetItemWithSymbol))
+		{
+			if (dynamic_cast<TreeWidgetItemWithSymbol*>(current)->GetSymbol().GetTypeName() == TPosition::TypeName()){
+				m_btnTeach->setEnabled(true);
+				RemoteFeedbackController::GetInstance()->AddListener(this);
+			}
+			else{
+				m_btnTeach->setEnabled(false);
+				RemoteFeedbackController::GetInstance()->DeleteListener(this);
+			}
+		}
+	});
 }
 
 void ScreenVariate::InitButtonWidget()
@@ -184,6 +220,7 @@ void ScreenVariate::InitButtonWidget()
 	btnList.append(m_btnDelete);
 
 	m_btnGroupVariate = new ButtonGroup(btnList, m_btnVariate);
+
 }
 
 void ScreenVariate::InitSignalSlot()

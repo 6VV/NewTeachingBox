@@ -18,6 +18,8 @@
 *************************************************/
 
 #include "QObject"
+#include <memory>
+#include <future>
 
 class TInterpreterThread:public QObject
 {
@@ -32,6 +34,7 @@ public slots:
 
 private:
 	void SendEndCommand();
+
 };
 
 #endif

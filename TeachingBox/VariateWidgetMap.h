@@ -36,5 +36,4 @@ public:
 	static std::shared_ptr<VariateValueTreeWidgetItem> GetVariateWidget(const QString& type);
 
 };
-
 #endif

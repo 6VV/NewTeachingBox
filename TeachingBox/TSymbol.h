@@ -49,6 +49,7 @@ public:
 
 	//void SetName(const QString& name);
 
+	void ReadDataFromStream(QDataStream& dataStream);
 	void WriteToStream(QDataStream& dataStream) const;
 
 protected:

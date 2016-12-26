@@ -24,11 +24,12 @@ void TInterpreterThread::SlotStopExecute()
 	RemoteManager::GetInstance()->SendStopCommand();
 }
 
+
 void TInterpreterThread::SlotExecuteNextCommand()
 {
 	auto nextNode = Context::interpreterContext.GetNextNode();
 
-	while (nextNode != nullptr && Context::interpreterContext.IsAllowExecute() && Context::interpreterContext.IsAllowSendCommandData())
+	if (nextNode != nullptr && Context::interpreterContext.IsAllowExecute() && Context::interpreterContext.IsAllowSendCommandData())
 	{
 		nextNode->Execute();
 		nextNode = Context::interpreterContext.GetNextNode();

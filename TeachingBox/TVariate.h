@@ -11,7 +11,6 @@
 	提供了变量需具有的基本信息，包括变量名、作用域、变量类型
 	提供变量需具有的基本功能，包括：
 		Clone：新建并返回一个与本变量相同的变量；
-		UpdateFromVariate：从另一个同类型的变量中复制值；
 		Save：保存值并更新显示控件；
 		ReadTreeWidgetItem：将变量添加到树形控件中
 		ReadContentIntoItem：根据变量更新控件显示数据
@@ -44,12 +43,12 @@ class TVariate:public QObject
 
 public:
 	TVariate(const TSymbol& symbol);
-	TVariate(const TVariate& variate);
-	TVariate(QDataStream& dataStream);
 	virtual ~TVariate();
 
 public:
 	virtual TVariate* Clone() const = 0;
+	virtual void WriteValueToStream(QDataStream& dataStream) const = 0;	/*将变量值读入到数据流*/
+	virtual void ReadValueFromStream(QDataStream& dataStream) = 0;
 
 	TSymbol GetSymbol() const;
 	QString GetScope() const;
@@ -57,12 +56,11 @@ public:
 	TSymbol::SymbolType GetType() const;	/*获取变量类型*/
 	QString GetTypeName() const;	/*获取变量类型名*/
 
+	void ReadDataFromStream(QDataStream& dataStream);
 	void WriteDataToStream(QDataStream& dataStream) const;	/*将变量读入到数据流中*/
-	void UpdateFromVariate(const TVariate& variate);	/*更新变量值*/
 
 protected:
-	virtual void WriteValueToStream(QDataStream& dataStream) const=0;
-	virtual void UpdateFromValue(const TVariate& variate) =0;
+	TVariate(const TVariate& variate);
 
 private:
 	void UpdateRamAndDatabaseFrom(const TVariate& variate) const;

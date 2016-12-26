@@ -80,12 +80,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RemoteManagerTests.cpp" />
     <ClCompile Include="TLexerTests.cpp" />
     <ClCompile Include="TRefSysTests.cpp" />
     <ClCompile Include="TVariateContextNodeTests.cpp" />
     <ClCompile Include="TVariateContextTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RemoteManagerTests.h" />
     <ClInclude Include="TLexerTests.h" />
     <ClInclude Include="TRefSysTests.h" />
     <ClInclude Include="TVariateContextNodeTests.h" />
@@ -105,7 +107,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2013_86" MocOptions="" />
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2013_86_571" MocOptions="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

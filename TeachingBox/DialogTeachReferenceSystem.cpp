@@ -132,6 +132,8 @@ QWidget* DialogTeachReferenceSystem::ThreePointsWithOriginWidgetStep2()
 	radioLayout->addWidget(btnY);
 	radioLayout->addWidget(btnZ);
 
+	btnX->setChecked(true);
+
 	layout->addLayout(radioLayout);
 	layout->addWidget(PointWidget());
 
@@ -157,6 +159,8 @@ QWidget* DialogTeachReferenceSystem::ThreePointsWithOriginWidgetStep3()
 	radioLayout->addWidget(btnXY);
 	radioLayout->addWidget(btnZX);
 	radioLayout->addWidget(btnYZ);
+
+	btnXY->setChecked(true);
 
 	layout->addLayout(radioLayout);
 	layout->addWidget(PointWidget());

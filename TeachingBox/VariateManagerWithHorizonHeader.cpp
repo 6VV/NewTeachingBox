@@ -5,6 +5,7 @@
 #include <assert.h>
 #include "VariateValueTreeWidgetItem.h"
 #include "VariateWidgetMap.h"
+#include "TComplex.h"
 
 
 VariateManagerWithHorizonHeader* VariateManagerWithHorizonHeader::GetInstance()
@@ -49,6 +50,7 @@ void VariateManagerWithHorizonHeader::UpdateWidget(const std::shared_ptr<TVariat
 	item->SetSymbol(newVariate->GetSymbol());
 	VariateWidgetMap::GetVariateWidget(newVariate->GetTypeName())->UpdateWidgetValue(newVariate, treeWidget, variateItem);
 }
+
 
 void VariateManagerWithHorizonHeader::SetSave(QTreeWidgetItem* variateItem)
 {

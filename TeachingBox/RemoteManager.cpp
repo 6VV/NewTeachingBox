@@ -5,6 +5,7 @@
 #include "TcpAdapter.h"
 #include "Context.h"
 #include "RemoteAdapterFactory.h"
+#include "..\DataStream\DataStream.h"
 
 
 RemoteManager* RemoteManager::GetInstance()
@@ -12,22 +13,33 @@ RemoteManager* RemoteManager::GetInstance()
 	return SingleTon<RemoteManager>::GetInstance();
 }
 
-void RemoteManager::SendMovlCommand(const char* commandData, int commandLength, int lineNumber, long long programAddress)
-{
-	Context::interpreterContext.IsAllowSendCommandData(false);
 
-	RemoteAdapterFactory::GetRemoteAdapter()->SendData(std::move(ContructNormalCommand(COMMAND_ID::MOVL, commandData, commandLength, lineNumber, programAddress)));
+void RemoteManager::SendCommand(const DataStream& stream)
+{
+	static const int LENGTH = 1024;
+	char result[LENGTH];
+
+	result[0] = '\0';
+	stream.ReadRawBytes(result + 1, stream.Length());
+
+	RemoteAdapterFactory::GetRemoteAdapter()->SendData(QByteArray(result, LENGTH));
+
 }
+
+//void RemoteManager::SendCommand(CmdAttributeType type, CommandId id)
+//{
+//
+//}
 
 void RemoteManager::SendStopCommand()
 {
-	RemoteAdapterFactory::GetRemoteAdapter()->SendData(std::move(ContructSpecialCommand(COMMAND_ID::STOP_EXECUTE)));
+	SendSpecialCommand(CommandId::STOP_EXECUTE);
 }
 
 
 void RemoteManager::SendEndCommand()
 {
-	RemoteAdapterFactory::GetRemoteAdapter()->SendData(std::move(ContructNormalCommand(COMMAND_ID::END)));
+	SendNormalCommand(CommandId::END);
 }
 
 RemoteManager::RemoteManager()
@@ -40,73 +52,30 @@ RemoteManager::~RemoteManager()
 
 }
 
-inline
-void RemoteManager::AddLock(char* head, int& offset)
+void RemoteManager::SendNormalCommand(int commandId)
 {
-	*(head + offset) = 0;
-	++offset;
-}
-
-inline
-void RemoteManager::AddNormalCommandAttribute(char* head, int& offset, int commandId, int commandLength, int lineNumber, long long programAddress)
-{
-	tTeachCmdAttribute attribute;
-	attribute.m_length = 1 + sizeof(tTeachCmdAttribute) + commandLength;
-	attribute.m_ID = commandId;
-	attribute.m_type = CmdAttributeType::CMD_ATTRIBUTE_NORMAL_COMMAND;
-	attribute.m_LineNumber = lineNumber;
-	attribute.m_programAddress = programAddress;
-
-	*(tTeachCmdAttribute*)(head + offset) = attribute;
-	offset += sizeof(tTeachCmdAttribute);
-}
-
-inline
-void RemoteManager::AddCommand(char* head, int& offset, const char* command,int commandLength)
-{
-	for (int i = 0; i < commandLength;++i,++offset)
-	{
-		*(head + offset) = *(command + i);
-	}
-}
-
-QByteArray RemoteManager::ContructNormalCommand(int commandId, const char* commandData, int commandLength, int lineNumber, long long programAddress)
-{
-	static const int LENGTH = 1024;
-	char result[LENGTH];
-	int offset = 0;
-
-	AddLock(result, offset);
-	AddNormalCommandAttribute(result, offset, commandId, commandLength,lineNumber,programAddress);
-	AddCommand(result, offset, commandData,commandLength);
-
-	return QByteArray(result, LENGTH);
-}
-
-QByteArray RemoteManager::ContructNormalCommand(int commandId)
-{
-	QByteArray result;
-	result.append('\0');
-
 	tTeachCmdAttribute attribute;
 	attribute.m_type = CmdAttributeType::CMD_ATTRIBUTE_NORMAL_COMMAND;
 	attribute.m_length = 1 + sizeof(tTeachCmdAttribute);
 	attribute.m_ID = commandId;
-	result.append((char*)&attribute, sizeof(tTeachCmdAttribute));
 
-	return std::move(result);
+	DataStream result;
+	result << attribute;
+	result.Seek(0);
+
+	SendCommand(result);
 }
 
-QByteArray RemoteManager::ContructSpecialCommand(int commandId)
+void RemoteManager::SendSpecialCommand(int commandId)
 {
-	QByteArray result;
-	result.append('\0');
-	
 	tTeachCmdAttribute attribute;
 	attribute.m_type = CmdAttributeType::CMD_ATTRIBUTE_SPECIAL_COMMAND;
-	attribute.m_length = 1+sizeof(tTeachCmdAttribute);
+	attribute.m_length = 1 + sizeof(tTeachCmdAttribute);
 	attribute.m_ID = commandId;
-	result.append((char*)&attribute, sizeof(tTeachCmdAttribute));
 
-	return std::move(result);
+	DataStream result;
+	result << attribute;
+	result.Seek(0);
+
+	SendCommand(result);
 }

@@ -68,24 +68,25 @@ QWidget* DialogTeachToolSystem::OriginWidget()
 
 	QVBoxLayout* layout = new QVBoxLayout(box);
 
-	auto btnOnePointKeepOrientation = new QRadioButton(tr("1 point XYZ"), box);
+	//auto btnOnePointKeepOrientation = new QRadioButton(tr("1 point XYZ"), box);
 	auto btnFourPointKeepOrientation = new QRadioButton(tr("4 points XYZ"), box);
-	auto btnOnePointChangeOrientation = new QRadioButton(tr("1 point 6D"), box);
+	//auto btnOnePointChangeOrientation = new QRadioButton(tr("1 point 6D"), box);
 
 	layout->addStretch(1);
 	layout->addWidget(new QLabel(tr("Keep orientation")));
-	layout->addWidget(btnOnePointKeepOrientation);
+	//layout->addWidget(btnOnePointKeepOrientation);
 	layout->addWidget(btnFourPointKeepOrientation);
 	layout->addStretch(1);
-	layout->addWidget(new QLabel(tr("Change orientation")));
-	layout->addWidget(btnOnePointChangeOrientation);
+	//layout->addWidget(new QLabel(tr("Change orientation")));
+	//layout->addWidget(btnOnePointChangeOrientation);
 	layout->addStretch(1);
 
-	btnOnePointKeepOrientation->setChecked(true);
+	//btnOnePointKeepOrientation->setChecked(true);
+	btnFourPointKeepOrientation->setChecked(true);
 
-	connect(btnOnePointKeepOrientation, &QRadioButton::clicked, [this]{m_controller.m_teachMethod = Controller::ONE_POINT_KEEP_ORIENTATION; });
+	//connect(btnOnePointKeepOrientation, &QRadioButton::clicked, [this]{m_controller.m_teachMethod = Controller::ONE_POINT_KEEP_ORIENTATION; });
 	connect(btnFourPointKeepOrientation, &QRadioButton::clicked, [this]{m_controller.m_teachMethod = Controller::FOUR_POINT_KEEP_ORIENTATION; });
-	connect(btnOnePointChangeOrientation, &QRadioButton::clicked, [this]{m_controller.m_teachMethod = Controller::ONE_POINT_CHANGE_ORIENTATION; });
+	//connect(btnOnePointChangeOrientation, &QRadioButton::clicked, [this]{m_controller.m_teachMethod = Controller::ONE_POINT_CHANGE_ORIENTATION; });
 
 	return box;
 }
@@ -152,6 +153,21 @@ QWidget* DialogTeachToolSystem::FourPointKeepOrientationWidgetStep4()
 	return FourPointKeepOrientationWidgetStep1();
 }
 
+QWidget* DialogTeachToolSystem::KeepOrientationWidgetResult()
+{
+	QGroupBox* box = new QGroupBox(tr("Select teach method"));
+	QVBoxLayout* layout = new QVBoxLayout(box);
+
+	auto btnOnePointChangeOrientation = new QRadioButton(tr("1 point 6D"), box);
+
+	layout->addStretch(1);
+	layout->addWidget(new QLabel(tr("Change orientation")));
+	layout->addWidget(btnOnePointChangeOrientation);
+	layout->addStretch(1);
+
+	return box;
+}
+
 QWidget* DialogTeachToolSystem::OnePointChangeOrientationWidgetStep1()
 {
 	QGroupBox* box = new QGroupBox(tr("Method 1 points 6D"));
@@ -189,7 +205,9 @@ DialogTeachToolSystem::Controller::Controller(DialogTeachToolSystem* screenMain,
 	{&DialogTeachToolSystem::FourPointKeepOrientationWidgetStep1,
 	&DialogTeachToolSystem::FourPointKeepOrientationWidgetStep2,
 	&DialogTeachToolSystem::FourPointKeepOrientationWidgetStep3,
-	&DialogTeachToolSystem::FourPointKeepOrientationWidgetStep4});
+	&DialogTeachToolSystem::FourPointKeepOrientationWidgetStep4,
+	&DialogTeachToolSystem::KeepOrientationWidgetResult,
+	&DialogTeachToolSystem::OnePointChangeOrientationWidgetStep1 });
 
 	m_stepMap.insert(TeachMethod::ONE_POINT_CHANGE_ORIENTATION,
 	{ &DialogTeachToolSystem::OnePointChangeOrientationWidgetStep1});

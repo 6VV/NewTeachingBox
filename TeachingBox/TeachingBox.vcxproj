@@ -89,6 +89,7 @@
     <ClCompile Include="ButtonGroup.cpp" />
     <ClCompile Include="CodeEditor.cpp" />
     <ClCompile Include="ComboBoxInTree.cpp" />
+    <ClCompile Include="ComplexValueTreeWidgetItem.cpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="DialogNewAddress.cpp" />
     <ClCompile Include="DialogNewMacro.cpp" />
@@ -315,6 +316,7 @@
     <ClCompile Include="ScreenReferenceSystem.cpp" />
     <ClCompile Include="DialogTeachReferenceSystem.cpp" />
     <ClCompile Include="ScreenToolSystem.cpp" />
+    <ClCompile Include="StringValue.cpp" />
     <ClCompile Include="StringValueTreeWidgetItem.cpp" />
     <ClCompile Include="TAstNode.cpp" />
     <ClCompile Include="TAstNodeAssignSentence.cpp" />
@@ -331,13 +333,13 @@
     <ClCompile Include="TAstNodeProgram.cpp" />
     <ClCompile Include="TAstNodeRoot.cpp" />
     <ClCompile Include="TBoolWidget.cpp" />
+    <ClCompile Include="TComplex.cpp" />
     <ClCompile Include="TcpAdapter.cpp" />
     <ClCompile Include="TcpManager.cpp" />
     <ClCompile Include="TDoubleWidget.cpp" />
     <ClCompile Include="TDynamicWidget.cpp" />
     <ClCompile Include="TestTreeWdigetItem.cpp" />
     <ClCompile Include="TIntegerWidget.cpp" />
-    <ClCompile Include="TInterpreter.cpp" />
     <ClCompile Include="TInterpreterException.cpp" />
     <ClCompile Include="TInterpreterThread.cpp" />
     <ClCompile Include="TLexer.cpp" />
@@ -684,6 +686,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../ScreenToolSystem.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
     </CustomBuild>
+    <ClInclude Include="ComplexValueTreeWidgetItem.h" />
     <ClInclude Include="DialogTeachToolSystem.h" />
     <CustomBuild Include="RemoteAdapter.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -698,7 +701,20 @@
     <ClInclude Include="DoubleValue.h" />
     <ClInclude Include="DoubleValueTreeWidgetItem.h" />
     <ClInclude Include="DynamicValueTreeWidgetItem.h" />
-    <ClInclude Include="IntegerValue.h" />
+    <CustomBuild Include="IntegerValue.h">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+    </CustomBuild>
     <ClInclude Include="IntegerValueTreeWidgetItem.h" />
     <ClInclude Include="IRemoteFeedbackListener.h" />
     <ClInclude Include="OverlapValueTreeWidgetItem.h" />
@@ -706,6 +722,7 @@
     <ClInclude Include="PositionValueTreeWidgetItem.h" />
     <ClInclude Include="RemoteAdapterFactory.h" />
     <ClInclude Include="RemoteFeedbackController.h" />
+    <ClInclude Include="StringValue.h" />
     <ClInclude Include="StringValueTreeWidgetItem.h" />
     <CustomBuild Include="TreeWidgetItemWithSymbol.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -717,6 +734,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../TreeWidgetItemWithSymbol.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
     </CustomBuild>
+    <ClInclude Include="TComplex.h" />
     <ClInclude Include="TToolSys.h" />
     <ClInclude Include="TToolSysWidget.h" />
     <ClInclude Include="TVariateContext.h" />
@@ -733,7 +751,20 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="VariateManagerWithVerticalHeader.h" />
-    <ClInclude Include="VariateValue.h" />
+    <CustomBuild Include="VariateValue.h">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+    </CustomBuild>
     <ClInclude Include="VariateValueTreeWidgetBuilder.h" />
     <CustomBuild Include="VariateValueTreeWidgetItem.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -1000,7 +1031,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../TIntegerWidget.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
     </CustomBuild>
-    <ClInclude Include="TInterpreter.h" />
     <ClInclude Include="TInterpreterException.h" />
     <CustomBuild Include="TInterpreterThread.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -1288,12 +1318,20 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork" "-fstdafx.h" "-f../../ScreenWarning.h"</Command>
     </CustomBuild>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataStream\DataStream.vcxproj">
+      <Project>{b4b9c986-c07a-4a26-9bb7-52d0ee1250e6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TeachingBoxFunction\TeachingBoxFunction.vcxproj">
+      <Project>{9e06c9c5-eb55-42d0-88e8-5a2a8f57c0db}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2013_86" MocOptions="" />
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2013_86_571" MocOptions="" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

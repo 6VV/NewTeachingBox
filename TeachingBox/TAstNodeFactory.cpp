@@ -21,6 +21,8 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QStr
 	std::shared_ptr<TAstNode> result(new TAstNodeRoot);
 	ProjectManager projectManager;
 	QList<QString> fileNames = projectManager.GetProjectFiles(project);
+
+	int programId = 0;
 	for (const QString& var : fileNames)
 	{
 		Context::projectContext.ProgramLoading(var);
@@ -31,7 +33,9 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QStr
 		lexer.Parse();
 		std::shared_ptr<TToken> token(new TToken(TYPE::ID, 0, var));
 
-		result->AddChild(TAstNodeProgram::GetAstNode(&lexer, token));
+		auto program = TAstNodeProgram::GetAstNode(&lexer, token);
+		std::dynamic_pointer_cast<TAstNodeProgram>(program)->SetId(programId++);
+		result->AddChild(program);
 	}
 
 	result->ParseSemantic();

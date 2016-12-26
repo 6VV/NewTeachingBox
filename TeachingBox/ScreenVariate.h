@@ -19,13 +19,14 @@
 
 #include "ScreenMainParent.h"
 #include "IEditVariate.h"
+#include "IRemoteFeedbackListener.h"
 
 class QPushButton;
 class QTreeWidget;
 class ButtonGroup;
 class QTreeWidgetItem;
 
-class ScreenVariate:public ScreenMainParent,IEditVariate
+class ScreenVariate :public ScreenMainParent, IEditVariate, IRemoteFeedbackListener
 {
 	friend class ScreenManager;
 
@@ -50,6 +51,8 @@ private:
 	virtual QList<QPushButton*> GetButtonList() override;
 	virtual QLayout* GetMainLayout() override;
 	virtual void showEvent(QShowEvent *) override;
+
+	virtual void OnReseivePosition(const tAxesAllPositions& position) override;
 
 	QTreeWidgetItem* FindScopeItem(const QString& scope);
 

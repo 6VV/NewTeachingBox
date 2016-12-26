@@ -54,18 +54,18 @@ public:
 	*************************************************/
 	std::shared_ptr<TVariate> GetVariate(QTreeWidget* treeWidget, QTreeWidgetItem* variateItem);
 
-	/*************************************************
-	//  Method:        static void UpdateWidget(const std::shared_ptr<TVariate> newVariate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
-	//  Description:   根据变量更新树形控件
-	//  Author:        刘巍
-	//  Date:          2016/12/12
-	//  Returns:       const std::shared_ptr<TVariate> newVariate:新变量
-			QTreeWidget* treeWidget：树形控件
-			QTreeWidgetItem* variateItem：变量项
-	//  Parameter:
-	//  History:
-	*************************************************/
-	void UpdateWidget(const std::shared_ptr<TVariate> newVariate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem);
+	///*************************************************
+	////  Method:        static void UpdateWidget(const std::shared_ptr<TVariate> newVariate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
+	////  Description:   根据变量更新树形控件
+	////  Author:        刘巍
+	////  Date:          2016/12/12
+	////  Returns:       const std::shared_ptr<TVariate> newVariate:新变量
+	//		QTreeWidget* treeWidget：树形控件
+	//		QTreeWidgetItem* variateItem：变量项
+	////  Parameter:
+	////  History:
+	//*************************************************/
+	//void UpdateWidget(const std::shared_ptr<TVariate> newVariate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem);
 };
 
 #endif

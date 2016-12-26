@@ -17,19 +17,15 @@ public:
 public:
 	TPosition(const TSymbol& symbol, ValueType value = ValueType{});
 	TPosition(const TPosition& variate);
-	TPosition(QDataStream& dataStream);
+	//TPosition(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
+	virtual void WriteValueToStream(QDataStream& dataStream) const override;
+	virtual void ReadValueFromStream(QDataStream& dataStream) override;
 
 	const ValueType GetValue() const;
 
 	void SetValue(const ValueType& value);
-
-
-private:
-	virtual void WriteValueToStream(QDataStream& dataStream) const override;
-
-	virtual void UpdateFromValue(const TVariate& variate) override;
 
 private:
 	ValueType m_value;

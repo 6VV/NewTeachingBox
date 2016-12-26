@@ -75,6 +75,14 @@ QString TSymbol::GetTypeName() const
 	return m_typeName;
 }
 
+void TSymbol::ReadDataFromStream(QDataStream& dataStream)
+{
+	dataStream >> m_scope;
+	dataStream >> m_name;
+	dataStream >> m_type;
+	dataStream >> m_typeName;
+}
+
 //void TSymbol::SetName(const QString& name)
 //{
 //	m_name = name;

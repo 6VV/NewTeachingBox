@@ -15,17 +15,14 @@ public:
 public:
 	TInteger(const TSymbol& symbol=TSymbol{}, ValueType value = 0);
 	TInteger(const TInteger& variate);
-	TInteger(QDataStream& dataStream);
+	//TInteger(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
+	virtual void WriteValueToStream(QDataStream& dataStream) const override;
+	virtual void ReadValueFromStream(QDataStream& dataStream) override;
 
 	int GetValue();
 	void SetValue(const int value);
-
-protected:
-	virtual void WriteValueToStream(QDataStream& dataStream) const override;
-	virtual void UpdateFromValue(const TVariate& variate) override;
-
 
 
 private:

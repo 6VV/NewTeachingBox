@@ -20,14 +20,13 @@
 
 #include "DataStruct.h"
 
-class QString;
 
 class IRemoteFeedbackListener
 {
 public:
 	virtual ~IRemoteFeedbackListener(){};
 
-	virtual void OnReseivePosition(const tAxesAllPositions& position);
+	virtual void OnReseivePosition(const tAxesAllPositions& position)=0;
 };
 
 #endif

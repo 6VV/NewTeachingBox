@@ -32,12 +32,11 @@ public:
 	
 private:
 	void ParseOneCommand(QByteArray& command) const;
-	tTeachCmdAttribute* GetAttribute(char* command) const;
+	tTeachCmdAttribute GetAttribute(char* command) const;
 	void SplitCommand(QList<QByteArray>& commandList, QByteArray& commands) const;
 
 	void SendNextCommand() const;		/*发送下一条指令*/
 	void RefreshLineNumber(const tTeachCmdAttribute& attribute) const;	/*命令反馈*/
-	void OnReceivePosition(QByteArray& command) const;	/*获取位置*/
 };
 
 #endif

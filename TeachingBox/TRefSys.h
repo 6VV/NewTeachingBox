@@ -23,11 +23,11 @@
 //    <desc>        build this moudle     
 *************************************************/
 
-#include "TVariate.h"
-#include <utility>
 #include <array>
+#include "TComplex.h"
+#include "TVariateRegister.h"
 
-class TRefSys:public TVariate
+class TRefSys:public TComplex
 {
 public:
 	typedef QString BaseSysType;	/*基坐标系相关信息，分别为坐标系名及作用域*/
@@ -41,24 +41,24 @@ public:
 	static QString TypeName();
 
 public:
-	TRefSys(const TSymbol& symbol, ValueType value = ValueType{});
-	//TRefSys(const QString& scope, const QString& name, const ValueType& value = ValueType{});
-	TRefSys(const TRefSys& refSys);
-	TRefSys(QDataStream& dataStream);
+	TRefSys(const TSymbol& symbol, ValueType value = ValueType{ "World", {} });
 	~TRefSys();
 
 	virtual TVariate* Clone() const override;
+
+	virtual std::vector<std::shared_ptr<VariateValue>> GetValues() const override;
+	virtual QStringList GetValueNames() const override;
+	virtual void ReadValueFromStream(QDataStream& dataStream) override;
+	virtual void SetValues(const std::vector<std::shared_ptr<VariateValue>>& values) override;
+	//virtual void WriteValueToStream(QDataStream& dataStream) const override;
 
 	ValueType GetValue() const;
 	void SetValue(ValueType value);
 
 private:
-	virtual void WriteValueToStream(QDataStream& dataStream) const override;
-	virtual void UpdateFromValue(const TVariate& variate) override;
-
-
-private:
 	ValueType m_value{};	/*位置偏移及姿态*/
+
+	static TVariateRegister<TRefSys> m_register;
 };
 
 #endif

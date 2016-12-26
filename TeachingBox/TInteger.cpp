@@ -22,11 +22,11 @@ QString TInteger::TypeName()
 //	Init();
 //}
 
-TInteger::TInteger(QDataStream& dataStream) :TVariate(dataStream)
-{
-	dataStream >> m_value;
-
-}
+//TInteger::TInteger(QDataStream& dataStream) :TVariate(dataStream)
+//{
+//	dataStream >> m_value;
+//
+//}
 
 TInteger::TInteger(const TInteger& variate)
 	: TVariate(variate)
@@ -55,12 +55,10 @@ void TInteger::WriteValueToStream(QDataStream& dataStream)const
 	dataStream << m_value;
 }
 
-void TInteger::UpdateFromValue(const TVariate& variate)
+void TInteger::ReadValueFromStream(QDataStream& dataStream)
 {
-	m_value = static_cast<const TInteger&>(variate).m_value;
+	dataStream >> m_value;
 }
-
-
 
 TVariateRegister<TInteger> TInteger::m_register{"Integer"};
 

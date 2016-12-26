@@ -10,7 +10,6 @@
 #include <assert.h>
 #include "TToolSys.h"
 #include "DialogTeachToolSystem.h"
-#include "IntegerValue.h"
 
 
 
@@ -198,7 +197,7 @@ void ScreenToolSystem::OnDataChanged()
 
 	for (size_t i = 0; i < values.size();++i)
 	{
-		m_dataLineEditList.at(i)->setText(QString::number(*std::dynamic_pointer_cast<NVariateValue::IntegerValue>(values[i])));
+		m_dataLineEditList.at(i)->setText(QString::number(values[i]));
 	}
 }
 

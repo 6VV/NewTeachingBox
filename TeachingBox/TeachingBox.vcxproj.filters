@@ -706,9 +706,6 @@
     <ClCompile Include="RegExp.cpp">
       <Filter>Source Files\Init</Filter>
     </ClCompile>
-    <ClCompile Include="TInterpreter.cpp">
-      <Filter>Source Files\Interpreter</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TInterpreterThread.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -1090,6 +1087,15 @@
     <ClCompile Include="ComplexValue.cpp">
       <Filter>Source Files\Variate\VariateValue</Filter>
     </ClCompile>
+    <ClCompile Include="TComplex.cpp">
+      <Filter>Source Files\Variate\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="ComplexValueTreeWidgetItem.cpp">
+      <Filter>Source Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="StringValue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="teachingbox.qrc">
@@ -1269,6 +1275,12 @@
     <CustomBuild Include="DialogNewVariate.h">
       <Filter>Header Files\Screen\ScreenVariate</Filter>
     </CustomBuild>
+    <CustomBuild Include="VariateValue.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
+    </CustomBuild>
+    <CustomBuild Include="IntegerValue.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="teachingbox_zh.qm">
@@ -1438,9 +1450,6 @@
     <ClInclude Include="DataStruct.h">
       <Filter>Header Files\Init</Filter>
     </ClInclude>
-    <ClInclude Include="TInterpreter.h">
-      <Filter>Header Files\Interpreter</Filter>
-    </ClInclude>
     <ClInclude Include="RemoteManager.h">
       <Filter>Header Files\Remote</Filter>
     </ClInclude>
@@ -1552,12 +1561,6 @@
     <ClInclude Include="VariateWidgetMap.h">
       <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
     </ClInclude>
-    <ClInclude Include="VariateValue.h">
-      <Filter>Header Files\Variate\VariateValue</Filter>
-    </ClInclude>
-    <ClInclude Include="IntegerValue.h">
-      <Filter>Header Files\Variate\VariateValue</Filter>
-    </ClInclude>
     <ClInclude Include="DoubleValue.h">
       <Filter>Header Files\Variate\VariateValue</Filter>
     </ClInclude>
@@ -1566,6 +1569,15 @@
     </ClInclude>
     <ClInclude Include="TVariateRegister.h">
       <Filter>Header Files\Variate\Variate</Filter>
+    </ClInclude>
+    <ClInclude Include="TComplex.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </ClInclude>
+    <ClInclude Include="ComplexValueTreeWidgetItem.h">
+      <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="StringValue.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

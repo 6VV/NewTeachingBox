@@ -55,3 +55,13 @@ void TAstNodeProgram::ParseSemantic() const
 		child = child->GetSibling();
 	}
 }
+
+void TAstNodeProgram::SetId(int id)
+{
+	m_id = id;
+}
+
+int TAstNodeProgram::GetId() const
+{
+	return m_id;
+}

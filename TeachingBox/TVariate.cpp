@@ -6,10 +6,10 @@
 #include <assert.h>
 
 
-TVariate::TVariate(QDataStream& dataStream) 
-	: m_symbol(dataStream)
-{
-}
+//TVariate::TVariate(QDataStream& dataStream) 
+//	: m_symbol(dataStream)
+//{
+//}
 
 //TVariate::TVariate(const QString& scope, const QString& name, TSymbol::SymbolType type)
 //	: m_symbol(scope, name, type, TSymbol::CATEGORY_VARIABLE)
@@ -57,6 +57,12 @@ QString TVariate::GetTypeName() const
 	return m_symbol.GetTypeName();
 }
 
+void TVariate::ReadDataFromStream(QDataStream& dataStream)
+{
+	m_symbol.ReadDataFromStream(dataStream);
+	ReadValueFromStream(dataStream);
+}
+
 //void TVariate::SetName(const QString& name)
 //{
 //	m_symbol.SetName(name);
@@ -71,12 +77,6 @@ void TVariate::WriteDataToStream(QDataStream& dataStream) const
 }
 
 
-void TVariate::UpdateFromVariate(const TVariate& variate)
-{
-	assert(typeid(variate) == typeid(*this));
-	m_symbol = variate.m_symbol;
-	UpdateFromValue(variate);
-}
 
 void TVariate::UpdateRamAndDatabaseFrom(const TVariate& variate) const
 {

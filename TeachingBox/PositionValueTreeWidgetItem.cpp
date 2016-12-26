@@ -21,7 +21,7 @@ std::shared_ptr<TVariate> PositionValueTreeWidgetItem::GetVariate(const TSymbol&
 void PositionValueTreeWidgetItem::InsertVariateValue(const std::shared_ptr<TVariate> variate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
 {
 	assert(typeid(*variate) == typeid(TPosition));
-	auto value = dynamic_cast<TPosition*>(variate.get())->GetValue();
+	auto value = std::dynamic_pointer_cast<TPosition>(variate)->GetValue();
 
 	QStringList nameList{ "Axis1", "Axis2", "Axis3", "Axis4","Axis5", "Axis6" };
 

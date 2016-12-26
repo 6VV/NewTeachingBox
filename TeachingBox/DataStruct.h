@@ -11,15 +11,15 @@ enum CmdAttributeType
 };
 
 //单条指令的属性
-typedef struct
+struct tTeachCmdAttribute
 {
 	int m_length;
 	int m_ID;//命令ID
 	int m_type;	/*类型*/
 	int m_LineNumber;//行号
-	long long m_programAddress;	/*地址*/
+	int m_programId;	/*地址*/
 	//	tTeachCmdState m_State;//命令状态
-}tTeachCmdAttribute;
+};
 
 const int LOCK_LENGTH = 1;
 const int COMMAND_HEAD_LENGTH = LOCK_LENGTH + sizeof(tTeachCmdAttribute);
@@ -27,7 +27,7 @@ const int COMMAND_MAX_LENGTH = 1024;
 const int AXIS_SIZE = 6;
 
 /*命令Id*/
-enum COMMAND_ID
+enum CommandId
 {
 	MOVL = 2000,
 	MOVX = 2001,
@@ -60,9 +60,9 @@ enum COMMAND_ID
 
 	STOP_MOVE = 5027,
 
-	STOP_EXECUTE=5031,
+	STOP_EXECUTE = 5031,
 
-	ROBOT_POSITION=6001,
+	ROBOT_POSITION = 6001,
 
 	NORMAL_COMMAND_FEEDBACK = 6009,
 
@@ -70,14 +70,14 @@ enum COMMAND_ID
 };
 
 /*位置变量*/
-typedef struct
+struct tAxesAllPositions
 {
 	double m_AxisPosition[AXIS_SIZE];
 
-}tAxesAllPositions;
+};
 
 /*速度约束*/
-typedef struct {
+struct tDynamicConstraint{
 	//位置约束
 	double m_Velocity;
 	double m_Acceleration;
@@ -87,192 +87,207 @@ typedef struct {
 	double m_PostureVelocity;
 	double m_PostureAcceleration;
 	double m_PostureDeceleration;
-}tDynamicConstraint;
+};
 
 /*相邻运动指令间的过度模式*/
-typedef enum
+enum tTransitionMode
 {
 	kTransitionModeAbsolute = 0,
 	kTransitionModeRelative = 1,
 
-}tTransitionMode;
+};
 
 /*过渡区域约束*/
-typedef struct {
+struct tOverlapConstraint
+{
 	//过渡模式和参数
 	int m_TransitionMode;	/*此处采用int而非枚举，是为了在数据库存储时方便*/
 	double m_TransitionParameter;
-}tOverlapConstraint;
+};
 
 /*三维坐标点位置*/
-typedef struct
+struct tPositionCartesian
 {
 	double m_X;
 	double m_Y;
 	double m_Z;
-
-}tPositionCartesian;
+};
 
 /*姿态旋转矩阵*/
-typedef struct
+struct tPostureRotary
 {
 	double m_R[3][3];
 
-}tPostureRotary;
+};
 
 /*点的位置和姿态*/
-typedef struct
+struct tPose
 {
 	tPostureRotary m_PostureRotary;
 	tPositionCartesian m_PositionCartesian;
 
-}tPose;
+};
+
+struct tPostureEuler
+{
+	double m_A;
+	double m_B;
+	double m_C;
+
+};
+
+
+struct tPoseEuler
+{
+	tPositionCartesian m_PositionCartesian;
+	tPostureEuler m_PostureEuler;
+
+};
 
 /*位置齐次变换*/
-typedef struct
+struct tPoseHomogeneous
 {
 	double m_T[4][4];
-
-}tPoseHomogeneous;
+};
 
 /////////////////////////////////////////////////////
 //velocity
 
 /*6个轴的速度*/
-typedef struct
+struct tAxesAllVelocities
 {
 	double m_AxisVelocity[6];
 
-}tAxesAllVelocities;
+};
 
 /*三维坐标点速度*/
-typedef struct
+struct tVelocityCartesian
 {
 	double m_Vx;
 	double m_Vy;
 	double m_Vz;
 
-}tVelocityCartesian;
+};
 
 /*速度旋转矩阵*/
-typedef struct
+struct tVelocityRotary
 {
 	double m_R[3][3];
 
-}tVelocityRotary;
+};
 
 /*点的速度和姿态速度*/
-typedef struct
+struct tPoseVelocity
 {
 	tVelocityRotary m_PostureRotary;
 	tVelocityCartesian m_PositionCartesian;
 
-}tPoseVelocity;
+};
 
 /*速度齐次变换*/
-typedef struct
+struct tVelocityHomogeneous
 {
 	double m_T[4][4];
 
-}tVelocityHomogeneous;
+};
 
 
 /////////////////////////////////////////////////////
 //Acceleration
 
 /*6个轴的加速度*/
-typedef struct
+struct tAxesAllAccelerations
 {
 	double m_AxisAcceleration[6];
 
-}tAxesAllAccelerations;
+};
 
 /*三维坐标点加速度*/
-typedef struct
+struct tAccelerationCartesian
 {
 	double m_Vx;
 	double m_Vy;
 	double m_Vz;
 
-}tAccelerationCartesian;
+};
 
 /*加速度旋转矩阵*/
-typedef struct
+struct tAccelerationRotary
 {
 	double m_R[3][3];
 
-}tAccelerationRotary;
+};
 
 /*点的加速度和姿态加速度*/
-typedef struct
+struct tPoseAcceleration
 {
 	tAccelerationRotary m_PostureRotary;
 	tAccelerationCartesian m_PositionCartesian;
 
-}tPoseAcceleration;
+};
 
 /*加速度齐次变换*/
-typedef struct
+struct tAccelerationHomogeneous
 {
 	double m_T[4][4];
 
-}tAccelerationHomogeneous;
+};
 
 
 /////////////////////////////////////////////////////////////////
 //用户指令参数
 
 /*直线运动规划数据结构*/
-typedef struct
+struct tMovLParam
 {
 	tAxesAllPositions m_Destination;//目标位置
 
 	tDynamicConstraint m_Dynamic;
 
 	tOverlapConstraint m_Overlap;
-}tMovLParam;
+};
 
 
-typedef struct
+struct tMovXParam
 {
 	tAxesAllPositions m_Destination;//目标位置
 	tDynamicConstraint m_Dynamic;
 	tOverlapConstraint m_Overlap;
 
-}tMovXParam;
+};
 
-typedef struct
+struct tMovYParam
 {
 	tAxesAllPositions m_Destination;//目标位置
 	tDynamicConstraint m_Dynamic;
 	tOverlapConstraint m_Overlap;
-}tMovYParam;
+};
 
-typedef struct
+struct tMovZParam
 {
 	tAxesAllPositions m_Destination;//目标位置
 	tDynamicConstraint m_Dynamic;
 	tOverlapConstraint m_Overlap;
-}tMovZParam;
+};
 
 
 
-typedef enum
+enum tCircMode
 {
 	kCircModeBorder = 0,//设定圆弧边上三点
 	kCircModeCenter = 1,//设定圆心和末端点
 	kCircModeRadius = 2,//设定圆弧平面、半径和末端点
 
-}tCircMode;
+};
 
-typedef enum
+enum tPathChoice
 {
 	kPathChoiceClockwise = 0,//顺时针
 	kPathChoioceCounterClockwise = 1,//逆时针
 
-}tPathChoice;
+};
 
-typedef struct
+struct tMovCParam
 {
 	tAxesAllPositions m_AuxPoint;//参数位置
 	tAxesAllPositions m_EndPoint;//目标位置
@@ -280,7 +295,7 @@ typedef struct
 
 	tDynamicConstraint m_Dynamic;
 	tOverlapConstraint m_Overlap;
-}tMovCParam;
+};
 
 
 //////////////////////////////////////////////////////////
@@ -318,7 +333,7 @@ typedef struct
 //}tTeachBufferAttribute;
 
 //示教器要设置的数据
-typedef enum
+enum tTeachSetParam
 {
 	JLimitPos = 0,//关节角正限位
 	JLimitNeg = 1,//关节角负限位
@@ -327,21 +342,21 @@ typedef enum
 	jerkLimit = 4,//加加速度
 
 
-}tTeachSetParam;
+};
 
 
 
-typedef enum
+enum tControllerError
 {
 	//TODO:待定义
 
-}tControllerError;
+};
 
-typedef enum
+enum tTeachBoxError
 {
 	//TODO:待定义
 
-}tTeachBoxError;
+};
 
 
 

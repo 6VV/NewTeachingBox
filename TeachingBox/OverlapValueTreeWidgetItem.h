@@ -40,7 +40,6 @@ private:
 private:
 	static VariateValueTreeWidgetBuilder<OverlapValueTreeWidgetItem> builder;
 
-
 };
 
 #endif

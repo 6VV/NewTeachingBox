@@ -21,11 +21,11 @@ QString TOverlap::TypeName()
 //	Init();
 //}
 
-TOverlap::TOverlap(QDataStream& dataStream) : TVariate(dataStream)
-{
-	WriteValueSteam(dataStream);
-
-}
+//TOverlap::TOverlap(QDataStream& dataStream) : TVariate(dataStream)
+//{
+//	ReadValueFromStream(dataStream);
+//
+//}
 
 TOverlap::TOverlap(const TOverlap& variate)
 	: TVariate(variate)
@@ -56,12 +56,7 @@ void TOverlap::WriteValueToStream(QDataStream& dataStream)const
 	dataStream << m_value.m_TransitionParameter;
 }
 
-void TOverlap::UpdateFromValue(const TVariate& variate)
-{
-	m_value = static_cast<const TOverlap&>(variate).m_value;
-}
-
-void TOverlap::WriteValueSteam(QDataStream& dataStream)
+void TOverlap::ReadValueFromStream(QDataStream& dataStream)
 {
 	dataStream >> m_value.m_TransitionMode;
 	dataStream >> m_value.m_TransitionParameter;

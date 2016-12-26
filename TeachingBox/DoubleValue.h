@@ -1,5 +1,5 @@
-﻿#ifndef _TEACHING_BOX_N_VARIATE_VALUE_DOUBLE_VALUE_H_
-#define _TEACHING_BOX_N_VARIATE_VALUE_DOUBLE_VALUE_H_
+﻿#ifndef _TEACHING_BOX_DOUBLE_VALUE_H_
+#define _TEACHING_BOX_DOUBLE_VALUE_H_
 
 /*************************************************
 //  Copyright (C), 2015-2016, CS&S. Co., Ltd.
@@ -19,8 +19,6 @@
 
 #include "VariateValue.h"
 
-namespace NVariateValue
-{
 	class DoubleValue :public VariateValue
 	{
 	public:
@@ -32,17 +30,17 @@ namespace NVariateValue
 
 		virtual void WriteToDataStream(QDataStream& dataStream) const override;
 
-		virtual void WriteToTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column) const override;
+		//virtual void WriteToTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column) const override;
+		//virtual void UpdateTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column) const override;
 
 		virtual void ReadFromDataStream(QDataStream& dataStream) override;
 
-		virtual void ReadFromTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column) override;
+		//virtual void ReadFromTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column) override;
 
 	private:
 		double m_value = 0;
 
 	};
-}
 
 
 #endif // !_TEACHING_BOX_N_VARIATE_VALUE_INTEGER_VALUE_H_

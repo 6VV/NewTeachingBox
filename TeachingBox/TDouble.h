@@ -15,17 +15,13 @@ public:
 public:
 	TDouble(const TSymbol& symbol, ValueType value = 0);
 	TDouble(const TDouble& variate);
-	TDouble(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
+	virtual void WriteValueToStream(QDataStream& dataStream) const override;
+	virtual void ReadValueFromStream(QDataStream& dataStream) override;
 
 	ValueType GetValue();
 	void SetValue(const ValueType value);
-
-protected:
-	virtual void WriteValueToStream(QDataStream& dataStream) const override;
-	virtual void UpdateFromValue(const TVariate& variate) override;
-
 
 
 private:

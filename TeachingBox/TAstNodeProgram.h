@@ -15,6 +15,11 @@ public:
 
 	virtual void ParseSemantic() const override;
 
+	void SetId(int id);
+	int GetId() const;
+
+private:
+	int m_id = 0;	/*当前程序id，可用于根据id来识别程序*/
 };
 
 #endif

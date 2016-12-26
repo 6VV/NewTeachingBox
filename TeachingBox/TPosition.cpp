@@ -12,18 +12,11 @@ QString TPosition::TypeName()
 	return "Position";
 }
 
-TPosition::TPosition(QDataStream& dataStream) : TVariate(dataStream)
-{
-	double value;
-
-	for (int i = 0; i < AXIS_SIZE;++i)
-	{
-		dataStream >> value;
-		m_value.m_AxisPosition[i] = value;
-		//m_value.push_back(value);
-	}
-
-}
+//TPosition::TPosition(QDataStream& dataStream) : TVariate(dataStream)
+//{
+//	ReadValueFromStream(dataStream);
+//
+//}
 
 //TPosition::TPosition(const QString& scope, const QString& name, const tAxesAllPositions& value)
 //	:TVariate(scope, name, TSymbol::TYPE_POSITION)
@@ -64,9 +57,15 @@ void TPosition::WriteValueToStream(QDataStream& dataStream)const
 	}
 }
 
-void TPosition::UpdateFromValue(const TVariate& variate)
+void TPosition::ReadValueFromStream(QDataStream& dataStream)
 {
-	m_value = static_cast<const TPosition&>(variate).m_value;
+	double value;
+
+	for (int i = 0; i < AXIS_SIZE; ++i)
+	{
+		dataStream >> value;
+		m_value.m_AxisPosition[i] = value;
+	}
 }
 
 

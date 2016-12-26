@@ -46,7 +46,7 @@ protected:
 	void InsertComboBox(const QString& valueName, const QStringList& itemTexts, const QString& currentText, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem);
 	void InsertInt(const QString& valueName, int value, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem);
 	void InsertDouble(const QString& valueName, double value, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem);
-	void InsertLineEdit(const QString& valueName, const QString& value, const QString& regExp, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem);
+	void InsertLineEdit(const QString& valueName, const QString& value, const QString& regExp, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem,bool enable=true);
 
 	int GetInt(QTreeWidget* treeWidget, QTreeWidgetItem* valueItem);
 	double GetDouble(QTreeWidget* treeWidget, QTreeWidgetItem* valueItem);

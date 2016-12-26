@@ -9,6 +9,8 @@
 #include "TDynamic.h"
 #include "TOverlap.h"
 #include "RemoteManager.h"
+#include "TAstNodeProgram.h"
+#include "..\DataStream\DataStream.h"
 
 TAstNodeMovlSentence::TAstNodeMovlSentence(const std::shared_ptr<TToken> token /*= nullptr*/) :TAstNode(token)
 {
@@ -106,10 +108,26 @@ void TAstNodeMovlSentence::CheckParameterType(std::shared_ptr<TAstNode> node, co
 
 void TAstNodeMovlSentence::SendMovlData() const
 {
-	char data[sizeof(tMovLParam)];
-	*(tMovLParam*)data = GetMovlParameter();
-	RemoteManager::GetInstance()->SendMovlCommand(data,sizeof(tMovLParam),m_token->LineNumber(),
-		reinterpret_cast<long long>(GetProgramNode()));
+	tTeachCmdAttribute attribute;
+	attribute.m_type = CmdAttributeType::CMD_ATTRIBUTE_NORMAL_COMMAND;
+	attribute.m_ID = CommandId::MOVL;
+	attribute.m_LineNumber = m_token->LineNumber();
+	attribute.m_programId = dynamic_cast<const TAstNodeProgram*>(GetProgramNode())->GetId();
+
+	DataStream dataStream;
+	dataStream << attribute;
+	dataStream << GetMovlParameter();
+	attribute.m_length = dataStream.Length();
+	dataStream.Seek(0);
+	dataStream << attribute;
+	dataStream.Seek(0);
+
+	RemoteManager::GetInstance()->SendCommand(dataStream);
+
+	//char data[sizeof(tMovLParam)];
+	//*(tMovLParam*)data = GetMovlParameter();
+	//RemoteManager::GetInstance()->SendMovlCommand(data, sizeof(tMovLParam), m_token->LineNumber(),
+	//	dynamic_cast<const TAstNodeProgram*>(GetProgramNode())->GetId());
 }
 
 tMovLParam TAstNodeMovlSentence::GetMovlParameter() const

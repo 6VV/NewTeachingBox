@@ -47,12 +47,6 @@ std::shared_ptr<TVariate> VariateManagerWithVerticalHeader::GetVariate(QTreeWidg
 	auto scope = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(1), 1))->text();
 	auto type = dynamic_cast<QLineEdit*>(treeWidget->itemWidget(variateItem->child(2), 1))->text();
 
-	return VariateWidgetMap::GetVariateWidget(type)->GetVariate(TSymbol{ scope, name }, treeWidget, variateItem,3);
+	return VariateWidgetMap::GetVariateWidget(type)->GetVariate(TSymbol{ scope, name, TSymbol::TYPE_VOID, type }, treeWidget, variateItem, 3);
 }
 
-void VariateManagerWithVerticalHeader::UpdateWidget(const std::shared_ptr<TVariate> newVariate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
-{
-	newVariate;
-	treeWidget;
-	variateItem;
-}

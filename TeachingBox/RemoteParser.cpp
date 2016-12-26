@@ -7,6 +7,10 @@
 #include "InterpreterManager.h"
 #include "CodeEditor.h"
 #include "RemoteFeedbackController.h"
+#include "TAstNodeProgram.h"
+#include <assert.h>
+#include "..\DataStream\DataStream.h"
+#include <xutility>
 
 
 RemoteParser::RemoteParser(QObject* parent/*=nullptr*/)
@@ -33,30 +37,42 @@ void RemoteParser::ParseCommands(QByteArray& commands) const
 
 void RemoteParser::ParseOneCommand(QByteArray& command) const
 {
-	tTeachCmdAttribute* attribute = GetAttribute(command.data());
+	DataStream stream;
+	stream.WriteRawBytes(command.data() , command.length());
+	//tTeachCmdAttribute attribute = GetAttribute(command.data());
+	stream.Seek(1);
+	tTeachCmdAttribute attribute;
+	stream >> attribute;
 
-	switch (attribute->m_ID)
+	switch (attribute.m_ID)
 	{
-	case COMMAND_ID::NORMAL_COMMAND:
+	case CommandId::NORMAL_COMMAND:
 	{
 		SendNextCommand();
 	}break;
-	case COMMAND_ID::NORMAL_COMMAND_FEEDBACK:
+	case CommandId::NORMAL_COMMAND_FEEDBACK:
 	{
-		RefreshLineNumber(*attribute);
+		RefreshLineNumber(attribute);
 	}break;
-	case COMMAND_ID::ROBOT_POSITION:
+	case CommandId::ROBOT_POSITION:
 	{
-		OnReceivePosition(command);
+		tAxesAllPositions position;
+		stream >> position;
+		RemoteFeedbackController::GetInstance()->OnReseivePosition(position);
 	}break;
 	default:
 		break;
 	}
 }
 
-tTeachCmdAttribute* RemoteParser::GetAttribute(char* command) const
+tTeachCmdAttribute RemoteParser::GetAttribute(char* command) const
 {
-	return (tTeachCmdAttribute*)(command + LOCK_LENGTH);
+	DataStream stream;
+	stream.WriteRawBytes(command, COMMAND_HEAD_LENGTH);
+	stream.Seek(1);
+	tTeachCmdAttribute attribute;
+	stream >> attribute;
+	return std::move(attribute);
 }
 
 void RemoteParser::SplitCommand(QList<QByteArray>& commandList, QByteArray& commands) const
@@ -64,7 +80,7 @@ void RemoteParser::SplitCommand(QList<QByteArray>& commandList, QByteArray& comm
 	int length = 0;
 	while (commands.size() > 0)
 	{
-		length = GetAttribute(commands.data())->m_length;
+		length = GetAttribute(commands.data()).m_length;
 		if (length <= 0 || length > commands.size())
 		{
 			break;
@@ -83,7 +99,27 @@ void RemoteParser::SendNextCommand() const
 
 void RemoteParser::RefreshLineNumber(const tTeachCmdAttribute& attribute) const
 {
-	auto program = reinterpret_cast<TAstNode*>(attribute.m_programAddress)->GetToken()->Name();
+	auto rootNode = Context::interpreterContext.GetRootNode();
+	auto childNode = rootNode->GetFirstChild();
+	int id = attribute.m_programId;
+
+	QString program{};
+	while (childNode!=nullptr)
+	{
+		assert(typeid(*childNode) == typeid(TAstNodeProgram));
+		auto programNode = std::dynamic_pointer_cast<TAstNodeProgram>(childNode);
+		if (programNode->GetId()==id)
+		{
+			program = programNode->GetToken()->Name();
+			break;
+		}
+		childNode = childNode->GetSibling();
+	}
+
+	if (program.size()==0)
+	{
+		return;
+	}
 	int lineNumber = attribute.m_LineNumber;
 
 	CodeEditor::GetInstance()->HighlightPCLine(program, lineNumber);
@@ -91,8 +127,3 @@ void RemoteParser::RefreshLineNumber(const tTeachCmdAttribute& attribute) const
 
 }
 
-void RemoteParser::OnReceivePosition(QByteArray& command) const
-{
-	tAxesAllPositions position = *(reinterpret_cast<tAxesAllPositions*>(command.data() + sizeof(tTeachCmdAttribute)));
-	RemoteFeedbackController::GetInstance()->OnReseivePosition(position);
-}

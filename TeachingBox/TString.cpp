@@ -17,12 +17,12 @@ QString TString::TypeName()
 //
 //	Init();
 //}
-
-TString::TString(QDataStream& dataStream) : TVariate(dataStream)
-{
-	dataStream >> m_value;
-
-}
+//
+//TString::TString(QDataStream& dataStream) : TVariate(dataStream)
+//{
+//	dataStream >> m_value;
+//
+//}
 
 TString::TString(const TString& variate)
 	: TVariate(variate)
@@ -54,11 +54,10 @@ void TString::WriteValueToStream(QDataStream& dataStream)const
 	dataStream << m_value;
 }
 
-void TString::UpdateFromValue(const TVariate& variate)
+void TString::ReadValueFromStream(QDataStream& dataStream)
 {
-	m_value = static_cast<const TString&>(variate).m_value;
+	dataStream >> m_value;
 }
-
 
 
 TVariateRegister<TString> TString::m_register{ "String" };

@@ -24,6 +24,12 @@ void InterpreterManager::LoadProject(const QString& project)
 
 void InterpreterManager::AutoExecute()
 {
+	/*已经允许执行*/
+	if (Context::interpreterContext.IsAllowExecute())
+	{
+		return;
+	}
+
 	SaveFile();
 	LoadProject(Context::projectContext.ProjectLoaded());
 	UpdateStartNode();
@@ -35,6 +41,11 @@ void InterpreterManager::AutoExecute()
 
 void InterpreterManager::StepExecute()
 {
+	/*已经允许执行*/
+	if (Context::interpreterContext.IsAllowExecute())
+	{
+		return;
+	}
 	SaveFile();
 	LoadProject(Context::projectContext.ProjectLoaded());
 	UpdateStartNode();
@@ -137,10 +148,10 @@ InterpreterManager::InterpreterManager()
 {
 	m_interpreterThread->moveToThread(m_thread);
 
-	connect(this, SIGNAL(SignalAutoExecute()), m_interpreterThread, SLOT(SlotAutoExecute()));
-	connect(this, SIGNAL(SignalStopExecute()), m_interpreterThread, SLOT(SlotStopExecute()));
-	connect(this, SIGNAL(SignalStepExecute()), m_interpreterThread, SLOT(SlotStepExecute()));
-	connect(this, SIGNAL(SignalExecuteNextCommand()), m_interpreterThread, SLOT(SlotExecuteNextCommand()));
+	connect(this, &InterpreterManager::SignalAutoExecute, m_interpreterThread, &TInterpreterThread::SlotAutoExecute);
+	connect(this, &InterpreterManager::SignalStopExecute, m_interpreterThread, &TInterpreterThread::SlotStopExecute);
+	connect(this, &InterpreterManager::SignalStepExecute, m_interpreterThread, &TInterpreterThread::SlotStepExecute);
+	connect(this, &InterpreterManager::SignalExecuteNextCommand, m_interpreterThread, &TInterpreterThread::SlotExecuteNextCommand);
 
 	m_thread->start();
 }

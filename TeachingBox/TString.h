@@ -15,17 +15,15 @@ public:
 public:
 	TString(const TSymbol& symbol, ValueType value = "");
 	TString(const TString& variate);
-	TString(QDataStream& dataStream);
+	//TString(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
+	virtual void WriteValueToStream(QDataStream& dataStream) const override;
+	virtual void ReadValueFromStream(QDataStream& dataStream) override;
 
 	const ValueType GetValue() const;
 	void SetValue(const ValueType& value);
 
-
-protected:
-	virtual void WriteValueToStream(QDataStream& dataStream) const override;
-	virtual void UpdateFromValue(const TVariate& variate) override;
 
 
 private:

@@ -22,6 +22,7 @@
 #include <memory>
 #include "DataStruct.h"
 
+class DataStream;
 
 class RemoteManager
 {
@@ -30,7 +31,7 @@ class RemoteManager
 public:
 	static RemoteManager* GetInstance();
 
-	void SendMovlCommand(const char* commandData,int commandLength,int lineNumber, long long programAddress);
+	void SendCommand(const DataStream& stream);
 	void SendStopCommand();
 	void SendEndCommand();
 
@@ -41,13 +42,9 @@ private:
 	RemoteManager& operator=(RemoteManager&) = delete;
 
 private:
-	void AddLock(char* head,int& offset);		/*添加锁*/
-	void AddNormalCommandAttribute(char* head, int& offset, int commandId, int commandLength,int lineNumber,long long programAddress);	/*添加属性*/
-	void AddCommand(char* head, int& offset, const char* command,int commandLength);	/*添加命令*/
-
-	QByteArray ContructNormalCommand(int commandId, const char* commandData, int commandLength, int lineNumber, long long programAddress);
-	QByteArray ContructNormalCommand(int commandId);
-	QByteArray ContructSpecialCommand(int commandId);
+	void SendNormalCommand(int commandId);
+	void SendSpecialCommand(int commandId);
+	//void SendCommand(CmdAttributeType type, CommandId id);
 };
 
 #endif

@@ -15,19 +15,14 @@ public:
 
 public:
 	TBool(const TSymbol& symbol, ValueType value = false);
-	//TBool(const QString& scope, const QString& name, const bool value=false);
-	TBool(const TBool& variate);
-	TBool(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
+	virtual void WriteValueToStream(QDataStream& dataStream) const override;
+	virtual void ReadValueFromStream(QDataStream& dataStream) override;
 
 	const ValueType GetValue() const;
 	void SetValue(const ValueType value);
 
-
-protected:
-	virtual void WriteValueToStream(QDataStream& dataStream) const override;
-	virtual void UpdateFromValue(const TVariate& variate) override;
 
 
 

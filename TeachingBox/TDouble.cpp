@@ -20,11 +20,11 @@ QString TDouble::TypeName()
 //	Init();
 //}
 
-TDouble::TDouble(QDataStream& dataStream) : TVariate(dataStream)
-{
-	dataStream >> m_value;
-
-}
+//TDouble::TDouble(QDataStream& dataStream) : TVariate(dataStream)
+//{
+//	dataStream >> m_value;
+//
+//}
 
 TDouble::TDouble(const TDouble& variate)
 	: TVariate(variate)
@@ -54,9 +54,9 @@ void TDouble::WriteValueToStream(QDataStream& dataStream)const
 	dataStream << m_value;
 }
 
-void TDouble::UpdateFromValue(const TVariate& variate)
+void TDouble::ReadValueFromStream(QDataStream& dataStream)
 {
-	m_value = static_cast<const TDouble&>(variate).m_value;
+	dataStream >> m_value;
 }
 
 

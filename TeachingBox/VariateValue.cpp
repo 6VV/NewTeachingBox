@@ -2,8 +2,5 @@
 #include "VariateValue.h"
 
 
-namespace NVariateValue
-{
-	NVariateValue::VariateValue::~VariateValue(){}
-}
+VariateValue::~VariateValue(){}
 

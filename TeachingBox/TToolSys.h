@@ -18,31 +18,33 @@
 //    <desc>        build this moudle     
 *************************************************/
 
-#include "TVariate.h"
 #include <array>
-#include "ComplexValue.h"
+#include "TComplex.h"
+#include "TVariateRegister.h"
 
-class TToolSys:public TVariate
+class TToolSys:public TComplex
 {
 public:
-	typedef NVariateValue::ComplexValue ValueType;
+	typedef std::array<double, 6> ValueType;
 	static QString TypeName();
 
 public:
 	TToolSys(const TSymbol& symbol, ValueType value = ValueType{});
-	TToolSys(const TToolSys& variate);
-	TToolSys(QDataStream& dataStream);
 	~TToolSys();
 
 	virtual TVariate* Clone() const override;
 
-	ValueType::ValueType GetValue() const;
+	virtual QStringList GetValueNames() const override;
+	virtual std::vector<std::shared_ptr<VariateValue>> GetValues() const override;
+	virtual void ReadValueFromStream(QDataStream& dataStream) override;
+	virtual void SetValues(const std::vector<std::shared_ptr<VariateValue>>& values) override;
+	//virtual void WriteValueToStream(QDataStream& dataStream) const override;
+
+	ValueType GetValue() const;
 	void SetValue(ValueType value);
 
 private:
-	virtual void WriteValueToStream(QDataStream& dataStream) const override;
-	virtual void UpdateFromValue(const TVariate& variate) override;
-	
+	static TVariateRegister<TToolSys> m_register;
 
 private:
 	ValueType m_value;

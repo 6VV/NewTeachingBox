@@ -13,11 +13,11 @@ QString TDynamic::TypeName()
 }
 
 
-TDynamic::TDynamic(QDataStream& dataStream) : TVariate(dataStream)
-{
-	WriteValueStream(dataStream);
-
-}
+//TDynamic::TDynamic(QDataStream& dataStream) : TVariate(dataStream)
+//{
+//	ReadValueFromStream(dataStream);
+//
+//}
 
 TDynamic::TDynamic(const TDynamic& variate)
 	: TVariate(variate)
@@ -42,7 +42,7 @@ void TDynamic::SetValue(const tDynamicConstraint& value)
 	m_value = value;
 }
 
-void TDynamic::WriteValueStream(QDataStream& dataStream)
+void TDynamic::ReadValueFromStream(QDataStream& dataStream)
 {
 	dataStream >> m_value.m_Velocity;
 	dataStream >> m_value.m_Acceleration;
@@ -72,7 +72,3 @@ void TDynamic::WriteValueToStream(QDataStream& dataStream)const
 	dataStream << m_value.m_PostureDeceleration;
 }
 
-void TDynamic::UpdateFromValue(const TVariate& variate)
-{
-	m_value = static_cast<const TDynamic&>(variate).m_value;
-}
