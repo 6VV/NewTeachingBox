@@ -2,6 +2,7 @@
 #include "DataStruct.h"
 #include "QByteArray"
 #include "QDataStream"
+#include "..\TeachingBox\DataStruct.h"
 
 
 
@@ -105,6 +106,32 @@ DataStream& DataStream::operator>>(tMovLParam& value)
 }
 
 
+DataStream& DataStream::operator>>(tPoseEuler& value)
+{
+	*this >> value.m_PositionCartesian;
+	*this >> value.m_PostureEuler;
+
+	return *this;
+}
+
+DataStream& DataStream::operator>>(tPositionCartesian& value)
+{
+	*m_dataStream >> value.m_X;
+	*m_dataStream >> value.m_Y;
+	*m_dataStream >> value.m_Z;
+
+	return *this;
+}
+
+DataStream& DataStream::operator>>(tPostureEuler& value)
+{
+	*m_dataStream >> value.m_A;
+	*m_dataStream >> value.m_B;
+	*m_dataStream >> value.m_C;
+
+	return *this;
+}
+
 DataStream& DataStream::operator<<(int value)
 {
 	*m_dataStream << value;
@@ -169,4 +196,30 @@ DataStream& DataStream::operator<<(const tMovLParam& value)
 	return *this;
 }
 
+
+DataStream& DataStream::operator<<(tPoseEuler& value)
+{
+	*this << value.m_PositionCartesian;
+	*this << value.m_PostureEuler;
+
+	return *this;
+}
+
+DataStream& DataStream::operator<<(tPositionCartesian& value)
+{
+	*m_dataStream << value.m_X;
+	*m_dataStream << value.m_Y;
+	*m_dataStream << value.m_Z;
+
+	return *this;
+}
+
+DataStream& DataStream::operator<<(tPostureEuler& value)
+{
+	*m_dataStream << value.m_A;
+	*m_dataStream << value.m_B;
+	*m_dataStream << value.m_C;
+
+	return *this;
+}
 

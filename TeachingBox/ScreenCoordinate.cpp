@@ -61,4 +61,3 @@ void ScreenCoordiante::ChangeType(ScreenType screenType)
 }
 
 
-

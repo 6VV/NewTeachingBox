@@ -15,6 +15,7 @@
 #include "TVariate.h"
 #include "TPosition.h"
 #include "RemoteFeedbackController.h"
+#include "RemoteManager.h"
 
 ScreenVariate::ScreenVariate(QWidget* parent /*= 0*/)
 	:ScreenMainParent(parent)
@@ -93,7 +94,8 @@ void ScreenVariate::SlotOnNewVariateButtonClicked()
 
 void ScreenVariate::SlotOnTeachButtonClicked()
 {
-	WarningManager::GetInstance()->Warning(this, QStringLiteral("未实现"));
+	//WarningManager::GetInstance()->Warning(this, QStringLiteral("未实现"));
+	RemoteManager::GetInstance()->SendCommandToGetPosition();
 }
 
 QList<QPushButton*> ScreenVariate::GetButtonList()
@@ -140,6 +142,7 @@ void ScreenVariate::OnReseivePosition(const tAxesAllPositions& position)
 	assert(typeid(*variate) == typeid(TPosition));
 	std::dynamic_pointer_cast<TPosition>(variate)->SetValue(position);
 	VariateManagerWithHorizonHeader::GetInstance()->UpdateWidget(variate, m_treeWidget, item);
+	TVariateManager::GetInstance()->UpdateVariate(variate);
 }
 
 QTreeWidgetItem* ScreenVariate::FindScopeItem(const QString& scope)

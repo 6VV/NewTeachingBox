@@ -74,22 +74,6 @@ void TAstNodeMovlSentence::ParseSemantic() const
 	CheckParameterType(m_firstChild->GetSibling()->GetSibling(), TOverlap::TypeName());
 }
 
-//void TAstNodeMovlSentence::CheckParameterType(std::shared_ptr<TAstNode> node,int type) const
-//{
-//	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), node->GetToken()->Name());
-//
-//	if (variate==nullptr)
-//	{
-//		throw TInterpreterException(TInterpreterException::UNKNOWN_VARIATE, node->GetToken()->LineNumber()
-//			, node->GetToken()->Name());
-//	}
-//
-//	if (variate->GetType() != type)
-//	{
-//		throw TInterpreterException(TInterpreterException::MOVL_SHOULD_WITH_POSITOIN_DYNAMIC_OVERLAP, node->GetToken()->LineNumber());
-//	}
-//}
-
 void TAstNodeMovlSentence::CheckParameterType(std::shared_ptr<TAstNode> node, const QString& typeName) const
 {
 	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), node->GetToken()->Name());

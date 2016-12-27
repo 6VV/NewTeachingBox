@@ -19,13 +19,14 @@
 
 #include "InternationalWidget.h"
 #include <array>
+#include "ICoordinate.h"
 
 class Button;
 class QLineEdit;
 class VariateWidgetProducer;
 class TRefSys;
 
-class ScreenReferenceSystem :public InternationalWidget
+class ScreenReferenceSystem :public InternationalWidget,ICoordinate
 {
 	Q_OBJECT
 
@@ -35,6 +36,7 @@ public:
 private:
 	virtual void showEvent(QShowEvent *) override;
 	virtual void UpdateText() override;
+	virtual void OnReceive(const tPoseEuler& poseEuler) override;
 
 	QWidget* GetButtonWidget();
 	QWidget* GetOffsetDataWidget();
@@ -54,7 +56,7 @@ private:
 	void OnSaveButtonClicked();
 
 	void OnRefSysChanged();
-	
+
 private:
 	std::unique_ptr<VariateWidgetProducer> m_variateWidgetProducer;
 

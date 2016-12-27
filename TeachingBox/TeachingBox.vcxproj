@@ -91,6 +91,7 @@
     <ClCompile Include="ComboBoxInTree.cpp" />
     <ClCompile Include="ComplexValueTreeWidgetItem.cpp" />
     <ClCompile Include="Context.cpp" />
+    <ClCompile Include="CoordinateAdapter.cpp" />
     <ClCompile Include="DialogNewAddress.cpp" />
     <ClCompile Include="DialogNewMacro.cpp" />
     <ClCompile Include="DialogParent.cpp" />
@@ -687,6 +688,7 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../ScreenToolSystem.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork"</Command>
     </CustomBuild>
     <ClInclude Include="ComplexValueTreeWidgetItem.h" />
+    <ClInclude Include="CoordinateAdapter.h" />
     <ClInclude Include="DialogTeachToolSystem.h" />
     <CustomBuild Include="RemoteAdapter.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -715,6 +717,7 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </Command>
     </CustomBuild>
+    <ClInclude Include="ICoordinate.h" />
     <ClInclude Include="IntegerValueTreeWidgetItem.h" />
     <ClInclude Include="IRemoteFeedbackListener.h" />
     <ClInclude Include="OverlapValueTreeWidgetItem.h" />

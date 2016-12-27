@@ -58,7 +58,7 @@ TAstNode::ValueReturned TAstNodeElseIfSentence::Execute() const
 
 void TAstNodeElseIfSentence::ParseSemantic() const
 {
-	if (TAstNodeOperator::GetSymbolType(m_firstChild) != TSymbol::TYPE_BOOL)
+	if (TAstNodeOperator::GetSymbolType(m_firstChild) != TSymbol::BOOL)
 	{
 		throw TInterpreterException(TInterpreterException::IF_SENTENCE_SHOULD_WITH_BOOL, m_token->LineNumber());
 	}

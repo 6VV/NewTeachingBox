@@ -26,7 +26,8 @@ class IRemoteFeedbackListener
 public:
 	virtual ~IRemoteFeedbackListener(){};
 
-	virtual void OnReseivePosition(const tAxesAllPositions& position)=0;
+	virtual void OnReseivePosition(const tAxesAllPositions& /*position*/ = {}){};
+	virtual void OnReseivePose(const tPoseEuler& /*position*/ = {}){};
 };
 
 #endif

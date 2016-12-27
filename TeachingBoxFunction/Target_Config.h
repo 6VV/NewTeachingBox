@@ -3,6 +3,7 @@
 #ifndef _TARGET_CONFIG_H_
 #define _TARGET_CONFIG_H_
 
+namespace Coor{
 #define DEBUG	//输出log文件
 
 #define _WIN32_				1
@@ -19,7 +20,7 @@
 
 #define ROBOT_MECHINE_TYPE_ER20C10	//机器人类型
 
-//#define RATIO_LENGTH_THETA_THRESHOLD	100	// 弧度*RATIO_LENGTH_THETA_THRESHOLD > Length， 则按弧度计算
+	//#define RATIO_LENGTH_THETA_THRESHOLD	100	// 弧度*RATIO_LENGTH_THETA_THRESHOLD > Length， 则按弧度计算
 #define MAX_THETA_VELOCITY	5	//姿态最大速度 度/秒
 #define MAX_THETA_ACCELERATION	100	//姿态最大速度 度/秒2
 #define MAX_THETA_JERK	200	//姿态最大速度 度/秒3
@@ -32,7 +33,7 @@
 #define ERROR_LOG_MAXNUM 10
 
 
-
+}
 
 
 #endif  // #ifndef _TARGET_CONFIG_H_

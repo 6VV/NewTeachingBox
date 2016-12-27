@@ -34,6 +34,8 @@ public:
 	void SendCommand(const DataStream& stream);
 	void SendStopCommand();
 	void SendEndCommand();
+	void SendCommandToGetPosition();
+	void SendCommandToGetPose();
 
 private:
 	RemoteManager();
@@ -42,9 +44,9 @@ private:
 	RemoteManager& operator=(RemoteManager&) = delete;
 
 private:
-	void SendNormalCommand(int commandId);
-	void SendSpecialCommand(int commandId);
-	//void SendCommand(CmdAttributeType type, CommandId id);
+	//void SendNormalCommand(int commandId);
+	//void SendSpecialCommand(int commandId);
+	void SendCommand(CmdAttributeType type, CommandId id);
 };
 
 #endif

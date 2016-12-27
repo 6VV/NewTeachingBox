@@ -13,7 +13,7 @@ QString TBool::TypeName()
 
 
 TBool::TBool(const TSymbol& symbol, ValueType value)
-	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_BOOL,TypeName() })
+	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::BOOL,TypeName() })
 	, m_value(value)
 {
 }

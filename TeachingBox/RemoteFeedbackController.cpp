@@ -28,3 +28,11 @@ void RemoteFeedbackController::OnReseivePosition(const tAxesAllPositions& positi
 	}
 }
 
+void RemoteFeedbackController::OnReseivePoseEuler(const tPoseEuler& pose)
+{
+	for (auto iter : m_listeners)
+	{
+		iter->OnReseivePose(pose);
+	}
+}
+

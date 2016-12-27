@@ -45,10 +45,10 @@ TAstNode::ValueReturned TAstNodeAssignSentence::Execute() const
 		TVariateManager::GetInstance()->UpdateInMapScollUp(std::shared_ptr<TDouble>(new TDouble({ var->GetScope(), var->GetName() }, value.value)));
 		result.type = TSymbol::TYPE_DOUBLE;
 	}break;
-	case TSymbol::TYPE_BOOL:
+	case TSymbol::BOOL:
 	{
 		TVariateManager::GetInstance()->UpdateInMapScollUp(std::shared_ptr<TBool>(new TBool({ var->GetScope(), var->GetName() }, value.value != 0)));
-		result.type = TSymbol::TYPE_BOOL;
+		result.type = TSymbol::BOOL;
 	}break;
 	default:
 		break;

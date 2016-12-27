@@ -47,7 +47,7 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnTerminalValue(const TAst
 	case TOKEN_TYPE::LITERAL_BOOL:
 	{
 		result.value = static_cast<TTokenWithValue<bool>*>(node->GetToken().get())->GetValue();
-		result.type = SYMBOL_TYPE::TYPE_BOOL;
+		result.type = SYMBOL_TYPE::BOOL;
 	}break;
 	case TOKEN_TYPE::ID:
 	{
@@ -65,10 +65,10 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnTerminalValue(const TAst
 			result.value = std::static_pointer_cast<TDouble>(var)->GetValue();
 			result.type = SYMBOL_TYPE::TYPE_DOUBLE;
 		}break;
-		case SYMBOL_TYPE::TYPE_BOOL:
+		case SYMBOL_TYPE::BOOL:
 		{
 			result.value = std::static_pointer_cast<TBool>(var)->GetValue();
-			result.type = SYMBOL_TYPE::TYPE_BOOL;
+			result.type = SYMBOL_TYPE::BOOL;
 		}break;
 		default:
 			break;
@@ -134,7 +134,7 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnNonTerminalValue(const T
 	case TOKEN_TYPE::OPERATOR_GREATE_THAN:case TOKEN_TYPE::OPERATOR_GREATE_EQUAL:case TOKEN_TYPE::OPERATOR_LESS_THAN:case TOKEN_TYPE::OPERATOR_LESS_EQUAL:
 	case TOKEN_TYPE::OPERATOR_EQUAL:case TOKEN_TYPE::OPERATOR_NOT_EQUAL:case TOKEN_TYPE::OPERATOR_AND:case TOKEN_TYPE::OPERATOR_OR:
 	{
-		result.type = SYMBOL_TYPE::TYPE_BOOL;
+		result.type = SYMBOL_TYPE::BOOL;
 
 		auto result1 = ReturnValue(node->GetFirstChild().get());
 		auto result2 = ReturnValue(node->GetFirstChild()->GetSibling().get());
@@ -323,9 +323,9 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetNonTerminalSymbol(const
 	}break;
 	case TOKEN_TYPE::OPERATOR_NEGATION:
 	{
-		if (GetSymbolType(node->GetFirstChild()) == SYMBOL_TYPE::TYPE_BOOL)
+		if (GetSymbolType(node->GetFirstChild()) == SYMBOL_TYPE::BOOL)
 		{
-			return SYMBOL_TYPE::TYPE_BOOL;
+			return SYMBOL_TYPE::BOOL;
 		}
 		throw TInterpreterException(TInterpreterException::NEGATION_SHOULD_WITH_BOOL, node->GetToken()->LineNumber());
 	}break;
@@ -369,7 +369,7 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetNonTerminalSymbol(const
 		if ((firstType == SYMBOL_TYPE::TYPE_INTERGER || firstType == SYMBOL_TYPE::TYPE_DOUBLE)
 			&& (secondType == SYMBOL_TYPE::TYPE_INTERGER || secondType == SYMBOL_TYPE::TYPE_DOUBLE))
 		{
-			return SYMBOL_TYPE::TYPE_BOOL;
+			return SYMBOL_TYPE::BOOL;
 		}
 		throw TInterpreterException(TInterpreterException::ONLY_NUMBER_COULD_TAKE_RELATIONAL_OPERATION, node->GetToken()->LineNumber());
 	}break;
@@ -377,9 +377,9 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetNonTerminalSymbol(const
 	{
 		auto firstType = GetSymbolType(node->GetFirstChild());
 		auto secondType = GetSymbolType(node->GetFirstChild()->GetSibling());
-		if (firstType == SYMBOL_TYPE::TYPE_BOOL && secondType == SYMBOL_TYPE::TYPE_BOOL)
+		if (firstType == SYMBOL_TYPE::BOOL && secondType == SYMBOL_TYPE::BOOL)
 		{
-			return SYMBOL_TYPE::TYPE_BOOL;
+			return SYMBOL_TYPE::BOOL;
 		}
 		throw TInterpreterException(TInterpreterException::ONLY_BOOL_COULD_TAKE_LOGICAL_OPERATION, node->GetToken()->LineNumber());
 	}break;
@@ -395,7 +395,7 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetTerminalSymbolType(cons
 	{
 	case TOKEN_TYPE::LITERAL_INTERGER:return SYMBOL_TYPE::TYPE_INTERGER;
 	case TOKEN_TYPE::LITERAL_DOUBLE:return SYMBOL_TYPE::TYPE_DOUBLE;
-	case TOKEN_TYPE::LITERAL_BOOL:return SYMBOL_TYPE::TYPE_BOOL;
+	case TOKEN_TYPE::LITERAL_BOOL:return SYMBOL_TYPE::BOOL;
 	case TOKEN_TYPE::LITERAL_STRING:return SYMBOL_TYPE::TYPE_STRING;
 	case TOKEN_TYPE::ID:
 	{

@@ -24,8 +24,11 @@
 #include "DialogParent.h"
 #include "QMap"
 #include "QVector"
+#include "IRemoteFeedbackListener.h"
 
 class TRefSys;
+class ICoordinate;
+struct tPoseEuler;
 
 class DialogTeachReferenceSystem :public DialogParent
 {
@@ -35,7 +38,7 @@ private:
 	using FunctionCreateStepWidget = QWidget*(DialogTeachReferenceSystem::*)();
 
 public:
-	DialogTeachReferenceSystem(TRefSys* oldVariate,QWidget* parent=nullptr);
+	DialogTeachReferenceSystem(TRefSys* oldVariate, ICoordinate* iCoor = nullptr, QWidget* parent = nullptr);
 
 	virtual void UpdateText() override;
 
@@ -45,6 +48,8 @@ private:
 	QWidget* GetTeachToolWidget();
 	QWidget* GetIllustrationWidget();
 	QLayout* GetButtonLayout();
+
+	QWidget* GetEndWidget();
 
 	void Init();
 
@@ -61,10 +66,13 @@ private:
 	QWidget* ThreePointsWithoutOriginWidgetStep2();
 	QWidget* ThreePointsWithoutOriginWidgetStep3();
 
+	void UpdatePoseEuler(const tPoseEuler& point);
+
+
 private:
 /*************************************************
 //  Copyright (C), 2015-2016, CS&S. Co., Ltd.
-//  File name: 	    ScreenTeachReferenceSystem.h
+//  class name: 	Controller
 //  Author:			刘巍      
 //  Version: 		1.0     
 //  Date: 			2016/11/15
@@ -87,7 +95,7 @@ private:
 //    <version>     1.0 
 //    <desc>        build this moudle     
 *************************************************/
-	class Controller
+	class Controller:public IRemoteFeedbackListener
 	{
 	public:
 		/*示教方法*/
@@ -100,8 +108,7 @@ private:
 
 	public:
 		Controller(DialogTeachReferenceSystem* screenTeachReferenceSystem,TRefSys* variate);
-
-		//Step GetCurrentStep();
+		~Controller();
 
 		void NextStep();
 		void PreStep();
@@ -109,18 +116,79 @@ private:
 		bool HaveNextStep();
 		bool HavePreStep();
 
+		tPoseEuler GetDesPoseEuler() const;
+
+	private:
+		virtual void OnReseivePose(const tPoseEuler& pose) override;
+
+		bool IsTeached();
+
 	public:
-		DialogTeachReferenceSystem* m_screenTeachReferenceSystem;	/*示教窗口父控件*/
-		int m_step = -1;	/*当前步骤，-1表示示教方法选择过程*/
 		TRefSys* m_oldVariate;	/*原变量*/
 		TeachMethod m_teachMethod{ THREE_POINTS_WITH_ORIGIN };	/*当前示教方法*/
+
+	private:
+		DialogTeachReferenceSystem* m_screenTeachReferenceSystem;	/*示教窗口父控件*/
+		int m_step = -1;	/*当前步骤，-1表示示教方法选择过程*/
+		bool m_isTeached = false;
 		QMap<TeachMethod, QVector<DialogTeachReferenceSystem::FunctionCreateStepWidget>> m_stepMap;	/*记录各示教方法中的示教步骤控件的生成函数*/
+
+		std::shared_ptr<tPoseEuler> m_poseEuler = nullptr;	/*当前坐标系*/
+		std::vector<std::shared_ptr<tPoseEuler>> m_poses{};	/*已记录坐标系*/
+		tPoseEuler m_desPoseEuler{};	/*目标坐标系*/
+	};
+
+	/*************************************************
+	//  Copyright (C), 2015-2016, CS&S. Co., Ltd.
+	//  class name:	    RefSysWidget
+	//  Author:			刘巍      
+	//  Version: 		1.0     
+	//  Date: 			2016/12/26
+	//  Description:    用于生成坐标控件，并监听远程返回的坐标信息
+	//  Others:         
+	//  Function List:  
+	//  History:
+	//    <author>      刘巍 
+	//    <time>        2016/12/26
+	//    <version>     1.0 
+	//    <desc>        build this moudle     
+	*************************************************/
+	class RefSysWidget :public QWidget,IRemoteFeedbackListener
+	{
+	public:
+		RefSysWidget(QWidget* parent = 0);
+		~RefSysWidget();
+
+	private:
+		virtual void OnReseivePose(const tPoseEuler& pose) override;
+
+	private:
+		QLineEdit* m_lbX;
+		QLineEdit* m_lbY;
+		QLineEdit* m_lbZ;
+	};
+
+	/*示教完成界面*/
+	class EndWidget :public QWidget
+	{
+	public:
+		EndWidget(QWidget* parent = 0);
+
+		void Update(const tPoseEuler& poseEuler);
+	private:
+		QLineEdit* m_ltX;
+		QLineEdit* m_ltY;
+		QLineEdit* m_ltZ;
+		QLineEdit* m_ltA;
+		QLineEdit* m_ltB;
+		QLineEdit* m_ltC;
 	};
 
 	Controller m_controller;
 	QWidget* m_currentWidget = nullptr;
 	QGridLayout* m_mainLayout = nullptr;
-
+	QLabel* m_lbIllustration=nullptr;
+	ICoordinate* m_iCoor=nullptr;
 };
 
 #endif

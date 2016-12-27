@@ -60,6 +60,11 @@ void RemoteParser::ParseOneCommand(QByteArray& command) const
 		stream >> position;
 		RemoteFeedbackController::GetInstance()->OnReseivePosition(position);
 	}break;
+	case CommandId::ROBOT_POSE_EULER:{
+		tPoseEuler pose;
+		stream >> pose;
+		RemoteFeedbackController::GetInstance()->OnReseivePoseEuler(pose);
+	}break;
 	default:
 		break;
 	}

@@ -17,11 +17,11 @@ public:
 		TYPE_INTERGER,
 		TYPE_DOUBLE,
 		TYPE_STRING,
-		TYPE_BOOL,
+		BOOL,
 		//TYPE_POSITION,
 		//TYPE_DYNAMIC,
 		//TYPE_OVERLAP,
-		TYPE_COMPLEX
+		TYPE_COMPLEX,
 	};
 
 	enum SymbolCategory

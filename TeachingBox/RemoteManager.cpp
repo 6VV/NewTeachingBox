@@ -26,20 +26,40 @@ void RemoteManager::SendCommand(const DataStream& stream)
 
 }
 
-//void RemoteManager::SendCommand(CmdAttributeType type, CommandId id)
-//{
-//
-//}
+void RemoteManager::SendCommand(CmdAttributeType type, CommandId id)
+{
+	tTeachCmdAttribute attribute;
+	attribute.m_type = type;
+	attribute.m_length = 1 + sizeof(tTeachCmdAttribute);
+	attribute.m_ID = id;
+
+	DataStream result;
+	result << attribute;
+	result.Seek(0);
+
+	SendCommand(result);
+}
+
+
+void RemoteManager::SendCommandToGetPose()
+{
+	SendCommand(CMD_ATTRIBUTE_SPECIAL_COMMAND, CommandId::ROBOT_POSE_EULER);
+}
 
 void RemoteManager::SendStopCommand()
 {
-	SendSpecialCommand(CommandId::STOP_EXECUTE);
+	SendCommand(CmdAttributeType::CMD_ATTRIBUTE_SPECIAL_COMMAND,CommandId::STOP_EXECUTE);
 }
 
 
 void RemoteManager::SendEndCommand()
 {
-	SendNormalCommand(CommandId::END);
+	SendCommand(CmdAttributeType::CMD_ATTRIBUTE_NORMAL_COMMAND,CommandId::END);
+}
+
+void RemoteManager::SendCommandToGetPosition()
+{
+	SendCommand(CMD_ATTRIBUTE_SPECIAL_COMMAND, CommandId::ROBOT_POSITION);
 }
 
 RemoteManager::RemoteManager()
@@ -51,31 +71,31 @@ RemoteManager::~RemoteManager()
 {
 
 }
-
-void RemoteManager::SendNormalCommand(int commandId)
-{
-	tTeachCmdAttribute attribute;
-	attribute.m_type = CmdAttributeType::CMD_ATTRIBUTE_NORMAL_COMMAND;
-	attribute.m_length = 1 + sizeof(tTeachCmdAttribute);
-	attribute.m_ID = commandId;
-
-	DataStream result;
-	result << attribute;
-	result.Seek(0);
-
-	SendCommand(result);
-}
-
-void RemoteManager::SendSpecialCommand(int commandId)
-{
-	tTeachCmdAttribute attribute;
-	attribute.m_type = CmdAttributeType::CMD_ATTRIBUTE_SPECIAL_COMMAND;
-	attribute.m_length = 1 + sizeof(tTeachCmdAttribute);
-	attribute.m_ID = commandId;
-
-	DataStream result;
-	result << attribute;
-	result.Seek(0);
-
-	SendCommand(result);
-}
+//
+//void RemoteManager::SendNormalCommand(int commandId)
+//{
+//	tTeachCmdAttribute attribute;
+//	attribute.m_type = CmdAttributeType::CMD_ATTRIBUTE_NORMAL_COMMAND;
+//	attribute.m_length = 1 + sizeof(tTeachCmdAttribute);
+//	attribute.m_ID = commandId;
+//
+//	DataStream result;
+//	result << attribute;
+//	result.Seek(0);
+//
+//	SendCommand(result);
+//}
+//
+//void RemoteManager::SendSpecialCommand(int commandId)
+//{
+//	tTeachCmdAttribute attribute;
+//	attribute.m_type = CmdAttributeType::CMD_ATTRIBUTE_SPECIAL_COMMAND;
+//	attribute.m_length = 1 + sizeof(tTeachCmdAttribute);
+//	attribute.m_ID = commandId;
+//
+//	DataStream result;
+//	result << attribute;
+//	result.Seek(0);
+//
+//	SendCommand(result);
+//}

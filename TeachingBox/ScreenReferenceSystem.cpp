@@ -252,7 +252,7 @@ void ScreenReferenceSystem::OnAddButtonClicked()
 
 void ScreenReferenceSystem::OnEditButtonClicked()
 {
-	(new DialogTeachReferenceSystem(GetVariate(),this))->show();
+	(new DialogTeachReferenceSystem(GetVariate(),this,this))->show();
 }
 
 void ScreenReferenceSystem::OnDeleteButtonClicked()
@@ -286,4 +286,14 @@ void ScreenReferenceSystem::OnRefSysChanged()
 		auto value = QString::number(variateValue.offset[i]);
 		m_ltOffsetValues[i]->setText(value);
 	}
+}
+
+void ScreenReferenceSystem::OnReceive(const tPoseEuler& poseEuler)
+{
+	m_ltOffsetValues[0]->setText(QString::number(poseEuler.m_PositionCartesian.m_X));
+	m_ltOffsetValues[1]->setText(QString::number(poseEuler.m_PositionCartesian.m_Y));
+	m_ltOffsetValues[2]->setText(QString::number(poseEuler.m_PositionCartesian.m_Z));
+	m_ltOffsetValues[3]->setText(QString::number(poseEuler.m_PostureEuler.m_A));
+	m_ltOffsetValues[4]->setText(QString::number(poseEuler.m_PostureEuler.m_B));
+	m_ltOffsetValues[5]->setText(QString::number(poseEuler.m_PostureEuler.m_C));
 }

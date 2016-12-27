@@ -17,7 +17,6 @@
 //    <version>     1.0 
 //    <desc>        build this moudle     
 *************************************************/
-
 #include <list>
 #include "DataStruct.h"
 
@@ -33,6 +32,7 @@ public:
 
 public:
 	void OnReseivePosition(const tAxesAllPositions& position);
+	void OnReseivePoseEuler(const tPoseEuler& pose);
 
 private:
 	RemoteFeedbackController()=default;
