@@ -24,9 +24,11 @@ class MacroInfo
 public:
 	MacroInfo(const QString& name, int id,const QStringList& parameterTypes,const QString& category,const QString& type,const QString& text);
 	
+	int GetId() const;
 	QString GetText() const;
 	QString GetName() const;
 	QStringList GetParameterTypes() const;
+
 private:
 	QString m_category{};
 	QString m_type{};

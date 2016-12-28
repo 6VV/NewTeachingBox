@@ -6,6 +6,7 @@ const QMap<int, QString> TInterpreterException::Exception_TEXT
 {
 	{ UNKNOWN_TOKEN, "unknown token" },
 	{ WRONG_GRAMMAR, "wrong grammar" },
+	{ WRONG_PARAMETER, "wrong parameter" },
 	{ NOT_FIND_RIGHT_BRACKET, "not find right bracket" },
 	{ NEGATION_SHOULD_WITH_BOOL, "\"!\" should with bool" },
 	{ NEGATIVE_SHOULD_WITH_INT_OR_DOUBLE, "\"-\" should with integer or double" },

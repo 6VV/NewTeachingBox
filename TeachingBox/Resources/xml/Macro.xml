@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Root>
   <!--Parameter类型包括：Position,Dynamic,Overlap,Integer,Double,Bool,String,SysRef,ToolRef-->
+  <!--请务必保证此文件内容的正确性，程序不对此文件正确性进行检查，若出现错误，则可能导致意料之外的情况-->
   <Category name="MOVEMENT">
     <Type name="MOVEMENT">
       <Macro name = "MOVL" id="2000">
@@ -95,16 +96,6 @@
       <Macro name="SPOT_ON"></Macro>
       <Macro name="SPOT_OFF"></Macro>
       <Macro name="SET_SPOT"></Macro>
-    </Type>
-  </Category>
-  <Category name="TEST">
-    <Type name="TEST">
-      <Macro name = "TEST" id="10000">
-        <Parameter>position</Parameter>
-        <Parameter>int</Parameter>
-        <Parameter>double</Parameter>
-        <Text>TEST *,*,*</Text>
-      </Macro>
     </Type>
   </Category>
 </Root>

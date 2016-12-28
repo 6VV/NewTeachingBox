@@ -248,6 +248,7 @@
     <ClCompile Include="RemoteFeedbackController.cpp" />
     <ClCompile Include="RemoteManager.cpp" />
     <ClCompile Include="RemoteParser.cpp" />
+    <ClCompile Include="Resources\xml\TAstNodeMacroCommon.cpp" />
     <ClCompile Include="ScreenCoordinate.cpp" />
     <ClCompile Include="ScreenProgram.cpp" />
     <ClCompile Include="ScreenProject.cpp" />
@@ -639,6 +640,7 @@
     <ClInclude Include="PositionValueTreeWidgetItem.h" />
     <ClInclude Include="RemoteAdapterFactory.h" />
     <ClInclude Include="RemoteFeedbackController.h" />
+    <ClInclude Include="Resources\xml\TAstNodeMacroCommon.h" />
     <ClInclude Include="StringValue.h" />
     <ClInclude Include="StringValueTreeWidgetItem.h" />
     <CustomBuild Include="TreeWidgetItemWithSymbol.h">

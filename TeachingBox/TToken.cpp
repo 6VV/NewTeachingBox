@@ -7,7 +7,7 @@
 //}
 
 
-TToken::TToken(const TokenType type, int lineNumber, const QString& name/*=""*/)
+TToken::TToken(const int type, int lineNumber, const QString& name/*=""*/)
 	: m_type(type)
 	, m_lineNumber(lineNumber)
 	, m_name(name)
@@ -30,7 +30,7 @@ QString TToken::Name() const
 	return m_name;
 }
 
-const TToken::TokenType TToken::Type() const
+const int TToken::Type() const
 {
 	return m_type;
 }

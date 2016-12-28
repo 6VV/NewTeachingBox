@@ -24,9 +24,9 @@ public:
 
 private:
 	static const std::shared_ptr<TAstNode> GetNode(const std::shared_ptr<TToken>& token);
-	static const int GetPriority(const TOKEN_TYPE type);
-	static const bool IsLeftAssociativity(const TOKEN_TYPE type);
-	static const bool IsExistOperator(const TOKEN_TYPE type);
+	static const int GetPriority(const int type);
+	static const bool IsLeftAssociativity(const int type);
+	static const bool IsExistOperator(const int type);
 	static const std::shared_ptr<TAstNode> GetValue(TLexer* const lexer);
 	static const std::shared_ptr<TAstNode> GetShiftOperator(const std::shared_ptr<TAstNode>& leftValue,
 		const std::shared_ptr<TAstNode>& leftOper, TLexer* const lexer);
@@ -53,7 +53,7 @@ private:
 		bool isLeft = true;
 	};
 
-	static QHash<TOKEN_TYPE, OperatorProperty> m_operatorProperties;
+	static QHash<int, OperatorProperty> m_operatorProperties;
 	
 	class Inilization
 	{

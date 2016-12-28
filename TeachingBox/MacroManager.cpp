@@ -11,25 +11,31 @@ MacroManager* MacroManager::GetInstance()
 	return &manager;
 }
 
-std::shared_ptr<MacroManager::MacroMap> MacroManager::GetMacroMap()
+std::shared_ptr<MacroManager::MacroMap> MacroManager::GetMacroMap() const
 {
 	return m_macroMap;
 }
 
-std::shared_ptr<MacroManager::TypeMap> MacroManager::GetCategoryTypeMap()
+std::shared_ptr<MacroManager::TypeMap> MacroManager::GetCategoryTypeMap()const
 {
 	return m_categoryTypeMap;
 }
 
-std::shared_ptr<MacroManager::TypeMap> MacroManager::GetTypeMacroMap()
+std::shared_ptr<MacroManager::TypeMap> MacroManager::GetTypeMacroMap()const
 {
 	return m_typeMacroMap;
+}
+
+std::shared_ptr<std::set<int>> MacroManager::GetIdSet() const
+{
+	return m_idSet;
 }
 
 MacroManager::MacroManager()
 	:m_macroMap(std::make_shared<MacroMap>())
 	, m_categoryTypeMap(std::make_shared<TypeMap>())
 	, m_typeMacroMap(std::make_shared<TypeMap>())
+	, m_idSet(std::make_shared<std::set<int>>())
 {
 	InitMapFromXmlFile();
 }
@@ -99,6 +105,7 @@ void MacroManager::InitMapFromXmlFile()
 				}
 
 				(*m_macroMap)[macroName] = std::make_shared<MacroInfo>(macroName, id, parameterTypes, categoryName, typeName,text);
+				m_idSet->insert(id);
 			}
 		}
 	}

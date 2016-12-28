@@ -20,6 +20,11 @@ DataStream::~DataStream()
 	delete m_dataStream;
 }
 
+QDataStream* DataStream::GetOriginalDataStream() const
+{
+	return m_dataStream;
+}
+
 int DataStream::Length() const
 {
 	return m_dataStream->device()->size();
@@ -132,6 +137,15 @@ DataStream& DataStream::operator>>(tPostureEuler& value)
 	return *this;
 }
 
+DataStream& DataStream::operator>>(tMovCParam& value)
+{
+	*this >> value.m_AuxPoint;
+	*this >> value.m_EndPoint;
+	*this >> value.m_Dynamic;
+	*this >> value.m_Overlap;
+	return *this;
+}
+
 DataStream& DataStream::operator<<(int value)
 {
 	*m_dataStream << value;
@@ -197,7 +211,7 @@ DataStream& DataStream::operator<<(const tMovLParam& value)
 }
 
 
-DataStream& DataStream::operator<<(tPoseEuler& value)
+DataStream& DataStream::operator<<(const tPoseEuler& value)
 {
 	*this << value.m_PositionCartesian;
 	*this << value.m_PostureEuler;
@@ -205,7 +219,7 @@ DataStream& DataStream::operator<<(tPoseEuler& value)
 	return *this;
 }
 
-DataStream& DataStream::operator<<(tPositionCartesian& value)
+DataStream& DataStream::operator<<(const tPositionCartesian& value)
 {
 	*m_dataStream << value.m_X;
 	*m_dataStream << value.m_Y;
@@ -214,12 +228,21 @@ DataStream& DataStream::operator<<(tPositionCartesian& value)
 	return *this;
 }
 
-DataStream& DataStream::operator<<(tPostureEuler& value)
+DataStream& DataStream::operator<<(const tPostureEuler& value)
 {
 	*m_dataStream << value.m_A;
 	*m_dataStream << value.m_B;
 	*m_dataStream << value.m_C;
 
+	return *this;
+}
+
+DataStream& DataStream::operator<<(const tMovCParam& value)
+{
+	*this << value.m_AuxPoint;
+	*this << value.m_EndPoint;
+	*this << value.m_Dynamic;
+	*this << value.m_Overlap;
 	return *this;
 }
 

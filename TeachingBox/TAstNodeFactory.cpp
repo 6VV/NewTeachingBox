@@ -1,20 +1,19 @@
 ﻿#include "stdafx.h"
 #include "TAstNodeFactory.h"
-#include "TLexer.h"
-#include "TInterpreterException.h"
-#include "TAstNode.h"
-#include "TAstNodeOperator.h"
-#include "TAstNodeAssignSentence.h"
-#include "TAstNodeForSentence.h"
 #include "TAstNodeRoot.h"
-#include "TAstNodeIfSentence.h"
-#include "TAstNodeMovlSentence.h"
-#include "TAstNodeProgram.h"
 #include "ProjectManager.h"
 #include "Context.h"
-#include "TAstNodeGosubSentence.h"
+#include "TLexer.h"
+#include "TAstNodeProgram.h"
 #include "TToken.h"
-#include "TVariateContext.h"
+#include "TAstNodeAssignSentence.h"
+#include "TAstNodeForSentence.h"
+#include "TAstNodeIfSentence.h"
+#include "TAstNodeMovlSentence.h"
+#include "TAstNodeGosubSentence.h"
+#include "MacroManager.h"
+#include "Resources\xml\TAstNodeMacroCommon.h"
+
 
 const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QString& project)
 {
@@ -61,15 +60,20 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::GetNode(TLexer* const lexer)
 	{
 		return TAstNodeIfSentence::GetAstNode(lexer);
 	}break;
-	case TYPE::MACRO_MOVL:
-	{
-		return TAstNodeMovlSentence::GetAstNode(lexer);
-	}break;
+	//case TYPE::MACRO_MOVL:
+	//{
+	//	return TAstNodeMovlSentence::GetAstNode(lexer);
+	//}break;
 	case TYPE::STURCTURE_GOSUB:{
 		return TAstNodeGosubSentence::GetAstNode(lexer);
 	}break;
 	default:
 	{
+		auto iter=MacroManager::GetInstance()->GetIdSet()->find(token->Type());
+		if (iter != MacroManager::GetInstance()->GetIdSet()->end())
+		{
+			return TAstNodeMacroCommon::GetAstNode(lexer);
+		}
 		return nullptr;
 	}break;
 	}

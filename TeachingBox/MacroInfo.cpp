@@ -15,6 +15,11 @@ MacroInfo::MacroInfo(const QString& name, int id, const QStringList& parameterTy
 
 }
 
+int MacroInfo::GetId() const
+{
+	return m_id;
+}
+
 QString MacroInfo::GetText() const
 {
 	return m_text;

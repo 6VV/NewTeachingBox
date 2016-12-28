@@ -29,11 +29,13 @@ void TInterpreterThread::SlotExecuteNextCommand()
 {
 	auto nextNode = Context::interpreterContext.GetNextNode();
 
-	if (nextNode != nullptr && Context::interpreterContext.IsAllowExecute() && Context::interpreterContext.IsAllowSendCommandData())
+	while (nextNode != nullptr && Context::interpreterContext.IsAllowExecute() && Context::interpreterContext.IsAllowSendCommandData())
 	{
 		nextNode->Execute();
 		nextNode = Context::interpreterContext.GetNextNode();
 	}
+	Context::interpreterContext.IsAllowExecute(false);
+	Context::interpreterContext.IsAllowSendCommandData(true);
 }
 
 inline

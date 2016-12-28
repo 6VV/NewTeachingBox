@@ -79,24 +79,24 @@ public:
 		STURCTURE_END_SWITCH,
 		STURCTURE_GOSUB,
 
-		MACRO_MOVL = 600,
-		MACRO_MOVC,
+		//MACRO_MOVL = 600,
+		//MACRO_MOVC,
 	};
 
-	static const QHash<QString, Type> STRUCTURE_MAP;
-	static const QHash<QString, Type> MACRO_MAP;
-	static const QHash<QString, Type> VALUE_MAP;
+	//static const QHash<QString, Type> STRUCTURE_MAP;
+	//static const QHash<QString, Type> MACRO_MAP;
+	//static const QHash<QString, Type> VALUE_MAP;
 
 	static QHash<QString, Type> KEY_MAP;
 	
-private:
-	class Initialization
-	{
-	public:
-		Initialization();
-	};
-
-	static Initialization initialization;
+//private:
+//	class Initialization
+//	{
+//	public:
+//		Initialization();
+//	};
+//
+//	static Initialization initialization;
 };
 
 

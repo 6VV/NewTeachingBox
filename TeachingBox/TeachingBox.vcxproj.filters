@@ -946,6 +946,9 @@
     <ClCompile Include="MacroWidgetCommon.cpp">
       <Filter>Source Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
     </ClCompile>
+    <ClCompile Include="Resources\xml\TAstNodeMacroCommon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="teachingbox.qrc">
@@ -1377,6 +1380,9 @@
     </ClInclude>
     <ClInclude Include="MacroWidgetCommon.h">
       <Filter>Header Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\xml\TAstNodeMacroCommon.h">
+      <Filter>Header Files\Interpreter\TAstNode\Macro</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -30,10 +30,10 @@ private:
 public:
 	static MacroManager* GetInstance();
 
-	std::shared_ptr<MacroMap> GetMacroMap();
-	std::shared_ptr<TypeMap> GetCategoryTypeMap();
-	std::shared_ptr<TypeMap> GetTypeMacroMap();
-
+	std::shared_ptr<MacroMap> GetMacroMap() const;
+	std::shared_ptr<TypeMap> GetCategoryTypeMap() const;
+	std::shared_ptr<TypeMap> GetTypeMacroMap() const ;
+	std::shared_ptr<std::set<int>> GetIdSet() const;
 private:
 	MacroManager();
 	MacroManager(const MacroManager&) = delete;
@@ -44,6 +44,7 @@ private:
 	
 private:
 	std::shared_ptr<MacroMap> m_macroMap;
+	std::shared_ptr<std::set<int>> m_idSet;
 	std::shared_ptr<TypeMap> m_categoryTypeMap;
 	std::shared_ptr<TypeMap> m_typeMacroMap;
 

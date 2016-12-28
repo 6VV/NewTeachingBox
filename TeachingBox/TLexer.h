@@ -30,10 +30,11 @@ private:
 	const bool IsLetter(const char c) const;
 	const bool IsIdText(const char c) const;
 
-	void PushToken(const TYPE type);
+	void PushToken(const int type,const QString& name="");
 	const bool CheckPushDigit(const char c);
 	const bool CheckPushId(const char c);
 	const bool CheckPushKeyword(const QString& text);
+	bool CheckPushXmlKeyword(const QString& text);	/*判断是否是xml中记录关键字*/
 	const bool CheckPushReserveValue(const TYPE type);
 	const bool CheckPushOtherToken(const char);
 

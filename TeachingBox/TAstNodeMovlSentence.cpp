@@ -25,10 +25,7 @@ TAstNodeMovlSentence::~TAstNodeMovlSentence()
 const std::shared_ptr<TAstNode> TAstNodeMovlSentence::GetAstNode(TLexer* const lexer)
 {
 	auto token = lexer->GetToken();
-	if (token->Type()!=TOKEN_TYPE::MACRO_MOVL)
-	{
-		throw TInterpreterException(TInterpreterException::NOT_MOVL_SENTENCE, token->LineNumber());
-	}
+
 	std::shared_ptr<TAstNode> result(new TAstNodeMovlSentence(token));
 
 	result->AddChild(GetParameter(lexer));

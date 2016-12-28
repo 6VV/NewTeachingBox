@@ -24,6 +24,7 @@ struct tAxesAllPositions;
 struct tDynamicConstraint;
 struct tOverlapConstraint;
 struct tMovLParam;
+struct tMovCParam;
 struct tPoseEuler;
 struct tPositionCartesian;
 struct tPostureEuler;
@@ -34,6 +35,7 @@ public:
 	DataStream();
 	~DataStream();
 
+	QDataStream* GetOriginalDataStream() const;
 	int Length() const;	//字节流长度
 	int ReadRawBytes(char *c, unsigned int length) const;	//将数据写入到字节数组c
 	int WriteRawBytes(const char* c, unsigned int length);//从字节数组c中获取数据
@@ -46,6 +48,7 @@ public:
 	DataStream& operator>>(tDynamicConstraint& value);
 	DataStream& operator>>(tOverlapConstraint& value);
 	DataStream& operator>>(tMovLParam& value);
+	DataStream& operator>>(tMovCParam& value);
 	DataStream& operator>>(tPositionCartesian& value);
 	DataStream& operator>>(tPostureEuler& value);
 	DataStream& operator>>(tPoseEuler& value);
@@ -58,9 +61,10 @@ public:
 	DataStream& operator<<(const tDynamicConstraint& value);
 	DataStream& operator<<(const tOverlapConstraint& value);
 	DataStream& operator<<(const tMovLParam& value);
-	DataStream& operator<<(tPositionCartesian& value);
-	DataStream& operator<<(tPostureEuler& value);
-	DataStream& operator<<(tPoseEuler& value);
+	DataStream& operator<<(const tMovCParam& value);
+	DataStream& operator<<(const tPositionCartesian& value);
+	DataStream& operator<<(const tPostureEuler& value);
+	DataStream& operator<<(const tPoseEuler& value);
 
 
 private:

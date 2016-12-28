@@ -2,6 +2,8 @@
 #include "TLexer.h"
 #include "TTokenWithValue.h"
 #include "TInterpreterException.h"
+#include "MacroManager.h"
+#include "MacroInfo.h"
 
 
 TLexer::TLexer(const QString& text) :m_reader(text)
@@ -262,7 +264,7 @@ const bool TLexer::CheckPushKeyword(const QString& text)
 	auto iter = TTokenType::KEY_MAP.find(text);
 	if (iter == TTokenType::KEY_MAP.end())
 	{
-		return false;
+		return CheckPushXmlKeyword(text);
 	}
 
 	if (CheckPushReserveValue(iter.value()))
@@ -271,6 +273,18 @@ const bool TLexer::CheckPushKeyword(const QString& text)
 	}
 
 	PushToken(iter.value());
+	return true;
+}
+
+bool TLexer::CheckPushXmlKeyword(const QString& text)
+{
+	auto iter = MacroManager::GetInstance()->GetMacroMap()->find(text);
+	if (iter==MacroManager::GetInstance()->GetMacroMap()->end())
+	{
+		return false;
+	}
+
+	PushToken(iter->second->GetId(),iter->second->GetName());
 	return true;
 }
 
@@ -286,7 +300,7 @@ const bool TLexer::CheckPushReserveValue(const TYPE type)
 	default:return false;
 	}
 
-	m_tokens.push_back(std::shared_ptr<TToken>(new TTokenWithValue<bool>(type, m_reader.GetLineNumber(), value)));
+	m_tokens.push_back(std::shared_ptr<TToken>(new TTokenWithValue<bool>(TYPE::LITERAL_BOOL, m_reader.GetLineNumber(), value)));
 	return true;
 }
 
@@ -308,9 +322,9 @@ void TLexer::Parse()
 }
 
 inline
-void TLexer::PushToken(const TYPE type)
+void TLexer::PushToken(const int type, const QString& name)
 {
-	m_tokens.push_back(std::shared_ptr<TToken>(new TToken(type, m_reader.GetLineNumber())));
+	m_tokens.push_back(std::shared_ptr<TToken>(new TToken(type, m_reader.GetLineNumber(), name)));
 }
 
 inline

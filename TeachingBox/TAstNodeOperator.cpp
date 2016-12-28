@@ -175,17 +175,17 @@ const std::shared_ptr<TAstNode> TAstNodeOperator::GetNode(const std::shared_ptr<
 	return std::shared_ptr<TAstNode>(new TAstNodeOperator(token));
 }
 
-const int TAstNodeOperator::GetPriority(const TOKEN_TYPE type)
+const int TAstNodeOperator::GetPriority(const int type)
 {
 	return m_operatorProperties[type].priority;
 }
 
-const bool TAstNodeOperator::IsLeftAssociativity(const TOKEN_TYPE type)
+const bool TAstNodeOperator::IsLeftAssociativity(const int type)
 {
 	return m_operatorProperties[type].isLeft;
 }
 
-const bool TAstNodeOperator::IsExistOperator(const TOKEN_TYPE type)
+const bool TAstNodeOperator::IsExistOperator(const int type)
 {
 	if (m_operatorProperties.find(type) == m_operatorProperties.end())
 	{
@@ -429,7 +429,7 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnValue(const TAstNode* co
 	return ReturnNonTerminalValue(node);
 }
 
-QHash<TAstNodeOperator::TOKEN_TYPE, TAstNodeOperator::OperatorProperty> TAstNodeOperator::m_operatorProperties{};
+QHash<int, TAstNodeOperator::OperatorProperty> TAstNodeOperator::m_operatorProperties{};
 
 TAstNodeOperator::Inilization TAstNodeOperator::m_inilization{};
 
