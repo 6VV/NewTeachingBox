@@ -16,7 +16,6 @@
 //    <version>     1.0 
 //    <desc>        build this moudle     
 *************************************************/
-
 #include "ScreenMainParent.h"
 
 class CodeEditor;

@@ -5,7 +5,6 @@
 #include "ComboBoxInTree.h"
 #include "LineEditInTree.h"
 #include "DataStruct.h"
-#include "TOverlapWidget.h"
 
 
 inline

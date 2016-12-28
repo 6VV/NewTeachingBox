@@ -30,6 +30,8 @@ public:
 
 public:
 	TToolSys(const TSymbol& symbol, ValueType value = ValueType{});
+
+
 	~TToolSys();
 
 	virtual TVariate* Clone() const override;
@@ -38,16 +40,18 @@ public:
 	virtual std::vector<std::shared_ptr<VariateValue>> GetValues() const override;
 	virtual void ReadValueFromStream(QDataStream& dataStream) override;
 	virtual void SetValues(const std::vector<std::shared_ptr<VariateValue>>& values) override;
-	//virtual void WriteValueToStream(QDataStream& dataStream) const override;
 
 	ValueType GetValue() const;
 	void SetValue(ValueType value);
 
 private:
-	static TVariateRegister<TToolSys> m_register;
+	void MakeCommonValue(const ValueType& value);
+	ValueType MakeSpecialValue(const std::vector<std::shared_ptr<VariateValue>>& values) const;
 
 private:
-	ValueType m_value;
+	static TVariateRegister<TToolSys> m_register;
+
+	//ValueType m_value;
 };
 
 #endif

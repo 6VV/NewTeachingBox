@@ -124,31 +124,8 @@ void MacroWidgetParent::SlotOnButtonConfirmClicked()
 
 void MacroWidgetParent::SlotOnButtonCancleClicked()
 {
-	/*for (auto comboBox : m_parameterComboBoxes)
-	{
-		comboBox->ParentItem()->IsSave(false);
-	}*/
 	delete this;
 }
-
-//void MacroWidgetParent::SlotOnParameterChanged()
-//{
-//	auto comboBox = static_cast<ComboBoxWithParentItem*>(sender());
-//
-//	auto parameter = comboBox->currentText();
-//
-//	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(Context::projectContext.ProgramOpened(), parameter);
-//
-//	if (variate==nullptr)
-//	{
-//		return;
-//	}
-//
-//	auto parentItem = comboBox->ParentItem();
-//
-//	VariateManagerWithHorizonHeader::UpdateWidget(std::shared_ptr<TVariate>(variate->Clone()), m_treeWidget, parentItem);
-//	//variate->WriteContentIntoItem(parentItem, m_treeWidget);
-//}
 
 inline
 void MacroWidgetParent::OnConfirm()

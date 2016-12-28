@@ -191,6 +191,10 @@ void ScreenVariate::InitTreeWidget()
 		}
 	}
 	connect(m_treeWidget, &QTreeWidget::currentItemChanged, [this](QTreeWidgetItem *current, QTreeWidgetItem *){
+		if (current==nullptr)
+		{
+			return;
+		}
 		if (typeid(*current) == typeid(TreeWidgetItemWithSymbol))
 		{
 			if (dynamic_cast<TreeWidgetItemWithSymbol*>(current)->GetSymbol().GetTypeName() == TPosition::TypeName()){

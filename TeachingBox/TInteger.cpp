@@ -5,7 +5,6 @@
 #include "TSymbol.h"
 #include "TreeWidgetItemWithVariate.h"
 #include "LineEditWithRegExpAndKeyboard.h"
-#include "TIntegerWidget.h"
 
 
 inline

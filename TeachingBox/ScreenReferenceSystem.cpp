@@ -10,6 +10,7 @@
 #include <chrono>
 #include "QMessageBox"
 #include <assert.h>
+#include "CoordinateContext.h"
 
 
 ScreenReferenceSystem::ScreenReferenceSystem(QWidget* parent/*=nullptr*/)
@@ -30,22 +31,14 @@ ScreenReferenceSystem::ScreenReferenceSystem(QWidget* parent/*=nullptr*/)
 *************************************************/
 void ScreenReferenceSystem::showEvent(QShowEvent *)
 {
-
-	disconnect(m_comboBoxRefSys, &QComboBox::currentTextChanged, this, &ScreenReferenceSystem::OnRefSysChanged);	/*断开信号连接，以便更新数据*/
+	disconnect(m_comboBoxRefSys, &QComboBox::currentTextChanged, this, &ScreenReferenceSystem::OnRefSysChanged);	/*断开连接*/
 
 	auto variatesMap = std::move(TVariateManager::GetInstance()->GetVariatesMapScollUp(Context::projectContext.CurrentScope()));
 
-	//auto startTime = std::chrono::steady_clock::now();
-
 	/*考虑到不同作用域内可能存在同名坐标系，故在组合框中显示坐标系名时，同时显示作用域名*/
-	//m_variateWidgetProducer->UpdateComboBoxWithWholeName(TSymbol::SymbolType::TYPE_REF_SYS, variatesMap, m_comboBoxRefSys);
-	//m_variateWidgetProducer->UpdateComboBoxWithWholeName(TSymbol::SymbolType::TYPE_REF_SYS, variatesMap, m_comboBoxBaseSys);
-
 	m_variateWidgetProducer->UpdateComboBoxWithWholeName(TRefSys::TypeName(), variatesMap, m_comboBoxRefSys);
 	m_variateWidgetProducer->UpdateComboBoxWithWholeName(TRefSys::TypeName(), variatesMap, m_comboBoxBaseSys);
-
-	//auto endTime = std::chrono::steady_clock::now();
-	//qDebug() << "use time" << std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+	m_comboBoxBaseSys->setCurrentText(ProjectContext::ScopeSystem()+"."+CoordinateContext::WorldRefSysName());
 
 	OnRefSysChanged();	/*更新参考坐标系的基坐标系*/
 
@@ -263,11 +256,11 @@ void ScreenReferenceSystem::OnDeleteButtonClicked()
 void ScreenReferenceSystem::OnSaveButtonClicked()
 {
 	TRefSys::ValueType value;
-	value.baseSys = m_comboBoxBaseSys->currentText();
+	//value.baseSys = m_comboBoxBaseSys->currentText();
 
-	for (size_t i = 0; i < value.offset.size(); ++i)
+	for (size_t i = 0; i < value.size(); ++i)
 	{
-		value.offset[i] = m_ltOffsetValues[i]->text().toDouble();
+		value[i] = m_ltOffsetValues[i]->text().toDouble();
 	}
 
 	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetVariateScope(), GetVariateName());
@@ -278,12 +271,12 @@ void ScreenReferenceSystem::OnRefSysChanged()
 {
 	auto variate = GetVariate();
 	assert(variate != nullptr);
-	m_comboBoxBaseSys->setCurrentText(variate->GetValue().baseSys);	/*设置基坐标系*/
+	//m_comboBoxBaseSys->setCurrentText(variate->GetValue().baseSys);	/*设置基坐标系*/
 
 	auto variateValue = variate->GetValue();
-	for (size_t i = 0; i <variateValue.offset.size(); ++i)
+	for (size_t i = 0; i <variateValue.size(); ++i)
 	{
-		auto value = QString::number(variateValue.offset[i]);
+		auto value = QString::number(variateValue[i]);
 		m_ltOffsetValues[i]->setText(value);
 	}
 }

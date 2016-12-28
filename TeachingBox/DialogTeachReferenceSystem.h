@@ -68,7 +68,6 @@ private:
 
 	void UpdatePoseEuler(const tPoseEuler& point);
 
-
 private:
 /*************************************************
 //  Copyright (C), 2015-2016, CS&S. Co., Ltd.

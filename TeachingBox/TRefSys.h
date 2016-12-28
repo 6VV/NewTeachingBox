@@ -22,7 +22,6 @@
 //    <version>     1.0 
 //    <desc>        build this moudle     
 *************************************************/
-
 #include <array>
 #include "TComplex.h"
 #include "TVariateRegister.h"
@@ -30,18 +29,19 @@
 class TRefSys:public TComplex
 {
 public:
-	typedef QString BaseSysType;	/*基坐标系相关信息，分别为坐标系名及作用域*/
-	typedef std::array<double, 6> OffsetType;	/*参考坐标系相对于基坐标系的偏移及姿态*/
-	typedef struct  
-	{
-		BaseSysType baseSys;
-		OffsetType offset;
-	} ValueType;
+	//typedef QString BaseSysType;	/*基坐标系相关信息，分别为坐标系名及作用域*/
+	//typedef std::array<double, 6> OffsetType;	/*参考坐标系相对于基坐标系的偏移及姿态*/
+	//typedef struct  
+	//{
+	//	BaseSysType baseSys;
+	//	OffsetType offset;
+	//} ValueType;
+	typedef std::array<double, 6> ValueType;
 
 	static QString TypeName();
 
 public:
-	TRefSys(const TSymbol& symbol, ValueType value = ValueType{ "World", {} });
+	TRefSys(const TSymbol& symbol, ValueType value = ValueType{});
 	~TRefSys();
 
 	virtual TVariate* Clone() const override;
@@ -50,7 +50,6 @@ public:
 	virtual QStringList GetValueNames() const override;
 	virtual void ReadValueFromStream(QDataStream& dataStream) override;
 	virtual void SetValues(const std::vector<std::shared_ptr<VariateValue>>& values) override;
-	//virtual void WriteValueToStream(QDataStream& dataStream) const override;
 
 	ValueType GetValue() const;
 	void SetValue(ValueType value);

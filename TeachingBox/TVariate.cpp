@@ -2,7 +2,6 @@
 #include "TVariate.h"
 #include "TVariateManager.h"
 #include "TreeWidgetItemWithVariate.h"
-#include "TVariateWidget.h"
 #include <assert.h>
 
 

@@ -89,13 +89,6 @@ void TVariateManager::LoadInitDataFromDatabase()
 }
 
 
-//void TVariateManager::UpdateVariate(const QString& scope, const QString& name, std::shared_ptr<TVariate> newVariate)
-//{
-//	UpdateInMapScollUp(newVariate);
-//	UpdateInDatabase(scope, name, newVariate);
-//}
-
-
 void TVariateManager::UpdateVariate(std::shared_ptr<TVariate> newVariate)
 {
 	UpdateInMapScollUp(newVariate);

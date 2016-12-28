@@ -1,7 +1,6 @@
 ﻿#include "stdafx.h"
 #include "TRefSys.h"
 #include <assert.h>
-#include "TRefSysWidget.h"
 #include "StringValue.h"
 #include "DoubleValue.h"
 
@@ -38,21 +37,19 @@ TRefSys::ValueType TRefSys::GetValue() const
 
 void TRefSys::SetValue(ValueType value)
 {
-	m_value.baseSys = value.baseSys;
-	m_value.offset = value.offset;
+	m_value = value;
 }
 
 
 QStringList TRefSys::GetValueNames() const
 {
-	return{ "BaseSys", "a", "b", "c", "x", "y", "z" };
+	return{ "a", "b", "c", "x", "y", "z" };
 }
 
 std::vector<std::shared_ptr<VariateValue>> TRefSys::GetValues() const 
 {
 	std::vector<std::shared_ptr<VariateValue>> result;
-	result.push_back(std::make_shared<StringValue>(m_value.baseSys));
-	for (auto value:m_value.offset)
+	for (auto value:m_value)
 	{
 		result.push_back(std::make_shared<DoubleValue>(value));
 	}
@@ -62,29 +59,17 @@ std::vector<std::shared_ptr<VariateValue>> TRefSys::GetValues() const
 
 void TRefSys::SetValues(const std::vector<std::shared_ptr<VariateValue>>& values)
 {
-	m_value.baseSys =*std::dynamic_pointer_cast<StringValue>(values[0]);
+	//m_value.baseSys =*std::dynamic_pointer_cast<StringValue>(values[0]);
 
-	for (size_t i = 0; i < m_value.offset.size(); ++i)
+	for (size_t i = 0; i < m_value.size(); ++i)
 	{
-		m_value.offset[i] = *std::dynamic_pointer_cast<DoubleValue>(values[i+1]);
+		m_value[i] = *std::dynamic_pointer_cast<DoubleValue>(values[i]);
 	}
 }
 
-//void TRefSys::WriteValueToStream(QDataStream& dataStream) const
-//{
-//	dataStream << m_value.baseSys;
-//
-//	for (const auto& value: m_value.offset)
-//	{
-//		dataStream << value;
-//	}
-//}
-
 void TRefSys::ReadValueFromStream(QDataStream& dataStream)
 {
-	dataStream >> m_value.baseSys;
-
-	for (auto& value : m_value.offset)
+	for (auto& value : m_value)
 	{
 		dataStream >> value;
 	}

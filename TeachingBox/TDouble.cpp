@@ -3,7 +3,6 @@
 #include "TreeWidgetItemWithVariate.h"
 #include "RegExp.h"
 #include "LineEditWithRegExpAndKeyboard.h"
-#include "TDoubleWidget.h"
 
 
 inline

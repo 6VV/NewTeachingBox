@@ -107,11 +107,6 @@ void TAstNodeMovlSentence::SendMovlData() const
 	dataStream.Seek(0);
 
 	RemoteManager::GetInstance()->SendCommand(dataStream);
-
-	//char data[sizeof(tMovLParam)];
-	//*(tMovLParam*)data = GetMovlParameter();
-	//RemoteManager::GetInstance()->SendMovlCommand(data, sizeof(tMovLParam), m_token->LineNumber(),
-	//	dynamic_cast<const TAstNodeProgram*>(GetProgramNode())->GetId());
 }
 
 tMovLParam TAstNodeMovlSentence::GetMovlParameter() const

@@ -7,6 +7,8 @@
 #include "Macro.h"
 #include "WarningManager.h"
 #include "CodeEditor.h"
+#include "MacroManager.h"
+#include "MacroInfo.h"
 
 
 
@@ -35,12 +37,21 @@ void DialogNewMacro::SlotOnButtonConfirmClicked()
 
 	QString macro = m_macroWidget->currentItem()->text();
 
-	if (Macro::TEXT_MAP.find(macro)==Macro::TEXT_MAP.end())
+	auto map = MacroManager::GetInstance()->GetMacroMap();
+	if (map->find(macro) == map->end())
 	{
 		WarningManager::Warning(this, tr("Not Realize"));
 		return;
 	}
-	CodeEditor::GetInstance()->InsertTextBeforeLine(Macro::TEXT_MAP.at(macro));
+	CodeEditor::GetInstance()->InsertTextBeforeLine(map->at(macro)->GetText());
+
+	//TODO 切换
+	/*if (Macro::TEXT_MAP.find(macro)==Macro::TEXT_MAP.end())
+	{
+	WarningManager::Warning(this, tr("Not Realize"));
+	return;
+	}
+	CodeEditor::GetInstance()->InsertTextBeforeLine(Macro::TEXT_MAP.at(macro));*/
 
 	delete this;
 }
@@ -59,11 +70,23 @@ void DialogNewMacro::SlotOnTreeItemClicked(QTreeWidgetItem* item)
 
 	m_macroWidget->clear();
 	QString type = item->text(0);
-	auto macros = Macro::MACRO_MAP.find(type)->second;
+
+	auto iter = MacroManager::GetInstance()->GetTypeMacroMap()->find(type);
+	if (iter == MacroManager::GetInstance()->GetTypeMacroMap()->end())
+	{
+		return;
+	}
+	auto macros = iter->second;
 	for (auto macro : macros)
 	{
 		m_macroWidget->addItem(macro);
 	}
+	//TODO 切换
+	/*auto macros = Macro::MACRO_MAP.find(type)->second;
+	for (auto macro : macros)
+	{
+	m_macroWidget->addItem(macro);
+	}*/
 }
 
 void DialogNewMacro::UpdateText()
@@ -77,18 +100,29 @@ void DialogNewMacro::UpdateText()
 
 QWidget* DialogNewMacro::GetCategoryWidget()
 {
-	for (auto category: Macro::CATEGORYS)
+	//TODO 切换
+	//for (auto& iter : Macro::TYPE_MAP)
+	//{
+	//	QTreeWidgetItem* categoryItem = new QTreeWidgetItem(m_categoryTree, QStringList{ iter.first });
+	//	m_categoryTree->addTopLevelItem(categoryItem);
+
+	//	auto types = iter.second;
+	//	for (auto type : types)
+	//	{
+	//		categoryItem->addChild(new QTreeWidgetItem(QStringList{ type }));
+	//	}
+	//}
+	for (auto& iter : *MacroManager::GetInstance()->GetCategoryTypeMap())
 	{
-		QTreeWidgetItem* categoryItem = new QTreeWidgetItem(m_categoryTree, QStringList{ category });
+		QTreeWidgetItem* categoryItem = new QTreeWidgetItem(m_categoryTree, QStringList{ iter.first });
 		m_categoryTree->addTopLevelItem(categoryItem);
 
-		auto types = Macro::TYPE_MAP.find(category)->second;
+		auto types = iter.second;
 		for (auto type : types)
 		{
 			categoryItem->addChild(new QTreeWidgetItem(QStringList{ type }));
 		}
 	}
-
 	return m_categoryTree;
 }
 

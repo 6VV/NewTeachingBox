@@ -1,7 +1,6 @@
 ﻿#include "stdafx.h"
 #include "TString.h"
 #include "TreeWidgetItemWithVariate.h"
-#include "TStringWidget.h"
 
 
 inline

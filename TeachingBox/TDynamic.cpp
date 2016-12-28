@@ -3,7 +3,6 @@
 #include "TreeWidgetItemWithVariate.h"
 #include "RegExp.h"
 #include "LineEditInTree.h"
-#include "TDynamicWidget.h"
 
 
 inline
