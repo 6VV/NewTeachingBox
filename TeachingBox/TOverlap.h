@@ -16,7 +16,6 @@ public:
 public:
 	TOverlap(const TSymbol& symbol, ValueType value = ValueType{});
 	TOverlap(const TOverlap& variate);
-	//TOverlap(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
 	virtual void WriteValueToStream(QDataStream& dataStream) const override;

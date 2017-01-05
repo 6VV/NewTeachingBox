@@ -115,7 +115,12 @@ void TAstNodeMacroCommon::SendData() const
 	auto currentChild = m_firstChild;
 	while (currentChild)
 	{
-		TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), currentChild->GetToken()->Name())->WriteValueToStream(*dataStream.GetOriginalDataStream());
+		auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), currentChild->GetToken()->Name());
+		if (!variate)
+		{
+			break;
+		}
+		variate->WriteValueToStream(*dataStream.GetOriginalDataStream());
 		currentChild = currentChild->GetSibling();
 	}
 	attribute.m_length = dataStream.Length();
@@ -124,4 +129,5 @@ void TAstNodeMacroCommon::SendData() const
 	dataStream.Seek(0);
 
 	RemoteManager::GetInstance()->SendCommand(dataStream);
+	Context::interpreterContext.IsAllowSendCommandData(false);
 }

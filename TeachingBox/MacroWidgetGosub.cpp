@@ -2,6 +2,7 @@
 #include "MacroWidgetGosub.h"
 #include "QTreeWidget"
 #include "CodeEditor.h"
+#include "CodeEditorManager.h"
 
 
 
@@ -53,6 +54,6 @@ QString MacroWidgetGosub::MacroName()
 
 void MacroWidgetGosub::SlotOnButtonConfirmClicked()
 {
-	CodeEditor::GetInstance()->UpdateCurrentLine(MacroName()+" "+m_programComboBox->currentText());
+	CodeEditorManager::GetInstance()->UpdateCurrentLine(MacroName() + " " + m_programComboBox->currentText());
 	delete this;
 }

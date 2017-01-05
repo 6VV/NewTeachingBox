@@ -22,3 +22,8 @@ void StringValue::ReadFromDataStream(QDataStream& dataStream)
 {
 	dataStream >> m_value;
 }
+
+std::shared_ptr<VariateValue> StringValue::Clone() const
+{
+	return std::make_shared<StringValue>(m_value);
+}

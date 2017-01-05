@@ -32,6 +32,8 @@ public:
 
 	virtual void ReadFromDataStream(QDataStream& dataStream) override;
 
+	virtual std::shared_ptr<VariateValue> Clone() const override;
+
 private:
 	ValueType m_value;
 };

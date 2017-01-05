@@ -5,6 +5,26 @@
 #include "DoubleValue.h"
 
 
+void TRefSys::MakeCommonValue(const ValueType& value)
+{
+	m_commonValues.clear();
+	for (auto v : value)
+	{
+		m_commonValues.push_back(std::make_shared<DoubleValue>(v));
+	}
+}
+
+TRefSys::ValueType TRefSys::GetSpecialValue() const
+{
+	ValueType result{};
+	for (size_t i = 0; i < m_commonValues.size(); ++i)
+	{
+		result[i] = *std::dynamic_pointer_cast<DoubleValue>(m_commonValues[i]);
+	}
+
+	return result;
+}
+
 TVariateRegister<TRefSys> TRefSys::m_register(TypeName());
 
 inline
@@ -16,8 +36,9 @@ QString TRefSys::TypeName()
 
 TRefSys::TRefSys(const TSymbol& symbol, ValueType value )
 	:TComplex(TSymbol{symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX,TypeName()})
-	, m_value(value)
 {
+	MakeCommonValue(value);
+	m_valueNames = { "a", "b", "c", "x", "y", "z" };
 }
 
 TRefSys::~TRefSys()
@@ -32,46 +53,17 @@ TVariate* TRefSys::Clone() const
 
 TRefSys::ValueType TRefSys::GetValue() const
 {
-	return m_value;
+	return GetSpecialValue();
 }
 
 void TRefSys::SetValue(ValueType value)
 {
-	m_value = value;
+	MakeCommonValue(value);
 }
 
 
-QStringList TRefSys::GetValueNames() const
-{
-	return{ "a", "b", "c", "x", "y", "z" };
-}
+//QStringList TRefSys::GetValueNames() const
+//{
+//	return{ "a", "b", "c", "x", "y", "z" };
+//}
 
-std::vector<std::shared_ptr<VariateValue>> TRefSys::GetValues() const 
-{
-	std::vector<std::shared_ptr<VariateValue>> result;
-	for (auto value:m_value)
-	{
-		result.push_back(std::make_shared<DoubleValue>(value));
-	}
-
-	return std::move(result);
-}
-
-void TRefSys::SetValues(const std::vector<std::shared_ptr<VariateValue>>& values)
-{
-	//m_value.baseSys =*std::dynamic_pointer_cast<StringValue>(values[0]);
-
-	for (size_t i = 0; i < m_value.size(); ++i)
-	{
-		m_value[i] = *std::dynamic_pointer_cast<DoubleValue>(values[i]);
-	}
-}
-
-void TRefSys::ReadValueFromStream(QDataStream& dataStream)
-{
-	for (auto& value : m_value)
-	{
-		dataStream >> value;
-	}
-
-}

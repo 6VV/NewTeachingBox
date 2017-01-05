@@ -9,7 +9,6 @@
 #include "TAstNodeAssignSentence.h"
 #include "TAstNodeForSentence.h"
 #include "TAstNodeIfSentence.h"
-#include "TAstNodeMovlSentence.h"
 #include "TAstNodeGosubSentence.h"
 #include "MacroManager.h"
 #include "Resources\xml\TAstNodeMacroCommon.h"
@@ -60,10 +59,6 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::GetNode(TLexer* const lexer)
 	{
 		return TAstNodeIfSentence::GetAstNode(lexer);
 	}break;
-	//case TYPE::MACRO_MOVL:
-	//{
-	//	return TAstNodeMovlSentence::GetAstNode(lexer);
-	//}break;
 	case TYPE::STURCTURE_GOSUB:{
 		return TAstNodeGosubSentence::GetAstNode(lexer);
 	}break;

@@ -14,6 +14,7 @@
 #include "TcpManager.h"
 #include "CodeEditor.h"
 #include "DynamicController.h"
+#include "CodeEditorManager.h"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -318,7 +319,7 @@ void TeachingBox::SlotOnStartButtonPressed()
 		return;
 	}
 	try{
-		CodeEditor::GetInstance()->ClearWrongLine();
+		CodeEditorManager::GetInstance()->ClearWrongLine();
 
 		switch (Context::interpreterContext.GetExecuteMode())
 		{
@@ -336,7 +337,7 @@ void TeachingBox::SlotOnStartButtonPressed()
 		}
 	}
 	catch (TInterpreterException& e){
-		CodeEditor::GetInstance()->HighlightWrongLine(Context::projectContext.ProgramLoading(), e.LineNumber());
+		CodeEditorManager::GetInstance()->HighlightWrongLine(Context::projectContext.ProgramLoading(), e.LineNumber());
 		WarningManager::Warning(this, e.Info());
 		return;
 	}

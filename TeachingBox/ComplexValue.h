@@ -32,13 +32,9 @@
 
 		virtual void WriteToDataStream(QDataStream& dataStream) const override;
 
-		//virtual void WriteToTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column)  const override;
-
 		virtual void ReadFromDataStream(QDataStream& dataStream) override;
 
-		//virtual void ReadFromTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column) override;
-
-		//virtual void UpdateTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column) const override;
+		virtual std::shared_ptr<VariateValue> Clone() const override;
 
 	private:
 		ValueType m_value;

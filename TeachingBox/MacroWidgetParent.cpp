@@ -5,6 +5,7 @@
 #include "WarningManager.h"
 #include "CodeEditor.h"
 #include "VariateWidgetProducer.h"
+#include "CodeEditorManager.h"
 
 
 MacroWidgetParent::MacroWidgetParent(const QString& macroText, QWidget* parent /*= nullptr*/)
@@ -137,6 +138,6 @@ void MacroWidgetParent::OnConfirm()
 		text += m_parameterComboBoxes.at(i)->currentText() + ",";
 	}
 
-	CodeEditor::GetInstance()->UpdateCurrentLine(text.left(text.size() - 1));
+	CodeEditorManager::GetInstance()->UpdateCurrentLine(text.left(text.size() - 1));
 }
 

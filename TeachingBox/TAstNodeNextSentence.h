@@ -12,6 +12,8 @@ public:
 	~TAstNodeNextSentence();
 
 	static const std::shared_ptr<TAstNode> GetAstNode(TLexer* const lexer);
+	static const std::shared_ptr<TAstNode> GetAstNode(std::shared_ptr<TToken> token);
+
 
 	virtual ValueReturned Execute() const override;
 

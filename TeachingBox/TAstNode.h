@@ -43,6 +43,8 @@ protected:
 
 	static void CheckLineBreak(TLexer* const lexer);
 	static void CheckEofEol(TLexer* const lexer);
+	static void CheckLeftBrace(TLexer* const lexer);
+	static void CheckRightBrace(TLexer* const lexer);
 
 	static bool IsEofOrEol(const int type);
 

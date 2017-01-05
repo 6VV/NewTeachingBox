@@ -109,6 +109,22 @@ void TAstNode::CheckEofEol(TLexer* const lexer)
 
 }
 
+void TAstNode::CheckLeftBrace(TLexer* const lexer)
+{
+	if (lexer->GetToken()->Type() != TOKEN_TYPE::OPERATOR_LEFT_BRACE)
+	{
+		throw TInterpreterException(TInterpreterException::MISS_LEFT_BRACE, lexer->GetToken()->LineNumber());
+	}
+}
+
+void TAstNode::CheckRightBrace(TLexer* const lexer)
+{
+	if (lexer->GetToken()->Type() != TOKEN_TYPE::OPERATOR_RIGHT_BRACE)
+	{
+		throw TInterpreterException(TInterpreterException::MISS_RIGHT_BRACE, lexer->GetToken()->LineNumber());
+	}
+}
+
 QString TAstNode::GetScope() const
 {
 	if (m_parentNode == nullptr || m_parentNode->GetParentNode() == nullptr)

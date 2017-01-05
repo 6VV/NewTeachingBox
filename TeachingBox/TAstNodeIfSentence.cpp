@@ -33,13 +33,19 @@ const std::shared_ptr<TAstNode> TAstNodeIfSentence::GetAstNode(TLexer* const lex
 	std::shared_ptr<TAstNode> result(new TAstNodeIfSentence(token));
 
 	result->AddChild(TAstNodeOperator::GetAstNode(lexer));
+
+	CheckLeftBrace(lexer);
 	CheckLineBreak(lexer);
 
 	AddThenChild(lexer, result);
 
 	AddContent(lexer, result);
 
-	result->AddChild(TAstNodeEndIfSentence::GetAstNode(lexer));
+	int line = lexer->PeekToken()->LineNumber();
+	CheckRightBrace(lexer);
+	CheckEofEol(lexer);
+
+	result->AddChild(TAstNodeEndIfSentence::GetAstNode(line));
 
 	return result;
 }
@@ -47,7 +53,7 @@ const std::shared_ptr<TAstNode> TAstNodeIfSentence::GetAstNode(TLexer* const lex
 void TAstNodeIfSentence::AddContent(TLexer* const lexer, std::shared_ptr<TAstNode> result)
 {
 	int type = 0;
-	while ((type = lexer->PeekToken()->Type()) != TOKEN_TYPE::STURCTURE_END_IF)
+	while ((type = lexer->PeekToken()->Type()) != TOKEN_TYPE::OPERATOR_RIGHT_BRACE)
 	{
 		switch (type)
 		{

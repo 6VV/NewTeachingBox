@@ -32,12 +32,19 @@ const std::shared_ptr<TAstNode> TAstNodeElseIfSentence::GetAstNode(TLexer* const
 
 	std::shared_ptr<TAstNode> result(new TAstNodeElseIfSentence(token));
 	result->AddChild(TAstNodeOperator::GetAstNode(lexer));
+
+	CheckLeftBrace(lexer);
 	CheckLineBreak(lexer);
 
 	AddSentenceNodes(lexer, result);
 
-	result->AddChild(std::shared_ptr<TAstNode>(new TAstNodeEndIfSentence(
-		std::shared_ptr<TToken>(new TToken(TOKEN_TYPE::STURCTURE_END_IF, result->GetEndChild()->GetToken()->LineNumber())))));
+	CheckRightBrace(lexer);
+	CheckEofEol(lexer);
+
+	result->AddChild(TAstNodeEndIfSentence::GetAstNode(result->GetEndChild()->GetToken()->LineNumber()));
+
+	//result->AddChild(std::shared_ptr<TAstNode>(new TAstNodeEndIfSentence(
+	//	std::shared_ptr<TToken>(new TToken(TOKEN_TYPE::STURCTURE_END_IF, result->GetEndChild()->GetToken()->LineNumber())))));
 
 	return result;
 }

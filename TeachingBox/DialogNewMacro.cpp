@@ -9,6 +9,7 @@
 #include "CodeEditor.h"
 #include "MacroManager.h"
 #include "MacroInfo.h"
+#include "CodeEditorManager.h"
 
 
 
@@ -43,7 +44,7 @@ void DialogNewMacro::SlotOnButtonConfirmClicked()
 		WarningManager::Warning(this, tr("Not Realize"));
 		return;
 	}
-	CodeEditor::GetInstance()->InsertTextBeforeLine(map->at(macro)->GetText());
+	CodeEditorManager::GetInstance()->InsertTextBeforeLine(map->at(macro)->GetText());
 
 	//TODO 切换
 	/*if (Macro::TEXT_MAP.find(macro)==Macro::TEXT_MAP.end())

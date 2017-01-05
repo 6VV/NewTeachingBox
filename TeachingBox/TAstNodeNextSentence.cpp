@@ -7,6 +7,7 @@
 #include "TVariateManager.h"
 #include "TAstNodeForSentence.h"
 #include "TVariate.h"
+#include <assert.h>
 
 
 TAstNodeNextSentence::TAstNodeNextSentence(const std::shared_ptr<TToken> token /*= nullptr*/) :TAstNode(token)
@@ -57,6 +58,13 @@ const std::shared_ptr<TAstNode> TAstNodeNextSentence::GetAstNode(TLexer* const l
 	CheckEofEol(lexer);
 
 	return result;
+}
+
+const std::shared_ptr<TAstNode> TAstNodeNextSentence::GetAstNode(std::shared_ptr<TToken> token)
+{
+	assert(token->Type() == TOKEN_TYPE::STRUCTURE_NEXT);
+
+	return std::make_shared<TAstNodeNextSentence>(token);
 }
 
 void TAstNodeNextSentence::ParseSemantic() const

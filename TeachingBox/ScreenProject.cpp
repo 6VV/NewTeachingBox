@@ -13,6 +13,7 @@
 #include "InterpreterManager.h"
 #include "TInterpreterException.h"
 #include "TVariateContext.h"
+#include "CodeEditorManager.h"
 
 
 ScreenProject::ScreenProject(QWidget* parent)
@@ -180,11 +181,11 @@ void ScreenProject::SlotOnButtonOpenClicked()
 		return;
 	}
 
-	auto codeEidtor = CodeEditor::GetInstance();
+	auto codeEidtor = CodeEditorManager::GetInstance();
 
 	if (!currentProgram.isEmpty())
 	{
-		m_projectManager->SaveFile(currentProgram, codeEidtor->toPlainText());
+		m_projectManager->SaveFile(currentProgram, codeEidtor->Text());
 	}
 
 	codeEidtor->HighlightPCLine(nextProgram, 1);

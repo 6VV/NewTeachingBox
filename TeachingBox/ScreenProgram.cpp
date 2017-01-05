@@ -7,12 +7,13 @@
 #include "DialogNewMacro.h"
 #include "Context.h"
 #include "MacroWidgetFactory.h"
+#include "CodeEditorManager.h"
 
 
 
 ScreenProgram::ScreenProgram(QWidget* parent)
 	:ScreenMainParent(parent)
-	, m_codeEditor(CodeEditor::GetInstance())
+	, m_codeEditor(CodeEditorManager::GetInstance())
 	, m_btnModify(new Button(this))
 	, m_btnMacro(new Button(this))
 	, m_btnNew(new Button(this))
@@ -28,14 +29,6 @@ ScreenProgram::ScreenProgram(QWidget* parent)
 	, m_btnDelete(new Button(this))
 	, m_btnUndo(new Button(this))
 	, m_btnRedo(new Button(this))
-
-	/*高级功能*/
-	, m_btnKeyboard(new Button(this))
-	, m_btnSubProgram(new Button(this))
-	, m_btnFormat(new Button(this))
-	, m_btnSearch(new Button(this))
-	, m_btnNote(new Button(this))
-	, m_btnInvalidate(new Button(this))
 {
 	Init();
 }
@@ -72,7 +65,7 @@ void ScreenProgram::SlotOnButtonEditClicked()
 
 void ScreenProgram::SlotOnButtonSetPCClicked()
 {
-	m_codeEditor->HighlightPCLine();
+	m_codeEditor->HighlightCurrentPCLine();
 }
 
 void ScreenProgram::Init()
@@ -109,8 +102,8 @@ QList<QPushButton*> ScreenProgram::GetButtonList()
 
 QLayout* ScreenProgram::GetMainLayout()
 {
-	QHBoxLayout* layout = new QHBoxLayout(this);
-	layout->addWidget(m_codeEditor);
+	auto layout = new QHBoxLayout(this);
+	layout->addWidget(m_codeEditor->GetWidget());
 
 	return layout;
 }
@@ -126,11 +119,11 @@ void ScreenProgram::UpdateText()
 
 	/*高级功能*/
 	m_btnKeyboard->setText(tr("Keyboard"));
-	m_btnSubProgram->setText(tr("SubProgram"));
+	//m_btnSubProgram->setText(tr("SubProgram"));
 	m_btnFormat->setText(tr("Format"));
 	m_btnSearch->setText(tr("Search"));
-	m_btnNote->setText(tr("Note"));
-	m_btnInvalidate->setText(tr("Invalidate"));
+	//m_btnNote->setText(tr("Note"));
+	//m_btnInvalidate->setText(tr("Invalidate"));
 
 	/*编辑功能*/
 	m_btnSelectAll->setText(tr("SelectAll"));
@@ -160,19 +153,38 @@ void ScreenProgram::InitEditGroup()
 	btnGroupEdit.append(m_btnRedo);
 
 	m_btnGroupEdit = new ButtonGroup(btnGroupEdit, m_btnEdit);
+
+	connect(m_btnSelectAll, &QPushButton::clicked, m_codeEditor, &CodeEditorManager::SelectAll);
+	connect(m_btnCopy, &QPushButton::clicked, m_codeEditor, &CodeEditorManager::Copy);
+	connect(m_btnCut, &QPushButton::clicked, m_codeEditor, &CodeEditorManager::Cut);
+	connect(m_btnPaste, &QPushButton::clicked, m_codeEditor, &CodeEditorManager::Paste);
+	connect(m_btnDelete, &QPushButton::clicked, m_codeEditor, &CodeEditorManager::Delete);
+	connect(m_btnUndo, &QPushButton::clicked, m_codeEditor, &CodeEditorManager::Undo);
+	connect(m_btnRedo, &QPushButton::clicked, m_codeEditor, &CodeEditorManager::Redo);
 }
 
+/*高级功能*/
 void ScreenProgram::InitAddvanceGroup()
 {
+	m_btnKeyboard=new Button(this);
+	m_btnFormat=new Button(this);
+	m_btnSearch=new Button(this);
+
 	QList<QPushButton*> btnGroupAddvance;
 	btnGroupAddvance.append(m_btnKeyboard);
-	btnGroupAddvance.append(m_btnSubProgram);
 	btnGroupAddvance.append(m_btnFormat);
 	btnGroupAddvance.append(m_btnSearch);
-	btnGroupAddvance.append(m_btnNote);
-	btnGroupAddvance.append(m_btnInvalidate);
 
 	m_btnGroupAddvance = new ButtonGroup(btnGroupAddvance, m_btnAddvance);
+
+	connect(m_btnFormat, &QPushButton::clicked, m_codeEditor, &CodeEditorManager::Format);
+	connect(m_btnSearch, &QPushButton::clicked, [this]{
+		bool ok;
+		QString text=QInputDialog::getText(this, tr("Search word"), tr("search:"), QLineEdit::Normal, "",&ok);
+		if (ok){
+			m_codeEditor->Search(text);
+		}
+	});
 }
 
 void ScreenProgram::showEvent(QShowEvent *e)

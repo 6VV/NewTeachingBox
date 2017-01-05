@@ -11,6 +11,7 @@
 #include <assert.h>
 #include "..\DataStream\DataStream.h"
 #include <xutility>
+#include "CodeEditorManager.h"
 
 
 RemoteParser::RemoteParser(QObject* parent/*=nullptr*/)
@@ -127,7 +128,7 @@ void RemoteParser::RefreshLineNumber(const tTeachCmdAttribute& attribute) const
 	}
 	int lineNumber = attribute.m_LineNumber;
 
-	CodeEditor::GetInstance()->HighlightPCLine(program, lineNumber);
+	CodeEditorManager::GetInstance()->HighlightPCLine(program, lineNumber);
 	//RemoteFeedbackController::GetInstance()->RefreshLineNumber(program, lineNumber);
 
 }

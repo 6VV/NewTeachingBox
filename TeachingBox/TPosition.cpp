@@ -3,6 +3,7 @@
 #include "TreeWidgetItemWithVariate.h"
 #include "RegExp.h"
 #include "LineEditInTree.h"
+#include "DoubleValue.h"
 
 
 inline
@@ -11,61 +12,70 @@ QString TPosition::TypeName()
 	return "Position";
 }
 
-//TPosition::TPosition(QDataStream& dataStream) : TVariate(dataStream)
+
+//TPosition::TPosition(const TPosition& variate)
+//	: TVariate(variate)
 //{
-//	ReadValueFromStream(dataStream);
+//	m_value = variate.m_value;
 //
 //}
-
-//TPosition::TPosition(const QString& scope, const QString& name, const tAxesAllPositions& value)
-//	:TVariate(scope, name, TSymbol::TYPE_POSITION)
-//{
-//	m_value = value;
-//
-//	Init();
-//}
-
-TPosition::TPosition(const TPosition& variate)
-	: TVariate(variate)
-{
-	m_value = variate.m_value;
-
-}
 
 TPosition::TPosition(const TSymbol& symbol, ValueType value)
-	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX ,TypeName()})
-	, m_value(value)
+	:TComplex(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX ,TypeName()})
+	//, m_value(value)
 {
+	MakeCommonValue(value);
 }
 
 const tAxesAllPositions TPosition::GetValue() const
 {
-	return m_value;
+	return GetSpecialValue();
 }
 
 void TPosition::SetValue(const tAxesAllPositions& value)
 {
-	m_value = value;
+	MakeCommonValue(value);
 }
 
-void TPosition::WriteValueToStream(QDataStream& dataStream)const
+void TPosition::MakeCommonValue(const ValueType& value)
 {
-	for (int i = 0; i < AXIS_SIZE;++i)
+	m_commonValues.clear();
+	for (auto v : value.m_AxisPosition)
 	{
-		dataStream << m_value.m_AxisPosition[i];
+		m_commonValues.push_back(std::make_shared<DoubleValue>(v));
 	}
 }
 
-void TPosition::ReadValueFromStream(QDataStream& dataStream)
+TPosition::ValueType TPosition::GetSpecialValue() const
 {
-	double value;
-
-	for (int i = 0; i < AXIS_SIZE; ++i)
+	ValueType result{};
+	for (size_t i = 0; i < m_commonValues.size(); ++i)
 	{
-		dataStream >> value;
-		m_value.m_AxisPosition[i] = value;
+		result.m_AxisPosition[i] = *std::dynamic_pointer_cast<DoubleValue>(m_commonValues[i]);
 	}
+
+	return result;
 }
+
+//
+//void TPosition::WriteValueToStream(QDataStream& dataStream)const
+//{
+//	for (int i = 0; i < AXIS_SIZE;++i)
+//	{
+//		dataStream << m_value.m_AxisPosition[i];
+//	}
+//}
+//
+//void TPosition::ReadValueFromStream(QDataStream& dataStream)
+//{
+//	double value;
+//
+//	for (int i = 0; i < AXIS_SIZE; ++i)
+//	{
+//		dataStream >> value;
+//		m_value.m_AxisPosition[i] = value;
+//	}
+//}
 
 
 TVariateRegister<TPosition> TPosition::m_register{ "Position" };

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Root>
-  <!--Parameter类型包括：Position,Dynamic,Overlap,Integer,Double,Bool,String,SysRef,ToolRef-->
+  <!--Parameter类型包括：Position,Dynamic,Overlap,Integer,Double,Bool,String,RefSys,ToolSys-->
   <!--请务必保证此文件内容的正确性，程序不对此文件正确性进行检查，若出现错误，则可能导致意料之外的情况-->
+  <!--需要发送指令码的宏命令（如MOVL、MOVC）id建议从1000开始，以便与其它命令（如IF、FOR）区别，id值不可相同-->
   <Category name="MOVEMENT">
     <Type name="MOVEMENT">
       <Macro name = "MOVL" id="2000">
@@ -69,6 +70,7 @@
     </Type>
     <Type name="OTHERS">
       <Macro name="SET_TOOLFRAME">
+        <Parameter>ToolSys</Parameter>
         <Text>SET_TOOLFRAME *</Text>
       </Macro>
       <Macro name="SET_USERFRAME">

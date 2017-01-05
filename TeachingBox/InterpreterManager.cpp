@@ -9,6 +9,7 @@
 #include "QThread"
 #include "CodeEditor.h"
 #include "ProjectManager.h"
+#include "CodeEditorManager.h"
 
 
 
@@ -82,7 +83,7 @@ void InterpreterManager::SaveFile()
 {
 	ProjectManager projectManager;
 
-	projectManager.SaveFile(Context::projectContext.ProgramOpened(), CodeEditor::GetInstance()->toPlainText());
+	projectManager.SaveFile(Context::projectContext.ProgramOpened(), CodeEditorManager::GetInstance()->Text());
 }
 
 TAstNode* InterpreterManager::GetProgramNode(const QString& program)

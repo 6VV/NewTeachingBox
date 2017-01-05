@@ -1,12 +1,12 @@
 ﻿#ifndef _TEACHING_BOX_TPOSITION_H_
 #define _TEACHING_BOX_TPOSITION_H_
 
-#include "TVariate.h"
 #include "QVector"
 #include "DataStruct.h"
 #include "TVariateRegister.h"
+#include "TComplex.h"
 
-class TPosition:public TVariate
+class TPosition:public TComplex
 {
 	Q_OBJECT
 
@@ -16,20 +16,18 @@ public:
 
 public:
 	TPosition(const TSymbol& symbol, ValueType value = ValueType{});
-	TPosition(const TPosition& variate);
-	//TPosition(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
-	virtual void WriteValueToStream(QDataStream& dataStream) const override;
-	virtual void ReadValueFromStream(QDataStream& dataStream) override;
 
 	const ValueType GetValue() const;
 
 	void SetValue(const ValueType& value);
 
 private:
-	ValueType m_value;
+	void MakeCommonValue(const ValueType& value);
+	ValueType GetSpecialValue() const;
 
+private:
 	static TVariateRegister<TPosition> m_register;
 };
 

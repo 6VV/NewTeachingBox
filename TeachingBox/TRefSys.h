@@ -46,17 +46,14 @@ public:
 
 	virtual TVariate* Clone() const override;
 
-	virtual std::vector<std::shared_ptr<VariateValue>> GetValues() const override;
-	virtual QStringList GetValueNames() const override;
-	virtual void ReadValueFromStream(QDataStream& dataStream) override;
-	virtual void SetValues(const std::vector<std::shared_ptr<VariateValue>>& values) override;
-
 	ValueType GetValue() const;
 	void SetValue(ValueType value);
 
 private:
-	ValueType m_value{};	/*位置偏移及姿态*/
+	void MakeCommonValue(const ValueType& value);
+	ValueType GetSpecialValue() const;
 
+private:
 	static TVariateRegister<TRefSys> m_register;
 };
 

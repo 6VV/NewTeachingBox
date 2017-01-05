@@ -32,6 +32,12 @@ const std::shared_ptr<TAstNode> TAstNodeEndIfSentence::GetAstNode(TLexer* const 
 	return std::shared_ptr<TAstNode>(new TAstNodeEndIfSentence(token));
 }
 
+const std::shared_ptr<TAstNode> TAstNodeEndIfSentence::GetAstNode(int lineNumber)
+{
+	return std::make_shared<TAstNodeEndIfSentence>(std::make_shared<TToken>(TOKEN_TYPE::STURCTURE_END_IF, lineNumber));
+
+}
+
 TAstNode::ValueReturned TAstNodeEndIfSentence::Execute() const
 {
 	Context::interpreterContext.SetNextNode(FindNextValidNode());

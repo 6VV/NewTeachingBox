@@ -54,7 +54,6 @@ namespace
 		CodeEditor *codeEditor;
 	};
 
-
 	struct LightLine
 	{
 		LightLine(int l,const QColor& c)
@@ -88,59 +87,29 @@ class CodeEditor : public QPlainTextEdit
 
 	Q_OBJECT
 
-	/*enum OperatorType
-	{
-		UPDATE_LINE,
-		DELETE_LINE,
-		INSERT_LINE,
-	};*/
 
 public:
-	static CodeEditor* GetInstance();
+	//static CodeEditor* GetInstance();
 
-private:
 	CodeEditor(QWidget *parent = 0);
-	CodeEditor(const CodeEditor&);
-	CodeEditor& operator=(const CodeEditor&);
-	~CodeEditor();
+	CodeEditor(const CodeEditor&)=delete;
+	CodeEditor& operator=(const CodeEditor&)=delete;
+	~CodeEditor()=default;
 
 public:
-	void ClearWrongLine();
-	QString CurrentLineText();
+	void ClearWrongLine() ;
+	QString CurrentLineText() ;
 
-	int GetPCLineNumber();	/*获取PC行号*/
-
-	//void ClearWrongLine();	/*清除错误行颜色*/
-
-	//void DealText();	/*处理文本*/
-	//void DeleteCurrentLine();	/*删除当前行*/
-
-	void HighlightPCLine(const QString& program, int lineNumber);
-	void HighlightPCLine();	/*高亮显示PC行*/
 	void HighlightPCLine(int lineNumber);
-
-	void UpdateTextFromProgram(const QString &program);
-
 	void HighlightWrongLine(const int lineNumber);	/*高亮显示错误行*/
-	void HighlightWrongLine(const QString& program,const int lineNumber);	/*高亮显示错误行*/
+	void HighlightCurrentPCLine() ;	/*高亮显示PC行*/
 
-	void InsertTextBeforeLine(const QString& text);	/*插入文本*/
-
-	void UpdateCurrentLine(const QString& text);
-
-	//void InsertTextBeforeLineUnsafely(const QString& strText);	/*插入文本（不进行语法检查）*/
-
-	//void SaveFile();	/*保存文件*/
-
-	//void UpdateLineText(const QString& strNewText);	/*更新文本*/
-
-public slots:
-	//void setPlainText(const QString &text);
+	void UpdateCurrentLine(const QString& text) ;
+	void InsertTextBeforeLine(const QString& text) ;	/*插入文本*/
 
 	/*重定义父类函数*/
 protected:
-	void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
-	void showEvent(QShowEvent *event)	Q_DECL_OVERRIDE;
+	void resizeEvent(QResizeEvent *event) override;
 
 	/*自定义槽函数*/
 protected slots:
@@ -149,9 +118,6 @@ protected slots:
 	void SlotUpdateLineNumberArea(const QRect &, int);	/*更新左侧区域*/
 
 private:
-	//void FormatText(const QString& text); /*格式化文本*/
-	//void FormatCurrentText();	/*格式化当前文本*/
-	//bool ParseText();		/*解析文本并生成树*/
 	void AddSelection(QList<QTextEdit::ExtraSelection>& selections, const LightLine lightLine);
 
 	int GetLineNumberAreaWidth();		/*返回左侧区域宽度*/
@@ -162,10 +128,6 @@ private:
 
 	void PaintLineNumberArea(QPaintEvent *event);	/*绘制左侧行号区域*/
 
-	//void _DeleteCurrentLine();
-	//void _InsertTextBeforeLine(const QString& text);
-
-	//void OperatorText(OperatorType operatorType, const QString& text = QString{});	/*操作文本*/
 private:
 	int m_textChangeTime = 0;
 	QWidget *m_lineNumberArea;

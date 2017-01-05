@@ -47,7 +47,6 @@ std::shared_ptr<TVariate> TVariateRegister<Type>::GetVariate(QDataStream& data)
 template<typename Type>
 TVariateRegister<Type>::TVariateRegister(const QString& name)
 {
-	//TVariateFactory::FunMapGetVariate()[name] = GetVariate;
 	TVariateFactory::FunMapCreateVariate()[name] = CreateVariate;
 }
 

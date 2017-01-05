@@ -91,11 +91,16 @@ const std::shared_ptr<TAstNode> TAstNodeForSentence::GetAstNode(TLexer* const le
 	AddToNode(lexer, token, result);
 	AddStepNode(lexer, token, result);
 
+	CheckLeftBrace(lexer);
 	CheckLineBreak(lexer);
 
 	AddSentenceNodes(lexer, result);
 
-	result->AddChild(TAstNodeNextSentence::GetAstNode(lexer));
+	int line = lexer->PeekToken()->LineNumber();
+	CheckRightBrace(lexer);
+	CheckEofEol(lexer);
+
+	result->AddChild(TAstNodeNextSentence::GetAstNode(std::make_shared<TToken>(TOKEN_TYPE::STRUCTURE_NEXT, line)));
 
 	return result;
 }

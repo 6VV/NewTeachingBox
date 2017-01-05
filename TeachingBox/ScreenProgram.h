@@ -18,7 +18,7 @@
 *************************************************/
 #include "ScreenMainParent.h"
 
-class CodeEditor;
+class CodeEditorManager;
 class Button;
 class ButtonGroup;
 
@@ -49,7 +49,7 @@ private:
 	virtual QLayout* GetMainLayout() override;
 	virtual void UpdateText() override;
 private:
-	CodeEditor* m_codeEditor;
+	CodeEditorManager* m_codeEditor;
 
 	Button* m_btnModify;
 	Button* m_btnMacro;
@@ -71,11 +71,11 @@ private:
 	/*高级功能*/
 	ButtonGroup* m_btnGroupAddvance;
 	Button* m_btnKeyboard;
-	Button* m_btnSubProgram;
+	//Button* m_btnSubProgram;
 	Button* m_btnFormat;
 	Button* m_btnSearch;
-	Button* m_btnNote;
-	Button* m_btnInvalidate;
+	//Button* m_btnNote;
+	//Button* m_btnInvalidate;
 };
 
 #endif

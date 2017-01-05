@@ -109,6 +109,8 @@ const bool TLexer::CheckPushOtherToken(const char c)
 	case '|':{PushToken(TYPE::OPERATOR_OR); }break;
 	case '(':{PushToken(TYPE::OPERATOR_LEFT_BRACKET); }break;
 	case ')':{PushToken(TYPE::OPERATOR_RIGHT_BRACKET); }break;
+	case '{':{PushToken(TYPE::OPERATOR_LEFT_BRACE); }break;
+	case '}':{PushToken(TYPE::OPERATOR_RIGHT_BRACE); }break;
 	case '=':{PushTokenEqual();}break;
 	case '!':{PushTokenNot();}break;
 	case '>':{PushTokenGreat();}break;

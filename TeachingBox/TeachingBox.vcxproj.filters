@@ -287,6 +287,12 @@
     <Filter Include="Source Files\Variate\VariateValue">
       <UniqueIdentifier>{7d207d37-c9ab-4b92-b007-6307d34540b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Screen\ScreenProgram\CodeEditor">
+      <UniqueIdentifier>{c55e8140-1440-4c34-8060-932d4578e509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\ScreenProgram\CodeEditor">
+      <UniqueIdentifier>{7a037f2a-c1e4-4037-8a17-1bc7e5b89624}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -589,9 +595,6 @@
     <ClCompile Include="ScreenProgram.cpp">
       <Filter>Source Files\Screen\ScreenProgram</Filter>
     </ClCompile>
-    <ClCompile Include="CodeEditor.cpp">
-      <Filter>Source Files\Screen\ScreenProgram</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_CodeEditor.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -651,9 +654,6 @@
     </ClCompile>
     <ClCompile Include="TAstNodeIfSentence.cpp">
       <Filter>Source Files\Interpreter\TAstNode\If</Filter>
-    </ClCompile>
-    <ClCompile Include="TAstNodeMovlSentence.cpp">
-      <Filter>Source Files\Interpreter\TAstNode\Macro</Filter>
     </ClCompile>
     <ClCompile Include="TAstNodeAssignSentence.cpp">
       <Filter>Source Files\Interpreter\TAstNode\Assign</Filter>
@@ -947,7 +947,19 @@
       <Filter>Source Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
     </ClCompile>
     <ClCompile Include="Resources\xml\TAstNodeMacroCommon.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Interpreter\TAstNode\Macro</Filter>
+    </ClCompile>
+    <ClCompile Include="CodeEditor.cpp">
+      <Filter>Source Files\Screen\ScreenProgram\CodeEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="CodeEditorManager.cpp">
+      <Filter>Source Files\Screen\ScreenProgram\CodeEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CodeEditorManager.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CodeEditorManager.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1012,9 +1024,6 @@
       <Filter>Header Files\Screen\ScreenProject</Filter>
     </CustomBuild>
     <CustomBuild Include="ScreenProgram.h">
-      <Filter>Header Files\Screen\ScreenProgram</Filter>
-    </CustomBuild>
-    <CustomBuild Include="CodeEditor.h">
       <Filter>Header Files\Screen\ScreenProgram</Filter>
     </CustomBuild>
     <CustomBuild Include="TestTreeWdigetItem.h">
@@ -1097,6 +1106,12 @@
     </CustomBuild>
     <CustomBuild Include="IntegerValue.h">
       <Filter>Header Files\Variate\VariateValue</Filter>
+    </CustomBuild>
+    <CustomBuild Include="CodeEditor.h">
+      <Filter>Header Files\Screen\ScreenProgram\CodeEditor</Filter>
+    </CustomBuild>
+    <CustomBuild Include="CodeEditorManager.h">
+      <Filter>Header Files\Screen\ScreenProgram\CodeEditor</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1248,9 +1263,6 @@
     </ClInclude>
     <ClInclude Include="TAstNodeOperator.h">
       <Filter>Header Files\Interpreter\TAstNode\Assign</Filter>
-    </ClInclude>
-    <ClInclude Include="TAstNodeMovlSentence.h">
-      <Filter>Header Files\Interpreter\TAstNode\Macro</Filter>
     </ClInclude>
     <ClInclude Include="TAstNodeNextSentence.h">
       <Filter>Header Files\Interpreter\TAstNode\For</Filter>

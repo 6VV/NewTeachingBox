@@ -34,8 +34,10 @@ void TInterpreterThread::SlotExecuteNextCommand()
 		nextNode->Execute();
 		nextNode = Context::interpreterContext.GetNextNode();
 	}
-	Context::interpreterContext.IsAllowExecute(false);
-	Context::interpreterContext.IsAllowSendCommandData(true);
+	if (nextNode==nullptr)
+	{
+		Context::interpreterContext.IsAllowExecute(false);
+	}
 }
 
 inline

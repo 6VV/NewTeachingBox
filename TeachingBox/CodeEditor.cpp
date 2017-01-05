@@ -1,6 +1,5 @@
 ﻿#include "stdafx.h"
 #include "CodeEditor.h"
-#include "Context.h"
 #include "ProjectManager.h"
 #include <assert.h>
 
@@ -29,10 +28,10 @@ namespace{
 	const QColor LineHighlighter::COLOR_EDIT{ QColor(Qt::yellow).light(160) };
 }
 
-CodeEditor* CodeEditor::GetInstance()
-{
-	return SingleTon<CodeEditor>::GetInstance();
-}
+//CodeEditor* CodeEditor::GetInstance()
+//{
+//	return SingleTon<CodeEditor>::GetInstance();
+//}
 
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
@@ -48,9 +47,6 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 	this->setCursorWidth(0);
 }
 
-CodeEditor::~CodeEditor()
-{
-}
 
 /*返回左侧区域宽度*/
 int CodeEditor::GetLineNumberAreaWidth()
@@ -74,51 +70,17 @@ void CodeEditor::ClearWrongLine()
 	HighlightWrongLine(0);
 }
 
-int CodeEditor::GetPCLineNumber()
-{
-	return m_lineHighlighter.pcLine.lineNumber+1;
-}
-
-void CodeEditor::HighlightPCLine(const QString& program, int lineNumber)
-{
-	UpdateTextFromProgram(program);
-
-	HighlightPCLine(lineNumber);
-}
-
-void CodeEditor::HighlightPCLine()
+void CodeEditor::HighlightCurrentPCLine()
 {
 	HighlightPCLine(textCursor().blockNumber()+1);
 }
 
 void CodeEditor::HighlightPCLine(int lineNumber)
 {
-	Context::interpreterContext.SetLineNumber(lineNumber);
 	m_lineHighlighter.pcLine.lineNumber = lineNumber-1;
 	HighlightAllLines();
 }
 
-void CodeEditor::UpdateTextFromProgram(const QString &program)
-{
-	if (program != Context::projectContext.ProgramOpened())
-	{
-		auto stringList = program.split(".");
-		assert(stringList.size() == 2);
-
-		if (stringList.size() != 2)
-		{
-			return;
-		}
-
-		auto project = stringList.at(0);
-		auto file = stringList.at(1);
-
-		ProjectManager projectManager;
-
-		setPlainText(projectManager.GetFileText(project, file));
-		Context::projectContext.ProgramOpened(program);
-	}
-}
 
 void CodeEditor::HighlightWrongLine(const int lineNumber)
 {
@@ -126,12 +88,7 @@ void CodeEditor::HighlightWrongLine(const int lineNumber)
 	HighlightAllLines();
 }
 
-void CodeEditor::HighlightWrongLine(const QString& program, const int lineNumber)
-{
-	UpdateTextFromProgram(program);
 
-	HighlightWrongLine(lineNumber);
-}
 
 void CodeEditor::HighLightEditLine(const int lineNumber)
 {
@@ -172,19 +129,6 @@ QTextEdit::ExtraSelection CodeEditor::GetSelection(int lineNumber, const QColor&
 	return selection;
 }
 
-//void CodeEditor::ClearWrongLine()
-//{
-//	m_extraSelections.clear();
-//
-//	m_wrongSelection.format.clearBackground();
-//	m_wrongSelection.format.clearProperty(QTextFormat::FullWidthSelection);
-//
-//	m_extraSelections.append(m_selectSelection);
-//	m_extraSelections.append(m_pcSelection);
-//	m_extraSelections.append(m_wrongSelection);
-//
-//	setExtraSelections(m_extraSelections);
-//}
 
 /*更新右侧区域宽度*/
 void CodeEditor::SlotUpdateCodeAreaWidth(int /* newBlockCount */)
@@ -219,24 +163,12 @@ void CodeEditor::resizeEvent(QResizeEvent *e)
 	m_lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), GetLineNumberAreaWidth(), cr.height()));
 }
 
-void CodeEditor::showEvent(QShowEvent *)
-{
-	//m_pcSelection.format.clearBackground();
-	//m_pcSelection.format.clearProperty(QTextFormat::FullWidthSelection);
-	//m_wrongSelection.format.clearBackground();
-	//m_wrongSelection.format.clearProperty(QTextFormat::FullWidthSelection);
-}
-
 /*高亮显示某行*/
 void CodeEditor::SlotHighlightCurrentLine()
 {
 	HighLightEditLine(textCursor().blockNumber());
 }
 
-//int CodeEditor::GetPCLineNumber()
-//{
-//	return m_pcSelection.cursor.blockNumber() + 1;
-//}
 
 /*************************************************
 //  Function: 		PaintLineNumberArea
@@ -292,27 +224,6 @@ void CodeEditor::InsertTextBeforeLine(const QString& text)
 	++m_textChangeTime;
 }
 
-//
-//void CodeEditor::InsertTextBeforeLineUnsafely(const QString& strText)
-//{
-//	_InsertTextBeforeLine(strText);
-//	FormatCurrentText();
-//}
-
-//
-//void CodeEditor::_DeleteCurrentLine()
-//{
-//	QTextCursor currentCursor = this->textCursor();
-//	currentCursor.select(QTextCursor::BlockUnderCursor);
-//	currentCursor.removeSelectedText();
-//	++m_textChangeTime;
-//	if (currentCursor.atStart())
-//	{
-//		currentCursor.deleteChar();
-//		++m_textChangeTime;
-//	}
-//}
-//
 void CodeEditor::UpdateCurrentLine(const QString& text)
 {
 	QTextCursor textCursor = this->textCursor();
@@ -320,129 +231,3 @@ void CodeEditor::UpdateCurrentLine(const QString& text)
 	textCursor.removeSelectedText();
 	textCursor.insertText(text);
 }
-//
-//void CodeEditor::_InsertTextBeforeLine(const QString& text)
-//{
-//	moveCursor(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
-//	insertPlainText(text + "\n");
-//	++m_textChangeTime;
-//}
-//
-//void CodeEditor::OperatorText(OperatorType operatorType, const QString& text)
-//{
-//	int lastLineNumber = textCursor().blockNumber();
-//
-//	switch (operatorType)
-//	{
-//	case CodeEditor::UPDATE_LINE:
-//	{
-//		_UpdateCurrentLine(text);
-//	}
-//	break;
-//	case CodeEditor::DELETE_LINE:
-//	{
-//		_DeleteCurrentLine();
-//	}
-//	break;
-//	case CodeEditor::INSERT_LINE:
-//	{
-//		_InsertTextBeforeLine(text);
-//	}
-//	break;
-//	default:
-//		break;
-//	}
-//
-//	DealText();
-//	SaveFile();
-//
-//	while (lastLineNumber-- > 0)
-//	{
-//		this->moveCursor(QTextCursor::Down, QTextCursor::MoveAnchor);
-//	}
-//	SlotHighlightCurrentLine();
-//}
-//
-//void CodeEditor::SaveFile()
-//{
-//	/*CFileManager fileManager;
-//	fileManager.SetFileText(toPlainText(), CScreenProject::GetInstance()->GetOpenedFilePath());*/
-//}
-
-//
-//void CodeEditor::DealText()
-//{
-//	if (ParseText())
-//	{
-//		FormatText(this->toPlainText());
-//	}
-//}
-//
-//void CodeEditor::DeleteCurrentLine()
-//{
-//	OperatorText(DELETE_LINE);
-//}
-//
-//void CodeEditor::FormatText(const QString& )
-//{
-//	//CTextFormat textFormat;
-//	//QString strNewText;
-//	//textFormat.FormatText(text, strNewText);
-//	//QPlainTextEdit::setPlainText(strNewText);
-//}
-//
-//void CodeEditor::FormatCurrentText()
-//{
-//	FormatText(toPlainText());
-//}
-//
-//bool CodeEditor::ParseText()
-//{
-//	//CInterpreterManager* interpreterManager = CInterpreterManager::GetInstance();
-//
-//	///*检查语法错误并生成语法树*/
-//	//try
-//	//{
-//	//	interpreterManager->AddProgramNode(CScreenProject::GetInstance()->GetOpenedFileName().toStdString(), this->toPlainText().toStdString());
-//	//}
-//	//catch (CExceptionInterpreter& e)
-//	//{
-//	//	while (m_textChangeTime>0)
-//	//	{
-//	//		this->undo();
-//	//		--m_textChangeTime;
-//	//	}
-//
-//	//	std::string strWarning;
-//	//	CInterpreterManager::GetInstance()->GetWarningInfo(e, strWarning);
-//	//	CWarningManager::GetInstance()->Warning(this, QString::fromStdString(strWarning));
-//	//	return false;
-//	//}
-//
-//	//return true;
-//	return false;
-//}
-
-
-//void CodeEditor::setPlainText(const QString &text)
-//{
-//	FormatText(text);
-//}
-
-//void CCodeEditor::SetText(const QString& text)
-//{
-//	setPlainText(text);
-//	//ParseText();
-//}
-
-
-//void CCodeEditor::SlotFormatText()
-//{
-//	FormatText();
-//}
-
-//void CodeEditor::UpdateLineText(const QString& strNewText)
-//{
-//	OperatorText(UPDATE_LINE, strNewText);
-//}
-

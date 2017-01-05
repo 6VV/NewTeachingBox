@@ -28,6 +28,8 @@ class VariateValue
 public:
 	virtual ~VariateValue();
 
+	virtual std::shared_ptr<VariateValue> Clone() const=0;
+
 	/*************************************************
 	//  Method:        void WriteToDataStream(QDataStream& dataStream)
 	//  Description:   将变量值写入到字节流
@@ -38,22 +40,6 @@ public:
 	//  History:
 	*************************************************/
 	virtual void WriteToDataStream(QDataStream& dataStream) const = 0;
-
-	///*************************************************
-	////  Method:        void WriteToTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column)
-	////  Description:   将变量值写入到树形控件中，本操作不会新增节点，必须保证树形控件相关节点已经创建
-	////  Author:        刘巍
-	////  Date:          2016/12/14
-	////  Returns:       void
-	////  Parameter:     QTreeWidget* treeWidget：树形控件；
-	//QTreeWidgetItem* parentItem：变量值所在的父节点；
-	//int row：写入的开始行数；
-	//int column：写入的对应列数
-	////  History:
-	//*************************************************/
-	//virtual void WriteToTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column) const = 0;
-
-	//virtual void UpdateTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column) const = 0;
 
 	/*************************************************
 	//  Method:        void ReadFromDataStream(QDataStream& dataStream)
@@ -66,19 +52,6 @@ public:
 	*************************************************/
 	virtual void ReadFromDataStream(QDataStream& dataStream) = 0;
 
-	///*************************************************
-	////  Method:        void ReadFromTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column)
-	////  Description:   从树形控件中读出数据
-	////  Author:        刘巍
-	////  Date:          2016/12/14
-	////  Returns:       void
-	////  Parameter:     QTreeWidget* treeWidget：树形控件；
-	//QTreeWidgetItem* parentItem：读取的数据所在的父节点；
-	//int row：开始读取的行数；
-	//int column：读取的列数；
-	////  History:
-	//*************************************************/
-	//virtual void ReadFromTreeWidget(QTreeWidget* treeWidget, QTreeWidgetItem* parentItem, int row, int column) = 0;
 };
 
 #endif

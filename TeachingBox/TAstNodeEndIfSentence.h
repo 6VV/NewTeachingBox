@@ -10,6 +10,7 @@ public:
 	~TAstNodeEndIfSentence();
 
 	static const std::shared_ptr<TAstNode> GetAstNode(TLexer* const lexer);
+	static const std::shared_ptr<TAstNode> GetAstNode(int lineNumber);
 
 	virtual ValueReturned Execute() const override;
 
