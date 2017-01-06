@@ -17,10 +17,12 @@
 //    <desc>        build this moudle     
 *************************************************/
 #include "ScreenMainParent.h"
+#include "QBoxLayout"
 
 class CodeEditorManager;
 class Button;
 class ButtonGroup;
+class SimpleKeyboard;
 
 class ScreenProgram:public ScreenMainParent
 {
@@ -38,6 +40,7 @@ private slots:
 	void SlotOnButtonSetPCClicked();
 
 private:
+
 	void Init();
 	void InitSignalSlot();
 	void InitButtonGroup();
@@ -50,6 +53,9 @@ private:
 	virtual void UpdateText() override;
 private:
 	CodeEditorManager* m_codeEditor;
+	QVBoxLayout* m_editorLayout;
+	SimpleKeyboard* m_simpleKeyboard = nullptr;
+	bool m_isKeyboardVisiable=false;
 
 	Button* m_btnModify;
 	Button* m_btnMacro;
@@ -74,7 +80,7 @@ private:
 	//Button* m_btnSubProgram;
 	Button* m_btnFormat;
 	Button* m_btnSearch;
-	//Button* m_btnNote;
+	Button* m_btnNote;
 	//Button* m_btnInvalidate;
 };
 

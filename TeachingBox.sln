@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeEditor", "CodeEditor\Co
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qscintilla2", "QScintilla_gpl-2.9.3\Qt4Qt5\qscintilla2.vcxproj", "{F54032EB-E644-3C0C-BB46-BC9DCE532264}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcxproj", "{614320FD-112D-42F5-B268-C08BE3595F4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -97,6 +99,16 @@ Global
 		{F54032EB-E644-3C0C-BB46-BC9DCE532264}.Release|Win32.ActiveCfg = Release|Win32
 		{F54032EB-E644-3C0C-BB46-BC9DCE532264}.Release|Win32.Build.0 = Release|Win32
 		{F54032EB-E644-3C0C-BB46-BC9DCE532264}.Release|x64.ActiveCfg = Release|Win32
+		{614320FD-112D-42F5-B268-C08BE3595F4E}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
+		{614320FD-112D-42F5-B268-C08BE3595F4E}.Debug|Mixed Platforms.Build.0 = Debug|x64
+		{614320FD-112D-42F5-B268-C08BE3595F4E}.Debug|Win32.ActiveCfg = Debug|x64
+		{614320FD-112D-42F5-B268-C08BE3595F4E}.Debug|x64.ActiveCfg = Debug|x64
+		{614320FD-112D-42F5-B268-C08BE3595F4E}.Debug|x64.Build.0 = Debug|x64
+		{614320FD-112D-42F5-B268-C08BE3595F4E}.Release|Mixed Platforms.ActiveCfg = Release|x64
+		{614320FD-112D-42F5-B268-C08BE3595F4E}.Release|Mixed Platforms.Build.0 = Release|x64
+		{614320FD-112D-42F5-B268-C08BE3595F4E}.Release|Win32.ActiveCfg = Release|x64
+		{614320FD-112D-42F5-B268-C08BE3595F4E}.Release|x64.ActiveCfg = Release|x64
+		{614320FD-112D-42F5-B268-C08BE3595F4E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

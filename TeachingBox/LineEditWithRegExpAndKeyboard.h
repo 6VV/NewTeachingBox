@@ -21,7 +21,7 @@ public:
 	LineEditWithRegExpAndKeyboard(const QString& text = "", const QString& regExp = RegExp::STR_REG_ANY_CHAR, QWidget* const widget = 0);
 	~LineEditWithRegExpAndKeyboard();
 
-	virtual void KeyboardEdit() override;
+	virtual void KeyboardEdit(const QString& text) override;
 
 	void SetRegExp(const QString& regExp);
 	void SetKeyboardShowMode(const KEYBOARD_SHOW_MODE mode);

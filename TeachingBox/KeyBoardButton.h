@@ -26,8 +26,6 @@ public:
 	KeyboardButton(const QString& text, QWidget* parent = 0);
 	~KeyboardButton();
 
-protected:
-	//QSize sizeHint() const Q_DECL_OVERRIDE;
 private:
 	void Init();
 };

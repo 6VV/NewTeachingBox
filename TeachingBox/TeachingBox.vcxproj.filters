@@ -293,6 +293,9 @@
     <Filter Include="Header Files\Screen\ScreenProgram\CodeEditor">
       <UniqueIdentifier>{7a037f2a-c1e4-4037-8a17-1bc7e5b89624}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Function">
+      <UniqueIdentifier>{709be137-b938-4d97-8d5a-20013f927e3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -961,6 +964,21 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CodeEditorManager.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="SimpleKeyboard.cpp">
+      <Filter>Source Files\Widget\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SimpleKeyboard.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SimpleKeyboard.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardLineEdit.cpp">
+      <Filter>Source Files\Widget\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeCalculator.cpp">
+      <Filter>Source Files\Function</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="teachingbox.qrc">
@@ -1112,6 +1130,9 @@
     </CustomBuild>
     <CustomBuild Include="CodeEditorManager.h">
       <Filter>Header Files\Screen\ScreenProgram\CodeEditor</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SimpleKeyboard.h">
+      <Filter>Header Files\Widget\Keyboard</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1395,6 +1416,15 @@
     </ClInclude>
     <ClInclude Include="Resources\xml\TAstNodeMacroCommon.h">
       <Filter>Header Files\Interpreter\TAstNode\Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="IKeyboard.h">
+      <Filter>Header Files\Widget\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardLineEdit.h">
+      <Filter>Header Files\Widget\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeCalculator.h">
+      <Filter>Header Files\Function</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

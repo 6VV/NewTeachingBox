@@ -2,26 +2,32 @@
 #define _TEACHING_BOX_CODE_EDITOR_MANAGER_H_
 
 #include "QObject"
+#include "IKeyboard.h"
 
 class SciCodeEditor;
 
-class CodeEditorManager:public QObject
+class CodeEditorManager:public QObject,public IKeyboard
 {
 	Q_OBJECT
 
 public:
 	static CodeEditorManager* GetInstance();
 	
+	virtual void OnInsert(const QString& text) override;
+
 	void ClearWrongLine() const;
 	QString CurrentLineText() const;
 	void Cut() const;
 	void Copy() const;
+	int CursorLine() const;
+	int CursorIndex() const;
 
 	void Delete() const;
 
 	void Format() const;
 
 	QWidget* GetWidget() const;
+
 
 	void HighlightPCLine(const QString& program, int lineNumber) const;
 	void HighlightCurrentPCLine() const;	/*高亮显示PC行*/
@@ -40,6 +46,7 @@ public:
 	void Undo() const;
 
 	void InsertTextBeforeLine(const QString& text) const;	/*插入文本*/
+	void Insert(const QString& text, int line, int index) const;
 
 private:
 	CodeEditorManager();

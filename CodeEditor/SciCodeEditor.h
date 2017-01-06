@@ -7,6 +7,7 @@
 
 class QsciAPIs;
 class LexerRobot;
+class QKeyEvent;
 
 class SciCodeEditor : public QsciScintilla
 {
@@ -34,10 +35,12 @@ private:
 public:
     SciCodeEditor(QWidget *parent = nullptr);
 
+	//virtual void keyPressEvent(QKeyEvent *e) override;
+
 	void clearWrongLine();	/*清除错误行标志*/
 	void clearSearchIndicator(); /*清除搜索标志*/
 	QString currentLineText() const;	/*当前行文本*/
-	int currentLine() const;	/*当前行*/
+	int cursorLine() const;	/*当前行*/
 
 	void format();	/*文本格式化*/
 

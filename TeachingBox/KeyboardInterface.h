@@ -4,7 +4,7 @@
 class KeyboardInterface
 {
 public:
-	virtual void KeyboardEdit() = 0;
+	virtual void KeyboardEdit(const QString& text) = 0;
 
 };
 

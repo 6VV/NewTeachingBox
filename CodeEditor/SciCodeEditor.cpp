@@ -2,11 +2,10 @@
 #include "LexerRobot.h"
 #include "SciCodeEditor.h"
 #include "..\QScintilla_gpl-2.9.3\Qt4Qt5\Qsci\qsciapis.h"
-#include "..\QScintilla_gpl-2.9.3\Qt4Qt5\Qsci\qscilexercpp.h"
+#include <assert.h>
 
 #include "minus_icon.xpm"
 #include "plus_icon.xpm"
-#include <assert.h>
 
 SciCodeEditor::SciCodeEditor(QWidget *parent)
 	: QsciScintilla(parent)
@@ -24,7 +23,17 @@ SciCodeEditor::SciCodeEditor(QWidget *parent)
 	initIndentSetting();	/*设置缩进*/
 	initMarginSetting();	/*设置边界*/
 	initIndicator();	/*设置指示器*/
+	
+	setTabWidth(indentationWidth());	/*设置Tab宽度*/
 }
+
+
+//void SciCodeEditor::keyPressEvent(QKeyEvent *e)
+//{
+//	auto key = e->key();
+//	qDebug() << key;
+//	QsciScintilla::keyPressEvent(e);
+//}
 
 void SciCodeEditor::clearWrongLine()
 {
@@ -41,7 +50,7 @@ void SciCodeEditor::clearSearchIndicator()
 
 QString SciCodeEditor::currentLineText() const
 {
-	return text(currentLine());
+	return text(cursorLine());
 }
 
 void SciCodeEditor::highlightPCLine(int lineNumber)
@@ -95,13 +104,13 @@ void SciCodeEditor::search(const QString& word)
 
 void SciCodeEditor::updateCurrentLine(const QString& text)
 {
-	int line = currentLine();
+	int line = cursorLine();
 	setSelection(line, 0, line, lineLength(line));
 
 	replaceSelectedText(text + "\n");
 }
 
-int SciCodeEditor::currentLine() const
+int SciCodeEditor::cursorLine() const
 {
 	int line = 0;
 	int index = 0;
@@ -251,7 +260,7 @@ void SciCodeEditor::updateKeywords(const QStringList& keywords)
 
 void SciCodeEditor::insertTextBeforeLine(const QString& text)
 {
-	insertAt(text + "\n", currentLine(), 0);
+	insertAt(text + "\n", cursorLine(), 0);
 }
 
 SciCodeEditor::Range::Range(int lineFrom, int indexFrom, int lineTo, int indexTo)

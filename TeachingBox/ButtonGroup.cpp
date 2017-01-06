@@ -38,6 +38,9 @@ void ButtonGroup::Init()
 	for (auto button : m_btnList)
 	{
 		m_layout->addWidget(button);
+		connect(button, &QPushButton::clicked, [this]{
+			this->hide();
+		});
 	}
 
 	m_layout->setMargin(0);

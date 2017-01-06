@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "KeyBoardButton.h"
+#include "QIcon"
 
 
 
@@ -19,6 +20,7 @@ KeyboardButton::~KeyboardButton()
 
 }
 
+
 //QSize CButtonKeyBoard::sizeHint() const
 //{
 //	QSize size = QToolButton::sizeHint();
@@ -31,4 +33,8 @@ KeyboardButton::~KeyboardButton()
 void KeyboardButton::Init()
 {
 	this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);/*¿Ø¼þ³äÂúÊ£Óà¿Õ¼ä*/
+
+	this->setStyleSheet("QToolButton{border-image: url(:/new/image/Resources/Image/keyboard_normal.png);}"
+		"QToolButton:hover{border-image: url(:/new/image/Resources/Image/keyboard_hover.png);}"
+		"QToolButton:pressed{border-image: url(:/new/image/Resources/Image/keyboard_press.png);}");
 }

@@ -17,14 +17,12 @@ LineEditWithRegExpAndKeyboard::~LineEditWithRegExpAndKeyboard()
 
 }
 
-void LineEditWithRegExpAndKeyboard::KeyboardEdit()
+void LineEditWithRegExpAndKeyboard::KeyboardEdit(const QString& text)
 {
-	QString strText = Keyboard::GetInstance()->GetCurrentText();
-
 	QRegExp regExp(m_regExp);
-	if (regExp.exactMatch(strText))
+	if (regExp.exactMatch(text))
 	{
-		this->setText(strText);
+		this->setText(text);
 	}
 	else
 	{

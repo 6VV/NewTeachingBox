@@ -8,6 +8,8 @@
 #include "Context.h"
 #include "MacroWidgetFactory.h"
 #include "CodeEditorManager.h"
+#include "Keyboard.h"
+#include "SimpleKeyboard.h"
 
 
 
@@ -102,10 +104,10 @@ QList<QPushButton*> ScreenProgram::GetButtonList()
 
 QLayout* ScreenProgram::GetMainLayout()
 {
-	auto layout = new QHBoxLayout(this);
-	layout->addWidget(m_codeEditor->GetWidget());
+	m_editorLayout = new QVBoxLayout(this);
+	m_editorLayout->addWidget(m_codeEditor->GetWidget());
 
-	return layout;
+	return m_editorLayout;
 }
 
 void ScreenProgram::UpdateText()
@@ -122,7 +124,7 @@ void ScreenProgram::UpdateText()
 	//m_btnSubProgram->setText(tr("SubProgram"));
 	m_btnFormat->setText(tr("Format"));
 	m_btnSearch->setText(tr("Search"));
-	//m_btnNote->setText(tr("Note"));
+	m_btnNote->setText(tr("Note"));
 	//m_btnInvalidate->setText(tr("Invalidate"));
 
 	/*编辑功能*/
@@ -169,11 +171,13 @@ void ScreenProgram::InitAddvanceGroup()
 	m_btnKeyboard=new Button(this);
 	m_btnFormat=new Button(this);
 	m_btnSearch=new Button(this);
+	m_btnNote = new Button(this);
 
 	QList<QPushButton*> btnGroupAddvance;
 	btnGroupAddvance.append(m_btnKeyboard);
 	btnGroupAddvance.append(m_btnFormat);
 	btnGroupAddvance.append(m_btnSearch);
+	btnGroupAddvance.append(m_btnNote);
 
 	m_btnGroupAddvance = new ButtonGroup(btnGroupAddvance, m_btnAddvance);
 
@@ -184,6 +188,23 @@ void ScreenProgram::InitAddvanceGroup()
 		if (ok){
 			m_codeEditor->Search(text);
 		}
+	});
+	connect(m_btnKeyboard, &QPushButton::clicked, [this]{
+		if (m_simpleKeyboard==nullptr)
+		{
+			m_simpleKeyboard = new SimpleKeyboard(m_codeEditor, m_codeEditor->GetWidget());
+			//m_simpleKeyboard = SimpleKeyboard::GetInstance(m_codeEditor);
+			m_editorLayout->addWidget(m_simpleKeyboard);
+			m_isKeyboardVisiable = true;
+		}
+		else
+		{
+			m_isKeyboardVisiable = !m_isKeyboardVisiable;
+			m_simpleKeyboard->setVisible(m_isKeyboardVisiable);
+		}
+	});
+	connect(m_btnNote, &QPushButton::clicked, [this]{
+		m_codeEditor->Insert("//", m_codeEditor->CursorLine(), 0);
 	});
 }
 
@@ -197,4 +218,6 @@ void ScreenProgram::showEvent(QShowEvent *e)
 	}
 
 	m_btnSetPC->setEnabled(true);
+
 }
+

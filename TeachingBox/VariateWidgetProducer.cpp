@@ -99,7 +99,8 @@ void VariateWidgetProducer::UpdateComboBoxWithWholeName(const QString& typeName,
 	{
 		for (auto var : iter.value())
 		{
-			comboBox->addItem(QIcon(GetIconPath(iter.key())), iter.key() + "." + var);
+			QIcon icon(QPixmap(GetIconPath(iter.key())));
+			comboBox->addItem(icon, iter.key() + "." + var);
 		}
 	}
 }

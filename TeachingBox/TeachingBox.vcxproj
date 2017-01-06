@@ -147,6 +147,9 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_ScreenToolSystem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SimpleKeyboard.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TcpAdapter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -213,6 +216,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ScreenToolSystem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SimpleKeyboard.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_TcpAdapter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -238,6 +244,7 @@
     <ClCompile Include="IntegerValueTreeWidgetItem.cpp" />
     <ClCompile Include="InterpreterContext.cpp" />
     <ClCompile Include="InterpreterManager.cpp" />
+    <ClCompile Include="KeyboardLineEdit.cpp" />
     <ClCompile Include="Macro.cpp" />
     <ClCompile Include="MacroInfo.cpp" />
     <ClCompile Include="MacroManager.cpp" />
@@ -262,6 +269,7 @@
     <ClCompile Include="ScreenReferenceSystem.cpp" />
     <ClCompile Include="DialogTeachReferenceSystem.cpp" />
     <ClCompile Include="ScreenToolSystem.cpp" />
+    <ClCompile Include="SimpleKeyboard.cpp" />
     <ClCompile Include="StringValue.cpp" />
     <ClCompile Include="StringValueTreeWidgetItem.cpp" />
     <ClCompile Include="TAstNode.cpp" />
@@ -281,6 +289,7 @@
     <ClCompile Include="TcpAdapter.cpp" />
     <ClCompile Include="TcpManager.cpp" />
     <ClCompile Include="TestTreeWdigetItem.cpp" />
+    <ClCompile Include="TimeCalculator.cpp" />
     <ClCompile Include="TInterpreterException.cpp" />
     <ClCompile Include="TInterpreterThread.cpp" />
     <ClCompile Include="TLexer.cpp" />
@@ -645,8 +654,10 @@
       </Command>
     </CustomBuild>
     <ClInclude Include="ICoordinate.h" />
+    <ClInclude Include="IKeyboard.h" />
     <ClInclude Include="IntegerValueTreeWidgetItem.h" />
     <ClInclude Include="IRemoteFeedbackListener.h" />
+    <ClInclude Include="KeyboardLineEdit.h" />
     <ClInclude Include="MacroInfo.h" />
     <ClInclude Include="MacroManager.h" />
     <ClInclude Include="MacroReader.h" />
@@ -657,6 +668,16 @@
     <ClInclude Include="RemoteAdapterFactory.h" />
     <ClInclude Include="RemoteFeedbackController.h" />
     <ClInclude Include="Resources\xml\TAstNodeMacroCommon.h" />
+    <CustomBuild Include="SimpleKeyboard.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing SimpleKeyboard.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../SimpleKeyboard.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_XML_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtXml"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing SimpleKeyboard.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fstdafx.h" "-f../../SimpleKeyboard.h"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_XML_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtXml"</Command>
+    </CustomBuild>
     <ClInclude Include="StringValue.h" />
     <ClInclude Include="StringValueTreeWidgetItem.h" />
     <CustomBuild Include="TreeWidgetItemWithSymbol.h">
@@ -670,6 +691,7 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_XML_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtXml" "-fstdafx.h" "-f../../TreeWidgetItemWithSymbol.h"</Command>
     </CustomBuild>
     <ClInclude Include="TComplex.h" />
+    <ClInclude Include="TimeCalculator.h" />
     <ClInclude Include="TToolSys.h" />
     <ClInclude Include="TVariateContext.h" />
     <ClInclude Include="TVariateRegister.h" />
