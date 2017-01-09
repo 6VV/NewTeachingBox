@@ -8,6 +8,7 @@
 #include "IntegerValue.h"
 #include "StringValue.h"
 #include "RegExp.h"
+#include "EnumValue.h"
 
 
 
@@ -67,6 +68,12 @@ void ComplexValueTreeWidgetItem::InsertValue(const QString& valueName, const std
 	else if (typeid(*value) == typeid(StringValue))
 	{
 		InsertLineEdit(valueName, *std::dynamic_pointer_cast<StringValue>(value), RegExp::STR_REG_STRING_NAME,treeWidget, variateItem,false);
+	}
+	else if (typeid(*value)==typeid(EnumValue))
+	{
+		auto itemTexts = std::dynamic_pointer_cast<EnumValue>(value)->Texts();
+		assert(itemTexts.size() > 0);
+		InsertComboBox(valueName, itemTexts, itemTexts[0], treeWidget, variateItem);
 	}
 }
 

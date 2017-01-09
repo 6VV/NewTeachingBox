@@ -30,7 +30,7 @@ void TOverlap::SetValue(const tOverlapConstraint& value)
 void TOverlap::MakeCommonValue(const ValueType& value)
 {
 	m_commonValues.clear();
-	m_commonValues.push_back(std::make_shared<EnumValue>(value.m_TransitionMode));
+	m_commonValues.push_back(std::make_shared<EnumValue>(EnumValue::EnumMapType{ { 0, "Absolute" }, { 1, "Relative" } }, value.m_TransitionMode));
 	m_commonValues.push_back(std::make_shared<DoubleValue>(value.m_TransitionParameter));
 }
 

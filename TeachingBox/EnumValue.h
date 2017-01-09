@@ -26,9 +26,9 @@ public:
 	typedef std::map<int, QString> EnumMapType;
 
 public:
-	EnumValue(int id);
-	EnumValue(const QString& text);
-	EnumValue(const EnumMapType& enumMap);
+	//EnumValue(int id);
+	//EnumValue(const QString& text);
+	EnumValue(const EnumMapType& enumMap,int id);
 
 	operator int() const;
 

@@ -865,9 +865,6 @@
     <ClCompile Include="StringValueTreeWidgetItem.cpp">
       <Filter>Source Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClCompile>
-    <ClCompile Include="OverlapValueTreeWidgetItem.cpp">
-      <Filter>Source Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
-    </ClCompile>
     <ClCompile Include="TVariateContext.cpp">
       <Filter>Source Files\Variate</Filter>
     </ClCompile>
@@ -1349,9 +1346,6 @@
       <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClInclude>
     <ClInclude Include="StringValueTreeWidgetItem.h">
-      <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
-    </ClInclude>
-    <ClInclude Include="OverlapValueTreeWidgetItem.h">
       <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClInclude>
     <ClInclude Include="TVariateContext.h">

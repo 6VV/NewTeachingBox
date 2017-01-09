@@ -253,7 +253,6 @@
     <ClCompile Include="MacroWidgetGosub.cpp" />
     <ClCompile Include="MacroWidgetParent.cpp" />
     <ClCompile Include="MacroWidgetFactory.cpp" />
-    <ClCompile Include="OverlapValueTreeWidgetItem.cpp" />
     <ClCompile Include="ProjectManager.cpp" />
     <ClCompile Include="ProjectContext.cpp" />
     <ClCompile Include="ProjectVariatesXmlManager.cpp" />
@@ -661,7 +660,6 @@
     <ClInclude Include="MacroManager.h" />
     <ClInclude Include="MacroReader.h" />
     <ClInclude Include="MacroWidgetCommon.h" />
-    <ClInclude Include="OverlapValueTreeWidgetItem.h" />
     <ClInclude Include="ProjectVariatesXmlManager.h" />
     <ClInclude Include="RemoteAdapterFactory.h" />
     <ClInclude Include="RemoteFeedbackController.h" />
