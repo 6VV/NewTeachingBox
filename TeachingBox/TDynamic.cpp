@@ -12,24 +12,11 @@ QString TDynamic::TypeName()
 	return "Dynamic";
 }
 
-
-//TDynamic::TDynamic(QDataStream& dataStream) : TVariate(dataStream)
-//{
-//	ReadValueFromStream(dataStream);
-//
-//}
-
-//TDynamic::TDynamic(const TDynamic& variate)
-//	: TVariate(variate)
-//{
-//	m_value = variate.m_value;
-//
-//}
-
 TDynamic::TDynamic(const TSymbol& symbol, ValueType value )
 	:TComplex(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX,TypeName() })
 {
 	MakeCommonValue(value);
+	m_valueNames = { "Velocity","Acceleration","Deceleration","PostureVelocity","PostureAcceleration","PostureDeceleration" };
 }
 
 const tDynamicConstraint& TDynamic::GetValue() const
@@ -66,34 +53,10 @@ TDynamic::ValueType TDynamic::GetSpecialValue() const
 	return result;
 }
 
-//
-//void TDynamic::ReadValueFromStream(QDataStream& dataStream)
-//{
-//	dataStream >> m_value.m_Velocity;
-//	dataStream >> m_value.m_Acceleration;
-//	dataStream >> m_value.m_Deceleration;
-//
-//	dataStream >> m_value.m_PostureVelocity;
-//	dataStream >> m_value.m_PostureAcceleration;
-//	dataStream >> m_value.m_PostureDeceleration;
-//}
-
-
 TVariateRegister<TDynamic> TDynamic::m_register{ TypeName() };
 
 TVariate* TDynamic::Clone() const
 {
 	return new TDynamic(*this);
 }
-//
-//void TDynamic::WriteValueToStream(QDataStream& dataStream)const
-//{
-//	dataStream << m_value.m_Velocity;
-//	dataStream << m_value.m_Acceleration;
-//	dataStream << m_value.m_Deceleration;
-//
-//	dataStream << m_value.m_PostureVelocity;
-//	dataStream << m_value.m_PostureAcceleration;
-//	dataStream << m_value.m_PostureDeceleration;
-//}
 

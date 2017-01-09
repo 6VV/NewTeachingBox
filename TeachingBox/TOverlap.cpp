@@ -1,10 +1,7 @@
 ﻿#include "stdafx.h"
 #include "TOverlap.h"
-#include "TreeWidgetItemWithVariate.h"
-#include "RegExp.h"
-#include "ComboBoxInTree.h"
-#include "LineEditInTree.h"
-#include "DataStruct.h"
+#include "DoubleValue.h"
+#include "EnumValue.h"
 
 
 inline
@@ -13,54 +10,38 @@ QString TOverlap::TypeName()
 	return "Overlap";
 }
 
-//TOverlap::TOverlap(const QString& scope, const QString& name, const tOverlapConstraint& value)
-//	:TVariate(scope, name, TSymbol::TYPE_OVERLAP)
-//	, m_value(value)
-//{
-//	Init();
-//}
-
-//TOverlap::TOverlap(QDataStream& dataStream) : TVariate(dataStream)
-//{
-//	ReadValueFromStream(dataStream);
-//
-//}
-
-TOverlap::TOverlap(const TOverlap& variate)
-	: TVariate(variate)
-{
-	m_value = variate.m_value;
-
-}
-
 TOverlap::TOverlap(const TSymbol& symbol, ValueType value)
-	:TVariate(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX,TypeName() })
-	, m_value(value)
+	:TComplex(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX,TypeName() })
 {
+	MakeCommonValue(value);
+	m_valueNames = { "Mode", "Parameter"};
 }
 
 const tOverlapConstraint& TOverlap::GetValue() const
 {
-	return m_value;
+	return GetSpecialValue();
 }
 
 void TOverlap::SetValue(const tOverlapConstraint& value)
 {
-	m_value = value;
+	MakeCommonValue(value);
 }
 
-void TOverlap::WriteValueToStream(QDataStream& dataStream)const
+void TOverlap::MakeCommonValue(const ValueType& value)
 {
-	dataStream << m_value.m_TransitionMode;
-	dataStream << m_value.m_TransitionParameter;
+	m_commonValues.clear();
+	m_commonValues.push_back(std::make_shared<EnumValue>(value.m_TransitionMode));
+	m_commonValues.push_back(std::make_shared<DoubleValue>(value.m_TransitionParameter));
 }
 
-void TOverlap::ReadValueFromStream(QDataStream& dataStream)
+TOverlap::ValueType TOverlap::GetSpecialValue() const
 {
-	dataStream >> m_value.m_TransitionMode;
-	dataStream >> m_value.m_TransitionParameter;
-}
+	ValueType result{};
+	result.m_TransitionMode = *std::dynamic_pointer_cast<EnumValue>(m_commonValues[0]);
+	result.m_TransitionParameter = *std::dynamic_pointer_cast<DoubleValue>(m_commonValues[1]);
 
+	return result;
+}
 
 TVariateRegister<TOverlap> TOverlap::m_register{ TypeName() };
 

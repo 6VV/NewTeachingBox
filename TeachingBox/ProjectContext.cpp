@@ -31,6 +31,10 @@ ProjectContext::ProjectContext()
 
 QStringList ProjectContext::AllCurrentScopes()
 {
+	m_currentScopes = SCOPE_ORI;
+	m_currentScopes.append(m_project);
+	m_currentScopes.append(m_programs);
+
 	return m_currentScopes;
 }
 
@@ -79,10 +83,6 @@ void ProjectContext::SetLoadedProject(const QString& project, const QStringList&
 {
 	m_project = project;
 	m_programs = programs;
-
-	m_currentScopes = SCOPE_ORI;
-	m_currentScopes.append(m_project);
-	m_currentScopes.append(m_programs);
 }
 
 void ProjectContext::ProgramOpened(const QString& file)

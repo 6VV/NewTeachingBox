@@ -24,8 +24,10 @@ class QTreeWidgetItem;
 
 class ProjectManager
 {
-private:
+public:
 	static const QString PROJECT_PATH;
+
+private:
 	static const QString FILE_SUFFIX ;
 
 	typedef QMap<QString, QVector<QString>> FILE_MAP;

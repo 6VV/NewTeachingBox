@@ -18,6 +18,7 @@
 *************************************************/
 
 #include "QObject"
+#include "QStringList"
 
 class QDataStream;
 class QTreeWidget;
@@ -52,6 +53,7 @@ public:
 	*************************************************/
 	virtual void ReadFromDataStream(QDataStream& dataStream) = 0;
 
+	virtual QStringList ToStrings() = 0;	/*获取字符串值*/
 };
 
 #endif

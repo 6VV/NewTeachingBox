@@ -27,3 +27,8 @@ std::shared_ptr<VariateValue> StringValue::Clone() const
 {
 	return std::make_shared<StringValue>(m_value);
 }
+
+QStringList StringValue::ToStrings()
+{
+	return{ m_value };
+}

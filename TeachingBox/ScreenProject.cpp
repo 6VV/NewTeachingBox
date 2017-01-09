@@ -14,6 +14,7 @@
 #include "TInterpreterException.h"
 #include "TVariateContext.h"
 #include "CodeEditorManager.h"
+#include "ProjectVariatesXmlManager.h"
 
 
 ScreenProject::ScreenProject(QWidget* parent)
@@ -29,6 +30,7 @@ ScreenProject::ScreenProject(QWidget* parent)
 	, m_btnNewProgram(new Button(this))
 	, m_btnNewProject(new Button(this))
 	, m_btnDelete(new Button(this))
+	, m_btnExport(new Button(this))
 
 {
 	Init();
@@ -151,6 +153,8 @@ void ScreenProject::SlotOnButtonNewProgramClicked()
 	if (m_projectManager->CreateProgram(project, program))
 	{
 		parentItem->addChild(new QTreeWidgetItem(m_projectManager->GetStateTexts(program)));
+
+		UpdateLoadProjectState(parentItem);
 	}
 }
 
@@ -199,6 +203,12 @@ void ScreenProject::SlotOnButtonOpenClicked()
 void ScreenProject::SlotOnButtonRefreshClicked()
 {
 	InitFileTree();
+	auto list=m_treeWidget->findItems(Context::projectContext.ProjectLoaded(), Qt::MatchFixedString);
+	if (list.size()>0)
+	{
+		SetLoadState(list.at(0), LoadState::LOADED);
+	}
+
 }
 
 void ScreenProject::SlotOnButtonLoadClicked()
@@ -264,6 +274,7 @@ void ScreenProject::InitButtonGroup()
 	btnList.append(m_btnNewProject);
 	btnList.append(m_btnNewProgram);
 	btnList.append(m_btnDelete); 
+	btnList.append(m_btnExport);
 	m_btnGroupFile = new ButtonGroup(btnList, m_btnFile);
 }
 
@@ -278,6 +289,19 @@ void ScreenProject::InitSignalSlot()
 	connect(m_btnLoad, SIGNAL(clicked()), this, SLOT(SlotOnButtonLoadClicked()));
 	connect(m_btnOpen, SIGNAL(clicked()), this, SLOT(SlotOnButtonOpenClicked()));
 	connect(m_btnClose, SIGNAL(clicked()), this, SLOT(SlotOnButtonCloseClicked()));
+	connect(m_btnExport, &QPushButton::clicked, [this]{
+		auto currentItem = m_treeWidget->currentItem();
+		if (currentItem==nullptr)
+		{
+			return;
+		}
+		while (currentItem->parent()!=nullptr)
+		{
+			currentItem = currentItem->parent();
+		}
+		ProjectVariatesXmlManager manager;
+		manager.WriteToXml(currentItem->text(0));
+	});
 }
 
 QList<QPushButton*> ScreenProject::GetButtonList()
@@ -369,6 +393,7 @@ void ScreenProject::UpdateText()
 	m_btnNewProgram->setText(tr("New Program"));
 	m_btnNewProject->setText(tr("New Project"));
 	m_btnDelete->setText(tr("Delete"));
+	m_btnExport->setText(tr("Export"));
 }
 
 bool ScreenProject::IsCurrentItemValidity()

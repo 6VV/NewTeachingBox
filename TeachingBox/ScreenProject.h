@@ -84,6 +84,7 @@ private:
 	Button* m_btnInfo;
 	Button* m_btnRefresh;
 	Button* m_btnFile;
+	Button* m_btnExport;
 
 	/*文件相关按钮*/
 	ButtonGroup* m_btnGroupFile;

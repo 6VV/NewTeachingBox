@@ -27,7 +27,6 @@ class TVariateRegister
 public:
 	TVariateRegister(const QString& name);
 
-	static std::shared_ptr<TVariate> GetVariate(QDataStream& data);
 
 	static std::shared_ptr<TVariate> CreateVariate(const TSymbol& symbol);
 };
@@ -38,11 +37,7 @@ std::shared_ptr<TVariate> TVariateRegister<Type>::CreateVariate(const TSymbol& s
 	return std::make_shared<Type>(symbol);
 }
 
-template<typename Type>
-std::shared_ptr<TVariate> TVariateRegister<Type>::GetVariate(QDataStream& data)
-{
-	return std::make_shared<Type>(data);
-}
+
 
 template<typename Type>
 TVariateRegister<Type>::TVariateRegister(const QString& name)

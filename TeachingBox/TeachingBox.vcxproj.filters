@@ -865,13 +865,7 @@
     <ClCompile Include="StringValueTreeWidgetItem.cpp">
       <Filter>Source Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClCompile>
-    <ClCompile Include="PositionValueTreeWidgetItem.cpp">
-      <Filter>Source Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
-    </ClCompile>
     <ClCompile Include="OverlapValueTreeWidgetItem.cpp">
-      <Filter>Source Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
-    </ClCompile>
-    <ClCompile Include="DynamicValueTreeWidgetItem.cpp">
       <Filter>Source Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClCompile>
     <ClCompile Include="TVariateContext.cpp">
@@ -914,9 +908,6 @@
       <Filter>Source Files\Variate\VariateValue</Filter>
     </ClCompile>
     <ClCompile Include="IntegerValue.cpp">
-      <Filter>Source Files\Variate\VariateValue</Filter>
-    </ClCompile>
-    <ClCompile Include="ComplexValue.cpp">
       <Filter>Source Files\Variate\VariateValue</Filter>
     </ClCompile>
     <ClCompile Include="TComplex.cpp">
@@ -978,6 +969,12 @@
     </ClCompile>
     <ClCompile Include="TimeCalculator.cpp">
       <Filter>Source Files\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectVariatesXmlManager.cpp">
+      <Filter>Source Files\DataPersistence</Filter>
+    </ClCompile>
+    <ClCompile Include="EnumValue.cpp">
+      <Filter>Source Files\Variate\VariateValue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1354,13 +1351,7 @@
     <ClInclude Include="StringValueTreeWidgetItem.h">
       <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClInclude>
-    <ClInclude Include="PositionValueTreeWidgetItem.h">
-      <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
-    </ClInclude>
     <ClInclude Include="OverlapValueTreeWidgetItem.h">
-      <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
-    </ClInclude>
-    <ClInclude Include="DynamicValueTreeWidgetItem.h">
       <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
     </ClInclude>
     <ClInclude Include="TVariateContext.h">
@@ -1376,9 +1367,6 @@
       <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
     </ClInclude>
     <ClInclude Include="DoubleValue.h">
-      <Filter>Header Files\Variate\VariateValue</Filter>
-    </ClInclude>
-    <ClInclude Include="ComplexValue.h">
       <Filter>Header Files\Variate\VariateValue</Filter>
     </ClInclude>
     <ClInclude Include="TVariateRegister.h">
@@ -1425,6 +1413,12 @@
     </ClInclude>
     <ClInclude Include="TimeCalculator.h">
       <Filter>Header Files\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectVariatesXmlManager.h">
+      <Filter>Header Files\DataPersistence</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumValue.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

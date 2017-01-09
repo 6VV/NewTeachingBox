@@ -112,7 +112,7 @@ public:
 	//  Parameter:     const QString& scope：作用域名
 	//  History:       
 	*************************************************/
-	QVector<std::shared_ptr<TVariate>> GetAllVariateFromScope(const QString& scope) const;
+	QVector<std::shared_ptr<TVariate>> GetVariates(const QString& scope) const;
 
 	/*************************************************
 	//  Method:        QMap<QString, QVector<TVariate*>> GetVariatesMapScollUp(const QString& scope) const

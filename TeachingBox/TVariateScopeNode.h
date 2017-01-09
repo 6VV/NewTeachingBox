@@ -33,7 +33,7 @@ public:
 
 	void DeleteVariate(const QString& name);
 
-	QVector<std::shared_ptr<TVariate>> GetAllVariates() const;
+	QVector<std::shared_ptr<TVariate>> GetVariates() const;
 	QString GetName() const;
 	TVariateScopeNode* GetParentNode() const;
 

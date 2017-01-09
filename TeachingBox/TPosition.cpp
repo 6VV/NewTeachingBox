@@ -25,6 +25,7 @@ TPosition::TPosition(const TSymbol& symbol, ValueType value)
 	//, m_value(value)
 {
 	MakeCommonValue(value);
+	m_valueNames = { "Axis1","Axis2","Axis3","Axis4","Axis5","Aixs6" };
 }
 
 const tAxesAllPositions TPosition::GetValue() const

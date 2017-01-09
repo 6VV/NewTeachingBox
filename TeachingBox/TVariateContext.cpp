@@ -78,7 +78,7 @@ std::shared_ptr<TVariate> TVariateContext::GetVariateScollUp(const QString& scop
 	return nullptr;
 }
 
-QVector<std::shared_ptr<TVariate>> TVariateContext::GetAllVariateFromScope(const QString& scope) const
+QVector<std::shared_ptr<TVariate>> TVariateContext::GetVariates(const QString& scope) const
 {
 	auto node = m_rootNode->FindScope(scope);
 	if (node==nullptr)
@@ -86,7 +86,7 @@ QVector<std::shared_ptr<TVariate>> TVariateContext::GetAllVariateFromScope(const
 		return {};
 	}
 
-	return node->GetAllVariates();
+	return node->GetVariates();
 }
 
 QMap<QString, QVector<std::shared_ptr<TVariate>>> TVariateContext::GetVariatesMapScollUp(const QString& scope) const
@@ -96,7 +96,7 @@ QMap<QString, QVector<std::shared_ptr<TVariate>>> TVariateContext::GetVariatesMa
 	auto scopeNode = m_rootNode->FindScope(scope).get();
 	while (scopeNode != nullptr)
 	{
-		result[scopeNode->GetName()] = std::move(GetAllVariateFromScope(scopeNode->GetName()));
+		result[scopeNode->GetName()] = std::move(GetVariates(scopeNode->GetName()));
 		scopeNode = scopeNode->GetParentNode();
 	}
 

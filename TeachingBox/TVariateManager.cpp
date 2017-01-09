@@ -60,7 +60,7 @@ void TVariateManager::DeleteProgramVariates(const QString& program)
 
 QVector<std::shared_ptr<TVariate>> TVariateManager::GetVariatesFromScope(const QString& scope)
 {
-	return TVariateContext::GetInstance()->GetAllVariateFromScope(scope);
+	return TVariateContext::GetInstance()->GetVariates(scope);
 }
 
 QMap<QString, QVector<std::shared_ptr<TVariate>>> TVariateManager::GetVariatesMapScollUp(const QString& scope)

@@ -30,3 +30,8 @@ std::shared_ptr<VariateValue> DoubleValue::Clone() const
 	return std::make_shared<DoubleValue>(m_value);
 }
 
+QStringList DoubleValue::ToStrings()
+{
+	return{ QString::number(m_value) };
+}
+

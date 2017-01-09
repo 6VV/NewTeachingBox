@@ -35,6 +35,8 @@ public:
 
 	virtual std::shared_ptr<VariateValue> Clone() const override;
 
+	virtual QStringList ToStrings() override;
+
 
 private:
 	int m_value = 0;

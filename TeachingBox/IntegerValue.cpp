@@ -30,4 +30,8 @@ std::shared_ptr<VariateValue> IntegerValue::Clone() const
 	return std::make_shared<IntegerValue>(m_value);
 }
 
+QStringList IntegerValue::ToStrings()
+{
+	return{ QString::number(m_value) };
+}
 
