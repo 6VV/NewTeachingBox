@@ -47,6 +47,7 @@ void VariateManagerWithHorizonHeader::UpdateWidget(const std::shared_ptr<TVariat
 	auto item = dynamic_cast<TreeWidgetItemWithSymbol*>(variateItem);
 	assert(newVariate->GetTypeName() == item->GetSymbol().GetTypeName());
 
+	variateItem->setText(1, newVariate->GetName());
 	item->SetSymbol(newVariate->GetSymbol());
 	VariateWidgetMap::GetVariateWidget(newVariate->GetTypeName())->UpdateWidgetValue(newVariate, treeWidget, variateItem);
 }

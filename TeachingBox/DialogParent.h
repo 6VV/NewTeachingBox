@@ -23,7 +23,7 @@ class DialogParent:public InternationalWidget
 {
 public:
 	DialogParent(QWidget* parent);
-	virtual ~DialogParent()=0;
+	virtual ~DialogParent();
 	
 protected:
 	virtual void showEvent(QShowEvent *) override;

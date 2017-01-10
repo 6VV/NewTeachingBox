@@ -40,7 +40,7 @@ namespace VariateWidget{
 		DialogNewVariate(const QString& scope, IEditVariate* iEditVariate, QWidget* parent);
 		~DialogNewVariate();
 
-		private slots:
+	private slots:
 		void SlotOnConfrimButtonClicked();
 		void SlotOnCancleButtonClicked();
 		void SlotOnTypeChanged(QTreeWidgetItem* item);
@@ -75,7 +75,6 @@ namespace VariateWidget{
 
 		Button* m_btnConfrim;
 		Button* m_btnCancle;
-
 	};
 }
 #endif

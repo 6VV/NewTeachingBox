@@ -15,7 +15,6 @@ public:
 public:
 	TString(const TSymbol& symbol, ValueType value = "");
 	TString(const TString& variate);
-	//TString(QDataStream& dataStream);
 
 	virtual TVariate* Clone() const override;
 	virtual void WriteValueToStream(QDataStream& dataStream) const override;
@@ -23,8 +22,6 @@ public:
 
 	const ValueType GetValue() const;
 	void SetValue(const ValueType& value);
-
-
 
 private:
 	ValueType m_value;

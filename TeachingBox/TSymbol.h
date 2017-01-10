@@ -47,7 +47,8 @@ public:
 	QString GetScope() const;
 	QString GetTypeName() const;
 
-	//void SetName(const QString& name);
+	void SetName(const QString& name);
+	void SetScope(const QString& scope);
 
 	void ReadDataFromStream(QDataStream& dataStream);
 	void WriteToStream(QDataStream& dataStream) const;

@@ -1,30 +1,16 @@
 ﻿#include "stdafx.h"
 #include "DialogNewVariate.h"
 #include "TeachingBoxContext.h"
-#include "QRect"
-#include "QBoxLayout"
-#include "Button.h"
-#include "TVariateType.h"
-#include "QTreeWidget"
-#include "LineEditWithRegExpAndKeyboard.h"
+#include "VariateManagerWithVerticalHeader.h"
+#include <memory>
+#include "TVariateInfo.h"
+#include "TVariateFactory.h"
+#include "TInteger.h"
+#include "TVariateManager.h"
+#include "IEditVariate.h"
 #include "RegExp.h"
 #include "WarningManager.h"
-#include "VariateTableManager.h"
-#include "IEditVariate.h"
-#include "VariateDatabase.h"
-#include "TVariateManager.h"
-#include "VariateManagerWithVerticalHeader.h"
-#include "TInteger.h"
-#include <memory>
-#include "TVariateFactory.h"
-#include "TString.h"
-#include "TBool.h"
-#include "TDouble.h"
-#include "TPosition.h"
-#include "TDynamic.h"
-#include "TOverlap.h"
-#include "TRefSys.h"
-#include "TToolSys.h"
+#include "Button.h"
 
 namespace VariateWidget{
 
@@ -43,15 +29,8 @@ namespace VariateWidget{
 
 	void DialogNewVariate::SlotOnConfrimButtonClicked()
 	{
-		//if (!m_variateTableManager->IsValidVariate())
-		//{
-		//	WarningManager::Warning(this, tr("Wrong Variate"));
-		//	return;
-		//}
-
-		//auto variate = m_variateTableManager->GetVariate();
 		auto variate = VariateManagerWithVerticalHeader::GetInstance()->GetVariate(m_variateTree, m_variateTree->invisibleRootItem());
-		if (variate==nullptr)
+		if (variate == nullptr)
 		{
 			return;
 		}
@@ -62,7 +41,7 @@ namespace VariateWidget{
 
 		m_iEditVariate->OnNewVariate(*variate);
 		TVariateManager::GetInstance()->AddVariate(variate);
-	
+
 		Destroy();
 	}
 
@@ -82,18 +61,11 @@ namespace VariateWidget{
 		m_variateTree->clear();
 		VariateManagerWithVerticalHeader::GetInstance()->InsertVariate(
 			TVariateFactory::CreateVariate(TSymbol{ m_scope, "", TSymbol::TYPE_VOID, item->text(0) }), m_variateTree, m_variateTree->invisibleRootItem());
-		//UpdateVariateWidget(item->text(0));
 	}
-
-	//void DialogNewVariate::UpdateVariateWidget(const QString& currentType)
-	//{
-	//	m_variateTableManager->ChangeToType(currentType);
-	//}
 
 	void DialogNewVariate::UpdateText()
 	{
 		m_treeWidget->setHeaderLabel(tr("Type"));
-		//m_variateTableManager->UpdateText();
 
 		m_btnConfrim->setText(tr("Confirm"));
 		m_btnCancle->setText(tr("Cancle"));
@@ -147,39 +119,20 @@ namespace VariateWidget{
 
 	QWidget* DialogNewVariate::GetVariateTypeWidget()
 	{
-		/*添加基本类型*/
-		QTreeWidgetItem* itemBase = new QTreeWidgetItem(QStringList{ TVariateType::STR_CATEGORY_BASE });
-		QStringList strListBase;
-
-		itemBase->addChild(new QTreeWidgetItem(QStringList{ TInteger::TypeName() }));
-		itemBase->addChild(new QTreeWidgetItem(QStringList{ TDouble::TypeName() }));
-		itemBase->addChild(new QTreeWidgetItem(QStringList{ TBool::TypeName() }));
-		itemBase->addChild(new QTreeWidgetItem(QStringList{ TString::TypeName() }));
-
-		/*添加位置类型*/
-		QTreeWidgetItem* itemPosition = new QTreeWidgetItem(QStringList{ TPosition::TypeName() });
-		itemPosition->addChild(new QTreeWidgetItem(QStringList{ TPosition::TypeName() }));
-
-		/*添加动态类型*/
-		QTreeWidgetItem* itemDynamic = new QTreeWidgetItem(QStringList{ TDynamic::TypeName() });
-		itemDynamic->addChild(new QTreeWidgetItem(QStringList{ TDynamic::TypeName() }));
-
-		/*添加过渡类型*/
-		QTreeWidgetItem* itemOverlap = new QTreeWidgetItem(QStringList{ TOverlap::TypeName() });
-		itemOverlap->addChild(new QTreeWidgetItem(QStringList{ TOverlap::TypeName() }));
-
-		/*添加坐标系类型*/
-		QTreeWidgetItem* itemCoordinateSys = new QTreeWidgetItem(QStringList{ TVariateType::STR_TYPE_REF_SYS });
-		itemCoordinateSys->addChild(new QTreeWidgetItem(QStringList{ TRefSys::TypeName() }));
-		itemCoordinateSys->addChild(new QTreeWidgetItem(QStringList{ TToolSys::TypeName() }));
-
 		m_treeWidget = new QTreeWidget(this);
 
-		m_treeWidget->addTopLevelItem(itemBase);
-		m_treeWidget->addTopLevelItem(itemPosition);
-		m_treeWidget->addTopLevelItem(itemDynamic);
-		m_treeWidget->addTopLevelItem(itemOverlap);
-		m_treeWidget->addTopLevelItem(itemCoordinateSys);
+		auto& map = TVariateInfo::CategoryMap();
+
+		for (auto iter:map)
+		{
+			QTreeWidgetItem* itemCategory = new QTreeWidgetItem(QStringList{ iter.first });
+			m_treeWidget->addTopLevelItem(itemCategory);
+
+			for (auto iterType:*iter.second)
+			{
+				itemCategory->addChild(new QTreeWidgetItem(QStringList{ iterType}));
+			}
+		}
 
 		return m_treeWidget;
 	}
@@ -190,8 +143,7 @@ namespace VariateWidget{
 		m_variateTree->setHeaderLabels(QStringList{ "Name", "Value" });
 		m_variateTree->header()->setSectionResizeMode(QHeaderView::Stretch);	//平均分布各列
 		VariateManagerWithVerticalHeader::GetInstance()->InsertVariate(std::make_shared<TInteger>(TSymbol{ m_scope }, 0), m_variateTree, m_variateTree->invisibleRootItem());
-		return m_variateTree; 
-		//return m_variateTableManager->GetTableWidget(m_scope);
+		return m_variateTree;
 	}
 
 	void DialogNewVariate::Init()
@@ -209,7 +161,6 @@ namespace VariateWidget{
 		QVBoxLayout* layout = new QVBoxLayout(this);
 		layout->setMargin(0);
 
-		//layout->addWidget(GetTitleWidget());
 		layout->addLayout(GetVariateLayout());
 		layout->addLayout(GetButtonLayout());
 

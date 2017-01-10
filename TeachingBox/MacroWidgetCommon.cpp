@@ -4,6 +4,10 @@
 #include "TPosition.h"
 #include "TDynamic.h"
 #include "TOverlap.h"
+#include "TInteger.h"
+#include "TDouble.h"
+#include "TBool.h"
+#include "TString.h"
 
 
 
@@ -17,20 +21,7 @@ MacroWidgetCommon::MacroWidgetCommon(const MacroInfo& macroInfo, QWidget* parent
 	int i = 0;
 	for (auto type:parameterTypes)
 	{
-		if (type == TPosition::TypeName())
-		{
-			AddParameter<TPosition>(type, i);
-		}
-		else if (type == TDynamic::TypeName())
-		{
-			AddParameter<TDynamic>(type, i);
-		}
-		else if (type == TOverlap::TypeName())
-		{
-			AddParameter<TOverlap>(type, i);
-		}
-
-		++i;
+		AddParameter(type, i++);
 	}
 }
 

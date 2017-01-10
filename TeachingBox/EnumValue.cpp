@@ -3,27 +3,10 @@
 
 
 
-//EnumValue::EnumValue(int id)
-//	:m_value(id)
-//{
-//}
-
-//EnumValue::EnumValue(const EnumMapType& enumMap)
-//	: m_enumMap(enumMap)
-//{
-//}
-
-//EnumValue::EnumValue(const QString& text)
-//{
-//	for (auto iter:m_enumMap)
-//	{
-//		if (iter.second==text)
-//		{
-//			m_value = iter.first;
-//			break;
-//		}
-//	}
-//}
+QString EnumValue::TypeText()
+{
+	return "Enum";
+}
 
 EnumValue::EnumValue(const EnumMapType& enumMap, int id)
 	:m_value(id)
@@ -66,3 +49,21 @@ QStringList EnumValue::Texts() const
 	}
 	return result;
 }
+
+void EnumValue::SetValue(int id)
+{
+	m_value = id;
+}
+
+void EnumValue::SetValue(const QString& text)
+{
+	for (auto iter:m_enumMap)
+	{
+		if (iter.second==text)
+		{
+			m_value = iter.first;
+			break;
+		}
+	}
+}
+

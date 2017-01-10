@@ -1,87 +1,50 @@
 ﻿#include "stdafx.h"
 #include "TPosition.h"
-#include "TreeWidgetItemWithVariate.h"
-#include "RegExp.h"
-#include "LineEditInTree.h"
+#include "DataStruct.h"
 #include "DoubleValue.h"
 
 
-inline
 QString TPosition::TypeName()
 {
 	return "Position";
 }
 
-
-//TPosition::TPosition(const TPosition& variate)
-//	: TVariate(variate)
-//{
-//	m_value = variate.m_value;
-//
-//}
-
-TPosition::TPosition(const TSymbol& symbol, ValueType value)
-	:TComplex(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX ,TypeName()})
-	//, m_value(value)
+TComplex::ValueType TPosition::ToCommonValue(const tAxesAllPositions& value)
 {
-	MakeCommonValue(value);
-	m_valueNames = { "Axis1","Axis2","Axis3","Axis4","Axis5","Aixs6" };
-}
-
-const tAxesAllPositions TPosition::GetValue() const
-{
-	return GetSpecialValue();
-}
-
-void TPosition::SetValue(const tAxesAllPositions& value)
-{
-	MakeCommonValue(value);
-}
-
-void TPosition::MakeCommonValue(const ValueType& value)
-{
-	m_commonValues.clear();
+	TComplex::ValueType values{};
 	for (auto v : value.m_AxisPosition)
 	{
-		m_commonValues.push_back(std::make_shared<DoubleValue>(v));
-	}
-}
-
-TPosition::ValueType TPosition::GetSpecialValue() const
-{
-	ValueType result{};
-	for (size_t i = 0; i < m_commonValues.size(); ++i)
-	{
-		result.m_AxisPosition[i] = *std::dynamic_pointer_cast<DoubleValue>(m_commonValues[i]);
+		values.push_back(std::make_shared<DoubleValue>(v));
 	}
 
-	return result;
+	return values;
+
 }
 
-//
-//void TPosition::WriteValueToStream(QDataStream& dataStream)const
+//TPosition::TPosition(const TSymbol& symbol, ValueType value)
+//	:TComplex(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX, TypeName() })
 //{
-//	for (int i = 0; i < AXIS_SIZE;++i)
-//	{
-//		dataStream << m_value.m_AxisPosition[i];
-//	}
+//	MakeCommonValue(value);
+//	m_valueNames = { "Axis1", "Axis2", "Axis3", "Axis4", "Axis5", "Aixs6" };
 //}
-//
-//void TPosition::ReadValueFromStream(QDataStream& dataStream)
+
+//void TPosition::SetValue(const tAxesAllPositions& value)
 //{
-//	double value;
-//
-//	for (int i = 0; i < AXIS_SIZE; ++i)
+//	MakeCommonValue(value);
+//}
+
+//void TPosition::MakeCommonValue(const ValueType& value)
+//{
+//	m_commonValues.clear();
+//	for (auto v : value.m_AxisPosition)
 //	{
-//		dataStream >> value;
-//		m_value.m_AxisPosition[i] = value;
+//		m_commonValues.push_back(std::make_shared<DoubleValue>(v));
 //	}
 //}
 
+//TVariateRegister<TPosition> TPosition::m_register{ "Position" };
 
-TVariateRegister<TPosition> TPosition::m_register{ "Position" };
-
-TVariate* TPosition::Clone() const
-{
-	return new TPosition(*this);
-}
+//TVariate* TPosition::Clone() const
+//{
+//	return new TPosition(*this);
+//}

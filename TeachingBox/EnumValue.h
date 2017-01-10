@@ -24,10 +24,9 @@ class EnumValue:public VariateValue
 {
 public:
 	typedef std::map<int, QString> EnumMapType;
+	static QString TypeText();
 
 public:
-	//EnumValue(int id);
-	//EnumValue(const QString& text);
 	EnumValue(const EnumMapType& enumMap,int id);
 
 	operator int() const;
@@ -41,10 +40,13 @@ public:
 	virtual QStringList ToStrings() override;
 
 	QStringList Texts() const;
+	void SetValue(int id);
+	void SetValue(const QString& text);
 
 private:
 	EnumMapType m_enumMap{};
 	int m_value = 0;
+
 };
 
 #endif

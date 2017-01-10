@@ -1,6 +1,5 @@
 ﻿#include "stdafx.h"
 #include "TInteger.h"
-#include "TVariateType.h"
 #include "RegExp.h"
 #include "TSymbol.h"
 #include "TreeWidgetItemWithVariate.h"

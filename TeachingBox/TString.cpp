@@ -9,20 +9,6 @@ QString TString::TypeName()
 	return "String";
 }
 
-//TString::TString(const QString& scope, const QString& name, const QString& value)
-//	:TVariate(scope,name,TSymbol::TYPE_STRING)
-//{
-//	m_value = value;
-//
-//	Init();
-//}
-//
-//TString::TString(QDataStream& dataStream) : TVariate(dataStream)
-//{
-//	dataStream >> m_value;
-//
-//}
-
 TString::TString(const TString& variate)
 	: TVariate(variate)
 {

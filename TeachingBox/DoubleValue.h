@@ -18,29 +18,32 @@
 *************************************************/
 
 #include "VariateValue.h"
+#include "VariateValueRegister.h"
 
-	class DoubleValue :public VariateValue
-	{
-	public:
-		typedef double ValueType;
-		
-	public:
-		explicit DoubleValue(double value);
-		operator double() const;
+class DoubleValue :public VariateValue
+{
+public:
+	typedef double ValueType;
+	static QString TypeText();
 
-		virtual void WriteToDataStream(QDataStream& dataStream) const override;
+public:
+	explicit DoubleValue(double value = 0);
+	operator double() const;
 
-		virtual void ReadFromDataStream(QDataStream& dataStream) override;
+	virtual void WriteToDataStream(QDataStream& dataStream) const override;
 
-		virtual std::shared_ptr<VariateValue> Clone() const override;
+	virtual void ReadFromDataStream(QDataStream& dataStream) override;
 
-		virtual QStringList ToStrings() override;
+	virtual std::shared_ptr<VariateValue> Clone() const override;
+
+	virtual QStringList ToStrings() override;
 
 
-	private:
-		double m_value = 0;
+private:
+	double m_value = 0;
 
-	};
+	static VariateValueRegister<DoubleValue> m_register;
+};
 
 
 #endif // !_TEACHING_BOX_N_VARIATE_VALUE_INTEGER_VALUE_H_

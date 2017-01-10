@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--程序不对xml文件的正确性进行检查，用户需保证本文件内容完全正确，否则可能会出现各种意外情况-->
+<!--Category为变量分类，属性name为分类名-->
+<!--变量属性typeName为变量类型名（如Integer）-->
+<!--Value为值类型信息，属性type为值类型（如Integer），name为用户界面显示时对应的值名（如Axis）-->
+<!--值的类型包括Integer、Double、String、Bool、Enum-->
+<!--在修改或删除变量定义时，需要首先删除数据库中对应的变量值，以防之后读取或保存值时出错-->
+<!--Enum类型需预定义，定义方式可参考TOverlap类型，属性text为显示的文本，id为对应的数值，id只能为整数，且id、text不得重复-->
+<Root>
+    <Category name="Position">
+    <Variate typeName="Position" abbreviation="pos">
+      <Value type="Double" name="Axis1"></Value>
+      <Value type="Double" name="Axis2"></Value>
+      <Value type="Double" name="Axis3"></Value>
+      <Value type="Double" name="Axis4"></Value>
+      <Value type="Double" name="Axis5"></Value>
+      <Value type="Double" name="Axis6"></Value>
+    </Variate>
+  </Category>
+  
+  <Category name="Dynamic">
+    <Variate typeName="Dynamic" abbreviation="dyn">
+      <Value type="Double" name="Velocity"></Value>
+      <Value type="Double" name="Acceleration"></Value>
+      <Value type="Double" name="Deceleration"></Value>
+      <Value type="Double" name="PostureVelocity"></Value>
+      <Value type="Double" name="PostureAcceleration"></Value>
+      <Value type="Double" name="PostureDeceleration"></Value>
+    </Variate>
+  </Category>
+  
+  <Category name="Overlap">
+    <Variate typeName="Overlap" abbreviation="ovl">
+      <Value type="Enum" name="Mode" definition="define1"> <!--definition为定义名，用于与下面的定义对应-->
+        <define1>
+          <value id="0" text="Absolute"></value>
+          <value id="1" text="Relative"></value>
+        </define1>
+      </Value>
+      <Value type="Double" name="Parameter"></Value>
+    </Variate>
+  </Category>
+</Root>

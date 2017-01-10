@@ -2,6 +2,7 @@
     <qresource prefix="/TeachingBox">
         <file>teachingbox_zh.qm</file>
         <file>Resources/xml/Macro.xml</file>
+        <file>Resources/xml/Variates.xml</file>
     </qresource>
     <qresource prefix="/new/image">
         <file>Resources/Image/C.PNG</file>

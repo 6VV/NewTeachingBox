@@ -17,8 +17,8 @@
 //    <version>     1.0 
 //    <desc>        build this moudle     
 *************************************************/
-#include <list>
 #include "DataStruct.h"
+#include <set>
 
 class IRemoteFeedbackListener;
 
@@ -41,7 +41,7 @@ private:
 	~RemoteFeedbackController()=default;
 
 private:
-	std::list<IRemoteFeedbackListener*> m_listeners;
+	std::set<IRemoteFeedbackListener*> m_listeners;
 };
 
 #endif

@@ -42,7 +42,8 @@ std::shared_ptr<TVariate> TVariateRegister<Type>::CreateVariate(const TSymbol& s
 template<typename Type>
 TVariateRegister<Type>::TVariateRegister(const QString& name)
 {
-	TVariateFactory::FunMapCreateVariate()[name] = CreateVariate;
+	TVariateFactory::Register(name, CreateVariate);
+	//TVariateFactory::FunMapCreateVariate()[name] = CreateVariate;
 }
 
 #endif

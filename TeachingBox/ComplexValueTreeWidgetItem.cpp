@@ -73,7 +73,7 @@ void ComplexValueTreeWidgetItem::InsertValue(const QString& valueName, const std
 	{
 		auto itemTexts = std::dynamic_pointer_cast<EnumValue>(value)->Texts();
 		assert(itemTexts.size() > 0);
-		InsertComboBox(valueName, itemTexts, itemTexts[0], treeWidget, variateItem);
+		InsertComboBox(valueName, itemTexts, std::dynamic_pointer_cast<EnumValue>(value)->ToStrings()[0], treeWidget, variateItem);
 	}
 }
 
@@ -94,6 +94,11 @@ void ComplexValueTreeWidgetItem::UpdateValue(const std::shared_ptr<VariateValue>
 		dynamic_cast<QLineEdit*>(treeWidget->itemWidget(valueItem, 1))->setText(
 			*std::dynamic_pointer_cast<StringValue>(value));
 	}
+	else if (typeid(*value) == typeid(EnumValue))
+	{
+		dynamic_cast<QComboBox*>(treeWidget->itemWidget(valueItem, 1))->setCurrentText(
+			std::dynamic_pointer_cast<EnumValue>(value)->ToStrings()[0]);
+	}
 }
 
 void ComplexValueTreeWidgetItem::GetValue(const std::shared_ptr<VariateValue> desValue, QTreeWidget* treeWidget, QTreeWidgetItem* valueItem)
@@ -104,11 +109,15 @@ void ComplexValueTreeWidgetItem::GetValue(const std::shared_ptr<VariateValue> de
 	}
 	else if (typeid(*desValue) == typeid(DoubleValue))
 	{
-		*std::dynamic_pointer_cast<DoubleValue>(desValue) = DoubleValue(dynamic_cast<QLineEdit*>(treeWidget->itemWidget(valueItem, 1))->text().toInt());
+		*std::dynamic_pointer_cast<DoubleValue>(desValue) = DoubleValue(dynamic_cast<QLineEdit*>(treeWidget->itemWidget(valueItem, 1))->text().toDouble());
 	}
 	else if (typeid(*desValue) == typeid(StringValue))
 	{
 		*std::dynamic_pointer_cast<StringValue>(desValue) = StringValue(dynamic_cast<QLineEdit*>(treeWidget->itemWidget(valueItem, 1))->text());
+	}
+	else if (typeid(*desValue) == typeid(EnumValue))
+	{
+		std::dynamic_pointer_cast<EnumValue>(desValue)->SetValue(dynamic_cast<QComboBox*>(treeWidget->itemWidget(valueItem, 1))->currentText());
 	}
 }
 

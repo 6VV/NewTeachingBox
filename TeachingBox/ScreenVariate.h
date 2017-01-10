@@ -25,6 +25,7 @@ class QPushButton;
 class QTreeWidget;
 class ButtonGroup;
 class QTreeWidgetItem;
+class VariateManagerWithHorizonHeader;
 
 class ScreenVariate :public ScreenMainParent, IEditVariate, IRemoteFeedbackListener
 {
@@ -56,15 +57,23 @@ private:
 
 	QTreeWidgetItem* FindScopeItem(const QString& scope);
 
+	QString GetScope(QTreeWidgetItem* item) const;
+	QTreeWidgetItem* GetScopeItem(QTreeWidgetItem* item) const;
+
 	void Init();
 	void InitTreeWidget();
 	void InitButtonWidget();
 	void InitSignalSlot();
 
+	bool IsVariateItem(QTreeWidgetItem* item) const;
+	bool IsScopeItem(QTreeWidgetItem* item) const;
+	bool IsValueItem(QTreeWidgetItem* item) const;
+
 	virtual void UpdateText() override;
 
 private:
 	QTreeWidget* m_treeWidget;
+	VariateManagerWithHorizonHeader* m_variateWidgetManager;
 
 	QPushButton* m_btnVariate;
 	QPushButton* m_btnTeach;
@@ -79,6 +88,19 @@ private:
 	QPushButton* m_btnNew;
 	QPushButton* m_btnDelete;
 	QPushButton* m_btnSave;
+
+private:
+	struct PasteInfo
+	{
+		enum OperatorType
+		{
+			COPY,
+			CUT,
+		};
+		OperatorType operatorType = COPY;
+		std::shared_ptr<TVariate> variate=nullptr;
+	};
+	PasteInfo m_pasteInfo{};
 };
 
 #endif

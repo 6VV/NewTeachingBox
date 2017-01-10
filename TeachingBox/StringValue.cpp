@@ -3,6 +3,11 @@
 
 
 
+QString StringValue::TypeText()
+{
+	return "String";
+}
+
 StringValue::StringValue(ValueType value)
 	:m_value(value)
 {
@@ -32,3 +37,5 @@ QStringList StringValue::ToStrings()
 {
 	return{ m_value };
 }
+
+VariateValueRegister<StringValue> StringValue::m_register(TypeText());

@@ -83,10 +83,15 @@ void TSymbol::ReadDataFromStream(QDataStream& dataStream)
 	dataStream >> m_typeName;
 }
 
-//void TSymbol::SetName(const QString& name)
-//{
-//	m_name = name;
-//}
+void TSymbol::SetName(const QString& name)
+{
+	m_name = name;
+}
+
+void TSymbol::SetScope(const QString& scope)
+{
+	m_scope = scope;
+}
 
 void TSymbol::WriteToStream(QDataStream& dataStream) const
 {

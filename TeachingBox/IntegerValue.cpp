@@ -4,6 +4,11 @@
 #include <assert.h>
 
 
+QString IntegerValue::TypeText()
+{
+	return "Integer";
+}
+
 IntegerValue::IntegerValue(int value)
 	:m_value(value)
 {
@@ -34,4 +39,6 @@ QStringList IntegerValue::ToStrings()
 {
 	return{ QString::number(m_value) };
 }
+
+VariateValueRegister<IntegerValue> IntegerValue::m_register(TypeText());
 

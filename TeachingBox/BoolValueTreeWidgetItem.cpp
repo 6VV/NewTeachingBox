@@ -36,25 +36,6 @@ void BoolValueTreeWidgetItem::InsertVariateValue(const std::shared_ptr<TVariate>
 	}
 
 	InsertComboBox("Value", { TRUE_VALUE, FALSE_VALUE }, valueName, treeWidget, variateItem);
-	/*auto valueItem = new QTreeWidgetItem(variateItem);
-	valueItem->setText(0, "Value");
-
-	QComboBox* comboBox = new QComboBox(treeWidget);
-	comboBox->addItems({ TRUE_VALUE, FALSE_VALUE });
-
-	auto value = dynamic_cast<TBool*>(variate.get())->GetValue();
-	QString valueName = FALSE_VALUE;
-	if (value)
-	{
-	valueName = TRUE_VALUE;
-	}
-	comboBox->setCurrentText(valueName);
-
-	treeWidget->setItemWidget(valueItem, 1, comboBox);
-
-	connect(comboBox, &QComboBox::currentTextChanged, [this,variateItem]{
-	emit(SignalValueChanged(variateItem));
-	});*/
 }
 
 void BoolValueTreeWidgetItem::UpdateWidgetValue(const std::shared_ptr<TVariate> newVariate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)

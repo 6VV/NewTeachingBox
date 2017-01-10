@@ -32,8 +32,15 @@ ProjectContext::ProjectContext()
 QStringList ProjectContext::AllCurrentScopes()
 {
 	m_currentScopes = SCOPE_ORI;
-	m_currentScopes.append(m_project);
-	m_currentScopes.append(m_programs);
+	if (m_project.size()!=0)
+	{
+		m_currentScopes.append(m_project);
+	}
+	
+	if (m_programs.size()!=0)
+	{
+		m_currentScopes.append(m_programs);
+	}
 
 	return m_currentScopes;
 }

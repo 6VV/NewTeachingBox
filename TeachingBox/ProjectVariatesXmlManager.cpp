@@ -91,12 +91,6 @@ void ProjectVariatesXmlManager::WriteVariate(QXmlStreamWriter& writer, std::shar
 		}
 		writer.writeTextElement("Value", valueName);
 	}
-	else if (typeid(*variate) == typeid(TOverlap))
-	{
-		auto value = std::dynamic_pointer_cast<TOverlap>(variate)->GetValue();
-		writer.writeTextElement("Transition Parameter", QString::number(value.m_TransitionParameter));
-		writer.writeTextElement("Transition Mode", QString::number(value.m_TransitionMode));
-	}
 	else
 	{
 		auto valueNames = std::dynamic_pointer_cast<TComplex>(variate)->GetValueNames();

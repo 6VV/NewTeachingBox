@@ -18,14 +18,16 @@
 *************************************************/
 
 #include "VariateValue.h"
+#include "VariateValueRegister.h"
 
 class IntegerValue :public VariateValue
 {
 public:
 	typedef int ValueType;
+	static QString TypeText();
 
 public:
-	explicit IntegerValue(int value);
+	explicit IntegerValue(int value=0);
 	operator int() const;
 
 	virtual void WriteToDataStream(QDataStream& dataStream) const override;
@@ -40,6 +42,8 @@ public:
 
 private:
 	int m_value = 0;
+
+	static VariateValueRegister<IntegerValue> m_register;
 };
 
 

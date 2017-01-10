@@ -56,6 +56,21 @@ QString TVariate::GetTypeName() const
 	return m_symbol.GetTypeName();
 }
 
+void TVariate::SetSymbol(const TSymbol& symbol)
+{
+	m_symbol = symbol;
+}
+
+void TVariate::SetName(const QString& name)
+{
+	m_symbol.SetName(name);
+}
+
+void TVariate::SetScope(const QString& scope)
+{
+	m_symbol.SetScope(scope);
+}
+
 void TVariate::ReadDataFromStream(QDataStream& dataStream)
 {
 	m_symbol.ReadDataFromStream(dataStream);

@@ -5,6 +5,7 @@
 #include "TPosition.h"
 #include "TDynamic.h"
 #include "TOverlap.h"
+#include "TVariateInfo.h"
 
 
 
@@ -18,12 +19,6 @@ const QString VariateWidgetProducer::IMAGE_LOGO_PROJECT{ ":/new/image/Resources/
 
 const QString VariateWidgetProducer::IMAGE_LOGO_LOCAL{ ":/new/image/Resources/Image/L.PNG" };
 
-
-const QMap<QString, QString> VariateWidgetProducer::TYPE_HEADER_NAME_MAP{
-	{ TPosition::TypeName(), "p" },
-	{ TDynamic::TypeName(), "dyn" },
-	{ TOverlap::TypeName(), "ovl" },
-};
 
 
 VariateWidgetProducer::VariateWidgetProducer()
@@ -61,7 +56,7 @@ QString VariateWidgetProducer::GetSuggestName(const QString& typeName, const QMa
 {
 	std::vector<int> suggestNamesExisted;
 
-	auto header = TYPE_HEADER_NAME_MAP[typeName];
+	auto header = TVariateInfo::GetAbbreviation(typeName);
 
 	QRegExp regExp("^" + header + "([0 - 9] + )$");
 	for (auto iter = variateMap.begin(); iter != variateMap.end(); ++iter)

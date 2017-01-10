@@ -56,6 +56,10 @@ public:
 	TSymbol::SymbolType GetType() const;	/*获取变量类型*/
 	QString GetTypeName() const;	/*获取变量类型名*/
 
+	void SetSymbol(const TSymbol& symbol);
+	void SetName(const QString& name);
+	void SetScope(const QString& scope);
+
 	void ReadDataFromStream(QDataStream& dataStream);
 	void WriteDataToStream(QDataStream& dataStream) const;	/*将变量读入到数据流中*/
 

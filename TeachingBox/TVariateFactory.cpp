@@ -28,6 +28,17 @@ std::shared_ptr<TVariate> TVariateFactory::GetVariate(QByteArray& dataBytes)
 	return variate;
 }
 
+TVariateFactory::FunCreateVariate TVariateFactory::GetFun(const QString& type)
+{
+	auto iter = FunMapCreateVariate().find(type);
+	if (iter==FunMapCreateVariate().end())
+	{
+		return nullptr;
+	}
+
+	return iter->second;
+}
+
 std::shared_ptr<TVariate> TVariateFactory::CreateVariate(const TSymbol& symbol)
 {
 	auto type = symbol.GetTypeName();
@@ -39,12 +50,10 @@ std::shared_ptr<TVariate> TVariateFactory::CreateVariate(const TSymbol& symbol)
 	return (*iter->second)(symbol);
 }
 
-//std::map<QString, TVariateFactory::FunGetVariate>& TVariateFactory::FunMapGetVariate()
-//{
-//	static std::map<QString, TVariateFactory::FunGetVariate> map;
-//
-//	return map;
-//}
+void TVariateFactory::Register(const QString& type, FunCreateVariate fun)
+{
+	FunMapCreateVariate()[type] = fun;
+}
 
 std::map<QString, TVariateFactory::FunCreateVariate>& TVariateFactory::FunMapCreateVariate()
 {

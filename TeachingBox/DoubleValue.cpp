@@ -5,6 +5,11 @@
 
 
 
+QString DoubleValue::TypeText()
+{
+	return "Double";
+}
+
 DoubleValue::DoubleValue(double value)
 	:m_value(value)
 {
@@ -34,4 +39,6 @@ QStringList DoubleValue::ToStrings()
 {
 	return{ QString::number(m_value) };
 }
+
+VariateValueRegister<DoubleValue> DoubleValue::m_register(TypeText());
 

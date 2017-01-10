@@ -19,9 +19,9 @@ std::shared_ptr<VariateValueTreeWidgetItem> VariateWidgetMap::GetVariateWidget(c
 
 	if (iter == VaraiteWidgetMap().end())
 	{
-		auto funIter=TVariateFactory::FunMapCreateVariate().find(type);
-		assert(funIter != TVariateFactory::FunMapCreateVariate().end());
-		if (funIter != TVariateFactory::FunMapCreateVariate().end())
+		auto fun = TVariateFactory::GetFun(type);
+		assert(fun != nullptr);
+		if (fun != nullptr)
 		{
 			iter = VaraiteWidgetMap().find(TComplex::TypeName());
 		}

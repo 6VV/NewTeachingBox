@@ -11,7 +11,7 @@
 #include "TAstNodeIfSentence.h"
 #include "TAstNodeGosubSentence.h"
 #include "MacroManager.h"
-#include "Resources\xml\TAstNodeMacroCommon.h"
+#include "TAstNodeMacroCommon.h"
 
 
 const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QString& project)

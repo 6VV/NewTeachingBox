@@ -296,6 +296,12 @@
     <Filter Include="Source Files\Function">
       <UniqueIdentifier>{709be137-b938-4d97-8d5a-20013f927e3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Variate\VariateInfo">
+      <UniqueIdentifier>{72ba00db-6d4b-49c2-a21b-265dc2150dd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Variate\VariateInfo">
+      <UniqueIdentifier>{ea4fd074-31ee-4ac0-8491-3ac57f4cd0a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -448,12 +454,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_TSymbol.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TPosition.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TPosition.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TInteger.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -466,22 +466,10 @@
     <ClCompile Include="GeneratedFiles\Release\moc_TString.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TOverlap.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TOverlap.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TDouble.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_TDouble.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TDynamic.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TDynamic.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TBool.cpp">
@@ -557,9 +545,6 @@
       <Filter>Source Files\Variate</Filter>
     </ClCompile>
     <ClCompile Include="TVariateFactory.cpp">
-      <Filter>Source Files\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="TVariateType.cpp">
       <Filter>Source Files\Variate</Filter>
     </ClCompile>
     <ClCompile Include="ProjectContext.cpp">
@@ -790,9 +775,6 @@
     <ClCompile Include="TDouble.cpp">
       <Filter>Source Files\Variate\Variate\Base</Filter>
     </ClCompile>
-    <ClCompile Include="TDynamic.cpp">
-      <Filter>Source Files\Variate\Variate\Base</Filter>
-    </ClCompile>
     <ClCompile Include="TInteger.cpp">
       <Filter>Source Files\Variate\Variate\Base</Filter>
     </ClCompile>
@@ -937,9 +919,6 @@
     <ClCompile Include="MacroWidgetCommon.cpp">
       <Filter>Source Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
     </ClCompile>
-    <ClCompile Include="Resources\xml\TAstNodeMacroCommon.cpp">
-      <Filter>Source Files\Interpreter\TAstNode\Macro</Filter>
-    </ClCompile>
     <ClCompile Include="CodeEditor.cpp">
       <Filter>Source Files\Screen\ScreenProgram\CodeEditor</Filter>
     </ClCompile>
@@ -972,6 +951,24 @@
     </ClCompile>
     <ClCompile Include="EnumValue.cpp">
       <Filter>Source Files\Variate\VariateValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TAstNodeMacroCommon.cpp">
+      <Filter>Source Files\Interpreter\TAstNode\Macro</Filter>
+    </ClCompile>
+    <ClCompile Include="VariateValueFactory.cpp">
+      <Filter>Source Files\Variate\VariateValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TVariatePrototype.cpp">
+      <Filter>Source Files\Variate\Variate</Filter>
+    </ClCompile>
+    <ClCompile Include="VariateReader.cpp">
+      <Filter>Source Files\DataPersistence</Filter>
+    </ClCompile>
+    <ClCompile Include="TVariateInfo.cpp">
+      <Filter>Source Files\Variate\VariateInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="TDynamic.cpp">
+      <Filter>Source Files\Variate\Variate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1216,12 +1213,6 @@
     <ClInclude Include="TScope.h">
       <Filter>Header Files\Variate</Filter>
     </ClInclude>
-    <ClInclude Include="TVariateFactory.h">
-      <Filter>Header Files\Variate</Filter>
-    </ClInclude>
-    <ClInclude Include="TVariateType.h">
-      <Filter>Header Files\Variate</Filter>
-    </ClInclude>
     <ClInclude Include="ProjectContext.h">
       <Filter>Header Files\Context</Filter>
     </ClInclude>
@@ -1396,9 +1387,6 @@
     <ClInclude Include="MacroWidgetCommon.h">
       <Filter>Header Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\xml\TAstNodeMacroCommon.h">
-      <Filter>Header Files\Interpreter\TAstNode\Macro</Filter>
-    </ClInclude>
     <ClInclude Include="IKeyboard.h">
       <Filter>Header Files\Widget\Keyboard</Filter>
     </ClInclude>
@@ -1414,9 +1402,36 @@
     <ClInclude Include="EnumValue.h">
       <Filter>Header Files\Variate\VariateValue</Filter>
     </ClInclude>
+    <ClInclude Include="VariateReader.h">
+      <Filter>Header Files\DataPersistence</Filter>
+    </ClInclude>
+    <ClInclude Include="TAstNodeMacroCommon.h">
+      <Filter>Header Files\Interpreter\TAstNode\Macro</Filter>
+    </ClInclude>
+    <ClInclude Include="TVariatePrototype.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </ClInclude>
+    <ClInclude Include="VariateValueFactory.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
+    </ClInclude>
+    <ClInclude Include="VariateValueRegister.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TVariateFactory.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </ClInclude>
+    <ClInclude Include="TVariateAbbreviation.h">
+      <Filter>Header Files\Variate\VariateInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="TVariateInfo.h">
+      <Filter>Header Files\Variate\VariateInfo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resources\xml\Macro.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="Resources\xml\Variates.xml">
       <Filter>Resource Files</Filter>
     </Xml>
   </ItemGroup>

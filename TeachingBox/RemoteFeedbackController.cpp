@@ -6,12 +6,12 @@
 
 void RemoteFeedbackController::AddListener(IRemoteFeedbackListener* listener)
 {
-	m_listeners.push_back(listener);
+	m_listeners.insert(listener);
 }
 
 void RemoteFeedbackController::DeleteListener(IRemoteFeedbackListener* listener)
 {
-	m_listeners.remove(listener);
+	m_listeners.erase(listener);
 }
 
 RemoteFeedbackController* RemoteFeedbackController::GetInstance()

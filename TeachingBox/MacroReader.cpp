@@ -31,7 +31,7 @@ void MacroReader::InitMacro()
 	{
 		QString categoryName = categorys.at(i).toElement().attribute("name");
 
-		/*遍历分类*/
+		/*遍历类型*/
 		auto types = categorys.at(i).childNodes();
 		for (int m = 0; m < types.length(); ++m)
 		{
@@ -81,8 +81,8 @@ void MacroReader::InitMacro()
 	file.close();
 }
 
-MacroReader::Initialization MacroReader::m_initlization{};
-
+//MacroReader::Initialization MacroReader::m_initlization{};
+//
 MacroReader::Initialization::Initialization()
 {
 	MacroReader::InitMacro();

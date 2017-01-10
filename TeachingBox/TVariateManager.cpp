@@ -9,6 +9,7 @@
 #include "ProjectContext.h"
 #include "ProjectManager.h"
 #include "TVariateContext.h"
+#include "TimeCalculator.h"
 
 using namespace Database;
 
@@ -114,6 +115,7 @@ void TVariateManager::UpdateInDatabase(const QString& scope, const QString& name
 	QByteArray data;
 	QDataStream dataStream(&data, QIODevice::ReadWrite);
 	variate->WriteDataToStream(dataStream);
+
 	VariateDatabase::UpdateVariate(scope, name, dataStream);
 }
 
