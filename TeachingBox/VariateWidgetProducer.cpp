@@ -84,6 +84,35 @@ QString VariateWidgetProducer::GetSuggestName(const QString& typeName, const QMa
 	return header + QString::number(suggestNamesExisted.size());
 }
 
+QString VariateWidgetProducer::GetSuggestName(const QString& typeName, const QVector<std::shared_ptr<TVariate>>& variates)
+{
+	std::vector<int> suggestNamesExisted;
+
+	auto header = TVariateInfo::GetAbbreviation(typeName);
+
+	QRegExp regExp("^" + header + "([0 - 9] + )$");
+	for (auto variate:variates)
+	{
+		if (regExp.exactMatch(variate->GetName()))
+		{
+			suggestNamesExisted.push_back(regExp.capturedTexts().at(1).toInt());
+		}
+	}
+
+	std::sort(suggestNamesExisted.begin(), suggestNamesExisted.end());
+
+	int size = suggestNamesExisted.size();
+	for (int i = 0; i < size; ++i)
+	{
+		if (suggestNamesExisted.at(i) != i)
+		{
+			return header + QString::number(i);
+		}
+	}
+
+	return header + QString::number(suggestNamesExisted.size());
+}
+
 void VariateWidgetProducer::UpdateComboBoxWithWholeName(const QString& typeName, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap, QComboBox* comboBox)
 {
 	comboBox->clear();
@@ -111,6 +140,19 @@ void VariateWidgetProducer::UpdateComboBoxWithSimpleName(const QString& typeName
 		for (auto var : iter.value())
 		{
 			comboBox->addItem(QIcon(GetIconPath(iter.key())), var);
+		}
+	}
+}
+
+void VariateWidgetProducer::UpdateComboBoxWithSimpleName(const QString& typeName, const QVector<std::shared_ptr<TVariate>>& variates, QComboBox* comboBox)
+{
+	comboBox->clear();
+
+	for (auto variate:variates)
+	{
+		if (variate->GetTypeName()==typeName)
+		{
+			comboBox->addItem(QIcon(GetIconPath(variate->GetScope())), variate->GetName());
 		}
 	}
 }

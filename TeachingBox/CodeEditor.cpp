@@ -28,11 +28,6 @@ namespace{
 	const QColor LineHighlighter::COLOR_EDIT{ QColor(Qt::yellow).light(160) };
 }
 
-//CodeEditor* CodeEditor::GetInstance()
-//{
-//	return SingleTon<CodeEditor>::GetInstance();
-//}
-
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
 	m_lineNumberArea = new LineNumberArea(this);

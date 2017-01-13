@@ -51,12 +51,13 @@ protected:
 
 private:
 	void Init();
-	void InitBottom(QLayout* layout);
+	void InitBottomButton(QLayout* layout);
 	void InitCenter(QLayout* layout);
 	void InitContext();
 	void InitOption(QLayout* layout);
-	void InitMovement(QLayout* layout);
+	void InitMovementButton(QLayout* layout);
 	void InitScreen(QLayout* layout);
+	void InitState();
 	void InitTop(QLayout* layout);
 	void InitVertical();
 	void InitWarning(QLayout* layout);

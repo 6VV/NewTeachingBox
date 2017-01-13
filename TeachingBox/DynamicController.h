@@ -37,11 +37,11 @@ public:
 	static DynamicController* GetInstance();
 
 	void Accelerate();
-	void AddLabel(QLabel* label);
+	void AddWidget(QComboBox* speedComboBox);
 	void Decelerate();
 
 
-	double Dynovr() const;
+	double Speed() const;
 	void Stop();
 
 private:
@@ -53,14 +53,13 @@ private:
 
 	void AccelerateThread();
 	void DecelerateThread();
-	const QString DynovrText() const;
-	void UpdateLabels();
+	const QString SpeedText(double speed) const;
+	void UpdateSpeed();
 
 private:
-	double m_dynovr{ 50 };
+	double m_speed{ 50 };
 	bool m_isOperateDyn = false;
-
-	std::vector<QLabel*> m_lables;
+	QComboBox* m_speedComboBox;
 };
 
 #endif // !_TEACHING_BOX_DYNAMIC_CONTROLLER_H_

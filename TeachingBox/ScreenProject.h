@@ -34,6 +34,9 @@ class ScreenProject:public ScreenMainParent
 	Q_OBJECT
 
 private:
+	const QString PROJECT_ICON_PATH = ":/new/image/Resources/Image/project_icon.png";
+	const QString PROGRAM_ICON_PATH = ":/new/image/Resources/Image/program_icon.png";
+
 	enum LoadState
 	{
 		LOADED,
@@ -60,15 +63,18 @@ private:
 	virtual QLayout* GetMainLayout() override;
 	virtual void UpdateText() override;
 
-
 	void Init();
 	void InitButtonGroup();
+	void InitFileTree();
+
+	void InitTreeWidgetIcon();
+
 	void InitSignalSlot();
 	bool IsCurrentItemValidity();
 	bool IsCurrentItemProject();
 	bool IsCurrentItemProgram();
 
-	void InitFileTree();
+	void OpenProgram(const QString& project, const QString& program);
 
 	void SetLoadState(QTreeWidgetItem* projectItem,LoadState state);
 

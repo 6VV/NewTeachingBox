@@ -75,7 +75,8 @@ protected:
 	QTreeWidget* m_treeWidget;
 
 private:
-	QMap<QString, QVector<std::shared_ptr<TVariate>>> m_variatesMap;		/*保存本作用域中所有有效变量*/
+	QVector<std::shared_ptr<TVariate>> m_variates;	/*保存本作用域所有有效变量，不包括重名变量*/
+
 	QVector<std::shared_ptr<TVariate>> m_newVariates{};	/*保存所有新建变量*/
 	std::unique_ptr<VariateWidgetProducer> m_variateWidgetProducer;	/*用于生成各各变量的相应控件*/
 

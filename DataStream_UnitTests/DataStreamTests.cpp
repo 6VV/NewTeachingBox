@@ -174,7 +174,7 @@ TEST_F(DataStreamTests, Test_ReadRawBytes)
 	QDataStream dataStream(&array,QIODevice::ReadWrite);
 	int dataWriteNum=dataStream.writeRawData(c, length);
 	ASSERT_TRUE(dataWriteNum != -1);
-	delete c;
+	delete[] c;
 
 	int i1;
 	int i2;
@@ -199,7 +199,7 @@ TEST_F(DataStreamTests, Test_WriteRawBytes)
 	DataStream stream;
 	int dataWriteNum = stream.WriteRawBytes(c, length);
 	ASSERT_TRUE(dataWriteNum != -1);
-	delete c;
+	delete[] c;
 
 	int i1;
 	int i2;

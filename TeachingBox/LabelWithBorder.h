@@ -20,9 +20,18 @@
 
 class LabelWithBorder :public QLabel
 {
+	Q_OBJECT
+
+private:
+	const int BORDER_WIDTH = 1;
+	const QString ORIGIN_STYLE_SHEET = ".LabelWithBorder{border: "+QString::number(BORDER_WIDTH)+" groove gray; background-color: rgba(255, 193, 245, 0%);}";
+
 public:
 	LabelWithBorder(QWidget* parent = 0);
 	LabelWithBorder(const QString& text, QWidget* parent = 0);
+	virtual ~LabelWithBorder() = default;
+
+	int GetBorderWidth() const;
 
 private:
 	void Init();

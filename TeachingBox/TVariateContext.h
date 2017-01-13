@@ -115,15 +115,26 @@ public:
 	QVector<std::shared_ptr<TVariate>> GetVariates(const QString& scope) const;
 
 	/*************************************************
+	//  Method:        QVector<std::shared_ptr<TVariate>> GetVariatesScollUp(const QString& scope) const;
+	//  Description:   从特定作用域开始，向上查找所有有效变量，不包括同名变量
+	//  Author:        刘巍 
+	//  Date:          2017/01/13
+	//  Returns:       QVector<std::shared_ptr<TVariate>>：当前作用域的所有有效变量
+	//  Parameter:     const QString& scope：查找的起始作用域
+	//  History:       
+	*************************************************/
+	QVector<std::shared_ptr<TVariate>> GetAvailableVariatesScollUp(const QString& scope) const;
+
+	/*************************************************
 	//  Method:        QMap<QString, QVector<TVariate*>> GetVariatesMapScollUp(const QString& scope) const
-	//  Description:   获取从某作用域起开始向上，所有变量的集合
+	//  Description:   获取从某作用域起开始向上，所有变量的集合,包括不同作用域的重名变量
 	//  Author:        刘巍 
 	//  Date:          2016/12/07
 	//  Returns:       QMap<QString, QVector<TVariate*>>：变量集合
 	//  Parameter:     const QString& scope：起始作用域
 	//  History:       
 	*************************************************/
-	QMap<QString, QVector<std::shared_ptr<TVariate>>> GetVariatesMapScollUp(const QString& scope) const;
+	QMap<QString, QVector<std::shared_ptr<TVariate>>> GetAllVariatesMapScollUp(const QString& scope) const;
 
 	/*************************************************
 	//  Method:        void UpdateVariate(std::shared_ptr<TVariate> newVariate)

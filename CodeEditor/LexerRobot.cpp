@@ -3,7 +3,6 @@
 
 
 
-//
 const char * LexerRobot::language() const
 {
 	return "Rb";
@@ -16,8 +15,10 @@ const char * LexerRobot::wordCharacters() const
 
 const char * LexerRobot::keywords(int set) const
 {
-	if (set != 1)
-		return 0;
+	if (set == 2)
+	{
+		return m_variateWords.c_str();
+	}
 
 	return m_keywords.c_str();
 }
@@ -32,6 +33,16 @@ void LexerRobot::updateKeywords(const QStringList& keywords)
 	}
 }
 
+void LexerRobot::updateVariateWords(const QStringList& variateWords)
+{
+	m_variateWords.clear();
+
+	for (auto& key : variateWords)
+	{
+		m_variateWords.append(key.toStdString()).append(" ");
+	}
+}
+
 QStringList LexerRobot::autoCompletionWordSeparators() const
 {
 	return{};
@@ -40,7 +51,7 @@ QStringList LexerRobot::autoCompletionWordSeparators() const
 LexerRobot::LexerRobot(QObject* parent/*=0*/)
 	:QsciLexerCPP(parent)
 {
-	m_keywords = "IF FOR SWITCH CASE DEFAULT";
+	m_keywords = "IF ELSEIF FOR STEP TO SWITCH CASE DEFAULT";
 }
 
 LexerRobot::~LexerRobot()

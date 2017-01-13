@@ -19,9 +19,11 @@ public:
 	virtual const char * keywords(int set) const override;
 
 	void updateKeywords(const QStringList& keywords);
+	void updateVariateWords(const QStringList& variateWords);
 
 private:
 	std::string m_keywords{};
+	std::string m_variateWords{};
 };
 
 #endif

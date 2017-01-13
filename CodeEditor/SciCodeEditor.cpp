@@ -6,27 +6,29 @@
 
 #include "minus_icon.xpm"
 #include "plus_icon.xpm"
+#include "SciRobot.h"
 
 SciCodeEditor::SciCodeEditor(QWidget *parent)
 	: QsciScintilla(parent)
 {
 	m_lexer = new LexerRobot(this);	/*解析器*/
 	this->setLexer(m_lexer);	/*设置解析器*/
-	m_apis = new QsciAPIs(m_lexer);	/*自动完成入口*/
+	m_apis = new SciRobot(m_lexer);	/*自动完成入口*/
 
 	this->setUtf8(true);	/*设置编码为utf-8*/
 
 	initAutoCompletionSetting();	/*自动完成*/
 	initBraceMatching();	/*括号匹配*/
 	initCaretSetting();	/*插入符号*/
+	initKeywordColor();
 	initFoldingSetting();	/*设置折叠*/
 	initIndentSetting();	/*设置缩进*/
 	initMarginSetting();	/*设置边界*/
 	initIndicator();	/*设置指示器*/
 	
 	setTabWidth(indentationWidth());	/*设置Tab宽度*/
-}
 
+}
 
 //void SciCodeEditor::keyPressEvent(QKeyEvent *e)
 //{
@@ -56,13 +58,13 @@ QString SciCodeEditor::currentLineText() const
 void SciCodeEditor::highlightPCLine(int lineNumber)
 {
 	markerDeleteAll(EXECUTE_MARKER);
-	markerAdd(lineNumber, EXECUTE_MARKER);
-	m_executeLine = lineNumber;
+	markerAdd(lineNumber-1, EXECUTE_MARKER);
+	m_executeLine = lineNumber-1;
 }
 
-void SciCodeEditor::highlightWrongLine(const int lineNumber)
+void SciCodeEditor::highlightWrongLine(int lineNumber)
 {
-	markerAdd(lineNumber, WRONG_MARKER);
+	markerAdd(lineNumber-1, WRONG_MARKER);
 }
 
 void SciCodeEditor::selectAll()
@@ -117,6 +119,13 @@ int SciCodeEditor::cursorLine() const
 	getCursorPosition(&line, &index);
 
 	return line;
+}
+
+void SciCodeEditor::defineWrongLineMarker(const QString& iconPath)
+{
+	/*设置错误行标记*/
+	this->markerDefine(QPixmap(iconPath).scaled(marginWidth(FLAGS_MARGIN), textHeight(0),
+		Qt::KeepAspectRatio), WRONG_MARKER);
 }
 
 void SciCodeEditor::format()
@@ -197,6 +206,11 @@ void SciCodeEditor::initCaretSetting()
 	this->setCaretLineBackgroundColor(QColor(100, 100, 100, 100));	/*插入符号行背景色*/
 }
 
+void SciCodeEditor::initKeywordColor()
+{
+	m_lexer->setColor(QColor::fromRgb(200, 100, 50), LexerRobot::KeywordSet2);
+}
+
 void SciCodeEditor::initIndentSetting()
 {
 	this->setAutoIndent(true);	/*自动缩进*/
@@ -222,10 +236,6 @@ void SciCodeEditor::initMarginSetting()
 	this->markerDefine(QsciScintilla::RightArrow, EXECUTE_MARKER);	/*设置执行代码行标记样式*/
 	this->setMarkerBackgroundColor(QColor("#0000ff"), EXECUTE_MARKER);	/*设置执行代码行标记颜色*/
 
-	/*设置错误行标记*/
-	this->markerDefine(QPixmap(":/CodeEditor/Resources/wrong_icon.png").scaled(marginWidth(FLAGS_MARGIN), textHeight(0),
-		Qt::KeepAspectRatio), WRONG_MARKER);
-
 	/*设置行号边界*/
 	this->setMarginType(LINE_NUMBER_MARGIN, QsciScintilla::NumberMargin);	/*设置行区域*/
 	this->setMarginLineNumbers(LINE_NUMBER_MARGIN, true);	/*显示行数*/
@@ -250,12 +260,24 @@ void SciCodeEditor::updateMargin()
 
 void SciCodeEditor::updateKeywords(const QStringList& keywords)
 {
-	for (auto word : keywords)
+	/*for (auto word : keywords)
 	{
 		m_apis->add(word);
-	}
+	}*/
+	m_apis->updateKeywords(keywords);
+	m_apis->prepare();
 
 	m_lexer->updateKeywords(keywords);
+	setLexer(m_lexer);
+}
+
+void SciCodeEditor::updateVariateWords(const QStringList& variateWords)
+{
+	m_apis->updateVariates(variateWords);
+	m_apis->prepare();
+
+	m_lexer->updateVariateWords(variateWords);
+	setLexer(m_lexer);
 }
 
 void SciCodeEditor::insertTextBeforeLine(const QString& text)

@@ -15,7 +15,10 @@
 #include "TVariateContext.h"
 #include "CodeEditorManager.h"
 #include "ProjectVariatesXmlManager.h"
-
+#include "QIcon"
+#include "TeachingBoxBroadcast.h"
+#include "TVariateManager.h"
+#include "TVariate.h"
 
 ScreenProject::ScreenProject(QWidget* parent)
 	:ScreenMainParent(parent)
@@ -31,7 +34,6 @@ ScreenProject::ScreenProject(QWidget* parent)
 	, m_btnNewProject(new Button(this))
 	, m_btnDelete(new Button(this))
 	, m_btnExport(new Button(this))
-
 {
 	Init();
 }
@@ -61,6 +63,8 @@ void ScreenProject::SlotOnButtonCloseClicked()
 
 	SetLoadState(projectItem, LoadState::UNLOADED);
 	Context::projectContext.UnloadProject();
+
+	emit(TeachingBoxBroadcast::GetInstance()->LoadProject("", {}));
 }
 
 void ScreenProject::SlotOnButtonDeleteClicked()
@@ -110,7 +114,9 @@ void ScreenProject::SlotOnButtonNewProjectClicked()
 	/*创建项目 */
 	if (m_projectManager->CreateProject(projectName))
 	{
-		m_treeWidget->addTopLevelItem(new QTreeWidgetItem(m_projectManager->GetStateTexts(projectName)));
+		auto projectItem = new QTreeWidgetItem(m_projectManager->GetStateTexts(projectName));
+		projectItem->setIcon(0,QIcon(QPixmap(PROJECT_ICON_PATH)));
+		m_treeWidget->addTopLevelItem(projectItem);
 	}
 }
 
@@ -152,7 +158,9 @@ void ScreenProject::SlotOnButtonNewProgramClicked()
 	/*创建程序，添加节点*/
 	if (m_projectManager->CreateProgram(project, program))
 	{
-		parentItem->addChild(new QTreeWidgetItem(m_projectManager->GetStateTexts(program)));
+		auto childItem = new QTreeWidgetItem(m_projectManager->GetStateTexts(program));
+		childItem->setIcon(0, QIcon(QPixmap(PROGRAM_ICON_PATH)));
+		parentItem->addChild(childItem);
 
 		UpdateLoadProjectState(parentItem);
 	}
@@ -176,28 +184,7 @@ void ScreenProject::SlotOnButtonOpenClicked()
 	QString program = m_treeWidget->currentItem()->text(0);
 	QString project = m_treeWidget->currentItem()->parent()->text(0);
 
-	QString nextProgram = project + "." + program;
-	QString currentProgram = Context::projectContext.ProgramOpened();
-
-	if (nextProgram==currentProgram)
-	{
-		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
-		return;
-	}
-
-	auto codeEidtor = CodeEditorManager::GetInstance();
-
-	if (!currentProgram.isEmpty())
-	{
-		m_projectManager->SaveFile(currentProgram, codeEidtor->Text());
-	}
-
-	codeEidtor->HighlightPCLine(nextProgram, 1);
-	//codeEidtor->setPlainText(m_projectManager->GetFileText(project, program));
-	//codeEidtor->HighlightPCLine(1);
-
-	//Context::projectContext.SetFileOpened(nextProgram);
-	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
+	emit(TeachingBoxBroadcast::GetInstance()->OpenProgram(project,program));
 }
 
 void ScreenProject::SlotOnButtonRefreshClicked()
@@ -235,12 +222,13 @@ void ScreenProject::SlotOnButtonLoadClicked()
 	{
 		projectItem = m_treeWidget->currentItem()->parent();
 
-		QString program = m_treeWidget->currentItem()->text(0);
-		QString project = projectItem->text(0);
+		//QString program = m_treeWidget->currentItem()->text(0);
+		//QString project = projectItem->text(0);
 
-		UpdateLoadProjectState(projectItem);
+		UpdateLoadProjectState(projectItem);	/*更新状态需在打开文件之前，保证文件打开时项目已被加载，各种事件能够被正确响应*/
 		SlotOnButtonOpenClicked();
 	}
+
 }
 
 void ScreenProject::UpdateLoadProjectState(QTreeWidgetItem* projectItem)
@@ -257,6 +245,13 @@ void ScreenProject::UpdateLoadProjectState(QTreeWidgetItem* projectItem)
 	}
 
 	SetLoadState(projectItem, LoadState::LOADED);
+
+
+	for (auto& program : programs)
+	{
+		program = program.split(".").at(1);
+	}
+	emit(TeachingBoxBroadcast::GetInstance()->LoadProject(project, programs));
 }
 
 void ScreenProject::Init()
@@ -302,6 +297,8 @@ void ScreenProject::InitSignalSlot()
 		ProjectVariatesXmlManager manager;
 		manager.WriteToXml(currentItem->text(0));
 	});
+
+	connect(TeachingBoxBroadcast::GetInstance(), &TeachingBoxBroadcast::OpenProgram, this, &ScreenProject::OpenProgram);
 }
 
 QList<QPushButton*> ScreenProject::GetButtonList()
@@ -346,36 +343,93 @@ bool ScreenProject::IsCurrentItemProgram()
 	return true;
 }
 
+void ScreenProject::OpenProgram(const QString& project, const QString& program)
+{
+	QString nextProgram = project + "." + program;
+	QString currentProgram = Context::projectContext.ProgramOpened();
+
+	if (nextProgram == currentProgram)
+	{
+		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
+		return;
+	}
+
+	auto codeEidtor = CodeEditorManager::GetInstance();
+
+	if (!currentProgram.isEmpty())
+	{
+		m_projectManager->SaveFile(currentProgram, codeEidtor->Text());
+	}
+
+	ProjectManager projectManager;
+	codeEidtor->SetText(projectManager.GetFileText(project, program));
+
+	auto variates = TVariateManager::GetInstance()->GetAvailableVariatesScollUp(nextProgram);
+	QStringList variateNames{};
+	for (auto varaite:variates)
+	{
+		variateNames.append(varaite->GetName());
+	}
+	for (auto p : Context::projectContext.Programs())
+	{
+		variateNames.append(p.split(".").at(1));
+	}
+	codeEidtor->UpdateVariateWords(variateNames);
+
+	Context::projectContext.ProgramOpened(nextProgram);
+	//codeEidtor->HighlightPCLine(nextProgram, 1);
+	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
+}
+
 void ScreenProject::InitFileTree()
 {
 	m_treeWidget->clear();
 	m_treeWidget->header()->setSectionResizeMode(QHeaderView::Stretch);
 
 	m_projectManager->GetAllFiles(m_treeWidget->invisibleRootItem());
+
+	InitTreeWidgetIcon();
+
+}
+
+void ScreenProject::InitTreeWidgetIcon()
+{
+	for (int i = 0; i < m_treeWidget->topLevelItemCount(); ++i)
+	{
+		auto projectItem = m_treeWidget->topLevelItem(i);
+		projectItem->setIcon(0, QIcon(QPixmap(PROJECT_ICON_PATH)));
+		SetLoadState(projectItem, LoadState::UNLOADED);
+
+		for (int j = 0; j < projectItem->childCount(); ++j)
+		{
+			projectItem->child(j)->setIcon(0, QIcon(QPixmap(PROGRAM_ICON_PATH)));
+			SetLoadState(projectItem->child(j), LoadState::UNLOADED);
+		}
+	}
 }
 
 void ScreenProject::SetLoadState(QTreeWidgetItem* projectItem, LoadState state)
 {
-	QString stateText{};
+	QString iconPath{};
 
 	switch (state)
 	{
 	case ScreenProject::LOADED:
 	{
-		stateText = tr("Loaded");
+		iconPath = ":/new/image/Resources/Image/confirm_icon.png";
 	}break;
 	case ScreenProject::UNLOADED:
 	{
-		stateText = "---";
+		iconPath = ":/new/image/Resources/Image/double_horizon_line_icon.png";
 	}break;
 	default:
 		break;
 	}
 
-	projectItem->setText(1, stateText);
+	projectItem->setIcon(1,QIcon(QPixmap(iconPath)));
 	for (auto i = 0; i < projectItem->childCount(); ++i)
 	{
-		projectItem->child(i)->setText(1, stateText);
+		projectItem->child(i)->setIcon(1, QIcon(QPixmap(iconPath)));
 	}
 }
 

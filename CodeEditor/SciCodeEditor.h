@@ -5,7 +5,7 @@
 #include "../QScintilla_gpl-2.9.3/Qt4Qt5/Qsci/qsciscintilla.h"
 #include <vector>
 
-class QsciAPIs;
+class SciRobot;
 class LexerRobot;
 class QKeyEvent;
 
@@ -42,16 +42,19 @@ public:
 	QString currentLineText() const;	/*当前行文本*/
 	int cursorLine() const;	/*当前行*/
 
+	void defineWrongLineMarker(const QString& iconPath);
+
 	void format();	/*文本格式化*/
 
 	void highlightPCLine(int lineNumber);	/*高亮显示执行行*/
-	void highlightWrongLine(const int lineNumber);	/*高亮显示错误行*/
+	void highlightWrongLine(int lineNumber);	/*高亮显示错误行*/
 
 	void selectAll();
 	void search(const QString& word);
 
 	void updateCurrentLine(const QString& text);	/*更新当前行文本*/
 	void updateKeywords(const QStringList& keywords);	/*更新关键词*/
+	void updateVariateWords(const QStringList& variateWords);	/*更新变量集合*/
 
 	void insertTextBeforeLine(const QString& text);	/*插入文本*/
 
@@ -59,6 +62,7 @@ private:
 	void initAutoCompletionSetting();	/*设置自动完成*/
 	void initBraceMatching();	/*设置括号匹配*/
 	void initCaretSetting();	/*设置插入符号*/
+	void initKeywordColor();			/*设置关键词颜色*/
 	void initFoldingSetting();	/*设置折叠*/
 	void initIndentSetting();	/*设置缩进*/
 	void initMarginSetting();	/*设置边界*/
@@ -79,7 +83,7 @@ private:
 	};
 
 private:
-	QsciAPIs *m_apis;
+	SciRobot *m_apis;
 	LexerRobot* m_lexer;
 	std::vector<Range> m_rangesSearched{};
 	int m_executeLine = 0;

@@ -30,12 +30,12 @@ public:
 	QStringList GetParameterTypes() const;
 
 private:
-	QString m_category{};
-	QString m_type{};
-	QString m_name{};
-	int m_id{};
-	QStringList m_parameterTypes{};
-	QString m_text;
+	QString m_category{};	/*分类*/
+	QString m_type{};	/*类型*/
+	QString m_name{};	/*名字*/
+	int m_id{};	/*id*/
+	QStringList m_parameterTypes{};	/*参数类型*/
+	QString m_text;	/*生成文本*/
 };
 
 #endif

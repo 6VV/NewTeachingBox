@@ -15,7 +15,7 @@ MacroWidgetParent::MacroWidgetParent(const QString& macroText, QWidget* parent /
 	, m_btnConfirm(new Button(this))
 	, m_btnCancle(new Button(this))
 	, m_variateWidgetProducer(new VariateWidgetProducer())
-	, m_variatesMap(std::move(TVariateManager::GetInstance()->GetVariatesMapScollUp(Context::projectContext.ProgramOpened())))
+	, m_variates(std::move(TVariateManager::GetInstance()->GetAvailableVariatesScollUp(Context::projectContext.ProgramOpened())))
 {
 	InitMacroText(macroText);
 	InitLayout();
@@ -146,7 +146,7 @@ void MacroWidgetParent::OnConfirm()
 void MacroWidgetParent::AddParameter(const QString& typeName, const QString& name)
 {
 	auto variateComboBox = new QComboBox(m_treeWidget);
-	m_variateWidgetProducer->UpdateComboBoxWithSimpleName(typeName, m_variatesMap, variateComboBox);
+	m_variateWidgetProducer->UpdateComboBoxWithSimpleName(typeName, m_variates, variateComboBox);
 	m_parameterComboBoxes.append(variateComboBox);
 
 	variateComboBox->setCurrentText(name);
@@ -155,9 +155,8 @@ void MacroWidgetParent::AddParameter(const QString& typeName, const QString& nam
 
 	if (variate == nullptr)
 	{
-		auto name = m_variateWidgetProducer->GetSuggestName(typeName, m_variatesMap);
+		auto name = m_variateWidgetProducer->GetSuggestName(typeName, m_variates);
 		variateComboBox->addItem(QPixmap(VariateWidgetProducer::IMAGE_LOGO_LOCAL), name);
-		//variate = std::shared_ptr<TVariate>(new T(TSymbol{ Context::projectContext.ProgramOpened(), name }));
 		variate = TVariateFactory::CreateVariate(TSymbol{ Context::projectContext.ProgramOpened(), name, TSymbol::TYPE_VOID, typeName });
 		m_newVariates.append(variate);
 	}

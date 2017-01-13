@@ -66,7 +66,8 @@ public:
 	//  History:
 	*************************************************/
 	static void UpdateComboBoxWithSimpleName(const QString& typeName, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap, QComboBox* comboBox);
-	
+	static void UpdateComboBoxWithSimpleName(const QString& typeName, const QVector<std::shared_ptr<TVariate>>& variates, QComboBox* comboBox);
+
 	/*************************************************
 	//  Method:		static QString GetSuggestName(SymbolType type, const QMap<QString, QVector<TVariate*>>& variateMap)
 	//  Description:获取对应某变量类型的建议名字，如Position的建立名为p2（若已存在p1，未存在p2）
@@ -78,7 +79,7 @@ public:
 	//  History:
 	*************************************************/
 	static QString GetSuggestName(const QString& typeName, const QMap<QString, QVector<std::shared_ptr<TVariate>>>& variateMap);
-
+	static QString GetSuggestName(const QString& typeName, const QVector<std::shared_ptr<TVariate>>& variates);
 
 	/*************************************************
 	//  Method:		static QString GetIconPath(const QString& scope)

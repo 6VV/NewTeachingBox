@@ -30,35 +30,38 @@ public:
 		STEP,
 		MANUAL,
 	};
+	enum ExecuteState
+	{
+		EXECUTING,
+		STOP,
+	};
 
 public:
 	//QString GetCurrentScope() const;
 	TAstNode* CurrentProgramNode() const;
 	TAstNode* GetNextNode() const;
 	ExecuteMode GetExecuteMode() const;
+	ExecuteState GetExecuteState() const;
 	std::shared_ptr<TAstNode> GetRootNode() const;
 	int GetLineNumber() const;
 
-	bool IsAllowExecute() const;
-	void IsAllowExecute(bool isExecuting);
 	bool IsAllowSendCommandData() const;
 	void IsAllowSendCommandData(bool enabled);
 
 	//void SetCurrentScope(QString val);
 	void SetNextNode(TAstNode* nextNode);
 	void SetExecuteMode(ExecuteMode mode);
+	void SetExecuteState(ExecuteState mode);
 	void SetRootNode(std::shared_ptr<TAstNode> rootNode);
 	void SetLineNumber(int val);
 
-
 private:
 	ExecuteMode m_executeMode=ExecuteMode::AUTO;
+	ExecuteState m_executeState = ExecuteState::STOP;
 	std::shared_ptr<TAstNode> m_rootNode{ nullptr };
 	TAstNode*  m_nextNode=nullptr;
-
 	int m_lineNumber=1;
 
-	bool m_isAllowExecute = false;
 	bool m_isAllowSendData = false;
 };
 

@@ -24,11 +24,11 @@ private:
 	~InterpreterManager();
 
 public:
-	void AutoExecute();
+	bool AutoExecute();
 
-	void ManualExecute();
+	bool ManualExecute();
 
-	void StepExecute();
+	bool StepExecute();
 	void StopExecute();
 
 	void ExecuteNextCommand();

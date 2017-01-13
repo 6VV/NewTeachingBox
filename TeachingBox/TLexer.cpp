@@ -15,8 +15,6 @@ TLexer::~TLexer()
 {
 }
 
-
-
 const std::shared_ptr<TToken> TLexer::GetToken() const
 {
 	if (m_index>=m_tokens.size())
@@ -102,7 +100,13 @@ const bool TLexer::CheckPushOtherToken(const char c)
 	case '+':{PushToken(TYPE::OPERATOR_PLUS); }break;
 	case '-':{PushToken(TYPE::OPERATOR_MINUS); }break;
 	case '*':{PushToken(TYPE::OPERATOR_MULTIPLY); }break;
-	case '/':{PushToken(TYPE::OPERATOR_DIVIDE); }break;
+	case '/':{
+		if (m_reader.PeekChar(1) != '/'){
+			PushToken(TYPE::OPERATOR_DIVIDE);
+		}else{
+			PushTokenNote();
+		}
+	}break;
 	case '^':{PushToken(TYPE::OPERATOR_POWER); }break;
 	case '%':{PushToken(TYPE::OPERATOR_PERCENT); }break;
 	case '&':{PushToken(TYPE::OPERATOR_AND); }break;
@@ -116,22 +120,20 @@ const bool TLexer::CheckPushOtherToken(const char c)
 	case '>':{PushTokenGreat();}break;
 	case '<':{PushTokenLess();}break;
 	case '"':{PushTokenString();}break;
-	case '\\':{PushTokenNote();}break;
 	case '#':{SkipCharInSameLine();}break;
 	case  ',':{PushToken((TYPE::SEPARATOR_COMMA)); }break;
 	case '\0':{PushToken(TYPE::SEPARATOR_EOF); }break;
 	default:{return false;}
 	}
-
 	m_reader.GetNextChar();
 	return true;
 }
 
 void TLexer::PushTokenNote()
 {
-	if (m_reader.GetNextChar() != '\\')
+	if (m_reader.GetNextChar() != '/')
 	{
-		ThrowException_UnknownToken("\\");
+		ThrowException_UnknownToken("/");
 	}
 	else
 	{
@@ -205,7 +207,7 @@ void TLexer::PushTokenEqual()
 inline
 void TLexer::SkipCharInSameLine()
 {
-	while (IsEofOrEol(m_reader.GetNextChar())){}
+	while (!IsEofOrEol(m_reader.GetNextChar())){}
 	m_reader.UnGetChar();
 }
 

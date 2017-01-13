@@ -1,8 +1,6 @@
 ﻿#include "stdafx.h"
 #include "TeachingBox.h"
 #include <QtWidgets/QApplication>
-#include "KeyboardLineEdit.h"
-#include "SimpleKeyboard.h"
 
 
 int main(int argc, char *argv[])
@@ -14,4 +12,3 @@ int main(int argc, char *argv[])
 
 	return a.exec();
 }
-

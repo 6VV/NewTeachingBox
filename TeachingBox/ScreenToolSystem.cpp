@@ -45,7 +45,7 @@ void ScreenToolSystem::showEvent(QShowEvent *)
 
 	/*更新工具坐标系信息，列出当前所有可选的工具坐标系*/
 	auto scope = Context::projectContext.CurrentScope();
-	VariateWidgetProducer::UpdateComboBoxWithWholeName(TToolSys::TypeName(), TVariateManager::GetInstance()->GetVariatesMapScollUp(scope), m_comboBoxTool);
+	VariateWidgetProducer::UpdateComboBoxWithWholeName(TToolSys::TypeName(), TVariateManager::GetInstance()->GetAllVariatesMapScollUp(scope), m_comboBoxTool);
 
 	OnDataChanged();
 

@@ -122,7 +122,7 @@ bool ProjectManager::CreateProgram(const QString& project, const QString& progra
 
 QStringList ProjectManager::GetStateTexts(const QString& fileName)
 {
-	return QStringList{ fileName, "---" };
+	return QStringList{ fileName, "" };
 }
 
 QStringList ProjectManager::GetProjectFiles(const QString& project)

@@ -64,9 +64,14 @@ QVector<std::shared_ptr<TVariate>> TVariateManager::GetVariatesFromScope(const Q
 	return TVariateContext::GetInstance()->GetVariates(scope);
 }
 
-QMap<QString, QVector<std::shared_ptr<TVariate>>> TVariateManager::GetVariatesMapScollUp(const QString& scope)
+QVector<std::shared_ptr<TVariate>> TVariateManager::GetAvailableVariatesScollUp(const QString& scope)
 {
-	return TVariateContext::GetInstance()->GetVariatesMapScollUp(scope);
+	return TVariateContext::GetInstance()->GetAvailableVariatesScollUp(scope);
+}
+
+QMap<QString, QVector<std::shared_ptr<TVariate>>> TVariateManager::GetAllVariatesMapScollUp(const QString& scope)
+{
+	return TVariateContext::GetInstance()->GetAllVariatesMapScollUp(scope);
 }
 
 

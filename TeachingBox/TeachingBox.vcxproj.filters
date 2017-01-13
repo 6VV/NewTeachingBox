@@ -970,6 +970,18 @@
     <ClCompile Include="TDynamic.cpp">
       <Filter>Source Files\Variate\Variate</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TeachingBoxBroadcast.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TeachingBoxBroadcast.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_LabelWithBorder.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_LabelWithBorder.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="teachingbox.qrc">
@@ -1125,6 +1137,15 @@
     <CustomBuild Include="SimpleKeyboard.h">
       <Filter>Header Files\Widget\Keyboard</Filter>
     </CustomBuild>
+    <CustomBuild Include="TeachingBoxBroadcast.h">
+      <Filter>Header Files\Context</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LabelWithBorder.h">
+      <Filter>Header Files\Screen\Screen\Widget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ScreenState.h">
+      <Filter>Header Files\Screen\Screen</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="teachingbox_zh.qm">
@@ -1147,9 +1168,6 @@
     <ClInclude Include="ScreenAxis.h">
       <Filter>Header Files\Screen\Screen</Filter>
     </ClInclude>
-    <ClInclude Include="ScreenState.h">
-      <Filter>Header Files\Screen\Screen</Filter>
-    </ClInclude>
     <ClInclude Include="ScreenMainParent.h">
       <Filter>Header Files\Screen\ScreenMain</Filter>
     </ClInclude>
@@ -1158,9 +1176,6 @@
     </ClInclude>
     <ClInclude Include="ScreenUser.h">
       <Filter>Header Files\Screen\ScreenService</Filter>
-    </ClInclude>
-    <ClInclude Include="LabelWithBorder.h">
-      <Filter>Header Files\Screen\Screen\Widget</Filter>
     </ClInclude>
     <ClInclude Include="User.h">
       <Filter>Header Files\User</Filter>

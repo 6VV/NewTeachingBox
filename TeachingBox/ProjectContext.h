@@ -63,12 +63,12 @@ private:
 	ProjectContext& operator=(const ProjectContext&);
 
 private:
-	QStringList m_currentScopes{};
+	QStringList m_currentScopes{};	/*所有作用域，包括初始作用域、项目作用域、程序作用域*/
 
-	QString m_project{};
-	QStringList m_programs{};
-	QString m_programOpened{};
-	QString m_programLoading{};
+	QString m_project{};		/*加载的项目*/
+	QStringList m_programs{};	/*项目下所有程序*/
+	QString m_programOpened{};	/*当前打开的程序*/
+	QString m_programLoading{};	/*当前加载的程序*/
 };
 
 #endif

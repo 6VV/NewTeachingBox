@@ -31,6 +31,7 @@ void ScreenWarning::Init()
 	layout->setSpacing(0);
 	layout->addWidget(m_labelWarning,8);
 	layout->addWidget(m_btnConfrim, 1);
+	m_btnConfrim->setIcon(QIcon(QPixmap(":/new/image/Resources/Image/confirm_icon.png")));
 
 	UpdateText();
 }

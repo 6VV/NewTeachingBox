@@ -61,6 +61,15 @@
     <ClCompile Include="SciCodeEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SciRobot.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SciRobot.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="SciRobot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -81,6 +90,9 @@
       <Filter>Resource Files</Filter>
     </CustomBuild>
     <CustomBuild Include="SciCodeEditor.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SciRobot.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

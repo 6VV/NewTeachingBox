@@ -15,6 +15,7 @@
 #include "CodeEditor.h"
 #include "DynamicController.h"
 #include "CodeEditorManager.h"
+#include "TeachingBoxBroadcast.h"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -35,12 +36,10 @@ void TeachingBox::paintEvent(QPaintEvent *e)
 void TeachingBox::Init()
 {
 	InitContext();
-
 	setFixedSize(WIDTH, HEIGHT);
-
 	InitVertical();
-
 	UpdateText();
+	InitState();
 }
 
 void TeachingBox::InitVertical()
@@ -58,7 +57,7 @@ void TeachingBox::InitVertical()
 
 	InitTop(topLayout);
 	InitCenter(centerLayout);
-	InitBottom(bottomLayout);
+	InitBottomButton(bottomLayout);
 }
 
 /*************************************************
@@ -92,12 +91,22 @@ void TeachingBox::InitTop(QLayout* layout)
 	realLayout->addWidget(btnScram);
 	realLayout->addStretch(1);
 
+	Button* servoSwitch = new Button("Servo",this);
+	realLayout->addWidget(servoSwitch);
+	realLayout->addStretch(1);
+
 	connect(btnMode1, SIGNAL(clicked()), this, SLOT(SlotOnModelChanged()));
 	connect(btnMode2, SIGNAL(clicked()), this, SLOT(SlotOnModelChanged()));
 	connect(btnMode3, SIGNAL(clicked()), this, SLOT(SlotOnModelChanged()));
+
+	connect(servoSwitch, &Button::clicked, [this]{
+		static bool isServoOn = false;
+		isServoOn = !isServoOn;
+		emit(TeachingBoxBroadcast::GetInstance()->ServoStateChanged(isServoOn));
+	});
 }
 
-void TeachingBox::InitBottom(QLayout* layout)
+void TeachingBox::InitBottomButton(QLayout* layout)
 {
 	QHBoxLayout* realLayout = dynamic_cast<QHBoxLayout*>(layout);
 	QHBoxLayout* mainLayout = new QHBoxLayout();
@@ -152,7 +161,7 @@ void TeachingBox::InitCenter(QLayout* layout)
 	InitWarning(warningLayout);
 	InitOption(optionLayout);
 	InitScreen(screenLayout);
-	InitMovement(movementLayout);
+	InitMovementButton(movementLayout);
 }
 
 void TeachingBox::InitContext()
@@ -187,7 +196,7 @@ void TeachingBox::InitOption(QLayout* layout)
 	connect(btnCoordinate, &QPushButton::clicked, this, &TeachingBox::SlotOnCoordianteButtonClicked);
 }
 
-void TeachingBox::InitMovement(QLayout* layout)
+void TeachingBox::InitMovementButton(QLayout* layout)
 {
 	QGridLayout* realLayout = dynamic_cast<QGridLayout*>(layout);
 
@@ -240,6 +249,11 @@ void TeachingBox::InitScreen(QLayout* layout)
 	layout->addWidget(new Screen(this));
 	layout->setSpacing(0);
 	layout->setMargin(0);
+}
+
+void TeachingBox::InitState()
+{
+	SlotOnModelChanged();
 }
 
 void TeachingBox::InitWarning(QLayout* layout)
@@ -324,10 +338,16 @@ void TeachingBox::SlotOnStartButtonPressed()
 		switch (Context::interpreterContext.GetExecuteMode())
 		{
 		case InterpreterContext::AUTO:{
-			InterpreterManager::GetInstance()->AutoExecute();
+			if (!InterpreterManager::GetInstance()->AutoExecute())
+			{
+				QMessageBox::warning(this, tr("Operator failed"), tr("Already execute"));
+			}
 		}break;
 		case InterpreterContext::MANUAL:{
-			InterpreterManager::GetInstance()->ManualExecute();
+			if (!InterpreterManager::GetInstance()->ManualExecute())
+			{
+				QMessageBox::warning(this, tr("Operator failed"), tr("Already execute"));
+			}
 		}break;
 		case InterpreterContext::STEP:{
 			InterpreterManager::GetInstance()->StepExecute();

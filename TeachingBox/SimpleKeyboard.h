@@ -20,6 +20,7 @@
 
 #include "QWidget"
 #include "qcoreevent.h"
+#include <map>
 
 class IKeyboard;
 class KeyboardButton;
@@ -40,19 +41,16 @@ private:
 	void InitLayout();
 	void InitSignalSlot();
 
-	void OnButtonClicked();
 private:
 	struct KeyInfo
 	{
-		KeyInfo(Qt::Key lowerKeyType, Qt::Key upperKeyType, const QString& lowerText, const QString& upperText)
-			:lowerKeyType(lowerKeyType)
-			, upperKeyType(upperKeyType)
+		KeyInfo(Qt::Key keyType,const QString& lowerText, const QString& upperText)
+			:keyType(keyType)
 			, lowerText(lowerText)
 			, upperText(upperText)
 		{}
 		KeyInfo() = default;
-		Qt::Key lowerKeyType{};
-		Qt::Key upperKeyType{};
+		Qt::Key keyType{};
 		QString lowerText{};
 		QString upperText{};
 	};
@@ -64,59 +62,6 @@ private:
 	
 	bool m_isCapPressed = false;
 	bool m_isShiftPressed = false;
-
-	KeyboardButton* m_btnTilde;
-	KeyboardButton* m_btnNum1;
-	KeyboardButton* m_btnNum2;
-	KeyboardButton* m_btnNum3;
-	KeyboardButton* m_btnNum4;
-	KeyboardButton* m_btnNum5;
-	KeyboardButton* m_btnNum6;
-	KeyboardButton* m_btnNum7;
-	KeyboardButton* m_btnNum8;
-	KeyboardButton* m_btnNum9;
-	KeyboardButton* m_btnNum0;
-	KeyboardButton* m_btnMinus;
-	KeyboardButton* m_btnPlus;
-
-	KeyboardButton* m_btnQ;
-	KeyboardButton* m_btnW;
-	KeyboardButton* m_btnE;
-	KeyboardButton* m_btnR;
-	KeyboardButton* m_btnT;
-	KeyboardButton* m_btnY;
-	KeyboardButton* m_btnU;
-	KeyboardButton* m_btnI;
-	KeyboardButton* m_btnO;
-	KeyboardButton* m_btnP;
-	KeyboardButton* m_btnLeftBracket;
-	KeyboardButton* m_btnRightBracket;
-	KeyboardButton* m_btnBackSlash;
-	KeyboardButton* m_btnEqual;
-
-	KeyboardButton* m_btnA;
-	KeyboardButton* m_btnS;
-	KeyboardButton* m_btnD;
-	KeyboardButton* m_btnF;
-	KeyboardButton* m_btnG;
-	KeyboardButton* m_btnH;
-	KeyboardButton* m_btnJ;
-	KeyboardButton* m_btnK;
-	KeyboardButton* m_btnL;
-	KeyboardButton* m_btnSemicolon;
-	KeyboardButton* m_btnQuotation;
-
-	KeyboardButton* m_btnZ;
-	KeyboardButton* m_btnX;
-	KeyboardButton* m_btnC;
-	KeyboardButton* m_btnV;
-	KeyboardButton* m_btnB;
-	KeyboardButton* m_btnN;
-	KeyboardButton* m_btnM;
-	KeyboardButton* m_btnComma;
-	KeyboardButton* m_btnPeriod;
-	KeyboardButton* m_btnSlash;
-	KeyboardButton* m_btnSpace;
 };
 
 #endif

@@ -10,8 +10,6 @@
 #include "TString.h"
 
 
-
-
 MacroWidgetCommon::MacroWidgetCommon(const MacroInfo& macroInfo, QWidget* parent/*=0*/)
 	:MacroWidgetParent(macroInfo.GetText(), parent)
 	, m_macroInfo(macroInfo)

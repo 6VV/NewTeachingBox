@@ -14,7 +14,7 @@ void TInterpreterThread::SlotStepExecute()
 {
 	SlotExecuteNextCommand();
 
-	Context::interpreterContext.IsAllowExecute(false);	/*执行一条指令后，禁止执行之后语句 */
+	Context::interpreterContext.SetExecuteState(InterpreterContext::STOP);	/*执行一条指令后，禁止执行之后语句 */
 
 	SendEndCommand();
 }
@@ -29,14 +29,14 @@ void TInterpreterThread::SlotExecuteNextCommand()
 {
 	auto nextNode = Context::interpreterContext.GetNextNode();
 
-	while (nextNode != nullptr && Context::interpreterContext.IsAllowExecute() && Context::interpreterContext.IsAllowSendCommandData())
+	while (nextNode != nullptr && Context::interpreterContext.GetExecuteState()==InterpreterContext::EXECUTING && Context::interpreterContext.IsAllowSendCommandData())
 	{
 		nextNode->Execute();
 		nextNode = Context::interpreterContext.GetNextNode();
 	}
 	if (nextNode==nullptr)
 	{
-		Context::interpreterContext.IsAllowExecute(false);
+		Context::interpreterContext.SetExecuteState(InterpreterContext::STOP);
 	}
 }
 

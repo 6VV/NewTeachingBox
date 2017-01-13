@@ -31,11 +31,17 @@ std::shared_ptr<std::set<int>> MacroManager::GetIdSet() const
 	return m_idSet;
 }
 
+std::shared_ptr<QStringList> MacroManager::GetKeywords() const
+{
+	return m_keywords;
+}
+
 MacroManager::MacroManager()
 	:m_macroMap(std::make_shared<MacroMap>())
 	, m_categoryTypeMap(std::make_shared<TypeMap>())
 	, m_typeMacroMap(std::make_shared<TypeMap>())
 	, m_idSet(std::make_shared<std::set<int>>())
+	, m_keywords(std::make_shared<QStringList>())
 {
 	InitMapFromXmlFile();
 }
@@ -81,6 +87,7 @@ void MacroManager::InitMapFromXmlFile()
 
 				QString macroName = macroNode.toElement().attribute("name");
 				(*m_typeMacroMap)[typeName].insert(macroName);
+				m_keywords->append(macroName);
 
 				bool ok;
 				int id = macroNode.toElement().attribute("id").toInt(&ok);
@@ -98,9 +105,14 @@ void MacroManager::InitMapFromXmlFile()
 					{
 						parameterTypes.append(parameters.at(k).toElement().text());
 					}
-					else
+					else if (parameters.at(k).nodeName() == "Text")
 					{
 						text = parameters.at(k).toElement().text();
+					}
+					else if (parameters.at(k).nodeName() == "ExtraKeywords")
+					{
+						auto keywords = parameters.at(k).toElement().text().split(" ");
+						m_keywords->append(keywords);
 					}
 				}
 

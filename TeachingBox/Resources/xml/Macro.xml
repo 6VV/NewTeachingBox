@@ -40,22 +40,26 @@
         <Text>GOSUB *</Text>
       </Macro>
       <Macro name="FOR">
-        <Text>FOR *&#x000A;NEXT</Text>
+        <Text>FOR * TO * STEP *{&#x000A;}</Text>
+        <ExtraKeywords>TO STEP</ExtraKeywords>
       </Macro>
       <Macro name="IF">
-        <Text>IF *&#x000A;ENDIF</Text>
+        <Text>IF *{&#x000A;}</Text>
       </Macro>
       <Macro name="ELSEIF">
-        <Text>ELSE *</Text>
+        <Text>ELSE *{&#x000A;}</Text>
       </Macro>
       <Macro name="SWITCH">
-        <Text>SWITCH *&#x000A;DEFAULT&#x000A;BREAK&#x000A;ENDSWITCH</Text>
+        <Text>SWITCH *{&#x000A;DEFAULT&#x000A;BREAK&#x000A;}</Text>
       </Macro>
       <Macro name="CASE">
-        <Text>CASE *&#x000A;BREAK</Text>
+        <Text>CASE *{&#x000A;BREAK&#x000A;}</Text>
+      </Macro>
+      <Macro name="DEFAULT">
+        <Text>DEFAULT *{&#x000A;BREAK&#x000A;}</Text>
       </Macro>
       <Macro name="BREAK">
-        <Text>BREAK</Text>
+        <Text>BREAK&#x000A;}</Text>
       </Macro>
     </Type>
     <Type name="PROGRAM">

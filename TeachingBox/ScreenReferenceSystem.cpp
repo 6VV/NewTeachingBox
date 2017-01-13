@@ -33,7 +33,7 @@ void ScreenReferenceSystem::showEvent(QShowEvent *)
 {
 	disconnect(m_comboBoxRefSys, &QComboBox::currentTextChanged, this, &ScreenReferenceSystem::OnRefSysChanged);	/*断开连接*/
 
-	auto variatesMap = std::move(TVariateManager::GetInstance()->GetVariatesMapScollUp(Context::projectContext.CurrentScope()));
+	auto variatesMap = std::move(TVariateManager::GetInstance()->GetAllVariatesMapScollUp(Context::projectContext.CurrentScope()));
 
 	/*考虑到不同作用域内可能存在同名坐标系，故在组合框中显示坐标系名时，同时显示作用域名*/
 	m_variateWidgetProducer->UpdateComboBoxWithWholeName(TRefSys::TypeName(), variatesMap, m_comboBoxRefSys);
@@ -255,7 +255,7 @@ void ScreenReferenceSystem::OnDeleteButtonClicked()
 
 void ScreenReferenceSystem::OnSaveButtonClicked()
 {
-	TRefSys::ValueType value;
+	TRefSys::ValueType value{};
 	//value.baseSys = m_comboBoxBaseSys->currentText();
 
 	for (size_t i = 0; i < value.size(); ++i)

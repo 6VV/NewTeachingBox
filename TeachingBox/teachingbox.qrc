@@ -11,9 +11,27 @@
         <file>Resources/Image/S.PNG</file>
         <file>Resources/Image/G.PNG</file>
         <file>Resources/Image/KeyboardButton.png</file>
-        <file>Resources/Image/FloatingButton_Available.svg</file>
         <file>Resources/Image/keyboard_normal.png</file>
         <file>Resources/Image/keyboard_press.png</file>
         <file>Resources/Image/keyboard_hover.png</file>
+        <file>Resources/Image/wrong_icon.png</file>
+        <file>Resources/Image/execute_auto.png</file>
+        <file>Resources/Image/execute_manual.png</file>
+        <file>Resources/Image/execute_step.png</file>
+        <file>Resources/Image/execute_running.png</file>
+        <file>Resources/Image/execute_stop.png</file>
+        <file>Resources/Image/coordinate_system_icon.png</file>
+        <file>Resources/Image/tool_icon.png</file>
+        <file>Resources/Image/brand_icon.png</file>
+        <file>Resources/Image/speed_icon.png</file>
+        <file>Resources/Image/robot_icon.png</file>
+        <file>Resources/Image/project_icon.png</file>
+        <file>Resources/Image/program_icon.png</file>
+        <file>Resources/Image/power_off.png</file>
+        <file>Resources/Image/power_on.png</file>
+        <file>Resources/Image/confirm_icon.png</file>
+        <file>Resources/Image/double_horizon_line_icon.png</file>
+        <file>Resources/Image/cancle_icon.png</file>
+        <file>Resources/Image/files_icon.png</file>
     </qresource>
 </RCC>

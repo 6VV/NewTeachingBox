@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/CodeEditor">
-        <file>Resources/wrong_icon.png</file>
+        <file>Resources/execute_manual.png</file>
     </qresource>
 </RCC>

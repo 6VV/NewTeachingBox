@@ -89,7 +89,32 @@ QVector<std::shared_ptr<TVariate>> TVariateContext::GetVariates(const QString& s
 	return node->GetVariates();
 }
 
-QMap<QString, QVector<std::shared_ptr<TVariate>>> TVariateContext::GetVariatesMapScollUp(const QString& scope) const
+QVector<std::shared_ptr<TVariate>> TVariateContext::GetAvailableVariatesScollUp(const QString& scope) const
+{
+	QVector<std::shared_ptr<TVariate>> result;
+	QStringList names{};
+
+	auto scopeNode = m_rootNode->FindScope(scope).get();
+	while (scopeNode != nullptr)
+	{
+		auto variates = GetVariates(scopeNode->GetName());
+
+		for (auto variate:variates)
+		{
+			if (!names.contains(variate->GetName()))
+			{
+				result.push_back(variate);
+				names.push_back(variate->GetName());
+			}
+		}
+		
+		scopeNode = scopeNode->GetParentNode();
+	}
+
+	return result;
+}
+
+QMap<QString, QVector<std::shared_ptr<TVariate>>> TVariateContext::GetAllVariatesMapScollUp(const QString& scope) const
 {
 	QMap<QString, QVector<std::shared_ptr<TVariate>>> result;
 

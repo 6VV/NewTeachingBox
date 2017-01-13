@@ -34,6 +34,8 @@ public:
 	std::shared_ptr<TypeMap> GetCategoryTypeMap() const;
 	std::shared_ptr<TypeMap> GetTypeMacroMap() const ;
 	std::shared_ptr<std::set<int>> GetIdSet() const;
+	std::shared_ptr<QStringList> GetKeywords() const;
+
 private:
 	MacroManager();
 	MacroManager(const MacroManager&) = delete;
@@ -47,7 +49,7 @@ private:
 	std::shared_ptr<std::set<int>> m_idSet;
 	std::shared_ptr<TypeMap> m_categoryTypeMap;
 	std::shared_ptr<TypeMap> m_typeMacroMap;
-
+	std::shared_ptr<QStringList> m_keywords{};
 };
 
 #endif

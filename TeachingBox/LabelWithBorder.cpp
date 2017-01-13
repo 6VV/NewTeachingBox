@@ -16,8 +16,13 @@ LabelWithBorder::LabelWithBorder(const QString& text, QWidget* parent /*= 0*/)
 }
 
 
+int LabelWithBorder::GetBorderWidth() const
+{
+	return BORDER_WIDTH;
+}
+
 void LabelWithBorder::Init()
 {
-	this->setStyleSheet("border: 1px groove gray; background-color: rgba(255, 193, 245, 0%); ");
+	QLabel::setStyleSheet(ORIGIN_STYLE_SHEET);
 	this->setAlignment(Qt::AlignCenter);
 }

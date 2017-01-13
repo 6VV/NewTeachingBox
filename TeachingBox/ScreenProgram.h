@@ -40,7 +40,6 @@ private slots:
 	void SlotOnButtonSetPCClicked();
 
 private:
-
 	void Init();
 	void InitSignalSlot();
 	void InitButtonGroup();

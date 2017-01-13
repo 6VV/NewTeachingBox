@@ -23,37 +23,41 @@ void InterpreterManager::LoadProject(const QString& project)
 	Context::interpreterContext.SetRootNode(TAstNodeFactory::CreateAstFromProject(project));
 }
 
-void InterpreterManager::AutoExecute()
+bool InterpreterManager::AutoExecute()
 {
-	/*已经允许执行*/
-	if (Context::interpreterContext.IsAllowExecute())
+	/*已经执行*/
+	if (Context::interpreterContext.GetExecuteState()==InterpreterContext::EXECUTING)
 	{
-		return;
+		return false;
 	}
 
 	SaveFile();
 	LoadProject(Context::projectContext.ProjectLoaded());
 	UpdateStartNode();
 
-	Context::interpreterContext.IsAllowExecute(true);
+	Context::interpreterContext.SetExecuteState(InterpreterContext::EXECUTING);
 	Context::interpreterContext.IsAllowSendCommandData(true);
 	emit SignalAutoExecute();
+
+	return true;
 }
 
-void InterpreterManager::StepExecute()
+bool InterpreterManager::StepExecute()
 {
-	/*已经允许执行*/
-	if (Context::interpreterContext.IsAllowExecute())
+	/*已经执行*/
+	if (Context::interpreterContext.GetExecuteState()==InterpreterContext::EXECUTING)
 	{
-		return;
+		return false;
 	}
 	SaveFile();
 	LoadProject(Context::projectContext.ProjectLoaded());
 	UpdateStartNode();
 
-	Context::interpreterContext.IsAllowExecute(true);
+	Context::interpreterContext.SetExecuteState(InterpreterContext::EXECUTING);
 	Context::interpreterContext.IsAllowSendCommandData(true);
 	emit SignalStepExecute();
+
+	return true;
 }
 
 void InterpreterManager::UpdateStartNode()
@@ -62,14 +66,14 @@ void InterpreterManager::UpdateStartNode()
 	Context::interpreterContext.SetNextNode(GetNodeOnLineFromProgram(GetProgramNode(program), Context::interpreterContext.GetLineNumber()));
 }
 
-void InterpreterManager::ManualExecute()
+bool InterpreterManager::ManualExecute()
 {
-	AutoExecute();
+	return AutoExecute();
 }
 
 void InterpreterManager::StopExecute()
 {
-	Context::interpreterContext.IsAllowExecute(false);
+	Context::interpreterContext.SetExecuteState(InterpreterContext::STOP);
 
 	emit SignalStopExecute();
 }
@@ -86,6 +90,7 @@ void InterpreterManager::SaveFile()
 	projectManager.SaveFile(Context::projectContext.ProgramOpened(), CodeEditorManager::GetInstance()->Text());
 }
 
+
 TAstNode* InterpreterManager::GetProgramNode(const QString& program)
 {
 	auto rootNode = Context::interpreterContext.GetRootNode();
@@ -98,7 +103,6 @@ TAstNode* InterpreterManager::GetProgramNode(const QString& program)
 	while (childNode!=nullptr)
 	{
 		auto nodeText = childNode->GetToken()->Name();
-			//dynamic_cast<TTokenWithValue<QString>*>(childNode->GetToken().get())->GetValue();
 
 		if (nodeText==program)
 		{

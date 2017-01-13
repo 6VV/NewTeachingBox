@@ -4,9 +4,9 @@
 #include <chrono>
 #include <future>
 
-double DynamicController::Dynovr() const
+double DynamicController::Speed() const
 {
-	return m_dynovr;
+	return m_speed;
 }
 
 /*************************************************
@@ -29,7 +29,7 @@ void DynamicController::Accelerate()
 	catch (std::exception&)
 	{
 		/*若无法异步调用，每次增加1*/
-		++m_dynovr;
+		++m_speed;
 		return;
 	}
 
@@ -39,25 +39,22 @@ void DynamicController::AccelerateThread()
 {
 	while (m_isOperateDyn)
 	{
-		if (++m_dynovr > 100)
+		if (++m_speed > 100)
 		{
-			m_dynovr = 100;
+			m_speed = 100;
 			break;
 		}
 
-		UpdateLabels();
+		UpdateSpeed();
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
 }
 
 inline
-void DynamicController::UpdateLabels()
+void DynamicController::UpdateSpeed()
 {
-	for (auto label : m_lables)
-	{
-		label->setText(DynovrText());
-	}
+	m_speedComboBox->setCurrentText(SpeedText(m_speed));
 }
 
 void DynamicController::Decelerate()
@@ -71,7 +68,7 @@ void DynamicController::Decelerate()
 	catch (std::exception&)
 	{
 		/*若无法异步调用，每次减去1*/
-		--m_dynovr;
+		--m_speed;
 		return;
 	}
 }
@@ -80,16 +77,21 @@ void DynamicController::DecelerateThread()
 {
 	while (m_isOperateDyn)
 	{
-		if (--m_dynovr < 0)
+		if (--m_speed < 0)
 		{
-			m_dynovr = 0;
+			m_speed = 0;
 			break;
 		}
 
-		UpdateLabels();
+		UpdateSpeed();
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
+}
+
+const QString DynamicController::SpeedText(double speed) const
+{
+	return QString::number(speed) + QString("%");
 }
 
 void DynamicController::Stop()
@@ -97,17 +99,13 @@ void DynamicController::Stop()
 	m_isOperateDyn = false;
 }
 
-inline
-const QString DynamicController::DynovrText() const
+void DynamicController::AddWidget(QComboBox* speedComboBox)
 {
-	return QString::number(m_dynovr) + QString("%");
-}
+	m_speedComboBox = speedComboBox;
 
-void DynamicController::AddLabel(QLabel* label)
-{
-	m_lables.push_back(label);
-
-	label->setText(DynovrText());
+	connect(speedComboBox, static_cast<void(QComboBox::*)(const QString& text)>(&QComboBox::activated), [this](const QString& text){
+		m_speed = text.left(text.size() - 1).toDouble();
+	});
 }
 
 DynamicController* DynamicController::GetInstance()

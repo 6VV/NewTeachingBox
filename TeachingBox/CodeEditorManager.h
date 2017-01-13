@@ -28,7 +28,6 @@ public:
 
 	QWidget* GetWidget() const;
 
-
 	void HighlightPCLine(const QString& program, int lineNumber) const;
 	void HighlightCurrentPCLine() const;	/*高亮显示PC行*/
 	void HighlightWrongLine(const QString& program, const int lineNumber) const;	/*高亮显示错误行*/
@@ -37,12 +36,14 @@ public:
 
 	void Redo() const;
 
+	void SetText(const QString& text) const;
 	void SelectAll() const;
 	void Search(const QString& text) const;
 
 	QString Text() const;
 
 	void UpdateCurrentLine(const QString& text) const;
+	void UpdateVariateWords(const QStringList& words) const;
 	void Undo() const;
 
 	void InsertTextBeforeLine(const QString& text) const;	/*插入文本*/
