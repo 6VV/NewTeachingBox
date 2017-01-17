@@ -102,19 +102,6 @@ private:
 		QComboBox* m_widget;
 	};
 
-	class WidgetWithIcon :public LabelWithBorder
-	{
-	public:
-		WidgetWithIcon(QWidget* widget, const QString& iconPath, QWidget* parent = 0);
-
-		virtual void showEvent(QShowEvent *) override;
-
-	private:
-		QString m_iconPath;
-		QLabel* m_icon;
-		QWidget* m_widget;
-	};
-
 };
 
 #endif

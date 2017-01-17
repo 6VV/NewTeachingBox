@@ -260,10 +260,6 @@ void SciCodeEditor::updateMargin()
 
 void SciCodeEditor::updateKeywords(const QStringList& keywords)
 {
-	/*for (auto word : keywords)
-	{
-		m_apis->add(word);
-	}*/
 	m_apis->updateKeywords(keywords);
 	m_apis->prepare();
 

@@ -49,7 +49,7 @@ void Keyboard::InitLayout()
 	this->setWindowFlags(Qt::Popup);
 	
 	/*设置位置及大小*/
-	QRect rect = TeachingBoxContext::GetScreenRect();
+	QRect rect = TeachingBoxContext::GetInstance()->GetScreenRect();
 	this->setGeometry(rect.left(), (rect.top()+rect.bottom())/2, rect.width(), rect.height()/2);
 
 	/*总布局*/

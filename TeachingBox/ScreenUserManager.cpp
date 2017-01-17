@@ -26,7 +26,7 @@ ScreenUserManager::~ScreenUserManager()
 
 void ScreenUserManager::OnUpdate()
 {
-	int currentAuthority = TeachingBoxContext::GetUser().GetAuthority();
+	int currentAuthority = TeachingBoxContext::GetInstance()->GetUser().GetAuthority();
 	QList<User> suitableUsers;
 
 	QList<User> allUsers = UserDatabase::SelectAllUsers();

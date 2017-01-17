@@ -67,7 +67,8 @@ QWidget* DialogTeachReferenceSystem::OnePointKeepOrientationStep1()
 
 	layout->setStretch(0, 1);
 
-	m_lbIllustration->setText("OnePointKeepOrientationStep1");
+	m_lbIllustration->setPixmap(QPixmap(":/new/image/Resources/Image/ref_sys_1_points_keep_origin_step1.png")
+		.scaled(m_lbIllustration->width(), m_lbIllustration->height()));
 
 	return widget;
 }
@@ -81,8 +82,8 @@ QWidget* DialogTeachReferenceSystem::OriginWidget()
 	layout->addWidget(GetTeachToolWidget());
 	layout->addWidget(GetTeachMethodWidget());
 
-	m_lbIllustration->setText("OriginWidget");
-
+	m_lbIllustration->setPixmap(QPixmap(":/new/image/Resources/Image/ref_sys_illustration.png")
+		.scaled(m_lbIllustration->width(), m_lbIllustration->height()));
 	return widget;
 }
 
@@ -103,7 +104,8 @@ QWidget* DialogTeachReferenceSystem::ThreePointsWithOriginWidgetStep1()
 
 	layout->setStretch(0, 1);
 
-	m_lbIllustration->setText("ThreePointsWithOriginWidgetStep1");
+	m_lbIllustration->setPixmap(QPixmap(":/new/image/Resources/Image/ref_sys_3_points_with_origin_step1.png")
+		.scaled(m_lbIllustration->width(),m_lbIllustration->height()));
 
 	return widget;
 }
@@ -133,7 +135,8 @@ QWidget* DialogTeachReferenceSystem::ThreePointsWithOriginWidgetStep2()
 
 	layout->setStretch(1, 1);
 
-	m_lbIllustration->setText("ThreePointsWithOriginWidgetStep2");
+	m_lbIllustration->setPixmap(QPixmap(":/new/image/Resources/Image/ref_sys_3_points_with_origin_step2.png")
+		.scaled(m_lbIllustration->width(), m_lbIllustration->height()));
 
 	return widget;
 }
@@ -163,7 +166,8 @@ QWidget* DialogTeachReferenceSystem::ThreePointsWithOriginWidgetStep3()
 
 	layout->setStretch(1, 1);
 
-	m_lbIllustration->setText("ThreePointsWithOriginWidgetStep3");
+	m_lbIllustration->setPixmap(QPixmap(":/new/image/Resources/Image/ref_sys_3_points_with_origin_step3.png")
+		.scaled(m_lbIllustration->width(), m_lbIllustration->height()));
 
 	return widget;
 }
@@ -192,7 +196,8 @@ QWidget* DialogTeachReferenceSystem::ThreePointsWithoutOriginWidgetStep1()
 
 	layout->setStretch(1, 1);
 
-	m_lbIllustration->setText("ThreePointsWithoutOriginWidgetStep1");
+	m_lbIllustration->setPixmap(QPixmap(":/new/image/Resources/Image/ref_sys_3_points_without_origin_step1.png")
+		.scaled(m_lbIllustration->width(), m_lbIllustration->height()));
 
 	return widget;
 }
@@ -209,7 +214,8 @@ QWidget* DialogTeachReferenceSystem::ThreePointsWithoutOriginWidgetStep2()
 
 	layout->setStretch(0, 1);
 
-	m_lbIllustration->setText("ThreePointsWithoutOriginWidgetStep2");
+	m_lbIllustration->setPixmap(QPixmap(":/new/image/Resources/Image/ref_sys_3_points_without_origin_step2.png")
+		.scaled(m_lbIllustration->width(), m_lbIllustration->height()));
 
 	return widget;
 }
@@ -238,7 +244,8 @@ QWidget* DialogTeachReferenceSystem::ThreePointsWithoutOriginWidgetStep3()
 
 	layout->setStretch(1, 1);
 
-	m_lbIllustration->setText("ThreePointsWithoutOriginWidgetStep3");
+	m_lbIllustration->setPixmap(QPixmap(":/new/image/Resources/Image/ref_sys_3_points_without_origin_step3.png")
+		.scaled(m_lbIllustration->width(), m_lbIllustration->height()));
 
 	return widget;
 }
@@ -248,6 +255,13 @@ void DialogTeachReferenceSystem::UpdatePoseEuler(const tPoseEuler& point)
 {
 	m_iCoor->OnReceive(point);
 	delete this;
+}
+
+void DialogTeachReferenceSystem::showEvent(QShowEvent *e)
+{
+	DialogParent::showEvent(e);
+	m_lbIllustration->setPixmap(QPixmap(":/new/image/Resources/Image/ref_sys_illustration.png")
+		.scaled(m_lbIllustration->width(), m_lbIllustration->height()));
 }
 
 QWidget* DialogTeachReferenceSystem::GetReferenceSystemWidget()
@@ -549,7 +563,7 @@ DialogTeachReferenceSystem::RefSysWidget::RefSysWidget(QWidget* parent /*= 0*/)
 	layout->addWidget(m_lbZ, 2, 1);
 	layout->addWidget(new QLabel("mm"), 2, 2);
 
-	auto teachButton = new QPushButton(tr("Teach"));
+	auto teachButton = new QPushButton(QApplication::translate("DialogTeachReferenceSystem","Teach"));
 	layout->addWidget(teachButton, 3, 0, 1, 3);
 
 	connect(teachButton, &QPushButton::clicked, []{

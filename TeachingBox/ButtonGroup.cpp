@@ -24,8 +24,8 @@ void ButtonGroup::showEvent(QShowEvent *)
 		resize(m_parentButton->width(), m_parentButton->height()*m_btnList.size());
 	}
 
-	int positionLeft = m_parentButton->geometry().left() + TeachingBoxContext::GetScreenRect().left();
-	int positionBottom = TeachingBoxContext::GetScreenRect().bottom();
+	int positionLeft = m_parentButton->geometry().left() + TeachingBoxContext::GetInstance()->GetScreenRect().left();
+	int positionBottom = TeachingBoxContext::GetInstance()->GetScreenRect().bottom();
 
 	this->move(positionLeft, positionBottom - this->height()-m_parentButton->height());
 }

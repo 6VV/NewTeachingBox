@@ -302,6 +302,12 @@
     <Filter Include="Source Files\Variate\VariateInfo">
       <UniqueIdentifier>{ea4fd074-31ee-4ac0-8491-3ac57f4cd0a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Screen\ScreenWarning">
+      <UniqueIdentifier>{182e7d05-f6f8-4e88-85a5-8e91cd81cc53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenWarning">
+      <UniqueIdentifier>{9da63a74-018f-47ce-b743-f385d35a8e6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -339,15 +345,6 @@
     </ClCompile>
     <ClCompile Include="WarningLight.cpp">
       <Filter>Source Files\TeachingBox</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenWarning.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenWarning.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenWarning.cpp">
-      <Filter>Source Files\Screen\Screen</Filter>
     </ClCompile>
     <ClCompile Include="Screen.cpp">
       <Filter>Source Files\Screen\Screen</Filter>
@@ -982,6 +979,66 @@
     <ClCompile Include="GeneratedFiles\Release\moc_LabelWithBorder.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="ScreenWarningHeader.cpp">
+      <Filter>Source Files\Screen\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenWarningHeader.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenWarningHeader.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfirmButton.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenWarning.cpp">
+      <Filter>Source Files\Screen\ScreenWarning</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_WarningModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_WarningModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenWarning.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenWarning.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DateDelegate.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="WarningInfo.cpp">
+      <Filter>Source Files\Screen\ScreenWarning</Filter>
+    </ClCompile>
+    <ClCompile Include="WarningModel.cpp">
+      <Filter>Source Files\Screen\ScreenWarning</Filter>
+    </ClCompile>
+    <ClCompile Include="DateDelegate.cpp">
+      <Filter>Source Files\Screen\ScreenWarning</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DateDelegate.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ConfirmButton.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ConfirmButton.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TInterpreterInfo.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TInterpreterInfo.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TInterpreterInfo.cpp">
+      <Filter>Source Files\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetWithBorderAndIcon.cpp">
+      <Filter>Source Files\Screen\Screen\Widget</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="teachingbox.qrc">
@@ -998,9 +1055,6 @@
     </CustomBuild>
     <CustomBuild Include="WarningLight.h">
       <Filter>Header Files\TeachingBox</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenWarning.h">
-      <Filter>Header Files\Screen\Screen</Filter>
     </CustomBuild>
     <CustomBuild Include="ScreenService.h">
       <Filter>Header Files\Screen\ScreenService</Filter>
@@ -1146,6 +1200,27 @@
     <CustomBuild Include="ScreenState.h">
       <Filter>Header Files\Screen\Screen</Filter>
     </CustomBuild>
+    <CustomBuild Include="ScreenWarningHeader.h">
+      <Filter>Header Files\Screen\Screen</Filter>
+    </CustomBuild>
+    <CustomBuild Include="WarningModel.h">
+      <Filter>Header Files\Screen\ScreenWarning</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ScreenWarning.h">
+      <Filter>Header Files\Screen\ScreenWarning</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DateDelegate.h">
+      <Filter>Header Files\Screen\ScreenWarning</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ConfirmButton.h">
+      <Filter>Header Files\Widget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Exception.h">
+      <Filter>Header Files\Exception</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TInterpreterInfo.h">
+      <Filter>Header Files\Exception</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="teachingbox_zh.qm">
@@ -1182,9 +1257,6 @@
     </ClInclude>
     <ClInclude Include="Language.h">
       <Filter>Header Files\User</Filter>
-    </ClInclude>
-    <ClInclude Include="Exception.h">
-      <Filter>Header Files\Exception</Filter>
     </ClInclude>
     <ClInclude Include="IUserManager.h">
       <Filter>Header Files\Screen\ScreenService\UserManager</Filter>
@@ -1435,11 +1507,14 @@
     <ClInclude Include="TVariateFactory.h">
       <Filter>Header Files\Variate\Variate</Filter>
     </ClInclude>
-    <ClInclude Include="TVariateAbbreviation.h">
-      <Filter>Header Files\Variate\VariateInfo</Filter>
-    </ClInclude>
     <ClInclude Include="TVariateInfo.h">
       <Filter>Header Files\Variate\VariateInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="WarningInfo.h">
+      <Filter>Header Files\Screen\ScreenWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetWithBorderAndIcon.h">
+      <Filter>Header Files\Screen\Screen\Widget</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

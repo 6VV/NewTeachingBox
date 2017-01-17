@@ -60,6 +60,21 @@ QString TVariateInfo::GetAbbreviation(const QString& wholeName)
 	return iter->second;
 }
 
+QStringList TVariateInfo::GetAllTypeName()
+{
+	QStringList result{};
+
+	for (auto categorys:CategoryMap())
+	{
+		for (auto& type:*categorys.second)
+		{
+			result.append(type);
+		}
+	}
+
+	return result;
+}
+
 TVariateInfo::AbbreviationMapType& TVariateInfo::AbbreviationMap()
 {
 	static AbbreviationMapType map{};

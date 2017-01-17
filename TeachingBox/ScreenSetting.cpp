@@ -255,10 +255,10 @@ QGroupBox* ScreenSetting::CreateBoxLockScreenSetting()
 
 void ScreenSetting::showEvent(QShowEvent *)
 {
-	User user = TeachingBoxContext::GetUser();
+	User user = TeachingBoxContext::GetInstance()->GetUser();
 	m_cmbUser->setCurrentText(user.GetName());
 	m_lbAuthorityValue->setText(QString::number(user.GetAuthority()));
-	m_cmbLanguage->setCurrentText(TeachingBoxContext::GetLanguage());
+	m_cmbLanguage->setCurrentText(TeachingBoxContext::GetInstance()->GetLanguage());
 }
 
 void ScreenSetting::SlotChangeLanguage(int index)
@@ -277,7 +277,7 @@ void ScreenSetting::SlotChangeLanguage(int index)
 	if (translator->load(text))
 	{
 		qApp->installTranslator(translator);
-		TeachingBoxContext::SetLanguage(m_cmbLanguage->currentText());
+		TeachingBoxContext::GetInstance()->SetLanguage(m_cmbLanguage->currentText());
 	}
 }
 

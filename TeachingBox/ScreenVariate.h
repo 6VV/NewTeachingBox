@@ -34,6 +34,9 @@ class ScreenVariate :public ScreenMainParent, IEditVariate, IRemoteFeedbackListe
 	Q_OBJECT
 
 public:
+	const QString TYPE_ALL="";
+
+public:
 	virtual void OnNewVariate(TVariate& variate) override;
 
 private:
@@ -49,7 +52,7 @@ private slots:
 	void SlotOnTeachButtonClicked();
 
 private:
-	virtual QList<QPushButton*> GetButtonList() override;
+	virtual QList<QWidget*> GetButtonList() override;
 	virtual QLayout* GetMainLayout() override;
 	virtual void showEvent(QShowEvent *) override;
 
@@ -64,6 +67,7 @@ private:
 	void InitTreeWidget();
 	void InitButtonWidget();
 	void InitSignalSlot();
+	void InsertVariate(std::shared_ptr<TVariate> variate, QTreeWidgetItem* item);
 
 	bool IsVariateItem(QTreeWidgetItem* item) const;
 	bool IsScopeItem(QTreeWidgetItem* item) const;
@@ -79,6 +83,7 @@ private:
 	QPushButton* m_btnTeach;
 	QPushButton* m_btnClearUnused;
 	QPushButton* m_btnCheck;
+	QComboBox* m_comboBoxType;
 
 	ButtonGroup* m_btnGroupVariate;
 	QPushButton* m_btnCopy;

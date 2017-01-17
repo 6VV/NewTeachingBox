@@ -37,9 +37,9 @@ private:
 	TAstNode* GetProgramNode(const QString& program);
 	TAstNode* GetNodeOnLineFromProgram(TAstNode* programNode, int lineNumber);
 
-	void LoadProject(const QString& project);
+	bool LoadProject(const QString& project);
 
-	void SaveFile();
+	bool SaveFile();
 	void UpdateStartNode();
 
 signals:

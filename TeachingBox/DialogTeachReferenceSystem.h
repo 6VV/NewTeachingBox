@@ -43,6 +43,8 @@ public:
 	virtual void UpdateText() override;
 
 private:
+	void showEvent(QShowEvent *e) override;
+
 	QWidget* GetReferenceSystemWidget();
 	QWidget* GetTeachMethodWidget();
 	QWidget* GetTeachToolWidget();

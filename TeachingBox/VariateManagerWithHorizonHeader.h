@@ -46,7 +46,7 @@ public:
 			QTreeWidgetItem* parentItem：被插入的树形控件项
 	//  History:       
 	*************************************************/
-	void InsertVariate(const std::shared_ptr<TVariate> variate, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem);
+	QTreeWidgetItem* InsertVariate(const std::shared_ptr<TVariate> variate, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem);
 
 	/*************************************************
 	//  Method:        static std::shared_ptr<TVariate> GetVariate(QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)

@@ -14,9 +14,9 @@ ScreenCoordiante::ScreenCoordiante(QWidget* parent/*=nullptr*/)
 
 }
 
-QList<QPushButton*> ScreenCoordiante::GetButtonList()
+QList<QWidget*> ScreenCoordiante::GetButtonList()
 {
-	QList<QPushButton*> buttonList;
+	QList<QWidget*> buttonList;
 	buttonList.push_back(m_btnReferenceSystem);
 	buttonList.push_back(m_btnToolSystem);
 

@@ -34,6 +34,7 @@ public:
 		PROJECT,
 		PROGRAM,
 		COORDINATE,
+		WARNING,
 	};
 
 public:

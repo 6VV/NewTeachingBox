@@ -88,9 +88,9 @@ void ScreenProgram::InitSignalSlot()
 	connect(m_btnSetPC, SIGNAL(clicked()), this, SLOT(SlotOnButtonSetPCClicked()));
 }
 
-QList<QPushButton*> ScreenProgram::GetButtonList()
+QList<QWidget*> ScreenProgram::GetButtonList()
 {
-	QList<QPushButton*> btnList;
+	QList<QWidget*> btnList;
 
 	btnList.append(m_btnModify);
 	btnList.append(m_btnMacro);

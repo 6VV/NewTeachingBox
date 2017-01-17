@@ -20,19 +20,47 @@
 #include "QPoint"
 #include "QSize"
 
-namespace TeachingBoxContext
+class TeachingBoxContext
 {
-	const int STRING_MAX_LENGTH = 128;
+public:
+	static const int STRING_MAX_LENGTH = 128;
 
+public:
+	static TeachingBoxContext* GetInstance();
+
+private:
+	TeachingBoxContext();
+	TeachingBoxContext(const TeachingBoxContext&) = delete;
+	TeachingBoxContext& operator=(const TeachingBoxContext&) = delete;
+	~TeachingBoxContext() = default;
+
+public:
 	QString GetLanguage();
 	User GetUser();
 	QRect GetScreenRect();
 
+	bool IsMotOn();
+	bool IsServoOn();
+
+	void SetIsMotOn(bool isMotOn);
 	void SetTeachingBoxRect(const QRect& rect);
 	void SetScreenRect(const QRect& rect);
+	void SetIsServoOn(bool isServoOn);
 	void SetLanguage(const QString& language);
 	void SetUser(const User& user);
-}
+
+private:
+	User m_user{};
+	QString m_language;
+	QPoint m_screenPos{};
+	QPoint m_teachingBoxPos{};
+	QSize m_screenSize{};
+	QRect m_teachingBoxRect{};
+	QRect m_screenRect{};
+
+	bool m_isServoOn = false;
+	bool m_isMotOn = false;
+};
 
 
 #endif

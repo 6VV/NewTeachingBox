@@ -24,6 +24,8 @@ class LabelWithBorder :public QLabel
 
 private:
 	const int BORDER_WIDTH = 1;
+
+protected:
 	const QString ORIGIN_STYLE_SHEET = ".LabelWithBorder{border: "+QString::number(BORDER_WIDTH)+" groove gray; background-color: rgba(255, 193, 245, 0%);}";
 
 public:

@@ -37,9 +37,6 @@ public:
 		WRONG_PARAMETER,
 	};
 
-private:
-	static const QMap<int, QString> Exception_TEXT;
-
 public:
 	TInterpreterException(const InterpreterExceptionCode id,const int lineNumber,const QString& text="");
 

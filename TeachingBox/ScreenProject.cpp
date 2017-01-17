@@ -301,9 +301,9 @@ void ScreenProject::InitSignalSlot()
 	connect(TeachingBoxBroadcast::GetInstance(), &TeachingBoxBroadcast::OpenProgram, this, &ScreenProject::OpenProgram);
 }
 
-QList<QPushButton*> ScreenProject::GetButtonList()
+QList<QWidget*> ScreenProject::GetButtonList()
 {
-	QList<QPushButton*> buttons;
+	QList<QWidget*> buttons;
 	buttons.append(m_btnLoad);
 	buttons.append(m_btnOpen);
 	buttons.append(m_btnClose);

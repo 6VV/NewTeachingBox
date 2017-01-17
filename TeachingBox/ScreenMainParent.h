@@ -24,12 +24,12 @@ public:
 protected:
 	void showEvent(QShowEvent *) override;
 
-	virtual QList<QPushButton*> GetButtonList() =0;
+	virtual QList<QWidget*> GetButtonList() =0;
 	virtual QLayout* GetMainLayout() =0;
 
 private:
 	void Init();
-	void UpdateButtonLayout(const QList<QPushButton*>& btnList);
+	void UpdateButtonLayout(const QList<QWidget*>& btnList);
 
 private:
 	bool m_isFirstShow = true;

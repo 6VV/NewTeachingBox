@@ -19,6 +19,8 @@
 
 #include "QObject"
 
+class WarningInfo;
+
 class TeachingBoxBroadcast :public QObject
 {
 	Q_OBJECT
@@ -42,7 +44,8 @@ signals:
 	void ServoStateChanged(bool isOn);
 	void LoadProject(const QString& project, const QStringList& programs);
 	void OpenProgram(const QString& project, const QString& program);
-
+	void WarningThrowed(const WarningInfo& warningInfo);
+	void WarningStateChanged();
 };
 
 #endif

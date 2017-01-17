@@ -6,6 +6,7 @@
 #include "ScreenProject.h"
 #include "ScreenProgram.h"
 #include "ScreenCoordinate.h"
+#include "ScreenWarning.h"
 
 
 
@@ -74,6 +75,9 @@ QWidget* ScreenManager::CreateWithoutCheck(const ScreenType type, QWidget* paren
 	}break;
 	case ScreenType::COORDINATE:{
 		return new ScreenCoordiante(parent);
+	}break;
+	case ScreenType::WARNING:{
+		return new ScreenWarning(parent);
 	}break;
 	default:{
 		return nullptr;

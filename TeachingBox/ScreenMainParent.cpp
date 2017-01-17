@@ -17,7 +17,7 @@ ScreenMainParent::~ScreenMainParent()
 
 }
 
-void ScreenMainParent::UpdateButtonLayout(const QList<QPushButton*>& btnList)
+void ScreenMainParent::UpdateButtonLayout(const QList<QWidget*>& btnList)
 {
 	for (auto var : btnList)
 	{

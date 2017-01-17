@@ -35,6 +35,7 @@ public:
 	static CategoryMapType& CategoryMap();
 
 	static QString GetAbbreviation(const QString& wholeName);
+	static QStringList GetAllTypeName();	/*获取所有类型名*/
 
 private:
 	static AbbreviationMapType& AbbreviationMap();

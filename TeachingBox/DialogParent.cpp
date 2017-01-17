@@ -24,7 +24,7 @@ void DialogParent::showEvent(QShowEvent *)
 
 void DialogParent::SetSize()
 {
-	QRect screenRect = TeachingBoxContext::GetScreenRect();
+	QRect screenRect = TeachingBoxContext::GetInstance()->GetScreenRect();
 
 	/*设置固定大小*/
 	this->setFixedSize(screenRect.width() * 2 / 3, screenRect.height() * 2 / 3);
@@ -32,7 +32,7 @@ void DialogParent::SetSize()
 
 void DialogParent::SetPosition()
 {
-	QRect screenRect = TeachingBoxContext::GetScreenRect();
+	QRect screenRect = TeachingBoxContext::GetInstance()->GetScreenRect();
 
 	/*移动到屏幕中央*/
 	this->move(screenRect.left() + screenRect.width() / 2 - this->width() / 2,

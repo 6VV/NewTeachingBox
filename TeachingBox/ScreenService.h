@@ -38,7 +38,7 @@ private:
 	~ScreenService();
 	
 	virtual void UpdateText() override;
-	virtual QList<QPushButton*> GetButtonList() override;
+	virtual QList<QWidget*> GetButtonList() override;
 	virtual QLayout* GetMainLayout() override;
 
 	void Init();

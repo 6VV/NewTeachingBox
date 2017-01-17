@@ -92,7 +92,7 @@ void DialogNewAddress::UpdateText()
 
 void DialogNewAddress::SetSize()
 {
-	QRect screenRect = TeachingBoxContext::GetScreenRect();
+	QRect screenRect = TeachingBoxContext::GetInstance()->GetScreenRect();
 
 	/*设置固定大小*/
 	this->setFixedSize(screenRect.width() * 2 / 3, this->height());

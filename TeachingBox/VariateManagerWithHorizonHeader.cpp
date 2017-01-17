@@ -22,13 +22,15 @@ VariateManagerWithHorizonHeader::VariateManagerWithHorizonHeader()
 	}
 }
 
-void VariateManagerWithHorizonHeader::InsertVariate(const std::shared_ptr<TVariate> variate, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem)
+QTreeWidgetItem* VariateManagerWithHorizonHeader::InsertVariate(const std::shared_ptr<TVariate> variate, QTreeWidget* treeWidget, QTreeWidgetItem* parentItem)
 {
 	TreeWidgetItemWithSymbol* variateItem = new TreeWidgetItemWithSymbol(variate->GetSymbol(), parentItem);
 	variateItem->setText(0, variate->GetTypeName());
 	variateItem->setText(1, variate->GetName());
 
 	VariateWidgetMap::GetVariateWidget(variate->GetTypeName())->InsertVariate(variate, treeWidget, variateItem);
+
+	return variateItem;
 }
 
 std::shared_ptr<TVariate> VariateManagerWithHorizonHeader::GetVariate(QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)

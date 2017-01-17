@@ -159,6 +159,7 @@ QWidget* DialogTeachToolSystem::KeepOrientationWidgetResult()
 	QVBoxLayout* layout = new QVBoxLayout(box);
 
 	auto btnOnePointChangeOrientation = new QRadioButton(tr("1 point 6D"), box);
+	btnOnePointChangeOrientation->setChecked(true);
 
 	layout->addStretch(1);
 	layout->addWidget(new QLabel(tr("Change orientation")));

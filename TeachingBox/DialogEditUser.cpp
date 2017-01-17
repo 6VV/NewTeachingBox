@@ -75,7 +75,7 @@ void DialogEidtUser::InitLayout()
 	//this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint );
 	//this->setWindowModality(Qt::ApplicationModal);
 
-	User user = TeachingBoxContext::GetUser();
+	User user = TeachingBoxContext::GetInstance()->GetUser();
 
 	/*添加权限，最大权限不得超过当前用户的权限*/
 	for (int i = 1; i <= user.GetAuthority(); ++i)

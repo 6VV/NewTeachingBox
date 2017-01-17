@@ -19,7 +19,7 @@ ScreenUser::~ScreenUser()
 
 void ScreenUser::showEvent(QShowEvent *)
 {
-	User user = TeachingBoxContext::GetUser();
+	User user = TeachingBoxContext::GetInstance()->GetUser();
 	m_tableWidget->setItem(0, 0, new QTableWidgetItem(user.GetName()));
 	m_tableWidget->setItem(0, 2, new QTableWidgetItem(QString::number(user.GetAuthority())));
 }

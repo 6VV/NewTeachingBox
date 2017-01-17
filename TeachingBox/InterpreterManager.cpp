@@ -18,9 +18,15 @@ InterpreterManager* InterpreterManager::GetInstance()
 	return SingleTon<InterpreterManager>::GetInstance();
 }
 
-void InterpreterManager::LoadProject(const QString& project)
+bool InterpreterManager::LoadProject(const QString& project)
 {
-	Context::interpreterContext.SetRootNode(TAstNodeFactory::CreateAstFromProject(project));
+	auto rootNode = TAstNodeFactory::CreateAstFromProject(project);
+	if (rootNode->GetFirstChild()==nullptr)
+	{
+		return false;
+	}
+	Context::interpreterContext.SetRootNode(rootNode);
+	return true;
 }
 
 bool InterpreterManager::AutoExecute()
@@ -31,8 +37,10 @@ bool InterpreterManager::AutoExecute()
 		return false;
 	}
 
-	SaveFile();
-	LoadProject(Context::projectContext.ProjectLoaded());
+	if (!(SaveFile() && LoadProject(Context::projectContext.ProjectLoaded())))
+	{
+		return true;
+	}
 	UpdateStartNode();
 
 	Context::interpreterContext.SetExecuteState(InterpreterContext::EXECUTING);
@@ -49,8 +57,10 @@ bool InterpreterManager::StepExecute()
 	{
 		return false;
 	}
-	SaveFile();
-	LoadProject(Context::projectContext.ProjectLoaded());
+	if (!(SaveFile() && LoadProject(Context::projectContext.ProjectLoaded())))
+	{
+		return true;
+	}
 	UpdateStartNode();
 
 	Context::interpreterContext.SetExecuteState(InterpreterContext::EXECUTING);
@@ -83,11 +93,17 @@ void InterpreterManager::ExecuteNextCommand()
 	emit SignalExecuteNextCommand();
 }
 
-void InterpreterManager::SaveFile()
+bool InterpreterManager::SaveFile()
 {
+	if (Context::projectContext.ProgramOpened().size()==0)
+	{
+		return false;
+	}
 	ProjectManager projectManager;
 
 	projectManager.SaveFile(Context::projectContext.ProgramOpened(), CodeEditorManager::GetInstance()->Text());
+
+	return true;
 }
 
 

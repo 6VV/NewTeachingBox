@@ -16,6 +16,8 @@
 #include "DynamicController.h"
 #include "CodeEditorManager.h"
 #include "TeachingBoxBroadcast.h"
+#include "WarningInfo.h"
+#include "WarningModel.h"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -30,7 +32,7 @@ TeachingBox::~TeachingBox()
 void TeachingBox::paintEvent(QPaintEvent *e)
 {
 	InternationalWidget::paintEvent(e);
-	TeachingBoxContext::SetTeachingBoxRect(geometry());
+	TeachingBoxContext::GetInstance()->SetTeachingBoxRect(geometry());
 }
 
 void TeachingBox::Init()
@@ -100,8 +102,13 @@ void TeachingBox::InitTop(QLayout* layout)
 	connect(btnMode3, SIGNAL(clicked()), this, SLOT(SlotOnModelChanged()));
 
 	connect(servoSwitch, &Button::clicked, [this]{
-		static bool isServoOn = false;
-		isServoOn = !isServoOn;
+		if (Context::interpreterContext.GetExecuteMode()==InterpreterContext::AUTO)
+		{
+			emit(TeachingBoxBroadcast::GetInstance()->WarningThrowed(
+				WarningInfo{ WarningInfo::ID_PRESS_MANUAL_SERVO_BUTTON_AT_AUTO_MODE}));
+		}
+		auto isServoOn = !TeachingBoxContext::GetInstance()->IsServoOn();
+		TeachingBoxContext::GetInstance()->SetIsServoOn(isServoOn);
 		emit(TeachingBoxBroadcast::GetInstance()->ServoStateChanged(isServoOn));
 	});
 }
@@ -111,7 +118,7 @@ void TeachingBox::InitBottomButton(QLayout* layout)
 	QHBoxLayout* realLayout = dynamic_cast<QHBoxLayout*>(layout);
 	QHBoxLayout* mainLayout = new QHBoxLayout();
 	realLayout->addStretch(WARNING_WIDTH_RATIO + OPTION_WIDTH_RATIO);
-	realLayout->addLayout(mainLayout,SCREEN_WIDTH_RATIO);
+	realLayout->addLayout(mainLayout, SCREEN_WIDTH_RATIO);
 	realLayout->addStretch(MOVEMENT_WIDTH_RATIO);
 	realLayout->setSpacing(0);
 
@@ -141,7 +148,17 @@ void TeachingBox::InitBottomButton(QLayout* layout)
 	connect(btnVMinus, &Button::released, DynamicController::GetInstance(), &DynamicController::Stop);
 	connect(btnVPlus, &Button::pressed, DynamicController::GetInstance(), &DynamicController::Accelerate);
 	connect(btnVPlus, &Button::released, DynamicController::GetInstance(), &DynamicController::Stop);
+	connect(btnMot, &Button::clicked, [this]{
+		if (Context::interpreterContext.GetExecuteMode()!=InterpreterContext::AUTO)
+		{
+			emit(TeachingBoxBroadcast::GetInstance()->WarningThrowed(WarningInfo{WarningInfo::ID_PRESS_AUTO_SERVO_BUTTON_AT_MANUAL_MODE}));
+			return;
+		}
 
+		bool isMotOn = !TeachingBoxContext::GetInstance()->IsMotOn();
+		TeachingBoxContext::GetInstance()->SetIsMotOn(isMotOn);
+		emit(TeachingBoxBroadcast::GetInstance()->ServoStateChanged(isMotOn));
+	});
 }
 
 void TeachingBox::InitCenter(QLayout* layout)
@@ -167,6 +184,7 @@ void TeachingBox::InitCenter(QLayout* layout)
 void TeachingBox::InitContext()
 {
 	TcpManager::GetInstance();
+	WarningModel::GetInstance();
 }
 
 void TeachingBox::InitOption(QLayout* layout)
@@ -189,11 +207,24 @@ void TeachingBox::InitOption(QLayout* layout)
 	realLayout->addWidget(btnCoordinate);
 	realLayout->addWidget(btnWarning);
 
-	connect(btnService, SIGNAL(clicked()), this, SLOT(SlotOnServiceButtonClicked()));
-	connect(btnVariate, SIGNAL(clicked()), this, SLOT(SlotOnVariateButtonClicked()));
-	connect(btnProject, SIGNAL(clicked()), this, SLOT(SlotOnProjectButtonClicked()));
-	connect(btnProgram, SIGNAL(clicked()), this, SLOT(SlotOnProgramButtonClicked()));
-	connect(btnCoordinate, &QPushButton::clicked, this, &TeachingBox::SlotOnCoordianteButtonClicked);
+	connect(btnService, &QPushButton::clicked, []{
+		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::SERVICE);
+	});
+	connect(btnVariate, &QPushButton::clicked, this, []{
+		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::VARIATE);
+	});
+	connect(btnProject, &QPushButton::clicked, []{
+		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROJECT);
+	});
+	connect(btnProgram, &QPushButton::clicked, []{
+		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
+	});
+	connect(btnCoordinate, &QPushButton::clicked, []{
+		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::COORDINATE);
+	});
+	connect(btnWarning, &QPushButton::clicked, []{
+		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::WARNING);
+	});
 }
 
 void TeachingBox::InitMovementButton(QLayout* layout)
@@ -294,26 +325,6 @@ void TeachingBox::UpdateText()
 {
 }
 
-void TeachingBox::SlotOnServiceButtonClicked()
-{
-	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::SERVICE);
-}
-
-void TeachingBox::SlotOnVariateButtonClicked()
-{
-	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::VARIATE);
-}
-
-void TeachingBox::SlotOnProjectButtonClicked()
-{
-	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROJECT);
-}
-
-void TeachingBox::SlotOnProgramButtonClicked()
-{
-	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
-}
-
 void TeachingBox::SlotOnStartButtonReleased()
 {
 	switch (Context::interpreterContext.GetExecuteMode())
@@ -366,9 +377,4 @@ void TeachingBox::SlotOnStartButtonPressed()
 void TeachingBox::SlotOnStopButtonClicked()
 {
 	InterpreterManager::GetInstance()->StopExecute();
-}
-
-void TeachingBox::SlotOnCoordianteButtonClicked()
-{
-	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::COORDINATE);
 }

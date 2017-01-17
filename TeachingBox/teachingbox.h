@@ -67,14 +67,9 @@ private slots:
 
 	virtual void UpdateText() override;
 
-	void SlotOnServiceButtonClicked();
-	void SlotOnVariateButtonClicked();
-	void SlotOnProjectButtonClicked();
-	void SlotOnProgramButtonClicked();
 	void SlotOnStartButtonReleased();
 	void SlotOnStartButtonPressed();
 	void SlotOnStopButtonClicked();
-	void SlotOnCoordianteButtonClicked();
 
 
 private:

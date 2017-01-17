@@ -34,7 +34,7 @@ public:
 	ScreenCoordiante(QWidget* parent=nullptr);
 
 private:
-	virtual QList<QPushButton*> GetButtonList() override;
+	virtual QList<QWidget*> GetButtonList() override;
 	virtual QLayout* GetMainLayout() override;
 	virtual void UpdateText() override;
 

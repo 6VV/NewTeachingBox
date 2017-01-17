@@ -4,54 +4,75 @@
 #include "Language.h"
 
 
-namespace
+TeachingBoxContext* TeachingBoxContext::GetInstance()
 {
-	User g_user{};
-	QString g_language = Language::English();
-	QPoint g_screenPos{};
-	QPoint g_teachingBoxPos{};
-	QSize g_screenSize{};
-	QRect g_teachingBoxRect{};
-	QRect g_screenRect{};
+	static TeachingBoxContext context;
+	return &context;
+}
+
+TeachingBoxContext::TeachingBoxContext()
+	:m_language(Language::English())
+{
+
 }
 
 QString TeachingBoxContext::GetLanguage()
 {
-	return g_language;
+	return m_language;
 }
 
 User TeachingBoxContext::GetUser()
 {
-	return g_user;
+	return m_user;
 }
 
 
 
 QRect TeachingBoxContext::GetScreenRect()
 {
-	return QRect{ g_teachingBoxRect.left() + g_screenRect.left(),
-		g_teachingBoxRect.top() + g_screenRect.top(),
-		g_screenRect.width(),
-		g_screenRect.height() };
+	return QRect{ m_teachingBoxRect.left() + m_screenRect.left(),
+		m_teachingBoxRect.top() + m_screenRect.top(),
+		m_screenRect.width(),
+		m_screenRect.height() };
 	//return g_screenRect;
+}
+
+bool TeachingBoxContext::IsServoOn()
+{
+	return m_isServoOn;
+}
+
+void TeachingBoxContext::SetIsMotOn(bool isMotOn)
+{
+	m_isMotOn = isMotOn;
+}
+
+bool TeachingBoxContext::IsMotOn()
+{
+	return m_isMotOn;
 }
 
 void TeachingBoxContext::SetTeachingBoxRect(const QRect& rect)
 {
-	g_teachingBoxRect = rect;
+	m_teachingBoxRect = rect;
 }
 
 void TeachingBoxContext::SetScreenRect(const QRect& rect)
 {
-	g_screenRect = rect;
+	m_screenRect = rect;
+}
+
+void TeachingBoxContext::SetIsServoOn(bool isServoOn)
+{
+	m_isServoOn = isServoOn;
 }
 
 void TeachingBoxContext::SetLanguage(const QString& language)
 {
-	g_language = language;
+	m_language = language;
 }
 
 void TeachingBoxContext::SetUser(const User& user)
 {
-	g_user = user;
+	m_user = user;
 }
