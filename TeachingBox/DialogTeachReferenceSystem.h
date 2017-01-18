@@ -28,6 +28,7 @@
 
 class TRefSys;
 class ICoordinate;
+class Button;
 struct tPoseEuler;
 
 class DialogTeachReferenceSystem :public DialogParent
@@ -160,6 +161,8 @@ private:
 		RefSysWidget(QWidget* parent = 0);
 		~RefSysWidget();
 
+		void UpdatePose(const tPoseEuler& pose);
+
 	private:
 		virtual void OnReseivePose(const tPoseEuler& pose) override;
 
@@ -190,6 +193,7 @@ private:
 	QGridLayout* m_mainLayout = nullptr;
 	QLabel* m_lbIllustration=nullptr;
 	ICoordinate* m_iCoor=nullptr;
+	Button* m_btnNext = nullptr;
 };
 
 #endif

@@ -15,6 +15,7 @@
 #include "WarningManager.h"
 #include "CoordinateAdapter.h"
 #include "ICoordinate.h"
+#include "RefSysWidgetThreePointsWithOriginStep1.h"
 
 
 
@@ -337,16 +338,16 @@ QLayout* DialogTeachReferenceSystem::GetButtonLayout()
 {
 	QHBoxLayout* layout = new QHBoxLayout(this);
 
-	auto btnNext = new Button(tr("Next"), this);
+	m_btnNext = new Button(tr("Next"), this);
 	auto btnPre = new Button(tr("Pre"), this);
 	btnPre->setEnabled(false);
 	auto btnCancle = new Button(tr("Cancle"), this);
 
 	layout->addWidget(btnPre);
-	layout->addWidget(btnNext);
+	layout->addWidget(m_btnNext);
 	layout->addWidget(btnCancle);
 
-	connect(btnNext, &QPushButton::clicked, [this, btnPre,btnNext]{
+	connect(m_btnNext, &QPushButton::clicked, [this, btnPre]{
 		if (!m_controller.HaveNextStep())
 		{
 			UpdatePoseEuler(m_controller.GetDesPoseEuler());
@@ -358,19 +359,19 @@ QLayout* DialogTeachReferenceSystem::GetButtonLayout()
 		btnPre->setEnabled(m_controller.HavePreStep());
 		if (!m_controller.HaveNextStep())
 		{
-			btnNext->setText(tr("Complete"));
+			m_btnNext->setText(tr("Complete"));
 		}
 		else
 		{
-			btnNext->setText(tr("Next"));
+			m_btnNext->setText(tr("Next"));
 		}
 	});
 
-	connect(btnPre, &QPushButton::clicked, [this, btnPre, btnNext]{
+	connect(btnPre, &QPushButton::clicked, [this, btnPre]{
 		m_controller.PreStep();
 
 		btnPre->setEnabled(m_controller.HavePreStep());
-		btnNext->setEnabled(m_controller.HaveNextStep());
+		m_btnNext->setEnabled(m_controller.HaveNextStep());
 	});
 
 	connect(btnCancle, &QPushButton::clicked, [this]{delete this; });
@@ -413,11 +414,6 @@ DialogTeachReferenceSystem::Controller::~Controller()
 
 void DialogTeachReferenceSystem::Controller::NextStep()
 {
-	if (!IsTeached())
-	{
-		WarningManager::Warning(m_screenTeachReferenceSystem, tr("Not teached"));
-		return;
-	}
 	m_isTeached = false;
 
 	/*若已保存该位置坐标，则替换该位置，否则添加该位置*/
@@ -433,14 +429,18 @@ void DialogTeachReferenceSystem::Controller::NextStep()
 		}
 	}
 
+	/*进入下一步骤*/
 	++m_step;
 
+	/*切换下一界面*/
 	m_screenTeachReferenceSystem->m_mainLayout->removeWidget(m_screenTeachReferenceSystem->m_currentWidget);
 	delete m_screenTeachReferenceSystem->m_currentWidget;
 
 	m_screenTeachReferenceSystem->m_currentWidget = (m_screenTeachReferenceSystem->*m_stepMap[m_teachMethod][m_step])();
 	m_screenTeachReferenceSystem->m_mainLayout->addWidget(m_screenTeachReferenceSystem->m_currentWidget, 1, 0);
 
+	/*设置下一步按钮禁用状态*/
+	m_screenTeachReferenceSystem->m_btnNext->setEnabled(IsTeached());
 	if (!HaveNextStep())
 	{
 		assert(m_poses.size() == static_cast<size_t>(m_stepMap[m_teachMethod].size() - 1));
@@ -472,15 +472,23 @@ void DialogTeachReferenceSystem::Controller::NextStep()
 		assert(typeid(*m_screenTeachReferenceSystem->m_currentWidget) == typeid(EndWidget));
 		dynamic_cast<EndWidget*>(m_screenTeachReferenceSystem->m_currentWidget)->Update(m_desPoseEuler);
 	}
+	else
+	{
+		if (m_poses.size() > static_cast<size_t>(m_step))
+		{
+			dynamic_cast<RefSysWidget*>(m_screenTeachReferenceSystem->m_currentWidget)->UpdatePose(*m_poses[m_step]);
+		}
+	}
+
 }
 
 void DialogTeachReferenceSystem::Controller::PreStep()
 {
 	--m_step;
-	if (m_poses.size()> 0)
-	{
-		m_poses.erase(--m_poses.end());
-	}
+	//while (m_poses.size() > 0)
+	//{
+	//	m_poses.erase(--m_poses.end());
+	//}
 
 	m_screenTeachReferenceSystem->m_mainLayout->removeWidget(m_screenTeachReferenceSystem->m_currentWidget);
 	delete m_screenTeachReferenceSystem->m_currentWidget;
@@ -489,13 +497,17 @@ void DialogTeachReferenceSystem::Controller::PreStep()
 	{
 		m_poses.clear();
 		m_screenTeachReferenceSystem->m_currentWidget = m_screenTeachReferenceSystem->OriginWidget();
+
 	}
 	else
 	{
 		m_screenTeachReferenceSystem->m_currentWidget = (m_screenTeachReferenceSystem->*m_stepMap[m_teachMethod][m_step])();
+		//dynamic_cast<RefSysWidget*>(m_screenTeachReferenceSystem->m_currentWidget)->UpdatePose(*m_poses[m_step]);
 	}
 
 	m_screenTeachReferenceSystem->m_mainLayout->addWidget(m_screenTeachReferenceSystem->m_currentWidget, 1, 0);
+
+	m_screenTeachReferenceSystem->m_btnNext->setEnabled(IsTeached());
 }
 
 inline
@@ -519,15 +531,12 @@ void DialogTeachReferenceSystem::Controller::OnReseivePose(const tPoseEuler& pos
 {
 	m_poseEuler = std::make_shared<tPoseEuler>(pose);
 	m_isTeached = true;
+	m_screenTeachReferenceSystem->m_btnNext->setEnabled(IsTeached());
 }
 
 bool DialogTeachReferenceSystem::Controller::IsTeached()
 {
-	if (m_step<0)
-	{
-		return true;
-	}
-	if (m_poses.size()>static_cast<size_t>(m_step))
+	if (m_step<0 || m_poses.size()>static_cast<size_t>(m_step) || m_step==m_stepMap[m_teachMethod].size()-1)
 	{
 		return true;
 	}
@@ -583,6 +592,13 @@ void DialogTeachReferenceSystem::RefSysWidget::OnReseivePose(const tPoseEuler& p
 	m_lbZ->setText(QString::number(pose.m_PositionCartesian.m_Z));
 }
 
+
+void DialogTeachReferenceSystem::RefSysWidget::UpdatePose(const tPoseEuler& pose)
+{
+	m_lbX->setText(QString::number(pose.m_PositionCartesian.m_X));
+	m_lbY->setText(QString::number(pose.m_PositionCartesian.m_Y));
+	m_lbZ->setText(QString::number(pose.m_PositionCartesian.m_Z));
+}
 
 DialogTeachReferenceSystem::EndWidget::EndWidget(QWidget* parent /*= 0*/)
 	:QWidget(parent)

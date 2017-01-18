@@ -11,6 +11,7 @@
 #include "QMessageBox"
 #include <assert.h>
 #include "CoordinateContext.h"
+#include "RefSysDialog.h"
 
 
 ScreenReferenceSystem::ScreenReferenceSystem(QWidget* parent/*=nullptr*/)
@@ -245,7 +246,8 @@ void ScreenReferenceSystem::OnAddButtonClicked()
 
 void ScreenReferenceSystem::OnEditButtonClicked()
 {
-	(new DialogTeachReferenceSystem(GetVariate(),this,this))->show();
+	//(new DialogTeachReferenceSystem(GetVariate(),this,this))->show();
+	(new RefSysDialog(GetVariate(),this, this))->show();
 }
 
 void ScreenReferenceSystem::OnDeleteButtonClicked()

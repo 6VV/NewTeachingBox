@@ -91,6 +91,41 @@ QWidget* DialogTeachToolSystem::OriginWidget()
 	return box;
 }
 
+QWidget* DialogTeachToolSystem::OnePoint6D()
+{
+	QGroupBox* box = new QGroupBox(tr("Method 1 points 6D"));
+	QGridLayout* layout = new QGridLayout(box);
+
+	auto ltA = new QLineEdit("0.00");
+	auto ltB = new QLineEdit("0.00");
+	auto ltC = new QLineEdit("0.00");
+
+	ltA->setEnabled(false);
+	ltB->setEnabled(false);
+	ltC->setEnabled(false);
+
+	QVector<QLineEdit*> ltLists{ ltA, ltB, ltC };
+	QVector<QString> lbNames{ "A", "B", "C" };
+	QVector<QString> lbUnits{ QStringLiteral("°"), QStringLiteral("°"), QStringLiteral("°") };
+
+	for (int i = 0; i < ltLists.size(); ++i)
+	{
+		layout->addWidget(new QLabel(lbNames[i]), i, 0);
+		layout->addWidget(ltLists[i], i, 1);
+		layout->addWidget(new QLabel(lbUnits[i]), i, 2);
+	}
+
+	auto btnTeach = new QPushButton(tr("Teach"), box);
+	layout->addWidget(btnTeach, 3, 0, 1, 3);
+
+	connect(btnTeach, &QPushButton::clicked, [this]{
+		AssertNotImplement();
+
+	});
+
+	return box;
+}
+
 QWidget* DialogTeachToolSystem::FourPointKeepOrientationWidgetStep1()
 {
 	QGroupBox* box = new QGroupBox(tr("Method 4 points XYZ"));
@@ -208,7 +243,7 @@ DialogTeachToolSystem::Controller::Controller(DialogTeachToolSystem* screenMain,
 	&DialogTeachToolSystem::FourPointKeepOrientationWidgetStep3,
 	&DialogTeachToolSystem::FourPointKeepOrientationWidgetStep4,
 	&DialogTeachToolSystem::KeepOrientationWidgetResult,
-	&DialogTeachToolSystem::OnePointChangeOrientationWidgetStep1 });
+	&DialogTeachToolSystem::OnePoint6D });
 
 	m_stepMap.insert(TeachMethod::ONE_POINT_CHANGE_ORIENTATION,
 	{ &DialogTeachToolSystem::OnePointChangeOrientationWidgetStep1});

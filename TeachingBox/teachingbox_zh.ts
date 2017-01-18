@@ -90,113 +90,113 @@
     <name>DialogTeachReferenceSystem</name>
     <message>
         <location filename="DialogTeachReferenceSystem.cpp" line="62"/>
-        <location filename="DialogTeachReferenceSystem.cpp" line="98"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="99"/>
         <source>Origin Point</source>
         <translation type="unfinished">原点</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="115"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="117"/>
         <source>Axis Point</source>
         <translation type="unfinished">轴点</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="145"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="148"/>
         <source>Plane Point</source>
         <translation type="unfinished">平面点</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="175"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="179"/>
         <source>First point on axis</source>
         <translation type="unfinished">轴上第一点</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="204"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="209"/>
         <source>Second point on axis</source>
         <translation type="unfinished">轴上第二点</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="221"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="227"/>
         <source>Point on second axis</source>
         <translation type="unfinished">第二轴上的点</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="257"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="271"/>
         <source>System</source>
         <translation type="unfinished">坐标系</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="260"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="274"/>
         <source>Reference System</source>
         <translation type="unfinished">参考坐标系</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="275"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="289"/>
         <source>Select teach method</source>
         <translation type="unfinished">选择示教方法</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="286"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="300"/>
         <source>3 points(with origin)</source>
         <translation type="unfinished">3点法带原点</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="287"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="301"/>
         <source>3 points(without origin)</source>
         <translation type="unfinished">3点法无原点</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="288"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="302"/>
         <source>1 points(keep orientation)</source>
         <translation type="unfinished">1点法保持原点</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="307"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="321"/>
         <source>Tool for teaching</source>
         <translation type="unfinished">示教工具</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="314"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="328"/>
         <source>Illustration</source>
         <translation type="unfinished">说明</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="326"/>
-        <location filename="DialogTeachReferenceSystem.cpp" line="351"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="340"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="365"/>
         <source>Next</source>
         <translation type="unfinished">下一步</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="327"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="341"/>
         <source>Pre</source>
         <translation type="unfinished">上一步</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="329"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="343"/>
         <source>Cancle</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="347"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="361"/>
         <source>Complete</source>
         <translation type="unfinished">完成</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="404"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="418"/>
         <source>Not teached</source>
         <translation type="unfinished">未示教</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="435"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="449"/>
         <source>Failed</source>
         <translation type="unfinished">失败</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="552"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="566"/>
         <source>Teach</source>
         <translation type="unfinished">示教</translation>
     </message>
     <message>
-        <location filename="DialogTeachReferenceSystem.cpp" line="576"/>
+        <location filename="DialogTeachReferenceSystem.cpp" line="590"/>
         <source>Reference system</source>
         <translation type="unfinished">参考坐标系</translation>
     </message>
@@ -261,17 +261,17 @@
         <translation type="unfinished">1点6D</translation>
     </message>
     <message>
-        <location filename="DialogTeachToolSystem.cpp" line="164"/>
+        <location filename="DialogTeachToolSystem.cpp" line="165"/>
         <source>Change orientation</source>
         <translation type="unfinished">改变方向</translation>
     </message>
     <message>
-        <location filename="DialogTeachToolSystem.cpp" line="173"/>
+        <location filename="DialogTeachToolSystem.cpp" line="174"/>
         <source>Method 1 points 6D</source>
         <translation type="unfinished">1点法6D</translation>
     </message>
     <message>
-        <location filename="DialogTeachToolSystem.cpp" line="180"/>
+        <location filename="DialogTeachToolSystem.cpp" line="181"/>
         <source>Illustration</source>
         <translation type="unfinished">说明</translation>
     </message>
