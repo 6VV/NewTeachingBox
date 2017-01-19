@@ -118,6 +118,66 @@ QWidget* SystemDialogWidgetParent::PointWidgetXYZ()
 	return widget;
 }
 
+QWidget* SystemDialogWidgetParent::PointWidgetABC()
+{
+	QWidget* widget = new QWidget(this);
+	QGridLayout* layout = new QGridLayout(widget);
+
+	m_ltA = new QLineEdit("0.00");
+	m_ltB = new QLineEdit("0.00");
+	m_ltC = new QLineEdit("0.00");
+
+	m_ltA->setEnabled(false);
+	m_ltB->setEnabled(false);
+	m_ltC->setEnabled(false);
+
+	QVector<QLineEdit*> ltLists{ m_ltA, m_ltB, m_ltC };
+	QVector<QString> lbNames{ "A", "B", "C" };
+	QVector<QString> lbUnits{ QStringLiteral("°"), QStringLiteral("°"), QStringLiteral("°") };
+
+	for (int i = 0; i < ltLists.size(); ++i)
+	{
+		layout->addWidget(new QLabel(lbNames[i]), i, 0);
+		layout->addWidget(ltLists[i], i, 1);
+		layout->addWidget(new QLabel(lbUnits[i]), i, 2);
+	}
+
+	return widget;
+}
+
+QWidget* SystemDialogWidgetParent::PointWidgetXYZABC()
+{
+	QWidget* widget = new QWidget(this);
+	QGridLayout* layout = new QGridLayout(widget);
+
+	m_ltX = new QLineEdit("0.00");
+	m_ltY = new QLineEdit("0.00");
+	m_ltZ = new QLineEdit("0.00");
+	m_ltA = new QLineEdit("0.00");
+	m_ltB = new QLineEdit("0.00");
+	m_ltC = new QLineEdit("0.00");
+
+	m_ltX->setEnabled(false);
+	m_ltY->setEnabled(false);
+	m_ltZ->setEnabled(false);
+	m_ltA->setEnabled(false);
+	m_ltB->setEnabled(false);
+	m_ltC->setEnabled(false);
+
+	QVector<QLineEdit*> ltLists{ m_ltX, m_ltY, m_ltZ, m_ltA, m_ltB, m_ltC };
+	QVector<QString> lbNames{ "X", "Y", "Z", "A", "B", "C" };
+	QVector<QString> lbUnits{ "mm", "mm", "mm", QStringLiteral("°"), QStringLiteral("°"), QStringLiteral("°") };
+
+	for (int i = 0; i < ltLists.size(); ++i)
+	{
+		layout->addWidget(new QLabel(lbNames[i]), i, 0);
+		layout->addWidget(ltLists[i], i, 1);
+		layout->addWidget(new QLabel(lbUnits[i]), i, 2);
+	}
+
+	return widget;
+}
+
 void SystemDialogWidgetParent::Init()
 {
 	QVBoxLayout* layout = new QVBoxLayout(this);
@@ -182,6 +242,12 @@ void SystemDialogWidgetParent::OnReseivePose(const tPoseEuler& pose/*= */)
 		m_ltX->setText(QString::number(pose.m_PositionCartesian.m_X));
 		m_ltY->setText(QString::number(pose.m_PositionCartesian.m_Y));
 		m_ltZ->setText(QString::number(pose.m_PositionCartesian.m_Z));
+	}
+	if (m_ltA != nullptr && m_ltB != nullptr && m_ltC != nullptr)
+	{
+		m_ltA->setText(QString::number(pose.m_PostureEuler.m_A));
+		m_ltB->setText(QString::number(pose.m_PostureEuler.m_B));
+		m_ltC->setText(QString::number(pose.m_PostureEuler.m_C));
 	}
 }
 

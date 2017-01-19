@@ -38,31 +38,30 @@ private:
 	virtual void UpdateText() override;
 	virtual void OnReceive(const tPoseEuler& poseEuler) override;
 
-	QWidget* GetButtonWidget();
-	QWidget* GetOffsetDataWidget();
-	QWidget* GetSystemWidget();
-	QWidget* GetTcpValueWidget();
-	QLayout* GetValuesWidget(std::array<QLineEdit*,6> widgets,bool enabled);
-	QLabel* GetValuesIllustrateWidget();
 	TRefSys* GetVariate();
 	QString GetVariateName();
 	QString GetVariateScope();
 
 	void Init();
+	QWidget* InitButtonWidget();
+	QWidget* InitOffsetDataWidget();
+	QWidget* InitSystemWidget();
+	QWidget* InitTcpValueWidget();
+	QLayout* InitValuesWidget(std::array<QLineEdit*,6> widgets,bool enabled);
+	QLabel* InitValuesIllustrateWidget();
 
-	void OnAddButtonClicked();
 	void OnEditButtonClicked();
 	void OnDeleteButtonClicked();
 	void OnSaveButtonClicked();
-
 	void OnRefSysChanged();
+
+	void UpdateWidgetState();
 
 private:
 	std::unique_ptr<VariateWidgetProducer> m_variateWidgetProducer;
 
 	Button* m_btnSave;
 	Button* m_btnEdit;
-	Button* m_btnAdd;
 	Button* m_btnDelete;
 
 	QGroupBox* m_systemBox;

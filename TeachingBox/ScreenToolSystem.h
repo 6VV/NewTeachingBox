@@ -25,6 +25,7 @@
 
 #include "InternationalWidget.h"
 #include "QVector"
+#include "ICoordinate.h"
 
 class QGroupBox;
 class QPushButton; 
@@ -34,7 +35,7 @@ class QLineEdit;
 
 class TToolSys;
 
-class ScreenToolSystem :public InternationalWidget
+class ScreenToolSystem :public InternationalWidget, ICoordinate
 {
 	Q_OBJECT
 
@@ -44,16 +45,17 @@ public:
 	
 private:
 	virtual void UpdateText() override;
-	
+	virtual void OnReceive(const tPoseEuler& poseEuler) override;
+
 	//显示界面时，更新控件信息，包括：
 	//当前可用的工具坐标系，当前选择的工具坐标系值
 	virtual void showEvent(QShowEvent *) override;
 
 	//TVariate* GetCurrentVariate();
-	QWidget* GetDataWidget();
-	QWidget* GetIllustrationWidget();
-	QWidget* GetToolWidget();
-	QWidget* GetButtonWidget();
+	QWidget* CreateDataWidget();
+	QWidget* CreateIllustrationWidget();
+	QWidget* CreateToolWidget();
+	QWidget* CreateButtonWidget();
 
 	TToolSys* GetVariate();
 	QString GetVariateName();
@@ -63,12 +65,20 @@ private:
 
 	void OnDataChanged();
 
+	void UpdateWidgetState();
+
 private:
+	QLineEdit* m_ltX;
+	QLineEdit* m_ltY;
+	QLineEdit* m_ltZ;
+	QLineEdit* m_ltA;
+	QLineEdit* m_ltB;
+	QLineEdit* m_ltC;
+
 	QGroupBox* m_toolBox;
 	QGroupBox* m_dataBox;
 	QGroupBox* m_illustrationBox;
 
-	QPushButton* m_btnAdd;
 	QPushButton* m_btnDelete;
 	QPushButton* m_btnEdit;
 	QPushButton* m_btnSave;

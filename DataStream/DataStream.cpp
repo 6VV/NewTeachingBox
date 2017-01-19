@@ -2,7 +2,7 @@
 #include "DataStruct.h"
 #include "QByteArray"
 #include "QDataStream"
-#include "..\TeachingBox\DataStruct.h"
+#include "DataStruct.h"
 
 
 

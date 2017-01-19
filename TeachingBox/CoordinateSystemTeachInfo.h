@@ -27,6 +27,8 @@ public:
 		REF_SYS_THREE_POINTS_WITH_ORIGIN,
 		REF_SYS_THREE_POINTS_WITHOUT_ORIGIN,
 		REF_SYS_ONE_POINT_KEEP_ORIENTATION,
+		TOOL_SYS_FOUR_POINTS,
+		ONE_POINT_6D,
 	};
 	enum Orientation
 	{
@@ -36,6 +38,9 @@ public:
 		XY,
 		YZ,
 		ZX,
+		IX,	/*X反向*/
+		IY,
+		IZ,
 	};
 	struct CoorSysInfo
 	{

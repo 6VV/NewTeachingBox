@@ -52,6 +52,16 @@ tPositionCartesian CoorToLocal(const Coor::tPositionCartesian& point)
 	return result;
 }
 
+tPostureEuler CoorToLocal(const Coor::tPostureEuler& point)
+{
+	tPostureEuler result;
+	result.m_A = point.m_A;
+	result.m_B = point.m_B;
+	result.m_C = point.m_C;
+
+	return result;
+}
+
 tPoseEuler CoordinateAdapter::CartTeachThreeBase(const tPoseEuler& point1, const tPoseEuler& point2, const tPoseEuler& point3, int xyz, int xyzxyz)
 {
 	auto cp1 = LocalToCoor(point1);
@@ -61,13 +71,13 @@ tPoseEuler CoordinateAdapter::CartTeachThreeBase(const tPoseEuler& point1, const
 	return CoorToLocal(Coor::CartTeachThreeBase(cp1, cp2, cp3,xyz,xyzxyz));
 }
 
-tPoseEuler CoordinateAdapter::CartTeachThreeNoBase(const tPoseEuler& point1, const tPoseEuler& point2, const tPoseEuler& point3, int xyz, int xyzxyz)
+tPoseEuler CoordinateAdapter::CartTeachThreeNoBase(const tPoseEuler& point1, const tPoseEuler& point2, const tPoseEuler& point3, int xyz1_p, int xyz2_p)
 {
 	auto cp1 = LocalToCoor(point1);
 	auto cp2 = LocalToCoor(point2);
 	auto cp3 = LocalToCoor(point3);
 
-	return CoorToLocal(Coor::CartTeachThreeNoBase(cp1, cp2, cp3,xyz,xyzxyz));
+	return CoorToLocal(Coor::CartTeachThreeNoBase(cp1, cp2, cp3, xyz1_p, xyz2_p));
 }
 
 tPoseEuler CoordinateAdapter::CartTeachOne(const tPositionCartesian& point1)
@@ -75,4 +85,23 @@ tPoseEuler CoordinateAdapter::CartTeachOne(const tPositionCartesian& point1)
 	auto cp1 = LocalToCoor(point1);
 
 	return CoorToLocal(Coor::CartTeachOne(cp1));
+}
+
+tPositionCartesian CoordinateAdapter::ToolFrameSetWithFourPoints(tPoseEuler& Point1_p, tPoseEuler& Point2_p, tPoseEuler& Point3_p, tPoseEuler& Point4_p)
+{
+	auto cp1 = LocalToCoor(Point1_p);
+	auto cp2 = LocalToCoor(Point2_p);
+	auto cp3 = LocalToCoor(Point3_p);
+	auto cp4 = LocalToCoor(Point4_p);
+
+
+	return CoorToLocal(Coor::ToolFrameSetWithFourPoints(cp1, cp2, cp3, cp4));
+}
+
+tPostureEuler CoordinateAdapter::ToolFrameSetWithOnePoint(tPoseEuler& PoseRobot_p, int mode_p, unsigned char direction_p)
+{
+	auto cp = LocalToCoor(PoseRobot_p);
+
+	return CoorToLocal(Coor::ToolFrameSetWithOnePoint(cp,mode_p,direction_p));
+
 }

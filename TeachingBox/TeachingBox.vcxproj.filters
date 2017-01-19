@@ -814,12 +814,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ScreenToolSystem.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DialogTeachReferenceSystem.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DialogTeachReferenceSystem.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="ScreenToolSystem.cpp">
       <Filter>Source Files\Screen\ScreenCoordinate</Filter>
     </ClCompile>
@@ -1051,18 +1045,6 @@
     <ClCompile Include="WidgetWithBorderAndIcon.cpp">
       <Filter>Source Files\Screen\Screen\Widget</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DialogTeachToolSystem.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DialogTeachToolSystem.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="DialogTeachReferenceSystem.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="DialogTeachToolSystem.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_SystemDialogWidgetParent.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -1075,9 +1057,6 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_RefSysWidgetThreePointsWithOriginStep1.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="RefSysWidgetThreePointsWithOriginStep1.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_RefSysWidgetThreePointsWithOriginStep1.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
@@ -1086,15 +1065,6 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_RefSysDialog.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="RefSysWidgetThreePointsWithOriginStep3.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="RefSysWidgetThreePointsWithOriginStep2.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="RefSysDialog.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_RefSysWidgetThreePointsWithoutOriginStep1.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -1108,32 +1078,59 @@
     <ClCompile Include="GeneratedFiles\Release\moc_RefSysWidgetOnePointKeepOrientation.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="RefSysWidgetOnePointKeepOrientation.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="RefSysWidgetOrigin.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="RefSysWidgetThreePointsWithoutOriginStep1.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="RefSysWidgetThreePointsWithoutOriginStep2.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="RefSysWidgetThreePointsWithoutOriginStep3.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="RefSysWidgetEnd.cpp">
-      <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="CoordinateSystemTeachInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_RefSysWidgetEnd.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_RefSysWidgetEnd.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="RefSysDialog.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RefSysWidgetEnd.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RefSysWidgetOnePointKeepOrientation.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RefSysWidgetOrigin.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RefSysWidgetThreePointsWithOriginStep1.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RefSysWidgetThreePointsWithOriginStep2.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RefSysWidgetThreePointsWithOriginStep3.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RefSysWidgetThreePointsWithoutOriginStep1.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RefSysWidgetThreePointsWithoutOriginStep2.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RefSysWidgetThreePointsWithoutOriginStep3.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="CoordinateSystemTeachInfo.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolSysDialog.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolSysWidgetFourPoints.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolSysWidgetOnePoint6D.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolSysWidgetOrigin.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolSysWidgetEnd.cpp">
+      <Filter>Source Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1314,29 +1311,23 @@
     <CustomBuild Include="TInterpreterInfo.h">
       <Filter>Header Files\Exception</Filter>
     </CustomBuild>
-    <CustomBuild Include="DialogTeachReferenceSystem.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DialogTeachToolSystem.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
-    </CustomBuild>
     <CustomBuild Include="SystemDialogWidgetParent.h">
       <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
     </CustomBuild>
-    <CustomBuild Include="RefSysWidgetThreePointsWithOriginStep1.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
+    <CustomBuild Include="RefSysWidgetEnd.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
     </CustomBuild>
-    <CustomBuild Include="RefSysDialog.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
+    <CustomBuild Include="RefSysWidgetThreePointsWithOriginStep1.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
     </CustomBuild>
     <CustomBuild Include="RefSysWidgetThreePointsWithoutOriginStep1.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
+      <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RefSysDialog.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
     </CustomBuild>
     <CustomBuild Include="RefSysWidgetOnePointKeepOrientation.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </CustomBuild>
-    <CustomBuild Include="RefSysWidgetEnd.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
+      <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -1630,23 +1621,38 @@
     <ClInclude Include="WidgetWithBorderAndIcon.h">
       <Filter>Header Files\Screen\Screen\Widget</Filter>
     </ClInclude>
-    <ClInclude Include="RefSysWidgetThreePointsWithOriginStep2.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClInclude>
-    <ClInclude Include="RefSysWidgetThreePointsWithOriginStep3.h">
+    <ClInclude Include="CoordinateSystemTeachInfo.h">
       <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
     </ClInclude>
     <ClInclude Include="RefSysWidgetOrigin.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
+      <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
     </ClInclude>
-    <ClInclude Include="RefSysWidgetThreePointsWithoutOriginStep3.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
+    <ClInclude Include="RefSysWidgetThreePointsWithOriginStep2.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="RefSysWidgetThreePointsWithOriginStep3.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
     </ClInclude>
     <ClInclude Include="RefSysWidgetThreePointsWithoutOriginStep2.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
+      <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
     </ClInclude>
-    <ClInclude Include="CoordinateSystemTeachInfo.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
+    <ClInclude Include="RefSysWidgetThreePointsWithoutOriginStep3.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolSysDialog.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolSysWidgetOrigin.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolSysWidgetFourPoints.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolSysWidgetOnePoint6D.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolSysWidgetEnd.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\ToolSystemDialog</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

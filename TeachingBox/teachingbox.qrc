@@ -48,5 +48,12 @@
         <file>Resources/Image/ref_sys_3_points_without_origin_step3.png</file>
         <file>Resources/Image/ref_sys_illustration.png</file>
         <file>Resources/Image/ref_sys_end.png</file>
+        <file>Resources/Image/tool_sys_1_point_6D.png</file>
+        <file>Resources/Image/tool_sys_illustration.png</file>
+        <file>Resources/Image/tool_sys_4_points_step1.png</file>
+        <file>Resources/Image/tool_sys_4_points_step2.png</file>
+        <file>Resources/Image/tool_sys_4_points_step3.png</file>
+        <file>Resources/Image/tool_sys_4_points_step4.png</file>
+        <file>Resources/Image/tool_sys_end.png</file>
     </qresource>
 </RCC>

@@ -1,17 +1,13 @@
 ﻿#include "stdafx.h"
 #include "RemoteParser.h"
-#include "DataStruct.h"
-#include "TAstNode.h"
-#include "TTokenWithValue.h"
+#include "RemoteFeedbackController.h"
+#include "..\DataStream\DataStream.h"
 #include "Context.h"
 #include "InterpreterManager.h"
-#include "CodeEditor.h"
-#include "RemoteFeedbackController.h"
 #include "TAstNodeProgram.h"
 #include <assert.h>
-#include "..\DataStream\DataStream.h"
-#include <xutility>
 #include "CodeEditorManager.h"
+#include "TToken.h"
 
 
 RemoteParser::RemoteParser(QObject* parent/*=nullptr*/)
@@ -64,6 +60,7 @@ void RemoteParser::ParseOneCommand(QByteArray& command) const
 	case CommandId::ROBOT_POSE_EULER:{
 		tPoseEuler pose;
 		stream >> pose;
+
 		RemoteFeedbackController::GetInstance()->OnReseivePoseEuler(pose);
 	}break;
 	default:

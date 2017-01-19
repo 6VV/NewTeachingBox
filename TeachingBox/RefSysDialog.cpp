@@ -96,6 +96,11 @@ void RefSysDialog::Init()
 			delete this;
 		});
 	}
+
+	connect(dynamic_cast<SystemDialogWidgetParent*>(m_endWidget), &RefSysWidgetEnd::SignalCompletePose, [this](const tPoseEuler& poseEuler){
+		m_iCoordinate->OnReceive(poseEuler);
+		delete this;
+	});
 }
 
 void RefSysDialog::UpdateText()

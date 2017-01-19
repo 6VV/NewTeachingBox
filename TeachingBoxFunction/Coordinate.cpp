@@ -1,6 +1,7 @@
 
 #include "Coordinate.h"
 
+
 namespace Coor{
 
 	//从tPoseEuler坐标到tPoseHomogeneous的变换
@@ -106,7 +107,7 @@ namespace Coor{
 
 
 	//实现坐标变换，参考坐标系为BaseRefSys_p，偏移量为Transition_p
-	tPoseEuler CartRefSys(tPoseEuler& BaseRefSys_p, tPoseEuler& Transition_p)
+	tPoseEuler CartAdd(tPoseEuler& BaseRefSys_p, tPoseEuler& Transition_p)
 	{
 		tPoseHomogeneous Base, T, Result;
 		Base = TransEuler2Homogeneous(BaseRefSys_p);
@@ -116,6 +117,20 @@ namespace Coor{
 
 		return TransHomogeneous2Euler(Result);
 	}
+
+	tPoseEuler CartMinus(tPoseEuler& A_p, tPoseEuler& B_p)
+	{
+		tPoseHomogeneous AH, BH, BHReverse, RH;
+		AH = TransEuler2Homogeneous(A_p);
+		BH = TransEuler2Homogeneous(B_p);
+
+		HomeMatrixInv((double*)(BH.m_T), (double*)(BHReverse.m_T));
+
+		MatrixMul((double*)(BHReverse.m_T), (double*)(AH.m_T), 4, 4, 4, (double*)(RH.m_T));
+
+		return TransHomogeneous2Euler(RH);
+	}
+
 
 	//坐标系示教方法：三点（含原点）
 	//CartTeach From Three Points With Base
@@ -202,7 +217,7 @@ namespace Coor{
 
 	//坐标系示教方法：三点（无原点）
 	//CartTeach From Three Points Without Base
-	tPoseEuler CartTeachThreeNoBase(tPoseEuler& Point1_p, tPoseEuler& Point2_p, tPoseEuler& Point3_p, int xyz, int xyzxyz)
+	tPoseEuler CartTeachThreeNoBase(tPoseEuler& Point1_p, tPoseEuler& Point2_p, tPoseEuler& Point3_p, int xyz1_p, int xyz2_p)
 	{
 		tPose Pose;//1,2,3点确定的坐标系的变换量Transition_p
 		CVector ox, oy, oz, v1, v2, v3, v12, v23;
@@ -242,35 +257,35 @@ namespace Coor{
 		Pose.m_PostureRotary.m_R[2][2] = oz.GetZ();
 
 
-		if (xyz == 1)
+		if (xyz1_p == 1)
 		{
-			if (xyzxyz == 1)
+			if (xyz2_p == 2)
 				for (i = 0; i < 3; i++)
 					for (j = 0; j < 3; j++)
 						T[i][j] = xxy[i][j];
-			else if (xyzxyz == 2)
+			else if (xyz2_p == 3)
 				for (i = 0; i < 3; i++)
 					for (j = 0; j < 3; j++)
 						T[i][j] = xzx[i][j];
 		}
-		else if (xyz == 2)
+		else if (xyz1_p == 2)
 		{
-			if (xyzxyz == 1)
+			if (xyz2_p == 1)
 				for (i = 0; i < 3; i++)
 					for (j = 0; j < 3; j++)
 						T[i][j] = yxy[i][j];
-			else if (xyzxyz == 3)
+			else if (xyz2_p == 3)
 				for (i = 0; i < 3; i++)
 					for (j = 0; j < 3; j++)
 						T[i][j] = yyz[i][j];
 		}
-		else if (xyz == 3)
+		else if (xyz1_p == 3)
 		{
-			if (xyzxyz == 2)
+			if (xyz2_p == 1)
 				for (i = 0; i < 3; i++)
 					for (j = 0; j < 3; j++)
 						T[i][j] = zzx[i][j];
-			else if (xyzxyz == 3)
+			else if (xyz2_p == 2)
 				for (i = 0; i < 3; i++)
 					for (j = 0; j < 3; j++)
 						T[i][j] = zyz[i][j];
@@ -388,7 +403,7 @@ namespace Coor{
 	//B:对应工具坐标的姿态变换
 	//C:有mode_p确定的姿态方向
 	//AB=C，求A的伪逆乘以C得到B
-	tPostureEuler ToolFrameSetWithOnePoint(tPoseEuler& PoseRobot_p, tPoseEuler& Point1_p, int mode_p, TYPE_BOOL direction_p)
+	tPostureEuler ToolFrameSetWithOnePoint(tPoseEuler& PoseRobot_p, int mode_p, TYPE_BOOL direction_p)
 	{
 		tPose PoseRobot;
 		LONG_REAL A[3], B[9], C[3], temp1[9], temp2[9], temp3[9];
@@ -506,14 +521,14 @@ namespace Coor{
 	CCoordinate CCoordinate::Transit(tPoseEuler PoseEuler_p)
 	{
 		tPoseEuler PoseEuler;
-		PoseEuler = CartRefSys(this->m_PoseEuler, PoseEuler_p);
+		PoseEuler = CartAdd(this->m_PoseEuler, PoseEuler_p);
 		return CCoordinate(PoseEuler);
 	}
 
 	CCoordinate CCoordinate::Transit(tPose Pose_p)
 	{
 		tPoseEuler PoseEuler;
-		PoseEuler = CartRefSys(this->m_PoseEuler, TransPose2Euler(Pose_p));
+		PoseEuler = CartAdd(this->m_PoseEuler, TransPose2Euler(Pose_p));
 		return CCoordinate(PoseEuler);
 	}
 

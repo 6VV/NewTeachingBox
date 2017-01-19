@@ -6,7 +6,6 @@
 #include "Context.h"
 #include "TRefSys.h"
 #include "LineEditWithRegExpAndKeyboard.h"
-#include "DialogTeachReferenceSystem.h"
 #include <chrono>
 #include "QMessageBox"
 #include <assert.h>
@@ -32,20 +31,7 @@ ScreenReferenceSystem::ScreenReferenceSystem(QWidget* parent/*=nullptr*/)
 *************************************************/
 void ScreenReferenceSystem::showEvent(QShowEvent *)
 {
-	disconnect(m_comboBoxRefSys, &QComboBox::currentTextChanged, this, &ScreenReferenceSystem::OnRefSysChanged);	/*断开连接*/
-
-	auto variatesMap = std::move(TVariateManager::GetInstance()->GetAllVariatesMapScollUp(Context::projectContext.CurrentScope()));
-
-	/*考虑到不同作用域内可能存在同名坐标系，故在组合框中显示坐标系名时，同时显示作用域名*/
-	m_variateWidgetProducer->UpdateComboBoxWithWholeName(TRefSys::TypeName(), variatesMap, m_comboBoxRefSys);
-	m_variateWidgetProducer->UpdateComboBoxWithWholeName(TRefSys::TypeName(), variatesMap, m_comboBoxBaseSys);
-	m_comboBoxBaseSys->setCurrentText(ProjectContext::ScopeSystem()+"."+CoordinateContext::WorldRefSysName());
-
-	OnRefSysChanged();	/*更新参考坐标系的基坐标系*/
-
-	connect(m_comboBoxRefSys, &QComboBox::currentTextChanged, this, &ScreenReferenceSystem::OnRefSysChanged);	/*重新建立连接*/
-
-
+	UpdateWidgetState();
 }
 
 void ScreenReferenceSystem::UpdateText()
@@ -55,7 +41,6 @@ void ScreenReferenceSystem::UpdateText()
 	m_tcpValueBox->setTitle(tr("Tcp Values"));
 
 	m_btnSave->setText(tr("Save"));
-	m_btnAdd->setText(tr("Add"));
 	m_btnDelete->setText(tr("Delete"));
 	m_btnEdit->setText(tr("Edit"));
 
@@ -66,13 +51,13 @@ void ScreenReferenceSystem::UpdateText()
 	m_lbOffsetValuesIllustrate->setText(tr("Position and orientation offset relative to base"));
 }
 
-QWidget* ScreenReferenceSystem::GetOffsetDataWidget()
+QWidget* ScreenReferenceSystem::InitOffsetDataWidget()
 {
 	m_offsetBox = new QGroupBox(this);
 
 	QVBoxLayout* layout = new QVBoxLayout(m_offsetBox);
 
-	m_lbOffsetValuesIllustrate = GetValuesIllustrateWidget();
+	m_lbOffsetValuesIllustrate = InitValuesIllustrateWidget();
 	layout->addWidget(m_lbOffsetValuesIllustrate);
 
 	for (auto& lineEdit:m_ltOffsetValues)
@@ -81,13 +66,13 @@ QWidget* ScreenReferenceSystem::GetOffsetDataWidget()
 		//connect(lineEdit, &QLineEdit::textChanged, this, &ScreenReferenceSystem::OnDataChanged);
 	}
 
-	layout->addLayout(GetValuesWidget(m_ltOffsetValues,true));
+	layout->addLayout(InitValuesWidget(m_ltOffsetValues,true));
 	layout->setStretch(1, 1);
 
 	return m_offsetBox;
 }
 
-QWidget* ScreenReferenceSystem::GetSystemWidget()
+QWidget* ScreenReferenceSystem::InitSystemWidget()
 {
 	m_systemBox = new QGroupBox(this);
 
@@ -111,26 +96,26 @@ QWidget* ScreenReferenceSystem::GetSystemWidget()
 	return m_systemBox;
 }
 
-QWidget* ScreenReferenceSystem::GetTcpValueWidget()
+QWidget* ScreenReferenceSystem::InitTcpValueWidget()
 {
 	m_tcpValueBox = new QGroupBox(this);
 
 	QVBoxLayout* layout = new QVBoxLayout(m_tcpValueBox);
 
-	m_lbTcpValuesIllustrate = GetValuesIllustrateWidget();
+	m_lbTcpValuesIllustrate = InitValuesIllustrateWidget();
 	layout->addWidget(m_lbTcpValuesIllustrate);
 
 	for (auto& lineEdit: m_ltTcpValues)
 	{
 		lineEdit = new QLineEdit(this);
 	}
-	layout->addLayout(GetValuesWidget(m_ltTcpValues, false));
+	layout->addLayout(InitValuesWidget(m_ltTcpValues, false));
 	layout->setStretch(1, 1);
 
 	return m_tcpValueBox;
 }
 
-QLayout* ScreenReferenceSystem::GetValuesWidget(std::array<QLineEdit*, 6> widgets, bool enabled)
+QLayout* ScreenReferenceSystem::InitValuesWidget(std::array<QLineEdit*, 6> widgets, bool enabled)
 {
 	for (auto lineEdit : widgets)
 	{
@@ -166,7 +151,7 @@ QLayout* ScreenReferenceSystem::GetValuesWidget(std::array<QLineEdit*, 6> widget
 	return layout;
 }
 
-QLabel* ScreenReferenceSystem::GetValuesIllustrateWidget()
+QLabel* ScreenReferenceSystem::InitValuesIllustrateWidget()
 {
 	QLabel* textEdit = new QLabel(this);
 	textEdit->setEnabled(false);
@@ -199,23 +184,20 @@ QString ScreenReferenceSystem::GetVariateScope()
 	return wholeName.left(wholeName.size() - GetVariateName().size() - 1);
 }
 
-QWidget* ScreenReferenceSystem::GetButtonWidget()
+QWidget* ScreenReferenceSystem::InitButtonWidget()
 {
 	QWidget* widget = new QWidget(this);
 	QHBoxLayout* layout = new QHBoxLayout(widget);
 
 	m_btnSave = new Button(this);
-	m_btnAdd = new Button(this);
 	m_btnDelete = new Button(this);
 	m_btnEdit = new Button(this);
 
-	layout->addWidget(m_btnAdd);
 	layout->addWidget(m_btnEdit);
 	layout->addWidget(m_btnDelete);
 	layout->addWidget(m_btnSave);
 
 	connect(m_btnSave, &QPushButton::clicked, this, &ScreenReferenceSystem::OnSaveButtonClicked);
-	connect(m_btnAdd, &QPushButton::clicked, this, &ScreenReferenceSystem::OnAddButtonClicked);
 	connect(m_btnDelete, &QPushButton::clicked, this, &ScreenReferenceSystem::OnDeleteButtonClicked);
 	connect(m_btnEdit, &QPushButton::clicked, this, &ScreenReferenceSystem::OnEditButtonClicked);
 
@@ -226,37 +208,56 @@ void ScreenReferenceSystem::Init()
 {
 	QGridLayout* layout = new QGridLayout(this);
 
-	layout->addWidget(GetSystemWidget(), 0, 0, 1, 2);
-	layout->addWidget(GetOffsetDataWidget(), 1, 0);
-	layout->addWidget(GetTcpValueWidget(), 1, 1);
-	layout->addWidget(GetButtonWidget(), 2, 0, 1, 2);
+	layout->addWidget(InitSystemWidget(), 0, 0, 1, 2);
+	layout->addWidget(InitOffsetDataWidget(), 1, 0);
+	layout->addWidget(InitTcpValueWidget(), 1, 1);
+	layout->addWidget(InitButtonWidget(), 2, 0, 1, 2);
 	layout->setColumnStretch(0, 1);
 	layout->setColumnStretch(1, 1);
 
 	layout->setRowStretch(1, 1);
 
 	UpdateText();
-
 }
 
-void ScreenReferenceSystem::OnAddButtonClicked()
-{
-	QMessageBox::warning(this, "",tr("not implement"));
-}
 
 void ScreenReferenceSystem::OnEditButtonClicked()
 {
-	//(new DialogTeachReferenceSystem(GetVariate(),this,this))->show();
-	(new RefSysDialog(GetVariate(),this, this))->show();
+	auto variate = GetVariate();
+	if (variate==nullptr)
+	{
+	}
+	(new RefSysDialog(variate, this, this))->show();
 }
 
 void ScreenReferenceSystem::OnDeleteButtonClicked()
 {
-	QMessageBox::warning(this, "", tr("not implement"));
+	auto variate = GetVariate();
+
+	if (variate==nullptr)
+	{
+		return;
+	}
+
+	switch (QMessageBox::information(this, tr("Delete variate"), tr("Delete variate: ")+variate->GetName(), QMessageBox::Ok | QMessageBox::Cancel))
+	{
+	case QMessageBox::Ok:{
+		TVariateManager::GetInstance()->DeleteVariate(variate->GetScope(), variate->GetName());
+		UpdateWidgetState();
+	}break;
+	default:
+		break;
+	}
 }
 
 void ScreenReferenceSystem::OnSaveButtonClicked()
 {
+	auto variate = GetVariate();
+	if (variate==nullptr)
+	{
+		return;
+	}
+
 	TRefSys::ValueType value{};
 	//value.baseSys = m_comboBoxBaseSys->currentText();
 
@@ -265,7 +266,6 @@ void ScreenReferenceSystem::OnSaveButtonClicked()
 		value[i] = m_ltOffsetValues[i]->text().toDouble();
 	}
 
-	auto variate = TVariateManager::GetInstance()->GetVariateSrollUp(GetVariateScope(), GetVariateName());
 	TVariateManager::GetInstance()->UpdateVariate(std::shared_ptr<TVariate>(new TRefSys{ {variate->GetScope(), variate->GetName()}, value }));
 }
 
@@ -273,7 +273,6 @@ void ScreenReferenceSystem::OnRefSysChanged()
 {
 	auto variate = GetVariate();
 	assert(variate != nullptr);
-	//m_comboBoxBaseSys->setCurrentText(variate->GetValue().baseSys);	/*设置基坐标系*/
 
 	auto variateValue = variate->GetValue();
 	for (size_t i = 0; i <variateValue.size(); ++i)
@@ -281,6 +280,22 @@ void ScreenReferenceSystem::OnRefSysChanged()
 		auto value = QString::number(variateValue[i]);
 		m_ltOffsetValues[i]->setText(value);
 	}
+}
+
+void ScreenReferenceSystem::UpdateWidgetState()
+{
+	disconnect(m_comboBoxRefSys, &QComboBox::currentTextChanged, this, &ScreenReferenceSystem::OnRefSysChanged);	/*断开连接*/
+
+	auto variatesMap = std::move(TVariateManager::GetInstance()->GetAllVariatesMapScollUp(Context::projectContext.CurrentScope()));
+
+	/*考虑到不同作用域内可能存在同名坐标系，故在组合框中显示坐标系名时，同时显示作用域名*/
+	m_variateWidgetProducer->UpdateComboBoxWithWholeName(TRefSys::TypeName(), variatesMap, m_comboBoxRefSys);
+	m_variateWidgetProducer->UpdateComboBoxWithWholeName(TRefSys::TypeName(), variatesMap, m_comboBoxBaseSys);
+	m_comboBoxBaseSys->setCurrentText(ProjectContext::ScopeSystem() + "." + CoordinateContext::WorldRefSysName());
+
+	OnRefSysChanged();	/*更新参考坐标系的基坐标系*/
+
+	connect(m_comboBoxRefSys, &QComboBox::currentTextChanged, this, &ScreenReferenceSystem::OnRefSysChanged);	/*重新建立连接*/
 }
 
 void ScreenReferenceSystem::OnReceive(const tPoseEuler& poseEuler)
@@ -291,4 +306,14 @@ void ScreenReferenceSystem::OnReceive(const tPoseEuler& poseEuler)
 	m_ltOffsetValues[3]->setText(QString::number(poseEuler.m_PostureEuler.m_A));
 	m_ltOffsetValues[4]->setText(QString::number(poseEuler.m_PostureEuler.m_B));
 	m_ltOffsetValues[5]->setText(QString::number(poseEuler.m_PostureEuler.m_C));
+
+	TRefSys::ValueType value{};
+	value[0] = poseEuler.m_PositionCartesian.m_X;
+	value[1] = poseEuler.m_PositionCartesian.m_Y;
+	value[2] = poseEuler.m_PositionCartesian.m_Z;
+	value[3] = poseEuler.m_PostureEuler.m_A;
+	value[4] = poseEuler.m_PostureEuler.m_B;
+	value[5] = poseEuler.m_PostureEuler.m_C;
+
+	GetVariate()->SetValue(value);
 }

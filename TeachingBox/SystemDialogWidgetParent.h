@@ -31,6 +31,7 @@ class SystemDialogWidgetParent :public QWidget, public IRemoteFeedbackListener
 
 signals:
 	void SignalOnCancelClicked();
+	void SignalCompletePose(tPoseEuler poseEuler);
 
 public:
 	SystemDialogWidgetParent(QStackedWidget* parent);
@@ -57,6 +58,8 @@ protected:
 	void GetRemotePose();
 	bool IsTeached();
 	QWidget* PointWidgetXYZ();
+	QWidget* PointWidgetABC();
+	QWidget* PointWidgetXYZABC();
 	void UpdateButtonState();
 
 private:
