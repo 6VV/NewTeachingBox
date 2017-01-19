@@ -25,6 +25,12 @@ class TeachingBoxContext
 public:
 	static const int STRING_MAX_LENGTH = 128;
 
+	enum JogState
+	{
+		AXIS,
+		XYZ,
+	};
+
 public:
 	static TeachingBoxContext* GetInstance();
 
@@ -35,6 +41,7 @@ private:
 	~TeachingBoxContext() = default;
 
 public:
+	JogState GetJogState();
 	QString GetLanguage();
 	User GetUser();
 	QRect GetScreenRect();
@@ -43,6 +50,7 @@ public:
 	bool IsServoOn();
 
 	void SetIsMotOn(bool isMotOn);
+	void SetJog(JogState jogState);
 	void SetTeachingBoxRect(const QRect& rect);
 	void SetScreenRect(const QRect& rect);
 	void SetIsServoOn(bool isServoOn);
@@ -57,6 +65,7 @@ private:
 	QSize m_screenSize{};
 	QRect m_teachingBoxRect{};
 	QRect m_screenRect{};
+	JogState m_jogState = JogState::AXIS;
 
 	bool m_isServoOn = false;
 	bool m_isMotOn = false;

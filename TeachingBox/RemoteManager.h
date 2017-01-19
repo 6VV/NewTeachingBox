@@ -32,10 +32,11 @@ public:
 	static RemoteManager* GetInstance();
 
 	void SendCommand(const DataStream& stream);
-	void SendStopCommand();
-	void SendEndCommand();
 	void SendCommandToGetPosition();
 	void SendCommandToGetPose();
+	void SendEndCommand();
+	void SendSpecialCommand(CommandId id);
+	void SendStopCommand();
 
 private:
 	RemoteManager();

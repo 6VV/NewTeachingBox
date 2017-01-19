@@ -18,6 +18,7 @@
 #include "TeachingBoxBroadcast.h"
 #include "WarningInfo.h"
 #include "WarningModel.h"
+#include "RemoteManager.h"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -159,6 +160,17 @@ void TeachingBox::InitBottomButton(QLayout* layout)
 		TeachingBoxContext::GetInstance()->SetIsMotOn(isMotOn);
 		emit(TeachingBoxBroadcast::GetInstance()->ServoStateChanged(isMotOn));
 	});
+	connect(btnJog, &Button::clicked, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state==TeachingBoxContext::AXIS)
+		{
+			TeachingBoxContext::GetInstance()->SetJog(TeachingBoxContext::XYZ);
+		}
+		else
+		{
+			TeachingBoxContext::GetInstance()->SetJog(TeachingBoxContext::AXIS);
+		}
+	});
 }
 
 void TeachingBox::InitCenter(QLayout* layout)
@@ -207,6 +219,8 @@ void TeachingBox::InitOption(QLayout* layout)
 	realLayout->addWidget(btnCoordinate);
 	realLayout->addWidget(btnWarning);
 
+	btnProgram->setEnabled(false);
+
 	connect(btnService, &QPushButton::clicked, []{
 		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::SERVICE);
 	});
@@ -225,6 +239,10 @@ void TeachingBox::InitOption(QLayout* layout)
 	connect(btnWarning, &QPushButton::clicked, []{
 		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::WARNING);
 	});
+
+	connect(TeachingBoxBroadcast::GetInstance(), &TeachingBoxBroadcast::OpenProgram, [btnProgram](){
+		btnProgram->setEnabled(true);
+	});
 }
 
 void TeachingBox::InitMovementButton(QLayout* layout)
@@ -234,45 +252,204 @@ void TeachingBox::InitMovementButton(QLayout* layout)
 	//示教盒右侧控件
 	Button* btnStop = new Button("Stop", this);
 	Button* btnStart = new Button("Start", this);
-	Button* A1Plus = new Button("+", this);
-	Button* A1Minus = new Button("-", this);
-	Button* A2Plus = new Button("+", this);
-	Button* A2Minus = new Button("-", this);
-	Button* A3Plus = new Button("+", this);
-	Button* A3Minus = new Button("-", this);
-	Button* A4Plus = new Button("+", this);
-	Button* A4Minus = new Button("-", this);
-	Button* A5Plus = new Button("+", this);
-	Button* A5Minus = new Button("-", this);
-	Button* A6Plus = new Button("+", this);
-	Button* A6Minus = new Button("-", this);
+	Button* btnA1Plus = new Button("+", this);
+	Button* btnA1Minus = new Button("-", this);
+	Button* btnA2Plus = new Button("+", this);
+	Button* btnA2Minus = new Button("-", this);
+	Button* btnA3Plus = new Button("+", this);
+	Button* btnA3Minus = new Button("-", this);
+	Button* btnA4Plus = new Button("+", this);
+	Button* btnA4Minus = new Button("-", this);
+	Button* btnA5Plus = new Button("+", this);
+	Button* btnA5Minus = new Button("-", this);
+	Button* btnA6Plus = new Button("+", this);
+	Button* btnA6Minus = new Button("-", this);
 	Button* btn2nd = new Button("2nd", this);
 
 	realLayout->addWidget(btnStart, 0, 0);
 	realLayout->addWidget(btnStop, 0, 1);
-	realLayout->addWidget(A1Plus, 1, 0);
-	realLayout->addWidget(A1Minus, 1, 1);
+	realLayout->addWidget(btnA1Plus, 1, 0);
+	realLayout->addWidget(btnA1Minus, 1, 1);
 
-	realLayout->addWidget(A2Plus, 2, 0);
-	realLayout->addWidget(A2Minus, 2, 1);
+	realLayout->addWidget(btnA2Plus, 2, 0);
+	realLayout->addWidget(btnA2Minus, 2, 1);
 
-	realLayout->addWidget(A3Plus, 3, 0);
-	realLayout->addWidget(A3Minus, 3, 1);
+	realLayout->addWidget(btnA3Plus, 3, 0);
+	realLayout->addWidget(btnA3Minus, 3, 1);
 
-	realLayout->addWidget(A4Plus, 4, 0);
-	realLayout->addWidget(A4Minus, 4, 1);
+	realLayout->addWidget(btnA4Plus, 4, 0);
+	realLayout->addWidget(btnA4Minus, 4, 1);
 
-	realLayout->addWidget(A5Plus, 5, 0);
-	realLayout->addWidget(A5Minus, 5, 1);
+	realLayout->addWidget(btnA5Plus, 5, 0);
+	realLayout->addWidget(btnA5Minus, 5, 1);
 
-	realLayout->addWidget(A6Plus, 6, 0);
-	realLayout->addWidget(A6Minus, 6, 1);
+	realLayout->addWidget(btnA6Plus, 6, 0);
+	realLayout->addWidget(btnA6Minus, 6, 1);
 
 	realLayout->addWidget(btn2nd, 7, 0);
 
 	connect(btnStart, SIGNAL(pressed()), this, SLOT(SlotOnStartButtonPressed()));
 	connect(btnStart, SIGNAL(released()), this, SLOT(SlotOnStartButtonReleased()));
 	connect(btnStop, SIGNAL(clicked()), this, SLOT(SlotOnStopButtonClicked()));
+
+	connect(btnA1Plus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state==TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_PLUS_1);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_X_PLUS);
+		}
+	});
+	connect(btnA1Minus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state == TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_MINUS_1);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_X_MINUS);
+		}
+	});
+
+	connect(btnA2Plus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state == TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_PLUS_2);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_Y_PLUS);
+		}
+	});
+	connect(btnA2Minus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state == TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_MINUS_2);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_Y_MINUS);
+		}
+	});
+
+	connect(btnA3Plus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state == TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_PLUS_3);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_Z_PLUS);
+		}
+	});
+	connect(btnA3Minus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state == TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_MINUS_3);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_Z_MINUS);
+		}
+	});
+
+	connect(btnA4Plus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state == TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_PLUS_4);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_A_PLUS);
+		}
+	});
+	connect(btnA4Minus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state == TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_MINUS_4);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_A_MINUS);
+		}
+	});
+
+	connect(btnA5Plus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state == TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_PLUS_5);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_B_PLUS);
+		}
+	});
+	connect(btnA5Minus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state == TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_MINUS_5);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_B_MINUS);
+		}
+	});
+
+	connect(btnA6Plus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state == TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_PLUS_6);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_C_PLUS);
+		}
+	});
+	connect(btnA6Minus, &Button::pressed, this, []{
+		auto state = TeachingBoxContext::GetInstance()->GetJogState();
+		if (state == TeachingBoxContext::AXIS)
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_AXIS_MINUS_6);
+		}
+		else
+		{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::MOVE_C_MINUS);
+		}
+	});
+
+	std::vector<Button*> vec{};
+	vec.push_back(btnA1Plus);
+	vec.push_back(btnA2Plus);
+	vec.push_back(btnA3Plus);
+	vec.push_back(btnA4Plus);
+	vec.push_back(btnA5Plus);
+	vec.push_back(btnA6Plus);
+	vec.push_back(btnA1Minus);
+	vec.push_back(btnA2Minus);
+	vec.push_back(btnA3Minus);
+	vec.push_back(btnA4Minus);
+	vec.push_back(btnA5Minus);
+	vec.push_back(btnA6Minus);
+
+	for (auto btn:vec)
+	{
+		connect(btn, &Button::released, []{
+			RemoteManager::GetInstance()->SendSpecialCommand(CommandId::STOP_MOVE);
+		});
+	}
 }
 
 void TeachingBox::InitScreen(QLayout* layout)
@@ -285,6 +462,7 @@ void TeachingBox::InitScreen(QLayout* layout)
 void TeachingBox::InitState()
 {
 	SlotOnModelChanged();
+
 }
 
 void TeachingBox::InitWarning(QLayout* layout)
@@ -349,18 +527,33 @@ void TeachingBox::SlotOnStartButtonPressed()
 		switch (Context::interpreterContext.GetExecuteMode())
 		{
 		case InterpreterContext::AUTO:{
+			if (Context::interpreterContext.GetPCLine() < 0 || Context::interpreterContext.GetProgramExecuting().size() == 0)
+			{
+				QMessageBox::warning(this, tr("Lose PC Line"), tr("Please set PC line"));
+				return;
+			}
 			if (!InterpreterManager::GetInstance()->AutoExecute())
 			{
 				QMessageBox::warning(this, tr("Operator failed"), tr("Already execute"));
 			}
 		}break;
 		case InterpreterContext::MANUAL:{
+			if (Context::interpreterContext.GetPCLine() < 0 || Context::interpreterContext.GetProgramExecuting().size() == 0)
+			{
+				QMessageBox::warning(this, tr("Lose PC Line"), tr("Please set PC line"));
+				return;
+			}
 			if (!InterpreterManager::GetInstance()->ManualExecute())
 			{
 				QMessageBox::warning(this, tr("Operator failed"), tr("Already execute"));
 			}
 		}break;
 		case InterpreterContext::STEP:{
+			if (Context::interpreterContext.GetPCLine() < 0 || Context::interpreterContext.GetProgramExecuting().size() == 0)
+			{
+				QMessageBox::warning(this, tr("Lose PC Line"), tr("Please set PC line"));
+				return;
+			}
 			InterpreterManager::GetInstance()->StepExecute();
 		}break;
 		default:
@@ -368,7 +561,7 @@ void TeachingBox::SlotOnStartButtonPressed()
 		}
 	}
 	catch (TInterpreterException& e){
-		CodeEditorManager::GetInstance()->HighlightWrongLine(Context::projectContext.ProgramLoading(), e.LineNumber());
+		CodeEditorManager::GetInstance()->HighlightWrongLine(Context::interpreterContext.GetProgramLoading(), e.LineNumber());
 		WarningManager::Warning(this, e.Info());
 		return;
 	}

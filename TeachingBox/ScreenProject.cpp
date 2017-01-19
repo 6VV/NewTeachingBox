@@ -75,7 +75,13 @@ void ScreenProject::SlotOnButtonDeleteClicked()
 	}
 	if (IsCurrentItemProject())
 	{
-		m_projectManager->DeleteProject(m_treeWidget->currentItem()->text(0));
+		auto currentProject = m_treeWidget->currentItem()->text(0);
+		if (currentProject==Context::projectContext.ProjectLoaded())
+		{
+			QMessageBox::warning(this, tr("Delete failed"), tr("Cann't delete project loaded")); 
+			return;
+		}
+		m_projectManager->DeleteProject(currentProject);
 		delete m_treeWidget->takeTopLevelItem(m_treeWidget->currentIndex().row());
 	}
 	else if (IsCurrentItemProgram())
@@ -83,7 +89,15 @@ void ScreenProject::SlotOnButtonDeleteClicked()
 		auto item = m_treeWidget->currentItem();
 		m_projectManager->DeleteProgram(item->parent()->text(0), item->text(0));
 
+		UpdateLoadProjectState(item->parent());
+
+		if (item->parent()->text(0) == Context::projectContext.ProjectLoaded())
+		{
+			emit(TeachingBoxBroadcast::GetInstance()->LoadFilesChanged());
+		}
+
 		item->parent()->removeChild(item);
+		
 		delete item;
 	}
 }
@@ -163,6 +177,10 @@ void ScreenProject::SlotOnButtonNewProgramClicked()
 		parentItem->addChild(childItem);
 
 		UpdateLoadProjectState(parentItem);
+		if (project==Context::projectContext.ProjectLoaded())
+		{
+			emit(TeachingBoxBroadcast::GetInstance()->LoadFilesChanged());
+		}
 	}
 }
 
@@ -222,11 +240,8 @@ void ScreenProject::SlotOnButtonLoadClicked()
 	{
 		projectItem = m_treeWidget->currentItem()->parent();
 
-		//QString program = m_treeWidget->currentItem()->text(0);
-		//QString project = projectItem->text(0);
-
 		UpdateLoadProjectState(projectItem);	/*更新状态需在打开文件之前，保证文件打开时项目已被加载，各种事件能够被正确响应*/
-		SlotOnButtonOpenClicked();
+		CodeEditorManager::GetInstance()->HighlightPCLine(projectItem->text(0)+"."+m_treeWidget->currentItem()->text(0), 1);
 	}
 
 }
@@ -298,7 +313,6 @@ void ScreenProject::InitSignalSlot()
 		manager.WriteToXml(currentItem->text(0));
 	});
 
-	connect(TeachingBoxBroadcast::GetInstance(), &TeachingBoxBroadcast::OpenProgram, this, &ScreenProject::OpenProgram);
 }
 
 QList<QWidget*> ScreenProject::GetButtonList()
@@ -343,43 +357,6 @@ bool ScreenProject::IsCurrentItemProgram()
 	return true;
 }
 
-void ScreenProject::OpenProgram(const QString& project, const QString& program)
-{
-	QString nextProgram = project + "." + program;
-	QString currentProgram = Context::projectContext.ProgramOpened();
-
-	if (nextProgram == currentProgram)
-	{
-		ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
-		return;
-	}
-
-	auto codeEidtor = CodeEditorManager::GetInstance();
-
-	if (!currentProgram.isEmpty())
-	{
-		m_projectManager->SaveFile(currentProgram, codeEidtor->Text());
-	}
-
-	ProjectManager projectManager;
-	codeEidtor->SetText(projectManager.GetFileText(project, program));
-
-	auto variates = TVariateManager::GetInstance()->GetAvailableVariatesScollUp(nextProgram);
-	QStringList variateNames{};
-	for (auto varaite:variates)
-	{
-		variateNames.append(varaite->GetName());
-	}
-	for (auto p : Context::projectContext.Programs())
-	{
-		variateNames.append(p.split(".").at(1));
-	}
-	codeEidtor->UpdateVariateWords(variateNames);
-
-	Context::projectContext.ProgramOpened(nextProgram);
-	//codeEidtor->HighlightPCLine(nextProgram, 1);
-	ScreenManager::GetInstance()->ChangeScreen(ScreenManager::PROGRAM);
-}
 
 void ScreenProject::InitFileTree()
 {

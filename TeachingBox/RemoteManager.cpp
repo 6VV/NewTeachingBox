@@ -57,6 +57,11 @@ void RemoteManager::SendEndCommand()
 	SendCommand(CmdAttributeType::CMD_ATTRIBUTE_NORMAL_COMMAND,CommandId::END);
 }
 
+void RemoteManager::SendSpecialCommand(CommandId id)
+{
+	SendCommand(CmdAttributeType::CMD_ATTRIBUTE_SPECIAL_COMMAND, id);
+}
+
 void RemoteManager::SendCommandToGetPosition()
 {
 	SendCommand(CMD_ATTRIBUTE_SPECIAL_COMMAND, CommandId::ROBOT_POSITION);

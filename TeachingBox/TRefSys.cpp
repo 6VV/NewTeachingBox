@@ -30,7 +30,7 @@ TVariateRegister<TRefSys> TRefSys::m_register(TypeName());
 inline
 QString TRefSys::TypeName()
 {
-	return "TRefSys";
+	return "RefSys";
 }
 
 

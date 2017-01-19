@@ -34,7 +34,7 @@ private:
 		Initialization();
 	};
 
-	static Initialization m_initlization;
+	//static Initialization m_initlization;
 
 };
 

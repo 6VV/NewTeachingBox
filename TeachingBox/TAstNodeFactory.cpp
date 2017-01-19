@@ -23,7 +23,8 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QStr
 	int programId = 0;
 	for (const QString& var : fileNames)
 	{
-		Context::projectContext.ProgramLoading(var);
+		//Context::projectContext.ProgramLoading(var);
+		Context::interpreterContext.SetProgramLoading(var);
 
 		QString fileText = projectManager.GetFileText(project, var.split(".").at(1));
 

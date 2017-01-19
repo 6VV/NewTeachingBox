@@ -37,13 +37,14 @@ public:
 	};
 
 public:
-	//QString GetCurrentScope() const;
-	TAstNode* CurrentProgramNode() const;
+	//TAstNode* CurrentProgramNode() const;
 	TAstNode* GetNextNode() const;
 	ExecuteMode GetExecuteMode() const;
 	ExecuteState GetExecuteState() const;
 	std::shared_ptr<TAstNode> GetRootNode() const;
-	int GetLineNumber() const;
+	int GetPCLine() const;
+	QString GetProgramExecuting() const;
+	QString GetProgramLoading() const;
 
 	bool IsAllowSendCommandData() const;
 	void IsAllowSendCommandData(bool enabled);
@@ -53,14 +54,19 @@ public:
 	void SetExecuteMode(ExecuteMode mode);
 	void SetExecuteState(ExecuteState mode);
 	void SetRootNode(std::shared_ptr<TAstNode> rootNode);
-	void SetLineNumber(int val);
+	void SetPCLine(int val);
+	void SetProgramExecuting(const QString& program);
+	void SetProgramLoading(const QString& program);
 
 private:
-	ExecuteMode m_executeMode=ExecuteMode::AUTO;
-	ExecuteState m_executeState = ExecuteState::STOP;
-	std::shared_ptr<TAstNode> m_rootNode{ nullptr };
-	TAstNode*  m_nextNode=nullptr;
-	int m_lineNumber=1;
+	ExecuteMode m_executeMode = ExecuteMode::AUTO;	/*执行模式*/
+	ExecuteState m_executeState = ExecuteState::STOP;	/*执行状态*/
+	QString m_programExecuting{};	/*当前执行程序*/
+	QString m_programLoading{};	/*正在加载的程序，与正在执行的程序不同，此处仅用于解析过程*/
+
+	std::shared_ptr<TAstNode> m_rootNode{ nullptr };	/*语法树根节点*/
+	TAstNode*  m_nextNode = nullptr;	/*下一节点*/
+	int m_pcLine = -1;	/*执行行*/
 
 	bool m_isAllowSendData = false;
 };

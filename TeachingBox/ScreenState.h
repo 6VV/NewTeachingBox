@@ -52,6 +52,7 @@ private:
 	QLayout* GetSecondLayout();
 
 	void LoadProject(const QString& project, const QStringList& programs);
+	void LoadFilesChanged();
 	void OpenProgram(const QString& project, const QString& program);
 
 	void UpdatePixmap(LabelWithBorder* widget, const QString& pixmapPath, Qt::AspectRatioMode aspectRatioMode = Qt::IgnoreAspectRatio, Qt::TransformationMode transformMode = Qt::SmoothTransformation);

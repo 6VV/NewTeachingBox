@@ -5,23 +5,23 @@
 #include "TeachingBoxBroadcast.h"
 
 
-TAstNode* InterpreterContext::CurrentProgramNode() const
-{
-	if (m_nextNode == nullptr || m_nextNode->GetParentNode()==nullptr)
-	{
-		return nullptr;
-	}
-
-	auto result = m_nextNode;
-
-	while (result->GetParentNode()->GetParentNode() != nullptr)
-	{
-		result = result->GetParentNode();
-	}
-
-	return result;
-
-}
+//TAstNode* InterpreterContext::CurrentProgramNode() const
+//{
+//	if (m_nextNode == nullptr || m_nextNode->GetParentNode()==nullptr)
+//	{
+//		return nullptr;
+//	}
+//
+//	auto result = m_nextNode;
+//
+//	while (result->GetParentNode()->GetParentNode() != nullptr)
+//	{
+//		result = result->GetParentNode();
+//	}
+//
+//	return result;
+//
+//}
 
 TAstNode* InterpreterContext::GetNextNode() const
 {
@@ -37,6 +37,16 @@ InterpreterContext::ExecuteMode InterpreterContext::GetExecuteMode() const
 InterpreterContext::ExecuteState InterpreterContext::GetExecuteState() const
 {
 	return m_executeState;
+}
+
+QString InterpreterContext::GetProgramExecuting() const
+{
+	return m_programExecuting;
+}
+
+QString InterpreterContext::GetProgramLoading() const
+{
+	return m_programLoading;
 }
 
 std::shared_ptr<TAstNode> InterpreterContext::GetRootNode() const
@@ -72,17 +82,27 @@ void InterpreterContext::SetExecuteState(ExecuteState state)
 	emit(TeachingBoxBroadcast::GetInstance()->ExecuteStateChanged(m_executeState));
 }
 
+void InterpreterContext::SetProgramExecuting(const QString& program)
+{
+	m_programExecuting = program;
+}
+
+void InterpreterContext::SetProgramLoading(const QString& program)
+{
+	m_programLoading = program;
+}
+
 void InterpreterContext::SetRootNode(std::shared_ptr<TAstNode> rootNode)
 {
 	m_rootNode = rootNode;
 }
 
-int InterpreterContext::GetLineNumber() const
+int InterpreterContext::GetPCLine() const
 {
-	return m_lineNumber;
+	return m_pcLine;
 }
 
-void InterpreterContext::SetLineNumber(int val)
+void InterpreterContext::SetPCLine(int val)
 {
-	m_lineNumber = val;
+	m_pcLine = val;
 }

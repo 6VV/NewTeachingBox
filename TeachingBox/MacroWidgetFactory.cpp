@@ -29,6 +29,11 @@ QWidget* MacroWidgetFactory::CreateMacroWidget(const QString& macro, QWidget* pa
 		{
 			return nullptr;
 		}
+		/*若无参数*/
+		if (iter->second->GetParameterTypes().size()==0)
+		{
+			return nullptr;
+		}
 		return new MacroWidgetCommon(*iter->second, parent);
 	}
 

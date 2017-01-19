@@ -2,7 +2,7 @@
 <Root>
   <!--Parameter类型包括：Position,Dynamic,Overlap,Integer,Double,Bool,String,RefSys,ToolSys-->
   <!--请务必保证此文件内容的正确性，程序不对此文件正确性进行检查，若出现错误，则可能导致意料之外的情况-->
-  <!--需要发送指令码的宏命令（如MOVL、MOVC）id建议从较大值（如1000）开始，以便与其它命令（如IF、FOR）区别，id值不可相同-->
+  <!--需要发送指令码的宏命令（如MOVL、MOVC）id建议从较大值（如1000）开始，以便与其它命令（如IF、FOR）区别，id默认为-1，自定义id值不可相同-->
   <Category name="MOVEMENT">
     <Type name="MOVEMENT">
       <Macro name = "MOVL" id="2000">
@@ -23,16 +23,16 @@
   <Category name="FUNCTION">
     <Type name="MATH">
       <Macro name="SIN">
-        <Text>SIN *</Text>
+        <Text>SIN(*)</Text>
       </Macro>
       <Macro name="COS">
-        <Text>COS *</Text>
+        <Text>COS(*)</Text>
       </Macro>
       <Macro name="TAN">
-        <Text>TAN *</Text>
+        <Text>TAN(*)</Text>
       </Macro>
       <Macro name="SQRT">
-        <Text>SQRT *</Text>
+        <Text>SQRT(*)</Text>
       </Macro>
     </Type>
     <Type name="STRUCTURE">
@@ -68,17 +68,19 @@
       </Macro>
     </Type>
     <Type name="FUNCTION">
-      <Macro name="WAIT">
+      <Macro name="WAIT" id="2007">
+        <Parameter>Integer</Parameter>
         <Text>WAIT *</Text>
       </Macro>
     </Type>
     <Type name="OTHERS">
-      <Macro name="SET_TOOLFRAME">
+      <Macro name="SET_TOOL_SYS" id="2005">
         <Parameter>ToolSys</Parameter>
-        <Text>SET_TOOLFRAME *</Text>
+        <Text>SET_TOOL_SYS *</Text>
       </Macro>
-      <Macro name="SET_USERFRAME">
-        <Text>SET_USERFRAME *</Text>
+      <Macro name="SET_REF_SYS" id="2006">
+        <Parameter>RefSys</Parameter>
+        <Text>SET_REF_SYS *</Text>
       </Macro>
     </Type>
   </Category>

@@ -66,7 +66,7 @@ void VariateReader::InitVariatePrototype()
 //	}
 //}
 
-VariateReader::Initialization VariateReader::m_initlization{};
+//VariateReader::Initialization VariateReader::m_initlization{};
 
 VariateReader::Initialization::Initialization()
 {

@@ -2,6 +2,8 @@
 #include "ScreenAxis.h"
 #include "LabelWithBorder.h"
 #include "QBoxLayout"
+#include "TeachingBoxBroadcast.h"
+#include "TeachingBoxContext.h"
 
 
 
@@ -30,4 +32,28 @@ void ScreenAxis::Init()
 	layout->addWidget(m_axis5);
 	layout->addWidget(m_axis6);
 	layout->addWidget(new LabelWithBorder(this));
+
+	connect(TeachingBoxBroadcast::GetInstance(), &TeachingBoxBroadcast::JogStateChanged, [this](TeachingBoxContext::JogState state){
+		switch (state)
+		{
+		case TeachingBoxContext::AXIS:{
+			m_axis1->setText("Axis1");
+			m_axis2->setText("Axis2");
+			m_axis3->setText("Axis3");
+			m_axis4->setText("Axis4");
+			m_axis5->setText("Axis5");
+			m_axis6->setText("Axis6");
+		}break;
+		case TeachingBoxContext::XYZ:{
+			m_axis1->setText("X");
+			m_axis2->setText("Y");
+			m_axis3->setText("Z");
+			m_axis4->setText("A");
+			m_axis5->setText("B");
+			m_axis6->setText("C");
+		}break;
+		default:
+			break;
+		}
+	});
 }

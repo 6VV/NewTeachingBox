@@ -14,7 +14,7 @@ QString TInterpreterException::Info()
 	const int SIZE_ADDED = 2;
 
 	QString text = Format(TInterpreterInfo::InformationText()+":", SIZE_ADDED) + TInterpreterInfo::GetInfo(m_id) + "\n"
-		+ Format(TInterpreterInfo::ProgramText() + ":", SIZE_ADDED) + Context::projectContext.ProgramLoading() + "\n"
+		+ Format(TInterpreterInfo::ProgramText() + ":", SIZE_ADDED) + Context::interpreterContext.GetProgramLoading() + "\n"
 		+ Format(TInterpreterInfo::LineNumberText() + ":", SIZE_ADDED) + QString::number(m_lineNumber);
 
 	if (m_text.size() > 0)

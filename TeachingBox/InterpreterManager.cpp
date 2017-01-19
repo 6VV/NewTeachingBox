@@ -72,8 +72,8 @@ bool InterpreterManager::StepExecute()
 
 void InterpreterManager::UpdateStartNode()
 {
-	auto program = Context::projectContext.ProgramOpened();
-	Context::interpreterContext.SetNextNode(GetNodeOnLineFromProgram(GetProgramNode(program), Context::interpreterContext.GetLineNumber()));
+	auto program = Context::interpreterContext.GetProgramExecuting();
+	Context::interpreterContext.SetNextNode(GetNodeOnLineFromProgram(GetProgramNode(program), Context::interpreterContext.GetPCLine()));
 }
 
 bool InterpreterManager::ManualExecute()

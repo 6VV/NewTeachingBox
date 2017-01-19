@@ -74,8 +74,6 @@ private:
 	bool IsCurrentItemProject();
 	bool IsCurrentItemProgram();
 
-	void OpenProgram(const QString& project, const QString& program);
-
 	void SetLoadState(QTreeWidgetItem* projectItem,LoadState state);
 
 	void UpdateLoadProjectState(QTreeWidgetItem* projectItem);

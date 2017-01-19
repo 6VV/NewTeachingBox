@@ -50,8 +50,8 @@ public:
 	QString ProjectLoaded();
 	QString ProgramOpened() const;
 	void ProgramOpened(const QString& program);
-	void ProgramLoading(const QString& program);
-	QString ProgramLoading() const;
+	//void ProgramLoading(const QString& program);
+	//QString ProgramLoading() const;	
 
 	void SetLoadedProject(const QString& project, const QStringList& programs);
 
@@ -68,7 +68,7 @@ private:
 	QString m_project{};		/*加载的项目*/
 	QStringList m_programs{};	/*项目下所有程序*/
 	QString m_programOpened{};	/*当前打开的程序*/
-	QString m_programLoading{};	/*当前加载的程序*/
+	//QString m_programLoading{};	/*正在加载的程序*/
 };
 
 #endif

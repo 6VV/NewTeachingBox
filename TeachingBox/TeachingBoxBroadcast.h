@@ -18,6 +18,7 @@
 *************************************************/
 
 #include "QObject"
+#include "TeachingBoxContext.h"
 
 class WarningInfo;
 
@@ -41,8 +42,10 @@ private:
 signals:
 	void ExecuteModeChanged(int newMode);
 	void ExecuteStateChanged(int newState);
+	void JogStateChanged(TeachingBoxContext::JogState state);
 	void ServoStateChanged(bool isOn);
 	void LoadProject(const QString& project, const QStringList& programs);
+	void LoadFilesChanged();	/*已加载的文件数发生变化*/
 	void OpenProgram(const QString& project, const QString& program);
 	void WarningThrowed(const WarningInfo& warningInfo);
 	void WarningStateChanged();

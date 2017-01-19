@@ -76,15 +76,15 @@ QString ProjectContext::ProgramOpened() const
 }
 
 
-void ProjectContext::ProgramLoading(const QString& program)
-{
-	m_programLoading = program;
-}
-
-QString ProjectContext::ProgramLoading() const
-{
-	return m_programLoading;
-}
+//void ProjectContext::ProgramLoading(const QString& program)
+//{
+//	m_programLoading = program;
+//}
+//
+//QString ProjectContext::ProgramLoading() const
+//{
+//	return m_programLoading;
+//}
 
 void ProjectContext::SetLoadedProject(const QString& project, const QStringList& programs)
 {

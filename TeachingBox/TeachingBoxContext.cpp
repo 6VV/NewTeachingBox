@@ -2,6 +2,7 @@
 #include "TeachingBoxContext.h"
 #include "User.h"
 #include "Language.h"
+#include "TeachingBoxBroadcast.h"
 
 
 TeachingBoxContext* TeachingBoxContext::GetInstance()
@@ -14,6 +15,11 @@ TeachingBoxContext::TeachingBoxContext()
 	:m_language(Language::English())
 {
 
+}
+
+TeachingBoxContext::JogState TeachingBoxContext::GetJogState()
+{
+	return m_jogState;
 }
 
 QString TeachingBoxContext::GetLanguage()
@@ -45,6 +51,15 @@ bool TeachingBoxContext::IsServoOn()
 void TeachingBoxContext::SetIsMotOn(bool isMotOn)
 {
 	m_isMotOn = isMotOn;
+}
+
+void TeachingBoxContext::SetJog(JogState jogState)
+{
+	if (m_jogState != jogState)
+	{
+		m_jogState = jogState;
+		emit(TeachingBoxBroadcast::GetInstance()->GetInstance()->JogStateChanged(jogState));
+	}
 }
 
 bool TeachingBoxContext::IsMotOn()
