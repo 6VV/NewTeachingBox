@@ -1,6 +1,8 @@
+
 #include "Coordinate.h"
 
 namespace Coor{
+
 	//从tPoseEuler坐标到tPoseHomogeneous的变换
 	//tPoseEuler --> tPoseHomogeneous
 	tPoseHomogeneous TransEuler2Homogeneous(tPoseEuler & PoseEuler_p)
@@ -118,10 +120,19 @@ namespace Coor{
 	//坐标系示教方法：三点（含原点）
 	//CartTeach From Three Points With Base
 	//返回值为CartRefSys函数中的参数Transition_p。
-	tPoseEuler CartTeachThreeBase(tPoseEuler& Point1_p, tPoseEuler& Point2_p, tPoseEuler& Point3_p)
+	tPoseEuler CartTeachThreeBase(tPoseEuler& Point1_p, tPoseEuler& Point2_p, tPoseEuler& Point3_p, int xyz, int xyzxyz)
 	{
 		tPose Pose;//1,2,3点确定的坐标系的变换量Transition_p
+		tPoseHomogeneous PoseHomogeneousResult;
 		CVector ox, oy, oz, v1, v2, v3, v12, v23;
+		LONG_REAL T[4][4]{ { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+		LONG_REAL xxy[3][3] = { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 } };
+		LONG_REAL yxy[3][3] = { { 0, 1, 0 }, { 1, 0, 0 }, { 0, 0, -1 } };
+		LONG_REAL xzx[3][3] = { { 1, 0, 0 }, { 0, 0, -1 }, { 0, 1, 0 } };
+		LONG_REAL zzx[3][3] = { { 0, 1, 0 }, { 0, 0, 1 }, { 1, 0, 0 } };
+		LONG_REAL yyz[3][3] = { { 0, 1, 0 }, { 1, 0, 0 }, { 0, 0, 1 } };
+		LONG_REAL zyz[3][3] = { { 0, 0, -1 }, { 0, 1, 0 }, { 1, 0, 0 } };
+		int i, j;
 
 		v1 = CVector(Point1_p.m_PositionCartesian);
 		v2 = CVector(Point2_p.m_PositionCartesian);
@@ -145,16 +156,66 @@ namespace Coor{
 		Pose.m_PostureRotary.m_R[2][1] = oz.GetY();
 		Pose.m_PostureRotary.m_R[2][2] = oz.GetZ();
 
-		return TransPose2Euler(Pose);
+		if (xyz == 1)
+		{
+			if (xyzxyz == 1)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = xxy[i][j];
+			else if (xyzxyz == 2)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = xzx[i][j];
+		}
+		else if (xyz == 2)
+		{
+			if (xyzxyz == 1)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = yxy[i][j];
+			else if (xyzxyz == 3)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = yyz[i][j];
+		}
+		else if (xyz == 3)
+		{
+			if (xyzxyz == 2)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = zzx[i][j];
+			else if (xyzxyz == 3)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = zyz[i][j];
+		}
+		else
+		{
+			//T为单位矩阵
+		}
+
+		MatrixMul((double*)(TransPose2Homogeneous(Pose).m_T), (double*)(T), 4, 4, 4, (double*)(PoseHomogeneousResult.m_T));
+
+
+		return TransHomogeneous2Euler(PoseHomogeneousResult);
 	}
 
 	//坐标系示教方法：三点（无原点）
 	//CartTeach From Three Points Without Base
-	tPoseEuler CartTeachThreeNoBase(tPoseEuler& Point1_p, tPoseEuler& Point2_p, tPoseEuler& Point3_p)
+	tPoseEuler CartTeachThreeNoBase(tPoseEuler& Point1_p, tPoseEuler& Point2_p, tPoseEuler& Point3_p, int xyz, int xyzxyz)
 	{
 		tPose Pose;//1,2,3点确定的坐标系的变换量Transition_p
 		CVector ox, oy, oz, v1, v2, v3, v12, v23;
 		LONG_REAL Length03;
+		tPoseHomogeneous PoseHomogeneousResult;
+		LONG_REAL T[4][4]{ { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+		LONG_REAL xxy[3][3] = { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 } };
+		LONG_REAL yxy[3][3] = { { 0, 1, 0 }, { 1, 0, 0 }, { 0, 0, -1 } };
+		LONG_REAL xzx[3][3] = { { 1, 0, 0 }, { 0, 0, -1 }, { 0, 1, 0 } };
+		LONG_REAL zzx[3][3] = { { 0, 1, 0 }, { 0, 0, 1 }, { 1, 0, 0 } };
+		LONG_REAL yyz[3][3] = { { 0, 1, 0 }, { 1, 0, 0 }, { 0, 0, 1 } };
+		LONG_REAL zyz[3][3] = { { 0, 0, -1 }, { 0, 1, 0 }, { 1, 0, 0 } };
+		int i, j;
 
 		v1 = CVector(Point1_p.m_PositionCartesian);
 		v2 = CVector(Point2_p.m_PositionCartesian);
@@ -180,7 +241,48 @@ namespace Coor{
 		Pose.m_PostureRotary.m_R[2][1] = oz.GetY();
 		Pose.m_PostureRotary.m_R[2][2] = oz.GetZ();
 
-		return TransPose2Euler(Pose);
+
+		if (xyz == 1)
+		{
+			if (xyzxyz == 1)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = xxy[i][j];
+			else if (xyzxyz == 2)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = xzx[i][j];
+		}
+		else if (xyz == 2)
+		{
+			if (xyzxyz == 1)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = yxy[i][j];
+			else if (xyzxyz == 3)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = yyz[i][j];
+		}
+		else if (xyz == 3)
+		{
+			if (xyzxyz == 2)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = zzx[i][j];
+			else if (xyzxyz == 3)
+				for (i = 0; i < 3; i++)
+					for (j = 0; j < 3; j++)
+						T[i][j] = zyz[i][j];
+		}
+		else
+		{
+			//T为单位矩阵
+		}
+
+		MatrixMul((double*)(TransPose2Homogeneous(Pose).m_T), (double*)(T), 4, 4, 4, (double*)(PoseHomogeneousResult.m_T));
+
+		return TransHomogeneous2Euler(PoseHomogeneousResult);
 	}
 
 	//坐标系示教方法：一点（保持姿态）

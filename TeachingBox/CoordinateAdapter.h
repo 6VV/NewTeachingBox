@@ -24,10 +24,10 @@ class CoordinateAdapter
 public:
 	//坐标系示教方法：三点（含原点）
 	//CartTeach From Three Points With Base
-	static tPoseEuler CartTeachThreeBase(const tPoseEuler& point1, const tPoseEuler& point2, const tPoseEuler& point3);
+	static tPoseEuler CartTeachThreeBase(const tPoseEuler& point1, const tPoseEuler& point2, const tPoseEuler& point3, int xyz, int xyzxyz);
 	//坐标系示教方法：三点（无原点）
 	//CartTeach From Three Points Without Base
-	static tPoseEuler CartTeachThreeNoBase(const tPoseEuler& point1, const tPoseEuler& point2, const tPoseEuler& point3);
+	static tPoseEuler CartTeachThreeNoBase(const tPoseEuler& point1, const tPoseEuler& point2, const tPoseEuler& point3, int xyz, int xyzxyz);
 
 	//坐标系示教方法：一点（保持姿态）
 	static tPoseEuler CartTeachOne(const tPositionCartesian& point1);

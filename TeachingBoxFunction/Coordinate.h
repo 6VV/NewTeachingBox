@@ -2,8 +2,10 @@
 #ifndef _COORDINATE_H_
 #define _COORDINATE_H_
 
+
 #include "Target_GlobalDefine.h"
 #include "TrajectoryCommon.h"
+
 
 namespace Coor{
 
@@ -17,15 +19,21 @@ namespace Coor{
 
 
 	//实现坐标变换，参考坐标系为BaseRefSys_p，偏移量为Transition_p
-	tPoseEuler CartRefSys(tPoseEuler& BaseRefSys_p, tPoseEuler& Transition_p);
+	tPoseEuler CartAdd(tPoseEuler& BaseRefSys_p, tPoseEuler& Transition_p);
+
+	//坐标相减
+	//坐标A - 坐标B => 坐标返回值
+	tPoseEuler CartMinus(tPoseEuler& A_p, tPoseEuler& B_p);
+
+
 
 	//坐标系示教方法：三点（含原点）
 	//CartTeach From Three Points With Base
-	tPoseEuler CartTeachThreeBase(tPoseEuler& Point1_p, tPoseEuler& Point2_p, tPoseEuler& Point3_p);
+	tPoseEuler CartTeachThreeBase(tPoseEuler& Point1_p, tPoseEuler& Point2_p, tPoseEuler& Point3_p, int xyz, int xyzxyz);
 
 	//坐标系示教方法：三点（无原点）
 	//CartTeach From Three Points Without Base
-	tPoseEuler CartTeachThreeNoBase(tPoseEuler& Point1_p, tPoseEuler& Point2_p, tPoseEuler& Point3_p);
+	tPoseEuler CartTeachThreeNoBase(tPoseEuler& Point1_p, tPoseEuler& Point2_p, tPoseEuler& Point3_p, int xyz, int xyzxyz);
 
 	//坐标系示教方法：一点（保持姿态）
 	tPoseEuler CartTeachOne(tPositionCartesian& Point1_p);
@@ -64,8 +72,8 @@ namespace Coor{
 
 	};
 
-}
 
+}
 
 
 

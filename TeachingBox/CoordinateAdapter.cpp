@@ -52,22 +52,22 @@ tPositionCartesian CoorToLocal(const Coor::tPositionCartesian& point)
 	return result;
 }
 
-tPoseEuler CoordinateAdapter::CartTeachThreeBase(const tPoseEuler& point1, const tPoseEuler& point2, const tPoseEuler& point3)
+tPoseEuler CoordinateAdapter::CartTeachThreeBase(const tPoseEuler& point1, const tPoseEuler& point2, const tPoseEuler& point3, int xyz, int xyzxyz)
 {
 	auto cp1 = LocalToCoor(point1);
 	auto cp2= LocalToCoor(point2);
 	auto cp3= LocalToCoor(point3);
 
-	return CoorToLocal(Coor::CartTeachThreeBase(cp1, cp2, cp3));
+	return CoorToLocal(Coor::CartTeachThreeBase(cp1, cp2, cp3,xyz,xyzxyz));
 }
 
-tPoseEuler CoordinateAdapter::CartTeachThreeNoBase(const tPoseEuler& point1, const tPoseEuler& point2, const tPoseEuler& point3)
+tPoseEuler CoordinateAdapter::CartTeachThreeNoBase(const tPoseEuler& point1, const tPoseEuler& point2, const tPoseEuler& point3, int xyz, int xyzxyz)
 {
 	auto cp1 = LocalToCoor(point1);
 	auto cp2 = LocalToCoor(point2);
 	auto cp3 = LocalToCoor(point3);
 
-	return CoorToLocal(Coor::CartTeachThreeNoBase(cp1, cp2, cp3));
+	return CoorToLocal(Coor::CartTeachThreeNoBase(cp1, cp2, cp3,xyz,xyzxyz));
 }
 
 tPoseEuler CoordinateAdapter::CartTeachOne(const tPositionCartesian& point1)

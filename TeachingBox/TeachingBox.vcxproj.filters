@@ -1129,6 +1129,12 @@
     <ClCompile Include="CoordinateSystemTeachInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RefSysWidgetEnd.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RefSysWidgetEnd.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="teachingbox.qrc">
@@ -1327,6 +1333,9 @@
       <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
     </CustomBuild>
     <CustomBuild Include="RefSysWidgetOnePointKeepOrientation.h">
+      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RefSysWidgetEnd.h">
       <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -1634,9 +1643,6 @@
       <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
     </ClInclude>
     <ClInclude Include="RefSysWidgetThreePointsWithoutOriginStep2.h">
-      <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClInclude>
-    <ClInclude Include="RefSysWidgetEnd.h">
       <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
     </ClInclude>
     <ClInclude Include="CoordinateSystemTeachInfo.h">

@@ -453,12 +453,12 @@ void DialogTeachReferenceSystem::Controller::NextStep()
 		{
 		case DialogTeachReferenceSystem::Controller::THREE_POINTS_WITH_ORIGIN:
 		{
-			m_desPoseEuler =CoordinateAdapter::CartTeachThreeBase(*m_poses[0], *m_poses[1], *m_poses[2]);
+			m_desPoseEuler =CoordinateAdapter::CartTeachThreeBase(*m_poses[0], *m_poses[1], *m_poses[2],1,1);
 		}
 		break;
 		case DialogTeachReferenceSystem::Controller::THREE_POINTS_WITHOUT_ORIGIN:
 		{
-			m_desPoseEuler =CoordinateAdapter::CartTeachThreeNoBase(*m_poses[0], *m_poses[1], *m_poses[2]);
+			m_desPoseEuler =CoordinateAdapter::CartTeachThreeNoBase(*m_poses[0], *m_poses[1], *m_poses[2],1,1);
 		}
 			break;
 		case DialogTeachReferenceSystem::Controller::ONE_POINT_KEEP_ORIENTATION:

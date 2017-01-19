@@ -19,6 +19,8 @@
 
 #include "SystemDialogWidgetParent.h"
 
+class QRadioButton;
+
 class RefSysWidgetThreePointsWithoutOriginStep3:public SystemDialogWidgetParent
 {
 public:
@@ -31,8 +33,13 @@ private:
 
 	virtual void OnReseivePose(const tPoseEuler& pose/* = */) override;
 
+	virtual void showEvent(QShowEvent *event) override;
+
 private:
 	QButtonGroup* m_btnGroup;
+	QRadioButton* m_btnX;
+	QRadioButton* m_btnY;
+	QRadioButton* m_btnZ;
 };
 
 #endif

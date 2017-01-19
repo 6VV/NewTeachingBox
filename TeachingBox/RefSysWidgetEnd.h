@@ -18,9 +18,15 @@
 *************************************************/
 
 #include "SystemDialogWidgetParent.h"
+#include "DataStruct.h"
 
 class RefSysWidgetEnd:public SystemDialogWidgetParent
 {
+	Q_OBJECT
+
+signals:
+	void SignalCompletePose(const tPoseEuler& poseEuler);
+
 public:
 	RefSysWidgetEnd(QStackedWidget* parent = nullptr);
 
@@ -33,7 +39,12 @@ public:
 	virtual bool HaveNext() override;
 
 private:
+	virtual void showEvent(QShowEvent *event) override;
+
 	virtual void OnNextButtonClicked() override;
+
+private:
+	tPoseEuler m_poseEuler{};
 };
 
 #endif
