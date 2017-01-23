@@ -14,27 +14,30 @@ RemoteManager* RemoteManager::GetInstance()
 }
 
 
+tTeachCmdAttribute RemoteManager::GetAttribute(CmdAttributeType type, CommandId id)
+{
+	tTeachCmdAttribute attribute;
+	attribute.m_type = type;
+	attribute.m_length =sizeof(tTeachCmdAttribute);
+	attribute.m_ID = id;
+
+	return attribute;
+}
+
 void RemoteManager::SendCommand(const DataStream& stream)
 {
-	static const int LENGTH = 1024;
-	char result[LENGTH];
+	char result[COMMAND_MAX_LENGTH];
 
-	result[0] = '\0';
-	stream.ReadRawBytes(result + 1, stream.Length());
+	stream.ReadRawBytes(result, stream.Length());
 
-	RemoteAdapterFactory::GetRemoteAdapter()->SendData(QByteArray(result, LENGTH));
+	RemoteAdapterFactory::GetRemoteAdapter()->SendData(QByteArray(result, COMMAND_MAX_LENGTH));
 
 }
 
 void RemoteManager::SendCommand(CmdAttributeType type, CommandId id)
 {
-	tTeachCmdAttribute attribute;
-	attribute.m_type = type;
-	attribute.m_length = 1 + sizeof(tTeachCmdAttribute);
-	attribute.m_ID = id;
-
 	DataStream result;
-	result << attribute;
+	result << GetAttribute(type, id);
 	result.Seek(0);
 
 	SendCommand(result);
@@ -62,6 +65,7 @@ void RemoteManager::SendSpecialCommand(CommandId id)
 	SendCommand(CmdAttributeType::CMD_ATTRIBUTE_SPECIAL_COMMAND, id);
 }
 
+
 void RemoteManager::SendCommandToGetPosition()
 {
 	SendCommand(CMD_ATTRIBUTE_SPECIAL_COMMAND, CommandId::ROBOT_POSITION);
@@ -76,31 +80,3 @@ RemoteManager::~RemoteManager()
 {
 
 }
-//
-//void RemoteManager::SendNormalCommand(int commandId)
-//{
-//	tTeachCmdAttribute attribute;
-//	attribute.m_type = CmdAttributeType::CMD_ATTRIBUTE_NORMAL_COMMAND;
-//	attribute.m_length = 1 + sizeof(tTeachCmdAttribute);
-//	attribute.m_ID = commandId;
-//
-//	DataStream result;
-//	result << attribute;
-//	result.Seek(0);
-//
-//	SendCommand(result);
-//}
-//
-//void RemoteManager::SendSpecialCommand(int commandId)
-//{
-//	tTeachCmdAttribute attribute;
-//	attribute.m_type = CmdAttributeType::CMD_ATTRIBUTE_SPECIAL_COMMAND;
-//	attribute.m_length = 1 + sizeof(tTeachCmdAttribute);
-//	attribute.m_ID = commandId;
-//
-//	DataStream result;
-//	result << attribute;
-//	result.Seek(0);
-//
-//	SendCommand(result);
-//}

@@ -26,6 +26,8 @@ private:
 public:
 	bool AutoExecute();
 
+	TAstNode* GetNode(const QString& program, int lineNumber);
+
 	bool ManualExecute();
 
 	bool StepExecute();

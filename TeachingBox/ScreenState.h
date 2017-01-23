@@ -21,6 +21,7 @@
 #include "LabelWithBorder.h"
 
 class QLayout;
+class TVariate;
 
 class ScreenState:public InternationalWidget
 {
@@ -40,6 +41,7 @@ private:
 	virtual void showEvent(QShowEvent *) override;
 
 	void Init();
+
 	void InitLayout();
 	void InitSignalSlot();
 	void InitState();
@@ -53,10 +55,13 @@ private:
 
 	void LoadProject(const QString& project, const QStringList& programs);
 	void LoadFilesChanged();
+
 	void OpenProgram(const QString& project, const QString& program);
+	void OnChangeVariate(std::shared_ptr<TVariate> variate);
 
 	void UpdatePixmap(LabelWithBorder* widget, const QString& pixmapPath, Qt::AspectRatioMode aspectRatioMode = Qt::IgnoreAspectRatio, Qt::TransformationMode transformMode = Qt::SmoothTransformation);
-
+	void UpdateRefSysBox();	/*更新参考坐标系*/
+	void UpdateToolRefBox();	/*更新工具坐标系*/
 private:
 	bool m_isFirstCreate = true;
 
@@ -72,7 +77,7 @@ private:
 	LabelWithBorder* m_lbUserAuthority;	/*用户权限*/
 	LabelWithBorder* m_lbCurrentTime;	/*当前时间*/
 
-	ComboBoxWithUniqueIcon* m_comboBoxCoordiante;	/*参考坐标系*/
+	ComboBoxWithUniqueIcon* m_comboBoxRefSys;	/*参考坐标系*/
 	ComboBoxWithUniqueIcon* m_comboBoxTool;			/*工具手*/
 	ComboBoxWithUniqueIcon* m_comboBoxSpeed;			/*工具手*/
 	ComboBoxWithUniqueIcon* m_comboBoxProject;		/*当前打开的项目*/

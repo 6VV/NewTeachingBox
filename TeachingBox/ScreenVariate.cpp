@@ -283,19 +283,33 @@ void ScreenVariate::InitSignalSlot()
 		}
 		if (IsVariateItem(current))
 		{
-			m_btnCopy->setEnabled(true);
-			m_btnCut->setEnabled(true);
-			m_btnDelete->setEnabled(true);
-			m_btnRename->setEnabled(true);
-
-			if (dynamic_cast<TreeWidgetItemWithSymbol*>(current)->GetSymbol().GetTypeName() == TPosition::TypeName()){
-				m_btnTeach->setEnabled(true);
-				RemoteFeedbackController::GetInstance()->AddListener(this);
-			}
-			else{
+			if (GetScope(current->parent())==ProjectContext::ScopeSystem())
+			{
+				m_btnCopy->setEnabled(false);
+				m_btnCut->setEnabled(false);
+				m_btnDelete->setEnabled(false);
+				m_btnRename->setEnabled(false);
 				m_btnTeach->setEnabled(false);
-				RemoteFeedbackController::GetInstance()->DeleteListener(this);
+				m_btnNew->setEnabled(false);
+				m_btnPaste->setEnabled(false);
 			}
+			else
+			{
+				m_btnCopy->setEnabled(true);
+				m_btnCut->setEnabled(true);
+				m_btnDelete->setEnabled(true);
+				m_btnRename->setEnabled(true);
+
+				if (dynamic_cast<TreeWidgetItemWithSymbol*>(current)->GetSymbol().GetTypeName() == TPosition::TypeName()){
+					m_btnTeach->setEnabled(true);
+					RemoteFeedbackController::GetInstance()->AddListener(this);
+				}
+				else{
+					m_btnTeach->setEnabled(false);
+					RemoteFeedbackController::GetInstance()->DeleteListener(this);
+				}
+			}
+			
 		}
 		else
 		{
@@ -305,7 +319,7 @@ void ScreenVariate::InitSignalSlot()
 			m_btnRename->setEnabled(false);
 			m_btnTeach->setEnabled(false);
 
-			if (current == nullptr){
+			if (current == nullptr || GetScope(current)==ProjectContext::ScopeSystem()){
 				m_btnNew->setEnabled(false);
 				m_btnPaste->setEnabled(false);
 			}

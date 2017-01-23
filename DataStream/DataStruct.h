@@ -21,8 +21,7 @@ struct tTeachCmdAttribute
 	//	tTeachCmdState m_State;//命令状态
 };
 
-const int LOCK_LENGTH = 1;
-const int COMMAND_HEAD_LENGTH = LOCK_LENGTH + sizeof(tTeachCmdAttribute);
+const int COMMAND_HEAD_LENGTH = sizeof(tTeachCmdAttribute);
 const int COMMAND_MAX_LENGTH = 1024;
 const int AXIS_SIZE = 6;
 
@@ -76,6 +75,9 @@ enum CommandId
 	MOVE_B_MINUS = 5048,
 	MOVE_C_PLUS = 5049,
 	MOVE_C_MINUS = 5050,
+	SET_SPEED_PRECENT = 5051,
+	SET_JOG_REF_SYS = 5052,
+	SET_JOG_TOOL_SYS = 5053,
 
 	ROBOT_POSITION = 6001,
 	ROBOT_POSE_EULER = 6002,

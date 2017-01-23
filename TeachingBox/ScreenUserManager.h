@@ -22,6 +22,7 @@
 
 class QTableWidget;
 class Button;
+class User;
 
 class ScreenUserManager:public InternationalWidget,public IUserManager
 {
@@ -43,6 +44,9 @@ private:
 	void Init();
 	void InitLayout();
 	void InitSignalSlot();
+
+	bool IsCouldDelete(const User& user);
+	bool IsCouldEdit(const User& user);
 
 	virtual void UpdateText() override;
 

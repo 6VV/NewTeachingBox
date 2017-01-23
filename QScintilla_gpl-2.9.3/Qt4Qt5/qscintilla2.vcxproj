@@ -99,7 +99,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>debug\</ObjectFileName>
-      <Optimization>Disabled</Optimization>
+      <Optimization>Full</Optimization>
       <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QSCINTILLA_MAKE_DLL;SCINTILLA_QT;SCI_LEXER;QT_PRINTSUPPORT_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>

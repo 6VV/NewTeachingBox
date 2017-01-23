@@ -36,8 +36,20 @@ public:
 		STOP,
 	};
 
+	struct FunctionInfo
+	{
+		FunctionInfo(const QString& functionName="", int lineNumber=1)
+			:functionName(functionName)
+			, lineNumber(lineNumber)
+		{}
+		QString functionName="";
+		int lineNumber = 1;
+	};
+
 public:
 	//TAstNode* CurrentProgramNode() const;
+	void ClearFunctionInfo();
+
 	TAstNode* GetNextNode() const;
 	ExecuteMode GetExecuteMode() const;
 	ExecuteState GetExecuteState() const;
@@ -48,6 +60,9 @@ public:
 
 	bool IsAllowSendCommandData() const;
 	void IsAllowSendCommandData(bool enabled);
+
+	void PushFunctionInfo(const FunctionInfo& funInfo);
+	FunctionInfo PopFunctionInfo();
 
 	//void SetCurrentScope(QString val);
 	void SetNextNode(TAstNode* nextNode);
@@ -67,6 +82,7 @@ private:
 	std::shared_ptr<TAstNode> m_rootNode{ nullptr };	/*语法树根节点*/
 	TAstNode*  m_nextNode = nullptr;	/*下一节点*/
 	int m_pcLine = -1;	/*执行行*/
+	std::vector<FunctionInfo> m_functionInformations{};
 
 	bool m_isAllowSendData = false;
 };

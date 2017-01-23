@@ -36,9 +36,8 @@ void RemoteParser::ParseOneCommand(QByteArray& command) const
 {
 	DataStream stream;
 	stream.WriteRawBytes(command.data() , command.length());
-	//tTeachCmdAttribute attribute = GetAttribute(command.data());
-	stream.Seek(1);
 	tTeachCmdAttribute attribute;
+	stream.Seek(0);
 	stream >> attribute;
 
 	switch (attribute.m_ID)
@@ -71,9 +70,9 @@ void RemoteParser::ParseOneCommand(QByteArray& command) const
 tTeachCmdAttribute RemoteParser::GetAttribute(char* command) const
 {
 	DataStream stream;
-	stream.WriteRawBytes(command, COMMAND_HEAD_LENGTH);
-	stream.Seek(1);
+	stream.WriteRawBytes(command, sizeof(tTeachCmdAttribute));
 	tTeachCmdAttribute attribute;
+	stream.Seek(0);
 	stream >> attribute;
 	return std::move(attribute);
 }

@@ -108,6 +108,11 @@ void DynamicController::AddWidget(QComboBox* speedComboBox)
 	});
 }
 
+int DynamicController::InitSpeed()
+{
+	return 50;
+}
+
 DynamicController* DynamicController::GetInstance()
 {
 	return SingleTon<DynamicController>::GetInstance();

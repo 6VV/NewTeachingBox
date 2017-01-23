@@ -68,6 +68,9 @@ void ScreenProgram::SlotOnButtonEditClicked()
 void ScreenProgram::SlotOnButtonSetPCClicked()
 {
 	m_codeEditor->HighlightCurrentPCLine();
+
+	/*手动设置执行行时，清除记录的函数信息*/
+	Context::interpreterContext.ClearFunctionInfo();
 }
 
 void ScreenProgram::Init()
@@ -192,7 +195,7 @@ void ScreenProgram::InitAddvanceGroup()
 	connect(m_btnKeyboard, &QPushButton::clicked, [this]{
 		if (m_simpleKeyboard==nullptr)
 		{
-			m_simpleKeyboard = new SimpleKeyboard(m_codeEditor, m_codeEditor->GetWidget());
+			m_simpleKeyboard = new SimpleKeyboard(m_codeEditor->GetWidget());
 			//m_simpleKeyboard = SimpleKeyboard::GetInstance(m_codeEditor);
 			m_editorLayout->addWidget(m_simpleKeyboard);
 			m_isKeyboardVisiable = true;

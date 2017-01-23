@@ -12,6 +12,7 @@
 #include "TAstNodeGosubSentence.h"
 #include "MacroManager.h"
 #include "TAstNodeMacroCommon.h"
+#include "TAstNodeEof.h"
 
 
 const std::shared_ptr<TAstNode> TAstNodeFactory::CreateAstFromProject(const QString& project)
@@ -62,6 +63,9 @@ const std::shared_ptr<TAstNode> TAstNodeFactory::GetNode(TLexer* const lexer)
 	}break;
 	case TYPE::STURCTURE_GOSUB:{
 		return TAstNodeGosubSentence::GetAstNode(lexer);
+	}break;
+	case TYPE::SEPARATOR_EOF:{
+		return TAstNodeEof::GetAstNode(lexer);
 	}break;
 	default:
 	{

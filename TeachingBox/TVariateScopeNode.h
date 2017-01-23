@@ -33,11 +33,12 @@ public:
 
 	void DeleteVariate(const QString& name);
 
+	QVector<std::shared_ptr<TVariateScopeNode>> GetChildScopes() const;
 	QVector<std::shared_ptr<TVariate>> GetVariates() const;
 	QString GetName() const;
 	TVariateScopeNode* GetParentNode() const;
 
-	std::shared_ptr<TVariateScopeNode> FindScope(const QString& scopeName) const;
+	std::shared_ptr<TVariateScopeNode> FindChildScope(const QString& scopeName) const;
 	std::shared_ptr<TVariate> FindVariate(const QString& name) const;
 
 private:

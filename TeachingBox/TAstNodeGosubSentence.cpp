@@ -41,8 +41,7 @@ TAstNode::ValueReturned TAstNodeGosubSentence::Execute() const
 	auto programNode = Context::interpreterContext.GetRootNode()->GetFirstChild();
 	while (programNode!=nullptr)
 	{
-		if (/*dynamic_cast<TTokenWithValue<QString>*>(programNode->GetToken().get())->GetValue()*/
-			programNode->GetToken()->Name()== desProgramName)
+		if (programNode->GetToken()->Name()== desProgramName)
 		{
 			break;
 		}
@@ -53,6 +52,8 @@ TAstNode::ValueReturned TAstNodeGosubSentence::Execute() const
 	{
 		throw TInterpreterException(TInterpreterException::NOT_PROGRAM_NAME, m_token->LineNumber(),desProgramName);
 	}
+
+	Context::interpreterContext.PushFunctionInfo({Context::interpreterContext.GetProgramExecuting(),GetToken()->LineNumber()+1});
 
 	Context::interpreterContext.SetNextNode(programNode.get());
 

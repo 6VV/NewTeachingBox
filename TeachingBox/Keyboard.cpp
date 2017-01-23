@@ -25,6 +25,11 @@ Keyboard* Keyboard::GetInstance()
 }
 
 
+void Keyboard::SetEchoMode(QLineEdit::EchoMode echoMode)
+{
+	m_lineEditText->setEchoMode(echoMode);
+}
+
 void Keyboard::SetCurrentText(const QString& currentText)
 {
 	m_lineEditText->setText(currentText);
@@ -40,7 +45,7 @@ void Keyboard::SetKeyboardInterface(KeyboardInterface* keyboardInterface)
 void Keyboard::Init()
 {
 	m_lineEditText = new KeyboardLineEidt(this);
-	m_simpleKeyboard = new SimpleKeyboard(m_lineEditText, m_lineEditText);
+	m_simpleKeyboard = new SimpleKeyboard( m_lineEditText);
 	InitLayout();
 }
 
@@ -104,5 +109,6 @@ void Keyboard::Clear()
 {
 	m_keyboardInterface = nullptr;
 	m_lineEditText->clear();
+	m_lineEditText->setEchoMode(QLineEdit::Normal);
 }
 

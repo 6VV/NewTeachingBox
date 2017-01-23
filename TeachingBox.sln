@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TeachingBox", "TeachingBox\TeachingBox.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TeachingBox_UnitTests", "TeachingBox_UnitTests\TeachingBox_UnitTests.vcxproj", "{A1DF5C71-E1C1-4B3E-BEB1-222C4032025B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TeachingBoxFunction", "TeachingBoxFunction\TeachingBoxFunction.vcxproj", "{9E06C9C5-EB55-42D0-88E8-5A2A8F57C0DB}"
@@ -19,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qscintilla2", "QScintilla_g
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcxproj", "{614320FD-112D-42F5-B268-C08BE3595F4E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TeachingBox", "TeachingBox\TeachingBox.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -29,16 +29,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.ActiveCfg = Debug|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.Build.0 = Debug|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.ActiveCfg = Debug|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.ActiveCfg = Release|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.Build.0 = Release|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|Win32
 		{A1DF5C71-E1C1-4B3E-BEB1-222C4032025B}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{A1DF5C71-E1C1-4B3E-BEB1-222C4032025B}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{A1DF5C71-E1C1-4B3E-BEB1-222C4032025B}.Debug|Win32.ActiveCfg = Debug|Win32
@@ -109,6 +99,16 @@ Global
 		{614320FD-112D-42F5-B268-C08BE3595F4E}.Release|Win32.ActiveCfg = Release|x64
 		{614320FD-112D-42F5-B268-C08BE3595F4E}.Release|x64.ActiveCfg = Release|x64
 		{614320FD-112D-42F5-B268-C08BE3595F4E}.Release|x64.Build.0 = Release|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.Build.0 = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

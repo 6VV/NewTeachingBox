@@ -17,14 +17,16 @@
 *************************************************/
 
 #include "InternationalWidget.h"
+#include "KeyboardInterface.h"
 
 class Button;
 class QGroupBox;
 class QComboBox;
 class QCheckBox;
 class QLabel;
+class User;
 
-class ScreenSetting:public InternationalWidget
+class ScreenSetting:public InternationalWidget,public KeyboardInterface
 {
 	Q_OBJECT
 public:
@@ -36,6 +38,8 @@ public:
 private:
 	virtual void UpdateText() override;
 
+	void UpdateState(const User& user);
+
 	void Init();
 	QGroupBox* CreateBoxLogin();
 	QGroupBox* CreateBoxSystemSettings();
@@ -44,8 +48,11 @@ private:
 
 private slots:
 	void showEvent(QShowEvent *) override;
+	void hideEvent(QHideEvent *event) override;
 
 	void SlotChangeLanguage(int index);
+
+	virtual void KeyboardEdit(const QString& text) override;
 
 private:
 	QGroupBox* m_groupboxLogin;
@@ -57,28 +64,30 @@ private:
 	QLabel* m_lbUser;
 	QComboBox* m_cmbUser;
 	QLabel* m_lbAuthority;
-	QLabel* m_lbAuthorityValue;
+	QLineEdit* m_ltAuthorityValue;
 	Button* m_btnLogout;
 
 	/*系统窗口*/
 	QLabel* m_lbLanguage;
 	QComboBox* m_cmbLanguage;
 	QLabel* m_lbDate;
-	QLabel* m_lbDateValue;
+	QLineEdit* m_ltDateValue;
 	QLabel* m_lbTime;
-	QLabel* m_lbTimeValue;
+	QLineEdit* m_ltTimeValue;
 
 	/*机器人控制权限窗口*/
 	QLabel* m_lbControlAuthority;
 	QCheckBox* m_checkboxControlAuthority;
 	QLabel* m_lbDevice;
-	QLabel* m_lbDeviceValue;
+	QLineEdit* m_ltDeviceValue;
 	QLabel* m_lbDeviceIp;
-	QLabel* m_lbDeviceIpValue;
+	QLineEdit* m_ltDeviceIpValue;
 
 	/*显示设置窗口*/
 	QLabel* m_lbLockScreen;
 	Button* m_btnLockScreen;
+	QLabel* m_lbLockTime;
+	QLineEdit* m_ltLockTimeValue;
 };
 
 #endif

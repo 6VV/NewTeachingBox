@@ -11,6 +11,7 @@
 #include "TToolSys.h"
 #include "ToolSysDialog.h"
 #include "DataStruct.h"
+#include "TeachingBoxInitialization.h"
 
 
 
@@ -133,6 +134,15 @@ QWidget* ScreenToolSystem::CreateButtonWidget()
 		{
 			return;
 		}
+
+		/*若为默认坐标系*/
+		if (variate->GetScope() == TeachingBoxInitialization::DefaultToolSys()->GetScope()
+			|| variate->GetName() == TeachingBoxInitialization::DefaultToolSys()->GetName())
+		{
+			QMessageBox::warning(this, tr("Operator failed"), tr("Cann't delete variate: ") + variate->GetScope() + "." + variate->GetName());
+			return;
+		}
+
 		switch (QMessageBox::information(this, tr("Delete variate"), tr("Delete variate: ") + variate->GetName(), QMessageBox::Ok | QMessageBox::Cancel))
 		{
 		case QMessageBox::Ok:{

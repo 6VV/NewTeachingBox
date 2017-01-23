@@ -25,6 +25,7 @@ private:
 public:
 	static Keyboard* GetInstance();
 
+	void SetEchoMode(QLineEdit::EchoMode echoMode);
 	void SetCurrentText(const QString&);	/*设置键盘当前文本*/
 	void SetKeyboardInterface(KeyboardInterface*);	/*设置Confirm按钮按下时调用的函数*/
 

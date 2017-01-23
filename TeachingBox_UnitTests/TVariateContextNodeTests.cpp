@@ -27,10 +27,10 @@ TEST_F(TVariateContextNodeTests, FindScope_Successed)
 	node1->AddChild(child2);
 	child1->AddChild(child3);
 
-	EXPECT_TRUE(node1->FindScope("child1")!=nullptr);
-	EXPECT_TRUE(node1->FindScope("child2") != nullptr);
-	EXPECT_TRUE(node1->FindScope("child3") != nullptr);
-	EXPECT_TRUE(node1->FindScope("child4") == nullptr);
+	EXPECT_TRUE(node1->FindChildScope("child1")!=nullptr);
+	EXPECT_TRUE(node1->FindChildScope("child2") != nullptr);
+	EXPECT_TRUE(node1->FindChildScope("child3") != nullptr);
+	EXPECT_TRUE(node1->FindChildScope("child4") == nullptr);
 
 }
 

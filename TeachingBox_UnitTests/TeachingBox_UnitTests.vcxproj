@@ -94,11 +94,6 @@
     <ClInclude Include="TVariateContextTests.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TeachingBox\TeachingBox.vcxproj">
-      <Project>{b12702ad-abfb-343a-a199-8e24837244a3}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

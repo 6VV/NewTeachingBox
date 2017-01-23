@@ -3,6 +3,9 @@
 #include "User.h"
 #include "Language.h"
 #include "TeachingBoxBroadcast.h"
+#include "RemoteManager.h"
+#include "TRefSys.h"
+#include "TToolSys.h"
 
 
 TeachingBoxContext* TeachingBoxContext::GetInstance()
@@ -12,9 +15,19 @@ TeachingBoxContext* TeachingBoxContext::GetInstance()
 }
 
 TeachingBoxContext::TeachingBoxContext()
-	:m_language(Language::English())
+	:m_user(User{})
 {
+	m_language = m_user.GetLanguage();
+}
 
+std::shared_ptr<TVariate> TeachingBoxContext::GetCurrentRefSys()
+{
+	return m_currentRefSys;
+}
+
+std::shared_ptr<TVariate> TeachingBoxContext::GetCurrentToolSys()
+{
+	return m_currentToolSys;
 }
 
 TeachingBoxContext::JogState TeachingBoxContext::GetJogState()
@@ -32,8 +45,6 @@ User TeachingBoxContext::GetUser()
 	return m_user;
 }
 
-
-
 QRect TeachingBoxContext::GetScreenRect()
 {
 	return QRect{ m_teachingBoxRect.left() + m_screenRect.left(),
@@ -46,6 +57,38 @@ QRect TeachingBoxContext::GetScreenRect()
 bool TeachingBoxContext::IsServoOn()
 {
 	return m_isServoOn;
+}
+
+void TeachingBoxContext::SetCurrentRefSys(std::shared_ptr<TVariate> refSys)
+{
+	m_currentRefSys = refSys;
+
+	tPoseEuler pose{};
+	auto value = std::dynamic_pointer_cast<TRefSys>(m_currentRefSys)->GetValue();
+	pose.m_PositionCartesian.m_X = value[0];
+	pose.m_PositionCartesian.m_Y = value[1];
+	pose.m_PositionCartesian.m_Z = value[2];
+	pose.m_PostureEuler.m_A = value[3];
+	pose.m_PostureEuler.m_B = value[4];
+	pose.m_PostureEuler.m_C = value[5];
+
+	RemoteManager::GetInstance()->SendSpecialCommand(CommandId::SET_JOG_REF_SYS, pose);
+}
+
+void TeachingBoxContext::SetCurrentToolSys(std::shared_ptr<TVariate> toolSys)
+{
+	m_currentToolSys = toolSys;
+
+	tPoseEuler pose{};
+	auto value = std::dynamic_pointer_cast<TToolSys>(m_currentToolSys)->GetValue();
+	pose.m_PositionCartesian.m_X = value[0];
+	pose.m_PositionCartesian.m_Y = value[1];
+	pose.m_PositionCartesian.m_Z = value[2];
+	pose.m_PostureEuler.m_A = value[3];
+	pose.m_PostureEuler.m_B = value[4];
+	pose.m_PostureEuler.m_C = value[5];
+
+	RemoteManager::GetInstance()->SendSpecialCommand(CommandId::SET_JOG_TOOL_SYS, pose);
 }
 
 void TeachingBoxContext::SetIsMotOn(bool isMotOn)

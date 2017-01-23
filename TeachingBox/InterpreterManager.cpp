@@ -50,6 +50,11 @@ bool InterpreterManager::AutoExecute()
 	return true;
 }
 
+TAstNode* InterpreterManager::GetNode(const QString& program, int lineNumber)
+{
+	return GetNodeOnLineFromProgram(GetProgramNode(program), lineNumber);
+}
+
 bool InterpreterManager::StepExecute()
 {
 	/*已经执行*/

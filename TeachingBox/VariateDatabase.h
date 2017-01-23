@@ -26,10 +26,10 @@ namespace Database{
 	class VariateDatabase
 	{
 	private:
-		static const QString VARIATE_TABLE_NAME;	/*表名*/
-		static const QString VARIATE_COLUMN_SCOPE;	/*作用域列名*/
-		static const QString VARIATE_COLUMN_NAME;	/*变量名列名*/
-		static const QString VARIATE_COLUMN_VALUE;	/*值列名*/
+		static QString TableName();	/*表名*/
+		static QString ColumnScope();	/*作用域列名*/
+		static QString ColumnName();	/*变量名列名*/
+		static QString ColumnValue();	/*值列名*/
 
 	public:
 		static const QString GetTextCreateTable();

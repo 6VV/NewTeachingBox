@@ -21,8 +21,8 @@
 #include "SingleTon.h"
 #include <memory>
 #include "DataStruct.h"
+#include "..\DataStream\DataStream.h"
 
-class DataStream;
 
 class RemoteManager
 {
@@ -30,6 +30,13 @@ class RemoteManager
 
 public:
 	static RemoteManager* GetInstance();
+
+	template<typename T>
+	void SendCommand(CmdAttributeType type, CommandId id, T value);
+
+	template<typename T>
+	void SendSpecialCommand(CommandId id, T value);
+
 
 	void SendCommand(const DataStream& stream);
 	void SendCommandToGetPosition();
@@ -45,9 +52,31 @@ private:
 	RemoteManager& operator=(RemoteManager&) = delete;
 
 private:
-	//void SendNormalCommand(int commandId);
-	//void SendSpecialCommand(int commandId);
+	tTeachCmdAttribute GetAttribute(CmdAttributeType type, CommandId id);
 	void SendCommand(CmdAttributeType type, CommandId id);
 };
+
+template<typename T>
+void RemoteManager::SendCommand(CmdAttributeType type, CommandId id, T value)
+{
+	DataStream stream;
+	auto attribute = GetAttribute(type, id);
+	stream << attribute;
+	stream << value;
+	stream.Seek(0);
+
+	attribute.m_length = stream.Length();
+	stream.Seek(0);
+	stream << attribute;
+	stream.Seek(0);
+
+	SendCommand(stream);
+}
+
+template<typename T>
+void RemoteManager::SendSpecialCommand(CommandId id, T value)
+{
+	SendCommand(CmdAttributeType::CMD_ATTRIBUTE_SPECIAL_COMMAND, id, value);
+}
 
 #endif

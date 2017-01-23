@@ -5,6 +5,11 @@
 #include "TeachingBoxBroadcast.h"
 
 
+void InterpreterContext::ClearFunctionInfo()
+{
+	m_functionInformations.clear();
+}
+
 //TAstNode* InterpreterContext::CurrentProgramNode() const
 //{
 //	if (m_nextNode == nullptr || m_nextNode->GetParentNode()==nullptr)
@@ -62,6 +67,23 @@ void InterpreterContext::IsAllowSendCommandData(bool enabled)
 bool InterpreterContext::IsAllowSendCommandData() const
 {
 	return m_isAllowSendData;
+}
+
+void InterpreterContext::PushFunctionInfo(const FunctionInfo& funInfo)
+{
+	m_functionInformations.push_back(funInfo);
+}
+
+InterpreterContext::FunctionInfo InterpreterContext::PopFunctionInfo()
+{
+	if (m_functionInformations.size()==0)
+	{
+		return{};
+	}
+	auto funInfo= m_functionInformations.back();
+	m_functionInformations.pop_back();
+
+	return funInfo;
 }
 
 void InterpreterContext::SetNextNode(TAstNode* nextNode)

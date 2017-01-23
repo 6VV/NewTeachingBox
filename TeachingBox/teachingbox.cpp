@@ -19,6 +19,8 @@
 #include "WarningInfo.h"
 #include "WarningModel.h"
 #include "RemoteManager.h"
+#include "TeachingBoxInitialization.h"
+#include "QTimer"
 
 TeachingBox::TeachingBox(QWidget *parent)
 	: InternationalWidget(parent)
@@ -28,6 +30,10 @@ TeachingBox::TeachingBox(QWidget *parent)
 
 TeachingBox::~TeachingBox()
 {
+	emit(SignalStopTimer());
+
+	m_timerThread->quit();
+	m_timerThread->wait();
 }
 
 void TeachingBox::paintEvent(QPaintEvent *e)
@@ -38,11 +44,14 @@ void TeachingBox::paintEvent(QPaintEvent *e)
 
 void TeachingBox::Init()
 {
+	TeachingBoxInitialization();
 	InitContext();
 	setFixedSize(WIDTH, HEIGHT);
 	InitVertical();
 	UpdateText();
 	InitState();
+
+	InitThread();
 }
 
 void TeachingBox::InitVertical()
@@ -112,6 +121,22 @@ void TeachingBox::InitTop(QLayout* layout)
 		TeachingBoxContext::GetInstance()->SetIsServoOn(isServoOn);
 		emit(TeachingBoxBroadcast::GetInstance()->ServoStateChanged(isServoOn));
 	});
+}
+
+void TeachingBox::InitThread()
+{
+	m_timerThread = new QThread(this);
+	auto timer = new QTimer(this);
+
+	timer->start(1000);
+	timer->moveToThread(m_timerThread);
+
+	connect(timer, &QTimer::timeout, this, []{
+		emit(TeachingBoxBroadcast::GetInstance()->DateTimeChanged(QDateTime::currentDateTime()));
+	}, Qt::DirectConnection);
+	connect(this, &TeachingBox::SignalStopTimer, timer, &QTimer::stop);
+
+	m_timerThread->start();
 }
 
 void TeachingBox::InitBottomButton(QLayout* layout)
@@ -462,7 +487,6 @@ void TeachingBox::InitScreen(QLayout* layout)
 void TeachingBox::InitState()
 {
 	SlotOnModelChanged();
-
 }
 
 void TeachingBox::InitWarning(QLayout* layout)

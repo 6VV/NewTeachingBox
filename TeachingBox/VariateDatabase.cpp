@@ -8,17 +8,32 @@
 
 namespace Database{
 
-	const QString VariateDatabase::VARIATE_TABLE_NAME{"VariateTable"};
-	const QString VariateDatabase::VARIATE_COLUMN_SCOPE{ "scope" };
-	const QString VariateDatabase::VARIATE_COLUMN_NAME{ "name" };
-	const QString VariateDatabase::VARIATE_COLUMN_VALUE{ "value" };
+	QString VariateDatabase::TableName()
+	{
+		return "VariateTable";
+	}
+
+	QString VariateDatabase::ColumnScope()
+	{
+		return "scope";
+	}
+
+	QString VariateDatabase::ColumnName()
+	{
+		return "name";
+	}
+
+	QString VariateDatabase::ColumnValue()
+	{
+		return "value";
+	}
 
 	void VariateDatabase::InsertVariate(QDataStream& dataStream)
 	{
 		dataStream.device()->seek(0);
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 
-		query.prepare("insert into " + VARIATE_TABLE_NAME + " values(?,?,?)");
+		query.prepare("insert into " + TableName() + " values(?,?,?)");
 
 		QString scope;
 		QString name;
@@ -47,7 +62,7 @@ namespace Database{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 
 		query.prepare(QString("select * from %1")
-			.arg(VARIATE_TABLE_NAME));
+			.arg(TableName()));
 
 		if (!query.exec())
 		{
@@ -65,14 +80,14 @@ namespace Database{
 	void VariateDatabase::UpdateVariate(const QString& scope, const QString& name, QDataStream& dataStream)
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
-		query.prepare("update " + VARIATE_TABLE_NAME + " set "
-			+ VARIATE_COLUMN_SCOPE + "=?,"
-			+ VARIATE_COLUMN_NAME + "=?,"
-			+ VARIATE_COLUMN_VALUE + "=?"
+		query.prepare("update " + TableName() + " set "
+			+ ColumnScope() + "=?,"
+			+ ColumnName() + "=?,"
+			+ ColumnValue() + "=?"
 			+ " where "
-			+ VARIATE_COLUMN_SCOPE + "=?"
+			+ ColumnScope() + "=?"
 			+ " and "
-			+ VARIATE_COLUMN_NAME + "=?");
+			+ ColumnName() + "=?");
 
 		dataStream.device()->seek(0);
 		QString newScope;
@@ -100,9 +115,9 @@ namespace Database{
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		QString oper = QString("delete from %1 where %2='%3' and %4='%5'")
-			.arg(VARIATE_TABLE_NAME)
-			.arg(VARIATE_COLUMN_SCOPE).arg(scope)
-			.arg(VARIATE_COLUMN_NAME).arg(name);
+			.arg(TableName())
+			.arg(ColumnScope()).arg(scope)
+			.arg(ColumnName()).arg(name);
 		query.prepare(oper);
 
 		if (!query.exec())
@@ -115,8 +130,8 @@ namespace Database{
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		QString oper = QString("delete from %1 where %2='%3'")
-			.arg(VARIATE_TABLE_NAME)
-			.arg(VARIATE_COLUMN_SCOPE).arg(scope);
+			.arg(TableName())
+			.arg(ColumnScope()).arg(scope);
 		query.prepare(oper);
 
 		if (!query.exec())
@@ -129,10 +144,10 @@ namespace Database{
 	{
 		QString length = QString::number(TeachingBoxContext::STRING_MAX_LENGTH);
 
-		QString oper = "CREATE TABLE " + VARIATE_TABLE_NAME + " ("
-			+ VARIATE_COLUMN_SCOPE + " varchar("+ length+") NOT NULL,"	/*作用域*/
-			+ VARIATE_COLUMN_NAME + " varchar(" + length + ") NOT NULL,"	/*变量名*/
-			+ VARIATE_COLUMN_VALUE + " varchar NOT NULL)"	/*值*/;
+		QString oper = "CREATE TABLE " + TableName() + " ("
+			+ ColumnScope() + " varchar(" + length + ") NOT NULL,"	/*作用域*/
+			+ ColumnName() + " varchar(" + length + ") NOT NULL,"	/*变量名*/
+			+ ColumnValue() + " varchar NOT NULL)"	/*值*/;
 
 		return oper;
 	}

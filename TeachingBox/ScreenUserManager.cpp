@@ -6,6 +6,7 @@
 #include "User.h"
 #include "UserDatabase.h"
 #include "QMessageBox"
+#include "TeachingBoxInitialization.h"
 
 using namespace Database;
 
@@ -49,7 +50,6 @@ void ScreenUserManager::OnUpdate()
 
 		++index;
 	}
-
 }
 
 void ScreenUserManager::showEvent(QShowEvent *)
@@ -113,6 +113,51 @@ void ScreenUserManager::InitSignalSlot()
 	connect(m_btnDelete, SIGNAL(clicked()), this, SLOT(SlotOnDeleteButtonClicked()));
 }
 
+bool ScreenUserManager::IsCouldDelete(const User& user)
+{
+	/*若操作对象为管理员*/
+	if (user.GetName()==TeachingBoxInitialization::Adminastrator()->GetName())
+	{
+		return false;
+	}
+
+	/*若操作者与操作对象权限相同*/
+	if(user.GetAuthority() == TeachingBoxContext::GetInstance()->GetUser().GetAuthority())
+	{
+		/*若操作者为管理员*/
+		if (TeachingBoxContext::GetInstance()->GetUser().GetName() == TeachingBoxInitialization::Adminastrator()->GetName())
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+	return TeachingBoxContext::GetInstance()->GetUser().GetAuthority()>user.GetAuthority();
+}
+
+bool ScreenUserManager::IsCouldEdit(const User& user)
+{
+	/*若操作者为管理员*/
+	if (TeachingBoxContext::GetInstance()->GetUser().GetName() == TeachingBoxInitialization::Adminastrator()->GetName())
+	{
+		return true;
+	}
+	/*若操作者与操作对象权限相同*/
+	if (user.GetAuthority() == TeachingBoxContext::GetInstance()->GetUser().GetAuthority())
+	{
+		/*若操作者为操作对象本身*/
+		if (TeachingBoxContext::GetInstance()->GetUser().GetName() == user.GetName())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	return TeachingBoxContext::GetInstance()->GetUser().GetAuthority()>user.GetAuthority();
+}
+
 void ScreenUserManager::UpdateText()
 {
 	m_btnNew->setText(tr("New"));
@@ -139,7 +184,16 @@ void ScreenUserManager::SlotOnEditButtonClicked()
 		return;
 	}
 	QString name = item->text();
-	(new DialogEidtUser(this, this, DialogEidtUser::EDIT, name))->show();
+	User user = UserDatabase::SelectUser(name);
+
+	if (IsCouldEdit(user))
+	{
+		(new DialogEidtUser(this, this, DialogEidtUser::EDIT, name))->show();
+	}
+	else
+	{
+		QMessageBox::warning(this, tr("Operator failed"), tr("Cann't edit user: ") + name);
+	}
 }
 
 void ScreenUserManager::SlotOnDeleteButtonClicked()
@@ -157,20 +211,28 @@ void ScreenUserManager::SlotOnDeleteButtonClicked()
 	/*获取要删除的用户*/
 	User user=UserDatabase::SelectUser(userName);
 
-	/*用户权限低于当前操作者*/
-	switch (QMessageBox::question(this, tr("Delete User"), userName,
-		QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok))
+	if (IsCouldDelete(user))
 	{
-	case QMessageBox::Ok:
-	{
-		UserDatabase::DeleteUserInfo(userName);
-		OnUpdate();
-	}break;
-	case QMessageBox::Cancel:
-	{
-		return;
-	}break;
-	default:
-		break;
+		switch (QMessageBox::question(this, tr("Delete User"), userName,
+			QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok))
+		{
+		case QMessageBox::Ok:
+		{
+			UserDatabase::DeleteUserInfo(userName);
+			OnUpdate();
+		}break;
+		case QMessageBox::Cancel:
+		{
+			return;
+		}break;
+		default:
+			break;
+		}
 	}
+	else
+	{
+		QMessageBox::warning(this, tr("Operator failed"), tr("Cann't delete user: ") + user.GetName());
+	}
+
+	
 }

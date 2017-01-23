@@ -75,6 +75,9 @@ void DialogEidtUser::InitLayout()
 	//this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint );
 	//this->setWindowModality(Qt::ApplicationModal);
 
+	m_lineEditPassword->setEchoMode(QLineEdit::Password);
+	m_lineEditConfirmPassword->setEchoMode(QLineEdit::Password);
+
 	User user = TeachingBoxContext::GetInstance()->GetUser();
 
 	/*添加权限，最大权限不得超过当前用户的权限*/
@@ -137,6 +140,13 @@ void DialogEidtUser::InitUser()
 		m_lineEditConfirmPassword->setText(user.GetPassword());
 		m_comboBoxAuthority->setCurrentText(QString::number(user.GetAuthority()));
 		m_comboBoxLanguage->setCurrentText(user.GetLanguage());
+
+		/*若编辑对象为自身，则禁止修改名字与权限*/
+		if (m_oldName==TeachingBoxContext::GetInstance()->GetUser().GetName())
+		{
+			m_lineEditName->setEnabled(false);
+			m_comboBoxAuthority->setEnabled(false);
+		}
 	}break;
 	default:
 		break;
@@ -147,6 +157,32 @@ void DialogEidtUser::SlotOnButtonConfirmClicked()
 {
 	QString name = m_lineEditName->text();
 	QString password = m_lineEditPassword->text();
+	QString confirmPassword = m_lineEditConfirmPassword->text();
+
+	if (name.simplified().size() == 0) 
+	{
+		QMessageBox::warning(this, tr("Operator failed"), tr("Name cann't be empty"));
+		return;
+	}
+
+	if (password.size() == 0)
+	{
+		QMessageBox::warning(this, tr("Operator failed"), tr("Password cann't be empty"));
+		return;
+	}
+
+	if (confirmPassword.size() == 0)
+	{
+		QMessageBox::warning(this, tr("Operator failed"), tr("Confirm Password cann't be empty"));
+		return;
+	}
+
+	if (password!=confirmPassword)
+	{
+		QMessageBox::warning(this, tr("Operator failed"), tr("Password is not equal to confirm password"));
+		return;
+	}
+
 	int authority = m_comboBoxAuthority->currentText().toInt();
 	QString language = m_comboBoxLanguage->currentText();
 	User user(name, password, authority, language);

@@ -49,7 +49,7 @@ const std::shared_ptr<TAstNode> TAstNodeMacroCommon::GetAstNode(TLexer* const le
 TAstNode::ValueReturned TAstNodeMacroCommon::Execute() const
 {
 	SendData();
-	Context::interpreterContext.SetNextNode(GetSibling().get());
+	Context::interpreterContext.SetNextNode(FindNextValidNode());
 	return ValueReturned();
 }
 

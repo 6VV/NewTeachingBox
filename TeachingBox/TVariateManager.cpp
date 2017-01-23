@@ -10,6 +10,7 @@
 #include "ProjectManager.h"
 #include "TVariateContext.h"
 #include "TimeCalculator.h"
+#include "TeachingBoxBroadcast.h"
 
 using namespace Database;
 
@@ -32,12 +33,18 @@ void TVariateManager::AddVariate(std::shared_ptr<TVariate> variate)
 {
 	AddInDatabase(variate);
 	TVariateContext::GetInstance()->AddVariate(std::shared_ptr<TVariate>(variate));
+
+	emit(TeachingBoxBroadcast::GetInstance()->AddVariate(variate));
 }
 
 void TVariateManager::DeleteVariate(const QString& scope, const QString& name)
 {
+	auto variate = GetVariate(scope, name);
+
 	TVariateContext::GetInstance()->DeleteVariate(scope, name);
 	VariateDatabase::DeleteScope(scope, name);
+
+	emit(TeachingBoxBroadcast::GetInstance()->DeleteVariate(variate));
 }
 
 void TVariateManager::DeleteProjectVariates(const QStringList& names)
@@ -74,6 +81,11 @@ QMap<QString, QVector<std::shared_ptr<TVariate>>> TVariateManager::GetAllVariate
 	return TVariateContext::GetInstance()->GetAllVariatesMapScollUp(scope);
 }
 
+
+QVector<std::shared_ptr<TVariate>> TVariateManager::GetAllVariates(const QString& typeName)
+{
+	return TVariateContext::GetInstance()->GetAllVariates(typeName);
+}
 
 std::shared_ptr<TVariate> TVariateManager::GetVariate(const QString& scope, const QString& name)
 {

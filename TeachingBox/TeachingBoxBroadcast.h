@@ -40,6 +40,9 @@ private:
 	~TeachingBoxBroadcast() = default;
 
 signals:
+	void AddVariate(std::shared_ptr<TVariate> variate);
+	void CurrentUserChanged();
+	void DeleteVariate(std::shared_ptr<TVariate> variate);
 	void ExecuteModeChanged(int newMode);
 	void ExecuteStateChanged(int newState);
 	void JogStateChanged(TeachingBoxContext::JogState state);
@@ -49,6 +52,7 @@ signals:
 	void OpenProgram(const QString& project, const QString& program);
 	void WarningThrowed(const WarningInfo& warningInfo);
 	void WarningStateChanged();
+	void DateTimeChanged(const QDateTime& dateTime);
 };
 
 #endif

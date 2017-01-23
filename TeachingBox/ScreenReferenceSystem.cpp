@@ -11,6 +11,7 @@
 #include <assert.h>
 #include "CoordinateContext.h"
 #include "RefSysDialog.h"
+#include "TeachingBoxInitialization.h"
 
 
 ScreenReferenceSystem::ScreenReferenceSystem(QWidget* parent/*=nullptr*/)
@@ -236,6 +237,14 @@ void ScreenReferenceSystem::OnDeleteButtonClicked()
 
 	if (variate==nullptr)
 	{
+		return;
+	}
+
+	/*若为世界坐标系*/
+	if (variate->GetScope()==TeachingBoxInitialization::WorldRefSys()->GetScope()
+		|| variate->GetName()==TeachingBoxInitialization::WorldRefSys()->GetName())
+	{
+		QMessageBox::warning(this, tr("Operator failed"), tr("Cann't delete variate: ") + variate->GetScope()+"."+variate->GetName());
 		return;
 	}
 

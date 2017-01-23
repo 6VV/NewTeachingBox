@@ -25,6 +25,9 @@ class TeachingBox : public InternationalWidget
 {
 	Q_OBJECT
 
+signals:
+	void SignalStopTimer();
+
 private:
 	const int HEIGHT_RATIO = 24;	/*示教盒高度所占比例*/
 	const int CENTER_HEIGHT_RATIO = 20;	/*中间部分高度所占比例*/
@@ -59,6 +62,7 @@ private:
 	void InitScreen(QLayout* layout);
 	void InitState();
 	void InitTop(QLayout* layout);
+	void InitThread();
 	void InitVertical();
 	void InitWarning(QLayout* layout);
 
@@ -79,6 +83,8 @@ private:
 	WarningLight* m_clError;
 	WarningLight* m_clPro;
 	WarningLight* m_clMot;
+
+	QThread* m_timerThread = nullptr;
 };
 
 #endif // TEACHINGBOX_H

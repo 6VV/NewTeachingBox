@@ -34,6 +34,9 @@ class DynamicController:public QObject
 	Q_OBJECT
 
 public:
+	static int InitSpeed();
+
+public:
 	static DynamicController* GetInstance();
 
 	void Accelerate();
@@ -57,7 +60,7 @@ private:
 	void UpdateSpeed();
 
 private:
-	double m_speed{ 50 };
+	double m_speed{ InitSpeed() };
 	bool m_isOperateDyn = false;
 	QComboBox* m_speedComboBox;
 };

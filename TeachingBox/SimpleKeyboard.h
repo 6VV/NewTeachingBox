@@ -22,14 +22,13 @@
 #include "qcoreevent.h"
 #include <map>
 
-class IKeyboard;
 class KeyboardButton;
 
 class SimpleKeyboard:public QWidget
 {
 	Q_OBJECT
 public:
-	SimpleKeyboard(IKeyboard* iKeyboard,QWidget* parent=nullptr);
+	SimpleKeyboard(QWidget* parent=nullptr);
 	~SimpleKeyboard()=default;
 
 private:
@@ -56,7 +55,6 @@ private:
 	};
 
 private:
-	IKeyboard* m_iKeyboard;
 	std::map<KeyboardButton*, KeyInfo> m_keyMap{};
 	QObject* m_targetObject;
 	

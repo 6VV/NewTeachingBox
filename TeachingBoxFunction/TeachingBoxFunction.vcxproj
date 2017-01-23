@@ -10,22 +10,6 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Coordinate.cpp" />
-    <ClCompile Include="CVector.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="matrix.cpp" />
-    <ClCompile Include="Target_Math.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Coordinate.h" />
-    <ClInclude Include="CVector.h" />
-    <ClInclude Include="matrix.h" />
-    <ClInclude Include="Target_Config.h" />
-    <ClInclude Include="Target_GlobalDefine.h" />
-    <ClInclude Include="Target_Math.h" />
-    <ClInclude Include="TrajectoryCommon.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9E06C9C5-EB55-42D0-88E8-5A2A8F57C0DB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -69,7 +53,6 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -94,6 +77,22 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Coordinate.cpp" />
+    <ClCompile Include="CVector.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="matrix.cpp" />
+    <ClCompile Include="Target_Math.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Coordinate.h" />
+    <ClInclude Include="CVector.h" />
+    <ClInclude Include="matrix.h" />
+    <ClInclude Include="Target_Config.h" />
+    <ClInclude Include="Target_GlobalDefine.h" />
+    <ClInclude Include="Target_Math.h" />
+    <ClInclude Include="TrajectoryCommon.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

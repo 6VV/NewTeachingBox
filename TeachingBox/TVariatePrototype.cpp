@@ -33,6 +33,8 @@ void TVariatePrototype::InitPrototype()
 	QFile file("./Resources/xml/Variates.xml");
 	if (!file.open(QIODevice::ReadOnly | QFile::Text))
 	{
+		
+		//assert(1==2);
 		return;
 	}
 

@@ -51,8 +51,7 @@ TAstNodeOperator::ValueReturned TAstNodeOperator::ReturnTerminalValue(const TAst
 	}break;
 	case TOKEN_TYPE::ID:
 	{
-		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), node->GetToken()->Name()
-			/*static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue()*/);
+		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(GetScope(), node->GetToken()->Name());
 		switch (var->GetType())
 		{
 		case SYMBOL_TYPE::TYPE_INTERGER:
@@ -399,8 +398,7 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetTerminalSymbolType(cons
 	case TOKEN_TYPE::LITERAL_STRING:return SYMBOL_TYPE::TYPE_STRING;
 	case TOKEN_TYPE::ID:
 	{
-		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(node->GetScope(), node->GetToken()->Name()
-			/*static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue()*/);
+		auto var = TVariateManager::GetInstance()->GetVariateSrollUp(node->GetScope(), node->GetToken()->Name());
 
 		if (var)
 		{
@@ -408,8 +406,7 @@ const TAstNodeOperator::SYMBOL_TYPE TAstNodeOperator::GetTerminalSymbolType(cons
 		}
 		else
 		{
-			throw TInterpreterException(TInterpreterException::NOT_FIND_VARIATE, node->GetToken()->LineNumber(), node->GetToken()->Name()
-				/*static_cast<TTokenWithValue<QString>*>(node->GetToken().get())->GetValue()*/);
+			throw TInterpreterException(TInterpreterException::NOT_FIND_VARIATE, node->GetToken()->LineNumber(), node->GetToken()->Name());
 		}
 	}break;
 	default:

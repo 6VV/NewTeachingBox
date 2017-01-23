@@ -8,36 +8,25 @@ namespace Database{
 
 	const QString Database::UserDatabase::GetTextCreateTable()
 	{
-		QString strUserNameMaxLength = QString::number(TABLE_USER_NAME_MAX_LENGTH);
-		QString strUserPasswordMaxLength = QString::number(TABLE_USER_PASSWORD_MAX_LENGTH);
+		QString strUserNameMaxLength = QString::number(TableNameMaxLength());
+		QString strUserPasswordMaxLength = QString::number(TablePasswordMaxLength());
 
-		QString tableText = "CREATE TABLE " + TABLE_USER + " ("
-			+ TABLE_COLUMN_NAME + " varchar(" + strUserNameMaxLength + ") NOT NULL,"	/*用户名*/
-			+ TABLE_COLUMN_USER_PASSWORD + " varchar(" + strUserPasswordMaxLength + ") NOT NULL,"	/*用户密码*/
-			+ TABLE_COLUMN_USER_AUTHORITY + " int NOT NULL,"	/*用户权限*/
-			+ TABLE_COLUMN_USER_LANGUAGE + " varchar(" + strUserNameMaxLength + ") NOT NULL)"	/*用户语言*/
+		QString tableText = "CREATE TABLE " + TableUser() + " ("
+			+ TableColumnName() + " varchar(" + strUserNameMaxLength + ") NOT NULL,"	/*用户名*/
+			+ TableColumnPassword() + " varchar(" + strUserPasswordMaxLength + ") NOT NULL,"	/*用户密码*/
+			+ TableColumnAuthority() + " int NOT NULL,"	/*用户权限*/
+			+ TableColumnLanguage() + " varchar(" + strUserNameMaxLength + ") NOT NULL)"	/*用户语言*/
 			//+ TABLE_COLUMN_USER_IDENTITY + " varchar(" + strUserNameMaxLength + ") NOT NULL)"	/*用户身份*/
 			;
 
 		return tableText;
 	}
 
-	const QString Database::UserDatabase::TABLE_USER = "UserTable";
-
-	const QString Database::UserDatabase::TABLE_COLUMN_NAME = "name";
-
-	const QString Database::UserDatabase::TABLE_COLUMN_USER_PASSWORD = "password";
-
-	const QString Database::UserDatabase::TABLE_COLUMN_USER_AUTHORITY = "authority";
-
-	const QString Database::UserDatabase::TABLE_COLUMN_USER_LANGUAGE = "language";
-
-	const QString Database::UserDatabase::TABLE_COLUMN_USER_IDENTITY = "indetity";
 
 	void UserDatabase::InsertUserInfo(const User& user)
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
-		query.prepare("insert into " + TABLE_USER + " values(?,?,?,?)");
+		query.prepare("insert into " + TableUser() + " values(?,?,?,?)");
 
 		query.bindValue(0, user.GetName());
 		query.bindValue(1, user.GetPassword());
@@ -53,7 +42,7 @@ namespace Database{
 	QList<User> UserDatabase::SelectAllUsers()
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
-		query.prepare(QString("select * from %1").arg(TABLE_USER));
+		query.prepare(QString("select * from %1").arg(TableUser()));
 		QList<User> users;
 
 		if (query.exec())
@@ -75,8 +64,8 @@ namespace Database{
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		query.prepare(QString("select * from %1 where %2='%3'")
-			.arg(TABLE_USER)
-			.arg(TABLE_COLUMN_NAME)
+			.arg(TableUser())
+			.arg(TableColumnName())
 			.arg(name));
 
 		if (query.exec())
@@ -97,11 +86,11 @@ namespace Database{
 	void UserDatabase::UpdateUserInfo(const QString& oldUserName, const User& user)
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
-		query.prepare("update " + TABLE_USER + " set " + TABLE_COLUMN_NAME + "=?,"
-			+ TABLE_COLUMN_USER_PASSWORD + "=?,"
-			+ TABLE_COLUMN_USER_AUTHORITY + "=?,"
-			+ TABLE_COLUMN_USER_LANGUAGE + "=?"
-			+ " where " + TABLE_COLUMN_NAME + "=?");
+		query.prepare("update " + TableUser() + " set " + TableColumnName() + "=?,"
+			+ TableColumnPassword() + "=?,"
+			+ TableColumnAuthority() + "=?,"
+			+ TableColumnLanguage() + "=?"
+			+ " where " + TableColumnName() + "=?");
 
 		query.bindValue(0, user.GetName());
 		query.bindValue(1, user.GetPassword());
@@ -118,12 +107,53 @@ namespace Database{
 	void UserDatabase::DeleteUserInfo(const QString& userName)
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
-		query.prepare(QString("delete from %1 where %2='%3'").arg(TABLE_USER).arg(TABLE_COLUMN_NAME).arg(userName));
+		query.prepare(QString("delete from %1 where %2='%3'").arg(TableUser()).arg(TableColumnName()).arg(userName));
 
 		if (!query.exec())
 		{
 			throw(Exception("Update User Information Failed"));
 		}
+	}
+
+
+	int UserDatabase::TableNameMaxLength()
+	{
+		return TeachingBoxContext::STRING_MAX_LENGTH;
+	}
+
+	int UserDatabase::TablePasswordMaxLength()
+	{
+		return TeachingBoxContext::STRING_MAX_LENGTH;
+	}
+
+	QString UserDatabase::TableUser()
+	{
+		return "UserTable";
+	}
+
+	QString UserDatabase::TableColumnName()
+	{
+		return "name";
+	}
+
+	QString UserDatabase::TableColumnPassword()
+	{
+		return "password";
+	}
+
+	QString UserDatabase::TableColumnAuthority()
+	{
+		return "authority";
+	}
+
+	QString UserDatabase::TableColumnLanguage()
+	{
+		return "language";
+	}
+
+	QString UserDatabase::TableColumnIdentity()
+	{
+		return "indetity";
 	}
 
 }

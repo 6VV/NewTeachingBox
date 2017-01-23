@@ -5,10 +5,9 @@
 
 
 
-SimpleKeyboard::SimpleKeyboard(IKeyboard* iKeyboard, QWidget* parent/*=nullptr*/)
+SimpleKeyboard::SimpleKeyboard(QWidget* parent/*=nullptr*/)
 	:QWidget(parent)
 	, m_targetObject(parent)
-	, m_iKeyboard(iKeyboard)
 {
 	Init();
 }

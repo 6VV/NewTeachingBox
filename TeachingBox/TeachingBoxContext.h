@@ -20,6 +20,8 @@
 #include "QPoint"
 #include "QSize"
 
+class TVariate;
+
 class TeachingBoxContext
 {
 public:
@@ -41,6 +43,8 @@ private:
 	~TeachingBoxContext() = default;
 
 public:
+	std::shared_ptr<TVariate> GetCurrentRefSys();
+	std::shared_ptr<TVariate> GetCurrentToolSys();
 	JogState GetJogState();
 	QString GetLanguage();
 	User GetUser();
@@ -49,6 +53,8 @@ public:
 	bool IsMotOn();
 	bool IsServoOn();
 
+	void SetCurrentRefSys(std::shared_ptr<TVariate> refSys);
+	void SetCurrentToolSys(std::shared_ptr<TVariate> toolSys);
 	void SetIsMotOn(bool isMotOn);
 	void SetJog(JogState jogState);
 	void SetTeachingBoxRect(const QRect& rect);
@@ -58,17 +64,22 @@ public:
 	void SetUser(const User& user);
 
 private:
-	User m_user{};
-	QString m_language;
-	QPoint m_screenPos{};
-	QPoint m_teachingBoxPos{};
-	QSize m_screenSize{};
-	QRect m_teachingBoxRect{};
-	QRect m_screenRect{};
-	JogState m_jogState = JogState::AXIS;
+	std::shared_ptr<TVariate> m_currentRefSys;
+	std::shared_ptr<TVariate> m_currentToolSys;
 
 	bool m_isServoOn = false;
 	bool m_isMotOn = false;
+
+	JogState m_jogState = JogState::AXIS;
+	QString m_language;
+	QPoint m_screenPos{};
+	QSize m_screenSize{};
+	QRect m_screenRect{};
+	QPoint m_teachingBoxPos{};
+	QRect m_teachingBoxRect{};
+	User m_user{};
+
+
 };
 
 
