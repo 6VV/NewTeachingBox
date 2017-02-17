@@ -532,27 +532,27 @@
 <context>
     <name>ScreenProgram</name>
     <message>
-        <location filename="ScreenProgram.cpp" line="115"/>
+        <location filename="ScreenProgram.cpp" line="118"/>
         <source>Modify</source>
         <translation type="unfinished">修改</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="116"/>
+        <location filename="ScreenProgram.cpp" line="119"/>
         <source>Macro</source>
         <translation type="unfinished">宏</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="117"/>
+        <location filename="ScreenProgram.cpp" line="120"/>
         <source>New</source>
         <translation type="unfinished">新建</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="118"/>
+        <location filename="ScreenProgram.cpp" line="121"/>
         <source>SetPC</source>
         <translation type="unfinished">设置PC</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="123"/>
+        <location filename="ScreenProgram.cpp" line="126"/>
         <source>Keyboard</source>
         <translation type="unfinished">键盘</translation>
     </message>
@@ -561,17 +561,17 @@
         <translation type="obsolete">子程序</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="125"/>
+        <location filename="ScreenProgram.cpp" line="128"/>
         <source>Format</source>
         <translation type="unfinished">格式化</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="126"/>
+        <location filename="ScreenProgram.cpp" line="129"/>
         <source>Search</source>
         <translation type="unfinished">查找</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="127"/>
+        <location filename="ScreenProgram.cpp" line="130"/>
         <source>Note</source>
         <translation type="unfinished">注释</translation>
     </message>
@@ -580,47 +580,47 @@
         <translation type="obsolete">无效化</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="131"/>
+        <location filename="ScreenProgram.cpp" line="134"/>
         <source>SelectAll</source>
         <translation type="unfinished">选择全部</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="132"/>
+        <location filename="ScreenProgram.cpp" line="135"/>
         <source>Cut</source>
         <translation type="unfinished">剪切</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="133"/>
+        <location filename="ScreenProgram.cpp" line="136"/>
         <source>Copy</source>
         <translation type="unfinished">复制</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="134"/>
+        <location filename="ScreenProgram.cpp" line="137"/>
         <source>Paste</source>
         <translation type="unfinished">粘贴</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="135"/>
+        <location filename="ScreenProgram.cpp" line="138"/>
         <source>Delete</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="136"/>
+        <location filename="ScreenProgram.cpp" line="139"/>
         <source>Undo</source>
         <translation type="unfinished">撤销</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="137"/>
+        <location filename="ScreenProgram.cpp" line="140"/>
         <source>Redo</source>
         <translation type="unfinished">重做</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="187"/>
+        <location filename="ScreenProgram.cpp" line="190"/>
         <source>Search word</source>
         <translation type="unfinished">查找单词</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="187"/>
+        <location filename="ScreenProgram.cpp" line="190"/>
         <source>search:</source>
         <translation type="unfinished">查找：</translation>
     </message>
@@ -629,12 +629,12 @@
         <translation type="obsolete">设置PC</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="119"/>
+        <location filename="ScreenProgram.cpp" line="122"/>
         <source>Edit</source>
         <translation type="unfinished">编辑</translation>
     </message>
     <message>
-        <location filename="ScreenProgram.cpp" line="120"/>
+        <location filename="ScreenProgram.cpp" line="123"/>
         <source>Addvance</source>
         <translation type="unfinished">高级</translation>
     </message>
@@ -822,7 +822,7 @@
     <message>
         <location filename="ScreenReferenceSystem.cpp" line="247"/>
         <source>Cann&apos;t delete variate: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">无法删除变量：</translation>
     </message>
     <message>
         <location filename="ScreenReferenceSystem.cpp" line="251"/>
@@ -1066,20 +1066,24 @@
 <context>
     <name>ScreenUser</name>
     <message>
+        <location filename="ScreenUser.cpp" line="31"/>
         <source>User</source>
-        <translation type="obsolete">用户</translation>
+        <translation type="unfinished">用户</translation>
     </message>
     <message>
+        <location filename="ScreenUser.cpp" line="32"/>
         <source>Address</source>
-        <translation type="obsolete">地址</translation>
+        <translation type="unfinished">地址</translation>
     </message>
     <message>
+        <location filename="ScreenUser.cpp" line="33"/>
         <source>Authority</source>
-        <translation type="obsolete">权限</translation>
+        <translation type="unfinished">权限</translation>
     </message>
     <message>
+        <location filename="ScreenUser.cpp" line="34"/>
         <source>Control</source>
-        <translation type="obsolete">控制</translation>
+        <translation type="unfinished">控制</translation>
     </message>
 </context>
 <context>
@@ -1335,7 +1339,7 @@
     <message>
         <location filename="TInterpreterInfo.cpp" line="10"/>
         <source>for sentence should end with next</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">FOR语句后应跟{</translation>
     </message>
     <message>
         <location filename="TInterpreterInfo.cpp" line="11"/>

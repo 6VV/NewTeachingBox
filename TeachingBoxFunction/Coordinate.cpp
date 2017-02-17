@@ -4,6 +4,7 @@
 
 namespace Coor{
 
+
 	//从tPoseEuler坐标到tPoseHomogeneous的变换
 	//tPoseEuler --> tPoseHomogeneous
 	tPoseHomogeneous TransEuler2Homogeneous(tPoseEuler & PoseEuler_p)
@@ -46,6 +47,7 @@ namespace Coor{
 	{
 		tPose Pose;
 		tPoseHomogeneous PoseHomogeneous;
+		double temp[3];
 
 		Roll_Pitch_Yaw(PoseEuler_p.m_PostureEuler.m_A,
 			PoseEuler_p.m_PostureEuler.m_B,
@@ -53,8 +55,12 @@ namespace Coor{
 			(double*)(PoseHomogeneous.m_T));
 
 		HomeMatrix2RP((double*)(PoseHomogeneous.m_T),
-			(double*)(&(Pose.m_PostureRotary)),
-			(double*)(Pose.m_PositionCartesian));
+			(double*)(&(Pose.m_PostureRotary.m_R)),
+			temp);
+
+		Pose.m_PositionCartesian.m_X = temp[0];
+		Pose.m_PositionCartesian.m_Y = temp[1];
+		Pose.m_PositionCartesian.m_Z = temp[2];
 
 		return Pose;
 	}
@@ -65,9 +71,14 @@ namespace Coor{
 	{
 		tPoseEuler PoseEuler;
 		tPoseHomogeneous PoseHomogeneous;
+		double temp[3];
+
+		temp[0] = Pose_p.m_PositionCartesian.m_X;
+		temp[1] = Pose_p.m_PositionCartesian.m_Y;
+		temp[2] = Pose_p.m_PositionCartesian.m_Z;
 
 		RP2HomeMatrix((double*)(&Pose_p.m_PostureRotary),
-			(double*)(Pose_p.m_PositionCartesian),
+			temp,
 			(double*)(PoseHomogeneous.m_T));
 
 		Matrix_RPY((double*)(PoseHomogeneous.m_T),
@@ -85,9 +96,14 @@ namespace Coor{
 	tPoseHomogeneous TransPose2Homogeneous(tPose & Pose_p)
 	{
 		tPoseHomogeneous PoseHomogeneous;
+		double temp[3];
 
-		RP2HomeMatrix((double*)(&Pose_p.m_PostureRotary),
-			(double*)(Pose_p.m_PositionCartesian),
+		temp[0] = Pose_p.m_PositionCartesian.m_X;
+		temp[1] = Pose_p.m_PositionCartesian.m_Y;
+		temp[2] = Pose_p.m_PositionCartesian.m_Z;
+
+		RP2HomeMatrix((double*)(&Pose_p.m_PostureRotary.m_R),
+			temp,
 			(double*)(PoseHomogeneous.m_T));
 
 		return PoseHomogeneous;
@@ -97,10 +113,15 @@ namespace Coor{
 	tPose TransHomogeneous2Pose(tPoseHomogeneous & PoseHomogeneous_p)
 	{
 		tPose Pose;
+		double temp[3];
 
 		HomeMatrix2RP((double*)(PoseHomogeneous_p.m_T),
-			(double*)(&(Pose.m_PostureRotary)),
-			(double*)(Pose.m_PositionCartesian));
+			(double*)(&(Pose.m_PostureRotary.m_R)),
+			temp);
+
+		Pose.m_PositionCartesian.m_X = temp[0];
+		Pose.m_PositionCartesian.m_Y = temp[1];
+		Pose.m_PositionCartesian.m_Z = temp[2];
 
 		return Pose;
 	}
@@ -454,9 +475,10 @@ namespace Coor{
 
 
 		tPoseHomogeneous PoseHomo_temp;
-		tPositionCartesian PositionCartesian_temp;
+		//tPositionCartesian PositionCartesian_temp;
+		double temp[3];
 		RP2HomeMatrix(B,
-			(double*)(PositionCartesian_temp),
+			temp,//(double*)(PositionCartesian_temp),
 			(double*)(PoseHomo_temp.m_T));
 		Matrix_RPY((double*)(PoseHomo_temp.m_T),
 			&(PostureEuler.m_A),
@@ -466,6 +488,24 @@ namespace Coor{
 		return PostureEuler;
 	}
 
+
+
+
+	void CoordTransitHomogeneous(tPoseHomogeneous& A_p, tPoseHomogeneous& B_p, tPoseHomogeneous& C_p)
+	{
+		MatrixMul((double*)(A_p.m_T), (double*)(B_p.m_T), 4, 4, 4, (double*)(C_p.m_T));
+	}
+
+	void CoordTransitPose(tPose& A_p, tPose& B_p, tPose& C_p)
+	{
+		tPoseHomogeneous A = TransPose2Homogeneous(A_p);
+		tPoseHomogeneous B = TransPose2Homogeneous(B_p);
+		tPoseHomogeneous C;
+
+		CoordTransitHomogeneous(A, B, C);
+
+		C_p = TransHomogeneous2Pose(C);
+	}
 
 
 	CCoordinate::CCoordinate()
@@ -531,5 +571,4 @@ namespace Coor{
 		PoseEuler = CartAdd(this->m_PoseEuler, TransPose2Euler(Pose_p));
 		return CCoordinate(PoseEuler);
 	}
-
 }

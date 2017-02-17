@@ -22,6 +22,7 @@ class QTableWidget;
 
 class ScreenUser:public InternationalWidget
 {
+	Q_OBJECT
 public:
 	ScreenUser(QWidget* parent);
 	~ScreenUser();

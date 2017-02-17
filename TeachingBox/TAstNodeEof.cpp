@@ -4,6 +4,8 @@
 #include "TToken.h"
 #include "InterpreterManager.h"
 #include "Context.h"
+#include "RemoteManager.h"
+#include "TAstNodeProgram.h"
 
 
 
@@ -33,7 +35,22 @@ TAstNode* TAstNodeEof::FindNextValidNode() const
 
 TAstNode::ValueReturned TAstNodeEof::Execute() const
 {
-	Context::interpreterContext.SetNextNode(FindNextValidNode());
+	auto nextNode = FindNextValidNode();
+	if (nextNode==nullptr)
+	{
+		tTeachCmdAttribute attribute;
+		attribute.m_type = CmdAttributeType::CMD_ATTRIBUTE_NORMAL_COMMAND;
+		attribute.m_ID = CommandId::END;
+		attribute.m_LineNumber = m_token->LineNumber();
+		attribute.m_programId = dynamic_cast<const TAstNodeProgram*>(GetProgramNode())->GetId();
+
+		DataStream dataStream;
+		dataStream << attribute;
+		dataStream.Seek(0);
+
+		RemoteManager::GetInstance()->SendCommand(dataStream);
+	}
+	Context::interpreterContext.SetNextNode(nextNode);
 
 	return TAstNode::Execute();
 }

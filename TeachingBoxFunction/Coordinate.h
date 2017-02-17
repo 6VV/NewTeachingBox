@@ -48,6 +48,11 @@ namespace Coor{
 	tPostureEuler ToolFrameSetWithOnePoint(tPoseEuler& PoseRobot_p, int mode_p, TYPE_BOOL direction_p);
 
 
+	//返回C_p = A_p*B_p
+	void CoordTransitHomogeneous(tPoseHomogeneous& A_p, tPoseHomogeneous& B_p, tPoseHomogeneous& C_p);//坐标变换
+	//返回C_p = A_p*B_p
+	void CoordTransitPose(tPose& A_p, tPose& B_p, tPose& C_p);//坐标变换
+
 
 
 	class CCoordinate
@@ -72,19 +77,7 @@ namespace Coor{
 
 	};
 
-
-
-
 }
-
-
-
-
-
-
-
-
-
 
 
 #endif//_COORDINATE_H_

@@ -45,6 +45,7 @@
       </Macro>
       <Macro name="IF">
         <Text>IF *{&#x000A;}</Text>
+        <ExtraKeywords>TRUE FALSE</ExtraKeywords>
       </Macro>
       <Macro name="ELSEIF">
         <Text>ELSE *{&#x000A;}</Text>

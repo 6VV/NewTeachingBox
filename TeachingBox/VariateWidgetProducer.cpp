@@ -3,8 +3,6 @@
 #include "TVariate.h"
 #include "ProjectContext.h"
 #include "TPosition.h"
-#include "TDynamic.h"
-#include "TOverlap.h"
 #include "TVariateInfo.h"
 
 

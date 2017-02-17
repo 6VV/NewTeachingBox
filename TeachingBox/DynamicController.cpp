@@ -3,6 +3,7 @@
 #include <thread>
 #include <chrono>
 #include <future>
+#include "RemoteManager.h"
 
 double DynamicController::Speed() const
 {
@@ -97,6 +98,7 @@ const QString DynamicController::SpeedText(double speed) const
 void DynamicController::Stop()
 {
 	m_isOperateDyn = false;
+	RemoteManager::GetInstance()->SendSpecialCommand(CommandId::SET_SPEED_PRECENT, m_speed);
 }
 
 void DynamicController::AddWidget(QComboBox* speedComboBox)

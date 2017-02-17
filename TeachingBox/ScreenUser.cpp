@@ -28,10 +28,10 @@ void ScreenUser::UpdateText()
 {
 	/*添加表头*/
 	QStringList strList;
-	strList << QCoreApplication::translate(CLASS_NAME,"User")
-		<< QCoreApplication::translate(CLASS_NAME, "Address")
-		<< QCoreApplication::translate(CLASS_NAME, "Authority")
-		<< QCoreApplication::translate(CLASS_NAME, "Control");
+	strList << tr("User")
+		<< tr("Address")
+		<< tr("Authority")
+		<< tr("Control");
 	m_tableWidget->setHorizontalHeaderLabels(strList);
 }
 

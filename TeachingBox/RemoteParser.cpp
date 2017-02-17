@@ -44,7 +44,11 @@ void RemoteParser::ParseOneCommand(QByteArray& command) const
 	{
 	case CommandId::NORMAL_COMMAND:
 	{
-		SendNextCommand();
+		if (Context::interpreterContext.GetExecuteState()!=InterpreterContext::STOP)
+		{
+			SendNextCommand();
+		}
+		
 	}break;
 	case CommandId::NORMAL_COMMAND_FEEDBACK:
 	{

@@ -35,8 +35,6 @@ void TcpManager::SendData(const QByteArray& data)
 	}
 }
 
-
-
 void TcpManager::ConnectAddress(const QString& address)
 {
 	QHostAddress hostAddress;

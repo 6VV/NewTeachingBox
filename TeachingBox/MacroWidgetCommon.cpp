@@ -2,8 +2,6 @@
 #include "MacroWidgetCommon.h"
 #include "MacroInfo.h"
 #include "TPosition.h"
-#include "TDynamic.h"
-#include "TOverlap.h"
 #include "TInteger.h"
 #include "TDouble.h"
 #include "TBool.h"

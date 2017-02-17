@@ -10,7 +10,6 @@
 #include "TDouble.h"
 #include "TString.h"
 #include "TBool.h"
-#include "TOverlap.h"
 #include "TComplex.h"
 #include "VariateValue.h"
 #include "TVariateFactory.h"

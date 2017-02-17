@@ -574,9 +574,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ScreenProject.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="TOverlap.cpp">
-      <Filter>Source Files\Variate\Variate</Filter>
-    </ClCompile>
     <ClCompile Include="TPosition.cpp">
       <Filter>Source Files\Variate\Variate</Filter>
     </ClCompile>
@@ -970,9 +967,6 @@
     <ClCompile Include="TVariateInfo.cpp">
       <Filter>Source Files\Variate\VariateInfo</Filter>
     </ClCompile>
-    <ClCompile Include="TDynamic.cpp">
-      <Filter>Source Files\Variate\Variate</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TeachingBoxBroadcast.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -1146,6 +1140,12 @@
     </ClCompile>
     <ClCompile Include="TAstNodeEof.cpp">
       <Filter>Source Files\Interpreter\TAstNode</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenUser.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ScreenUser.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1323,6 +1323,9 @@
     <CustomBuild Include="DialogLockScreen.h">
       <Filter>Header Files\Screen\ScreenService</Filter>
     </CustomBuild>
+    <CustomBuild Include="ScreenUser.h">
+      <Filter>Header Files\Screen\ScreenService</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="teachingbox_zh.qm">
@@ -1350,9 +1353,6 @@
     </ClInclude>
     <ClInclude Include="SingleTon.h">
       <Filter>Header Files\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenUser.h">
-      <Filter>Header Files\Screen\ScreenService</Filter>
     </ClInclude>
     <ClInclude Include="User.h">
       <Filter>Header Files\User</Filter>
@@ -1651,32 +1651,34 @@
     <ClInclude Include="TeachingBoxInitialization.h">
       <Filter>Header Files\Init</Filter>
     </ClInclude>
-    <ClInclude Include="Exception.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IntegerValue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TDynamic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TOverlap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TPosition.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VariateValue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TAstNodeEof.h">
       <Filter>Header Files\Interpreter\TAstNode</Filter>
     </ClInclude>
+    <ClInclude Include="ScreenState.h">
+      <Filter>Header Files\Screen\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="TPosition.h">
+      <Filter>Header Files\Variate\Variate</Filter>
+    </ClInclude>
+    <ClInclude Include="IntegerValue.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
+    </ClInclude>
+    <ClInclude Include="VariateValue.h">
+      <Filter>Header Files\Variate\VariateValue</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resources\xml\Macro.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="Resources\xml\Variates.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

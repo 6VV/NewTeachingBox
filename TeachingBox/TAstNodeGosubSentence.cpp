@@ -53,7 +53,7 @@ TAstNode::ValueReturned TAstNodeGosubSentence::Execute() const
 		throw TInterpreterException(TInterpreterException::NOT_PROGRAM_NAME, m_token->LineNumber(),desProgramName);
 	}
 
-	Context::interpreterContext.PushFunctionInfo({Context::interpreterContext.GetProgramExecuting(),GetToken()->LineNumber()+1});
+	Context::interpreterContext.PushFunctionInfo({GetProgramNode()->GetToken()->Name(),GetToken()->LineNumber()+1});
 
 	Context::interpreterContext.SetNextNode(programNode.get());
 

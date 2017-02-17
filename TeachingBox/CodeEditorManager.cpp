@@ -156,8 +156,6 @@ CodeEditorManager::CodeEditorManager()
 
 	m_codeEditor->updateKeywords(*(MacroManager::GetInstance()->GetKeywords()));
 	m_codeEditor->defineWrongLineMarker(":/new/image/Resources/Image/wrong_icon.png");
-
-	connect(TeachingBoxBroadcast::GetInstance(), &TeachingBoxBroadcast::OpenProgram, this, &CodeEditorManager::OpenProgram);
 }
 
 void CodeEditorManager::UpdateTextFromProgram(const QString &program) const

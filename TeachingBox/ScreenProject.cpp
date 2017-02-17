@@ -36,6 +36,8 @@ ScreenProject::ScreenProject(QWidget* parent)
 	, m_btnExport(new Button(this))
 {
 	Init();
+	connect(TeachingBoxBroadcast::GetInstance(), &TeachingBoxBroadcast::OpenProgram, CodeEditorManager::GetInstance(), &CodeEditorManager::OpenProgram);
+
 }
 
 ScreenProject::~ScreenProject()

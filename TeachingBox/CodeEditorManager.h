@@ -32,6 +32,8 @@ public:
 	void HighlightCurrentPCLine() const;	/*高亮显示PC行*/
 	void HighlightWrongLine(const QString& program, const int lineNumber) const;	/*高亮显示错误行*/
 
+	void OpenProgram(const QString& project, const QString& program);
+
 	void Paste() const;
 
 	void Redo() const;
@@ -58,7 +60,6 @@ private:
 	void HighlightPCLine(int lineNumber) const;
 	void UpdateTextFromProgram(const QString &program) const;
 
-	void OpenProgram(const QString& project, const QString& program);
 
 private:
 	SciCodeEditor* m_codeEditor;
