@@ -1,0 +1,6 @@
+MOVL p3,dyn0,ov1
+MOVL p3,dyn0,ov2
+GOSUB d
+SET_TOOL_SYS aa
+MOVL p3,dyn0,ov1
+EOF
