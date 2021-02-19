@@ -107,9 +107,8 @@ void SciCodeEditor::search(const QString& word)
 void SciCodeEditor::updateCurrentLine(const QString& text)
 {
 	int line = cursorLine();
-	setSelection(line, 0, line, lineLength(line));
-
-	replaceSelectedText(text + "\n");
+	setSelection(line, 0, line, lineLength(line) - 1);
+	replaceSelectedText(text + "\r\n");
 }
 
 int SciCodeEditor::cursorLine() const

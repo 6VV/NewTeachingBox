@@ -31,7 +31,7 @@ std::shared_ptr<TVariate> ComplexValueTreeWidgetItem::GetVariate(const TSymbol& 
 
 void ComplexValueTreeWidgetItem::UpdateWidgetValue(const std::shared_ptr<TVariate> newVariate, QTreeWidget* treeWidget, QTreeWidgetItem* variateItem)
 {
-	assert(typeid(*newVariate) == typeid(TComplex));
+	//assert(typeid(*newVariate) == typeid(TComplex));
 	auto values = std::dynamic_pointer_cast<TComplex>(newVariate)->GetValues();
 
 	for (size_t i = 0; i < values.size(); ++i)

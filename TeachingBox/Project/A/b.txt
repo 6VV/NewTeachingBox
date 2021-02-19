@@ -1,5 +1,5 @@
 MOVL p2,dyn0,ov2
 MOVL p2,dyn0,ov2
-GOSUB a 
+GOSUB b
 MOVC p2,p2,dyn0,ov1
 EOF

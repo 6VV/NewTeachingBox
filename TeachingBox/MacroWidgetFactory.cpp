@@ -34,7 +34,7 @@ QWidget* MacroWidgetFactory::CreateMacroWidget(const QString& macro, QWidget* pa
 		{
 			return nullptr;
 		}
-		return new MacroWidgetCommon(*iter->second, parent);
+		return new MacroWidgetCommon(*iter->second, macro, parent);
 	}
 
 	return nullptr;

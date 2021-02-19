@@ -24,7 +24,7 @@
 class MacroWidgetCommon:public MacroWidgetParent
 {
 public:
-	MacroWidgetCommon(const MacroInfo& macroInfo,QWidget* parent=0);
+	MacroWidgetCommon(const MacroInfo& macroInfo, const QString& macroText, QWidget* parent = 0);
 	
 private:
 	virtual QString MacroName() override;

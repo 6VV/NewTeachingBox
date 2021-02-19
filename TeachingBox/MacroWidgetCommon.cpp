@@ -8,8 +8,8 @@
 #include "TString.h"
 
 
-MacroWidgetCommon::MacroWidgetCommon(const MacroInfo& macroInfo, QWidget* parent/*=0*/)
-	:MacroWidgetParent(macroInfo.GetText(), parent)
+MacroWidgetCommon::MacroWidgetCommon(const MacroInfo& macroInfo, const QString& macroText, QWidget* parent/*=0*/)
+	:MacroWidgetParent(macroText, parent)
 	, m_macroInfo(macroInfo)
 {
 	auto parameterTypes = macroInfo.GetParameterTypes();
