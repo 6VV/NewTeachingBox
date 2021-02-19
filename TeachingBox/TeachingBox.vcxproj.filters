@@ -331,27 +331,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_teachingbox.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TeachingBox.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TeachingBox.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_WarningLight.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_WarningLight.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_InternationalWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_InternationalWidget.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="InternationalWidget.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
@@ -385,30 +364,6 @@
     <ClCompile Include="ScreenService.cpp">
       <Filter>Source Files\Screen\ScreenService</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenService.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenService.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenSetting.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenSetting.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenUserManager.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenUserManager.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenNetwork.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenNetwork.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="LabelWithBorder.cpp">
       <Filter>Source Files\Screen\Screen\Widget</Filter>
     </ClCompile>
@@ -424,12 +379,6 @@
     <ClCompile Include="ScreenUserManager.cpp">
       <Filter>Source Files\Screen\ScreenService\UserManager</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DialogEditUser.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DialogEditUser.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="DialogEditUser.cpp">
       <Filter>Source Files\Screen\ScreenService\UserManager</Filter>
     </ClCompile>
@@ -442,12 +391,6 @@
     <ClCompile Include="UserDatabase.cpp">
       <Filter>Source Files\DataPersistence</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenVariate.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenVariate.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="ScreenManager.cpp">
       <Filter>Source Files\Screen\ScreenMain</Filter>
     </ClCompile>
@@ -457,62 +400,8 @@
     <ClCompile Include="ButtonGroup.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TVariate.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TVariate.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TSymbol.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TSymbol.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TInteger.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TInteger.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TString.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TString.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TDouble.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TDouble.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TBool.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TBool.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="TSymbol.cpp">
       <Filter>Source Files\Variate</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_LineEditWithRegExpAndKeyboard.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_LineEditWithRegExpAndKeyboard.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_Keyboard.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_Keyboard.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ComboBoxInTree.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ComboBoxInTree.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="Keyboard.cpp">
       <Filter>Source Files\Widget\Keyboard</Filter>
@@ -535,23 +424,11 @@
     <ClCompile Include="WidgetItemInTree.cpp">
       <Filter>Source Files\Screen\ScreenVariate\TreeWidget</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DialogNewVariate.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DialogNewVariate.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="KeyboardButton.cpp">
       <Filter>Source Files\Widget\Keyboard</Filter>
     </ClCompile>
     <ClCompile Include="VariateDatabase.cpp">
       <Filter>Source Files\DataPersistence</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TVariateManager.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TVariateManager.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="TVariateManager.cpp">
       <Filter>Source Files\Variate</Filter>
@@ -568,12 +445,6 @@
     <ClCompile Include="Context.cpp">
       <Filter>Source Files\Context</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenProject.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenProject.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="TPosition.cpp">
       <Filter>Source Files\Variate\Variate</Filter>
     </ClCompile>
@@ -586,38 +457,14 @@
     <ClCompile Include="ProjectManager.cpp">
       <Filter>Source Files\Screen\ScreenProject</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenProgram.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenProgram.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="ScreenProgram.cpp">
       <Filter>Source Files\Screen\ScreenProgram</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_CodeEditor.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_CodeEditor.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TestTreeWdigetItem.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TestTreeWdigetItem.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="TestTreeWdigetItem.cpp">
       <Filter>Source Files\Test</Filter>
     </ClCompile>
     <ClCompile Include="DialogParent.cpp">
       <Filter>Source Files\Widget</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DialogNewMacro.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DialogNewMacro.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="TToken.cpp">
       <Filter>Source Files\Interpreter\Token</Filter>
@@ -670,18 +517,6 @@
     <ClCompile Include="RegExp.cpp">
       <Filter>Source Files\Init</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TInterpreterThread.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TInterpreterThread.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_InterpreterManager.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_InterpreterManager.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="InterpreterManager.cpp">
       <Filter>Source Files\Interpreter</Filter>
     </ClCompile>
@@ -690,18 +525,6 @@
     </ClCompile>
     <ClCompile Include="InterpreterContext.cpp">
       <Filter>Source Files\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TcpManager.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TcpManager.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TcpAdapter.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TcpAdapter.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="TcpManager.cpp">
       <Filter>Source Files\Remote</Filter>
@@ -712,12 +535,6 @@
     <ClCompile Include="RemoteManager.cpp">
       <Filter>Source Files\Remote</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DialogNewAddress.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DialogNewAddress.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="TAstNodeGosubSentence.cpp">
       <Filter>Source Files\Interpreter\TAstNode</Filter>
     </ClCompile>
@@ -726,18 +543,6 @@
     </ClCompile>
     <ClCompile Include="ScreenNetwork.cpp">
       <Filter>Source Files\Screen\ScreenService\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_RemoteParser.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_RemoteParser.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_MacroWidgetParent.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_MacroWidgetParent.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="MacroWidgetParent.cpp">
       <Filter>Source Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
@@ -760,23 +565,11 @@
     <ClCompile Include="DynamicController.cpp">
       <Filter>Source Files\TeachingBox</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DynamicController.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DynamicController.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="ScreenCoordinate.cpp">
       <Filter>Source Files\Screen\ScreenCoordinate</Filter>
     </ClCompile>
     <ClCompile Include="ScreenReferenceSystem.cpp">
       <Filter>Source Files\Screen\ScreenCoordinate</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenReferenceSystem.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenReferenceSystem.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
@@ -799,29 +592,11 @@
     <ClCompile Include="VariateWidgetProducer.cpp">
       <Filter>Source Files\Variate</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenCoordinate.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenCoordinate.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenToolSystem.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenToolSystem.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="ScreenToolSystem.cpp">
       <Filter>Source Files\Screen\ScreenCoordinate</Filter>
     </ClCompile>
     <ClCompile Include="TToolSys.cpp">
       <Filter>Source Files\Variate\Variate\Coordinate</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_RemoteAdapter.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_RemoteAdapter.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="RemoteFeedbackController.cpp">
       <Filter>Source Files\Remote</Filter>
@@ -856,29 +631,11 @@
     <ClCompile Include="VariateManagerWithHorizonHeader.cpp">
       <Filter>Source Files\Variate\VariateWidget\NewWidget</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_VariateValueTreeWidgetItem.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_VariateValueTreeWidgetItem.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="VariateWidgetMap.cpp">
       <Filter>Source Files\Variate\VariateWidget\NewWidget</Filter>
     </ClCompile>
     <ClCompile Include="VariateManagerWithVerticalHeader.cpp">
       <Filter>Source Files\Variate\VariateWidget\NewWidget</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TreeWidgetItemWithSymbol.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TreeWidgetItemWithSymbol.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_VariateManagerWithHorizonHeader.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_VariateManagerWithHorizonHeader.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="VariateValue.cpp">
       <Filter>Source Files\Variate\VariateValue</Filter>
@@ -925,20 +682,8 @@
     <ClCompile Include="CodeEditorManager.cpp">
       <Filter>Source Files\Screen\ScreenProgram\CodeEditor</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_CodeEditorManager.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_CodeEditorManager.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="SimpleKeyboard.cpp">
       <Filter>Source Files\Widget\Keyboard</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_SimpleKeyboard.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_SimpleKeyboard.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="KeyboardLineEdit.cpp">
       <Filter>Source Files\Widget\Keyboard</Filter>
@@ -967,47 +712,14 @@
     <ClCompile Include="TVariateInfo.cpp">
       <Filter>Source Files\Variate\VariateInfo</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TeachingBoxBroadcast.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TeachingBoxBroadcast.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_LabelWithBorder.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_LabelWithBorder.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="ScreenWarningHeader.cpp">
       <Filter>Source Files\Screen\Screen</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenWarningHeader.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenWarningHeader.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="ConfirmButton.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
     <ClCompile Include="ScreenWarning.cpp">
       <Filter>Source Files\Screen\ScreenWarning</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_WarningModel.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_WarningModel.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenWarning.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenWarning.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DateDelegate.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="WarningInfo.cpp">
       <Filter>Source Files\Screen\ScreenWarning</Filter>
@@ -1018,65 +730,14 @@
     <ClCompile Include="DateDelegate.cpp">
       <Filter>Source Files\Screen\ScreenWarning</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DateDelegate.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ConfirmButton.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ConfirmButton.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TInterpreterInfo.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TInterpreterInfo.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="TInterpreterInfo.cpp">
       <Filter>Source Files\Exception</Filter>
     </ClCompile>
     <ClCompile Include="WidgetWithBorderAndIcon.cpp">
       <Filter>Source Files\Screen\Screen\Widget</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_SystemDialogWidgetParent.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_SystemDialogWidgetParent.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="SystemDialogWidgetParent.cpp">
       <Filter>Source Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_RefSysWidgetThreePointsWithOriginStep1.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_RefSysWidgetThreePointsWithOriginStep1.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_RefSysDialog.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_RefSysDialog.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_RefSysWidgetThreePointsWithoutOriginStep1.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_RefSysWidgetThreePointsWithoutOriginStep1.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_RefSysWidgetOnePointKeepOrientation.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_RefSysWidgetOnePointKeepOrientation.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_RefSysWidgetEnd.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_RefSysWidgetEnd.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="RefSysDialog.cpp">
       <Filter>Source Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
@@ -1132,200 +793,185 @@
     <ClCompile Include="DialogLockScreen.cpp">
       <Filter>Source Files\Screen\ScreenService</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DialogLockScreen.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DialogLockScreen.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="TAstNodeEof.cpp">
       <Filter>Source Files\Interpreter\TAstNode</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ScreenUser.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ScreenUser.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="teachingbox.qrc">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="InternationalWidget.h">
+    <QtMoc Include="InternationalWidget.h">
       <Filter>Header Files\Widget</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TeachingBox.h">
+    </QtMoc>
+    <QtMoc Include="TeachingBox.h">
       <Filter>Header Files\TeachingBox</Filter>
-    </CustomBuild>
-    <CustomBuild Include="WarningLight.h">
+    </QtMoc>
+    <QtMoc Include="WarningLight.h">
       <Filter>Header Files\TeachingBox</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenService.h">
+    </QtMoc>
+    <QtMoc Include="ScreenService.h">
       <Filter>Header Files\Screen\ScreenService</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenSetting.h">
+    </QtMoc>
+    <QtMoc Include="ScreenSetting.h">
       <Filter>Header Files\Screen\ScreenService</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenUserManager.h">
+    </QtMoc>
+    <QtMoc Include="ScreenUserManager.h">
       <Filter>Header Files\Screen\ScreenService\UserManager</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DialogEditUser.h">
+    </QtMoc>
+    <QtMoc Include="DialogEditUser.h">
       <Filter>Header Files\Screen\ScreenService\UserManager</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenVariate.h">
+    </QtMoc>
+    <QtMoc Include="ScreenVariate.h">
       <Filter>Header Files\Screen\ScreenVariate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TSymbol.h">
+    </QtMoc>
+    <QtMoc Include="TSymbol.h">
       <Filter>Header Files\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ComboBoxInTree.h">
+    </QtMoc>
+    <QtMoc Include="ComboBoxInTree.h">
       <Filter>Header Files\Screen\ScreenVariate\TreeWidget</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Keyboard.h">
+    </QtMoc>
+    <QtMoc Include="Keyboard.h">
       <Filter>Header Files\Widget\Keyboard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="LineEditWithRegExpAndKeyboard.h">
+    </QtMoc>
+    <QtMoc Include="LineEditWithRegExpAndKeyboard.h">
       <Filter>Header Files\Widget\Keyboard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TVariateManager.h">
+    </QtMoc>
+    <QtMoc Include="TVariateManager.h">
       <Filter>Header Files\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TVariate.h">
+    </QtMoc>
+    <QtMoc Include="TVariate.h">
       <Filter>Header Files\Variate\Variate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenProject.h">
+    </QtMoc>
+    <QtMoc Include="ScreenProject.h">
       <Filter>Header Files\Screen\ScreenProject</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenProgram.h">
+    </QtMoc>
+    <QtMoc Include="ScreenProgram.h">
       <Filter>Header Files\Screen\ScreenProgram</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TestTreeWdigetItem.h">
+    </QtMoc>
+    <QtMoc Include="TestTreeWdigetItem.h">
       <Filter>Header Files\Test</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TInterpreterThread.h">
+    </QtMoc>
+    <QtMoc Include="TInterpreterThread.h">
       <Filter>Header Files\Interpreter</Filter>
-    </CustomBuild>
-    <CustomBuild Include="InterpreterManager.h">
+    </QtMoc>
+    <QtMoc Include="InterpreterManager.h">
       <Filter>Header Files\Interpreter</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TcpManager.h">
+    </QtMoc>
+    <QtMoc Include="TcpManager.h">
       <Filter>Header Files\Remote</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TcpAdapter.h">
+    </QtMoc>
+    <QtMoc Include="TcpAdapter.h">
       <Filter>Header Files\Remote</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenNetwork.h">
+    </QtMoc>
+    <QtMoc Include="ScreenNetwork.h">
       <Filter>Header Files\Screen\ScreenService\Network</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DialogNewAddress.h">
+    </QtMoc>
+    <QtMoc Include="DialogNewAddress.h">
       <Filter>Header Files\Screen\ScreenService\Network</Filter>
-    </CustomBuild>
-    <CustomBuild Include="RemoteParser.h">
+    </QtMoc>
+    <QtMoc Include="RemoteParser.h">
       <Filter>Header Files\Remote</Filter>
-    </CustomBuild>
-    <CustomBuild Include="MacroWidgetParent.h">
+    </QtMoc>
+    <QtMoc Include="MacroWidgetParent.h">
       <Filter>Header Files\Screen\ScreenProgram\Macro\MacroWidget</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DialogNewMacro.h">
+    </QtMoc>
+    <QtMoc Include="DialogNewMacro.h">
       <Filter>Header Files\Screen\ScreenProgram\Macro\MacroSeletor</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DynamicController.h">
+    </QtMoc>
+    <QtMoc Include="DynamicController.h">
       <Filter>Header Files\TeachingBox</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenReferenceSystem.h">
+    </QtMoc>
+    <QtMoc Include="ScreenReferenceSystem.h">
       <Filter>Header Files\Screen\ScreenCoordinate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TBool.h">
+    </QtMoc>
+    <QtMoc Include="TBool.h">
       <Filter>Header Files\Variate\Variate\Base</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TDouble.h">
+    </QtMoc>
+    <QtMoc Include="TDouble.h">
       <Filter>Header Files\Variate\Variate\Base</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TInteger.h">
+    </QtMoc>
+    <QtMoc Include="TInteger.h">
       <Filter>Header Files\Variate\Variate\Base</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TString.h">
+    </QtMoc>
+    <QtMoc Include="TString.h">
       <Filter>Header Files\Variate\Variate\Base</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenCoordinate.h">
+    </QtMoc>
+    <QtMoc Include="ScreenCoordinate.h">
       <Filter>Header Files\Screen\ScreenCoordinate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenToolSystem.h">
+    </QtMoc>
+    <QtMoc Include="ScreenToolSystem.h">
       <Filter>Header Files\Screen\ScreenCoordinate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="RemoteAdapter.h">
+    </QtMoc>
+    <QtMoc Include="RemoteAdapter.h">
       <Filter>Header Files\Remote</Filter>
-    </CustomBuild>
-    <CustomBuild Include="VariateValueTreeWidgetItem.h">
+    </QtMoc>
+    <QtMoc Include="VariateValueTreeWidgetItem.h">
       <Filter>Header Files\Variate\VariateWidget\NewWidget\VariateValueTreeWidget</Filter>
-    </CustomBuild>
-    <CustomBuild Include="VariateManagerWithHorizonHeader.h">
+    </QtMoc>
+    <QtMoc Include="VariateManagerWithHorizonHeader.h">
       <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TreeWidgetItemWithSymbol.h">
+    </QtMoc>
+    <QtMoc Include="TreeWidgetItemWithSymbol.h">
       <Filter>Header Files\Variate\VariateWidget\NewWidget</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DialogNewVariate.h">
+    </QtMoc>
+    <QtMoc Include="DialogNewVariate.h">
       <Filter>Header Files\Screen\ScreenVariate</Filter>
-    </CustomBuild>
-    <CustomBuild Include="CodeEditor.h">
+    </QtMoc>
+    <QtMoc Include="CodeEditor.h">
       <Filter>Header Files\Screen\ScreenProgram\CodeEditor</Filter>
-    </CustomBuild>
-    <CustomBuild Include="CodeEditorManager.h">
+    </QtMoc>
+    <QtMoc Include="CodeEditorManager.h">
       <Filter>Header Files\Screen\ScreenProgram\CodeEditor</Filter>
-    </CustomBuild>
-    <CustomBuild Include="SimpleKeyboard.h">
+    </QtMoc>
+    <QtMoc Include="SimpleKeyboard.h">
       <Filter>Header Files\Widget\Keyboard</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TeachingBoxBroadcast.h">
+    </QtMoc>
+    <QtMoc Include="TeachingBoxBroadcast.h">
       <Filter>Header Files\Context</Filter>
-    </CustomBuild>
-    <CustomBuild Include="LabelWithBorder.h">
+    </QtMoc>
+    <QtMoc Include="LabelWithBorder.h">
       <Filter>Header Files\Screen\Screen\Widget</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenWarningHeader.h">
+    </QtMoc>
+    <QtMoc Include="ScreenWarningHeader.h">
       <Filter>Header Files\Screen\Screen</Filter>
-    </CustomBuild>
-    <CustomBuild Include="WarningModel.h">
+    </QtMoc>
+    <QtMoc Include="WarningModel.h">
       <Filter>Header Files\Screen\ScreenWarning</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenWarning.h">
+    </QtMoc>
+    <QtMoc Include="ScreenWarning.h">
       <Filter>Header Files\Screen\ScreenWarning</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DateDelegate.h">
+    </QtMoc>
+    <QtMoc Include="DateDelegate.h">
       <Filter>Header Files\Screen\ScreenWarning</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ConfirmButton.h">
+    </QtMoc>
+    <QtMoc Include="ConfirmButton.h">
       <Filter>Header Files\Widget</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TInterpreterInfo.h">
+    </QtMoc>
+    <QtMoc Include="TInterpreterInfo.h">
       <Filter>Header Files\Exception</Filter>
-    </CustomBuild>
-    <CustomBuild Include="SystemDialogWidgetParent.h">
+    </QtMoc>
+    <QtMoc Include="SystemDialogWidgetParent.h">
       <Filter>Header Files\Screen\ScreenCoordinate\SystemDialog</Filter>
-    </CustomBuild>
-    <CustomBuild Include="RefSysWidgetEnd.h">
+    </QtMoc>
+    <QtMoc Include="RefSysWidgetEnd.h">
       <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
-    </CustomBuild>
-    <CustomBuild Include="RefSysWidgetThreePointsWithOriginStep1.h">
+    </QtMoc>
+    <QtMoc Include="RefSysWidgetThreePointsWithOriginStep1.h">
       <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
-    </CustomBuild>
-    <CustomBuild Include="RefSysWidgetThreePointsWithoutOriginStep1.h">
+    </QtMoc>
+    <QtMoc Include="RefSysWidgetThreePointsWithoutOriginStep1.h">
       <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
-    </CustomBuild>
-    <CustomBuild Include="RefSysDialog.h">
+    </QtMoc>
+    <QtMoc Include="RefSysDialog.h">
       <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
-    </CustomBuild>
-    <CustomBuild Include="RefSysWidgetOnePointKeepOrientation.h">
+    </QtMoc>
+    <QtMoc Include="RefSysWidgetOnePointKeepOrientation.h">
       <Filter>Header Files\Screen\ScreenCoordinate\ReferenceSystemDialog</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DialogLockScreen.h">
+    </QtMoc>
+    <QtMoc Include="DialogLockScreen.h">
       <Filter>Header Files\Screen\ScreenService</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScreenUser.h">
+    </QtMoc>
+    <QtMoc Include="ScreenUser.h">
       <Filter>Header Files\Screen\ScreenService</Filter>
-    </CustomBuild>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="teachingbox_zh.qm">
@@ -1680,5 +1326,10 @@
     <Xml Include="Resources\xml\Variates.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="TeachingBox.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
   </ItemGroup>
 </Project>

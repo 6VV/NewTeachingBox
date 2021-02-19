@@ -60,7 +60,7 @@ private:
 	void UpdateSpeed();
 
 private:
-	double m_speed{ InitSpeed() };
+	double m_speed{ static_cast<double>(InitSpeed()) };
 	bool m_isOperateDyn = false;
 	QComboBox* m_speedComboBox;
 };

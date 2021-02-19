@@ -38,10 +38,10 @@ void VariateReader::InitVariatePrototype()
 
 			/*遍历值*/
 			auto values = variates.at(i).childNodes();
-			for (int i = 0; i < values.length(); ++i)
+			for (int k = 0; k < values.length(); ++k)
 			{
-				auto valueType = values.at(i).toElement().attribute("type");
-				auto valueName = values.at(i).toElement().attribute("name");
+				auto valueType = values.at(k).toElement().attribute("type");
+				auto valueName = values.at(k).toElement().attribute("name");
 
 				qDebug() << categoryName+": "+ typeName + ": " << valueType + " " << valueName;
 			}

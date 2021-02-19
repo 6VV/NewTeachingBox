@@ -155,9 +155,9 @@ void MacroWidgetParent::AddParameter(const QString& typeName, const QString& nam
 
 	if (variate == nullptr)
 	{
-		auto name = m_variateWidgetProducer->GetSuggestName(typeName, m_variates);
-		variateComboBox->addItem(QPixmap(VariateWidgetProducer::IMAGE_LOGO_LOCAL), name);
-		variate = TVariateFactory::CreateVariate(TSymbol{ Context::projectContext.ProgramOpened(), name, TSymbol::TYPE_VOID, typeName });
+		auto suggestName = m_variateWidgetProducer->GetSuggestName(typeName, m_variates);
+		variateComboBox->addItem(QPixmap(VariateWidgetProducer::IMAGE_LOGO_LOCAL), suggestName);
+		variate = TVariateFactory::CreateVariate(TSymbol{ Context::projectContext.ProgramOpened(), suggestName, TSymbol::TYPE_VOID, typeName });
 		m_newVariates.append(variate);
 	}
 

@@ -105,7 +105,7 @@ void DynamicController::AddWidget(QComboBox* speedComboBox)
 {
 	m_speedComboBox = speedComboBox;
 
-	connect(speedComboBox, static_cast<void(QComboBox::*)(const QString& text)>(&QComboBox::activated), [this](const QString& text){
+	connect(speedComboBox, static_cast<void(QComboBox::*)(const QString& text)>(&QComboBox::textActivated), [this](const QString& text){
 		m_speed = text.left(text.size() - 1).toDouble();
 	});
 }

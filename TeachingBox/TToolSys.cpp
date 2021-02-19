@@ -22,7 +22,7 @@ TToolSys::TToolSys(const TSymbol& symbol, ValueType value /*= ValueType{}*/)
 	:TComplex(TSymbol{ symbol.GetScope(), symbol.GetName(), TSymbol::TYPE_COMPLEX, TypeName() })
 {
 	MakeCommonValue(value);
-	m_valueNames = { "a", "b", "c", "x", "y", "z" };
+	m_valueNames = QStringList{ "a", "b", "c", "x", "y", "z" };
 }
 
 inline

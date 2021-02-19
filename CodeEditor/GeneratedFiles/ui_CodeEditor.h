@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'CodeEditor.ui'
 **
-** Created by: Qt User Interface Compiler version 5.8.0
+** Created by: Qt User Interface Compiler version 5.15.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,10 +10,7 @@
 #define UI_CODEEDITOR_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
@@ -33,19 +30,19 @@ public:
     void setupUi(QMainWindow *CodeEditorClass)
     {
         if (CodeEditorClass->objectName().isEmpty())
-            CodeEditorClass->setObjectName(QStringLiteral("CodeEditorClass"));
+            CodeEditorClass->setObjectName(QString::fromUtf8("CodeEditorClass"));
         CodeEditorClass->resize(600, 400);
         menuBar = new QMenuBar(CodeEditorClass);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setObjectName(QString::fromUtf8("menuBar"));
         CodeEditorClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(CodeEditorClass);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
+        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
         CodeEditorClass->addToolBar(mainToolBar);
         centralWidget = new QWidget(CodeEditorClass);
-        centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         CodeEditorClass->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(CodeEditorClass);
-        statusBar->setObjectName(QStringLiteral("statusBar"));
+        statusBar->setObjectName(QString::fromUtf8("statusBar"));
         CodeEditorClass->setStatusBar(statusBar);
 
         retranslateUi(CodeEditorClass);
@@ -55,7 +52,7 @@ public:
 
     void retranslateUi(QMainWindow *CodeEditorClass)
     {
-        CodeEditorClass->setWindowTitle(QApplication::translate("CodeEditorClass", "CodeEditor", Q_NULLPTR));
+        CodeEditorClass->setWindowTitle(QCoreApplication::translate("CodeEditorClass", "CodeEditor", nullptr));
     } // retranslateUi
 
 };

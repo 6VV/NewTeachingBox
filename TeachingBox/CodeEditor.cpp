@@ -23,9 +23,9 @@ namespace{
 
 	const QColor LineHighlighter::COLOR_PC{ QColor(Qt::blue).lighter(160) };	
 
-	const QColor LineHighlighter::COLOR_WRONG{ QColor(Qt::red).light(160) };
+	const QColor LineHighlighter::COLOR_WRONG{ QColor(Qt::red).lighter(160) };
 
-	const QColor LineHighlighter::COLOR_EDIT{ QColor(Qt::yellow).light(160) };
+	const QColor LineHighlighter::COLOR_EDIT{ QColor(Qt::yellow).lighter(160) };
 }
 
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
@@ -55,7 +55,7 @@ int CodeEditor::GetLineNumberAreaWidth()
 	}
 
 	/*宽度取决于行数的位数*/
-	int space = 3 + fontMetrics().width(QLatin1Char('9')) * digits;
+	int space = 3 + fontMetrics().horizontalAdvance(QLatin1Char('9')) * digits;
 
 	return space;
 }

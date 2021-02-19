@@ -18,7 +18,7 @@
 *************************************************/
 
 #include <QPlainTextEdit>
-#include "QColor"
+#include <QColor>
 #include "SingleTon.h"
 
 class CodeEditor;

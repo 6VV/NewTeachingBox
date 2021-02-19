@@ -2,7 +2,7 @@
 #define _SCI_CODE_EDITOR_H_
 
 #include <QtWidgets/QMainWindow>
-#include "../QScintilla_gpl-2.9.3/Qt4Qt5/Qsci/qsciscintilla.h"
+#include "Qsci/qsciscintilla.h"
 #include <vector>
 
 class SciRobot;

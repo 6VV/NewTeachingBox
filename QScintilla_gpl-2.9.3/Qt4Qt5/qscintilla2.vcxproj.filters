@@ -501,33 +501,33 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="SciClasses.h">
+    <QtMoc Include="SciClasses.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ScintillaQt.h">
+    </QtMoc>
+    <QtMoc Include="ScintillaQt.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Qsci\qsciabstractapis.h">
+    </QtMoc>
+    <QtMoc Include="Qsci\qsciabstractapis.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Qsci\qsciapis.h">
+    </QtMoc>
+    <QtMoc Include="Qsci\qsciapis.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Qsci\qscilexer.h">
+    </QtMoc>
+    <QtMoc Include="Qsci\qscilexer.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Qsci\qscilexercpp.h">
+    </QtMoc>
+    <QtMoc Include="Qsci\qscilexercpp.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Qsci\qscimacro.h">
+    </QtMoc>
+    <QtMoc Include="Qsci\qscimacro.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Qsci\qsciscintilla.h">
+    </QtMoc>
+    <QtMoc Include="Qsci\qsciscintilla.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Qsci\qsciscintillabase.h">
+    </QtMoc>
+    <QtMoc Include="Qsci\qsciscintillabase.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <CustomBuild Include="..\src\RunStyles.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -617,60 +617,24 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="debug\moc_SciClasses.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_SciClasses.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_ScintillaQt.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_ScintillaQt.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_qsciabstractapis.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_qsciabstractapis.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_qsciapis.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_qsciapis.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_qscilexer.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_qscilexer.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_qscilexercpp.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_qscilexercpp.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_qscimacro.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_qscimacro.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_qsciscintilla.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_qsciscintilla.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_qsciscintillabase.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_qsciscintillabase.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\lexlib\Accessor.h">
