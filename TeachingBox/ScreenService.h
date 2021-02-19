@@ -24,6 +24,7 @@ class ScreenSetting;
 class ScreenUser;
 class ScreenUserManager;
 class ScreenNetwork;
+class ScreenRobot;
 
 class ScreenService:public ScreenMainParent
 {
@@ -62,11 +63,12 @@ private:
 	ScreenUser* m_screenUser;
 	ScreenUserManager* m_screenUserManager;
 	ScreenNetwork* m_screenNetwork;
+	ScreenRobot* m_screenRobot;
 
 	Button* m_btnSetting;
 	Button* m_btnUser;
 	Button* m_btnUserManager;
-	Button* m_btnVersion;
+	Button* m_btnRobot;
 	Button* m_btnInformation;
 	Button* m_btnNetwork;
 };

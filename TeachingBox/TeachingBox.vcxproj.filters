@@ -326,6 +326,12 @@
     <Filter Include="Source Files\Screen\ScreenCoordinate\SystemDialog">
       <UniqueIdentifier>{38150667-1f7d-4960-bb79-8538bfa7eb79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Screen\ScreenService\Robot">
+      <UniqueIdentifier>{9cbccd97-160d-471d-9caa-5c472b5c20b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenService\Robot">
+      <UniqueIdentifier>{d98fe5ee-d73a-4912-9bf6-c8625ee3a5f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -796,6 +802,15 @@
     <ClCompile Include="TAstNodeEof.cpp">
       <Filter>Source Files\Interpreter\TAstNode</Filter>
     </ClCompile>
+    <ClCompile Include="ScreenRobot.cpp">
+      <Filter>Source Files\Screen\ScreenService\Robot</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogNewRobot.cpp">
+      <Filter>Source Files\Screen\ScreenService\Robot</Filter>
+    </ClCompile>
+    <ClCompile Include="RobotDatabase.cpp">
+      <Filter>Source Files\DataPersistence</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="InternationalWidget.h">
@@ -971,6 +986,12 @@
     </QtMoc>
     <QtMoc Include="ScreenUser.h">
       <Filter>Header Files\Screen\ScreenService</Filter>
+    </QtMoc>
+    <QtMoc Include="ScreenRobot.h">
+      <Filter>Header Files\Screen\ScreenService\Robot</Filter>
+    </QtMoc>
+    <QtMoc Include="DialogNewRobot.h">
+      <Filter>Header Files\Screen\ScreenService\Robot</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -1317,6 +1338,9 @@
     </ClInclude>
     <ClInclude Include="Exception.h">
       <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="RobotDatabase.h">
+      <Filter>Header Files\DataPersistence</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

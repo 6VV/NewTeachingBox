@@ -115,6 +115,46 @@
     </message>
 </context>
 <context>
+    <name>DialogNewRobot</name>
+    <message>
+        <location filename="DialogNewRobot.cpp" line="23"/>
+        <source>Name</source>
+        <translation type="unfinished">名称</translation>
+    </message>
+    <message>
+        <location filename="DialogNewRobot.cpp" line="35"/>
+        <source>Confirm</source>
+        <translation type="unfinished">确认</translation>
+    </message>
+    <message>
+        <location filename="DialogNewRobot.cpp" line="36"/>
+        <source>Cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <location filename="DialogNewRobot.cpp" line="59"/>
+        <location filename="DialogNewRobot.cpp" line="64"/>
+        <location filename="DialogNewRobot.cpp" line="69"/>
+        <source>Warning</source>
+        <translation type="unfinished">警告</translation>
+    </message>
+    <message>
+        <location filename="DialogNewRobot.cpp" line="59"/>
+        <source>Name cann&apos;t be empty</source>
+        <translation type="unfinished">名字不能为空</translation>
+    </message>
+    <message>
+        <location filename="DialogNewRobot.cpp" line="64"/>
+        <source>Already exist robot name: %1</source>
+        <translation type="unfinished">已存在机器人名称：%1</translation>
+    </message>
+    <message>
+        <location filename="DialogNewRobot.cpp" line="69"/>
+        <source>Already exist robot id: %1</source>
+        <translation type="unfinished">已存在机器人ID：%2</translation>
+    </message>
+</context>
+<context>
     <name>DialogTeachReferenceSystem</name>
     <message>
         <source>Origin Point</source>
@@ -642,38 +682,38 @@
 <context>
     <name>ScreenProject</name>
     <message>
-        <location filename="ScreenProject.cpp" line="114"/>
+        <location filename="ScreenProject.cpp" line="116"/>
         <source>New project</source>
         <translation type="unfinished">新建项目</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="114"/>
+        <location filename="ScreenProject.cpp" line="116"/>
         <source>Input project name:</source>
         <translation type="unfinished">输入项目名：</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="124"/>
-        <location filename="ScreenProject.cpp" line="168"/>
+        <location filename="ScreenProject.cpp" line="126"/>
+        <location filename="ScreenProject.cpp" line="170"/>
         <source>Already exist </source>
         <translation type="unfinished">已存在</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="147"/>
+        <location filename="ScreenProject.cpp" line="149"/>
         <source>New program</source>
         <translation type="unfinished">新建程序</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="147"/>
+        <location filename="ScreenProject.cpp" line="149"/>
         <source>Input program name:</source>
         <translation type="unfinished">输入程序名：</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="198"/>
+        <location filename="ScreenProject.cpp" line="200"/>
         <source>Please select a program</source>
         <translation type="unfinished">请选择一个程序</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="229"/>
+        <location filename="ScreenProject.cpp" line="231"/>
         <source>Already load project</source>
         <translation type="unfinished">已经加载了一个项目有</translation>
     </message>
@@ -682,77 +722,77 @@
         <translation type="obsolete">已加载</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="81"/>
+        <location filename="ScreenProject.cpp" line="83"/>
         <source>Delete failed</source>
         <translation type="unfinished">删除失败</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="81"/>
+        <location filename="ScreenProject.cpp" line="83"/>
         <source>Cann&apos;t delete project loaded</source>
         <translation type="unfinished">不能删除已加载的项目</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="415"/>
+        <location filename="ScreenProject.cpp" line="417"/>
         <source>Project</source>
         <translation type="unfinished">项目</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="415"/>
+        <location filename="ScreenProject.cpp" line="417"/>
         <source>Setting</source>
         <translation type="unfinished">设置</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="417"/>
+        <location filename="ScreenProject.cpp" line="419"/>
         <source>Load</source>
         <translation type="unfinished">加载</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="418"/>
+        <location filename="ScreenProject.cpp" line="420"/>
         <source>Open</source>
         <translation type="unfinished">打开</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="419"/>
+        <location filename="ScreenProject.cpp" line="421"/>
         <source>Close</source>
         <translation type="unfinished">关闭</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="420"/>
+        <location filename="ScreenProject.cpp" line="422"/>
         <source>Info</source>
         <translation type="unfinished">信息</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="421"/>
+        <location filename="ScreenProject.cpp" line="423"/>
         <source>Refresh</source>
         <translation type="unfinished">刷新</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="422"/>
+        <location filename="ScreenProject.cpp" line="424"/>
         <source>File</source>
         <translation type="unfinished">文件</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="424"/>
+        <location filename="ScreenProject.cpp" line="426"/>
         <source>New Program</source>
         <translation type="unfinished">新建程序</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="425"/>
+        <location filename="ScreenProject.cpp" line="427"/>
         <source>New Project</source>
         <translation type="unfinished">新建项目</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="426"/>
+        <location filename="ScreenProject.cpp" line="428"/>
         <source>Delete</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="427"/>
+        <location filename="ScreenProject.cpp" line="429"/>
         <source>Export</source>
         <translation type="unfinished">导出</translation>
     </message>
     <message>
-        <location filename="ScreenProject.cpp" line="434"/>
+        <location filename="ScreenProject.cpp" line="436"/>
         <source>Invalid Item</source>
         <translation type="unfinished">无效的节点</translation>
     </message>
@@ -841,34 +881,84 @@
     </message>
 </context>
 <context>
-    <name>ScreenService</name>
+    <name>ScreenRobot</name>
     <message>
-        <location filename="ScreenService.cpp" line="100"/>
-        <source>Setting</source>
-        <translation type="unfinished">设置</translation>
+        <location filename="ScreenRobot.cpp" line="20"/>
+        <source>Add</source>
+        <translation type="unfinished">添加</translation>
     </message>
     <message>
-        <location filename="ScreenService.cpp" line="101"/>
-        <source>User</source>
-        <translation type="unfinished">用户</translation>
+        <location filename="ScreenRobot.cpp" line="25"/>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="ScreenService.cpp" line="102"/>
-        <source>UserAdmin</source>
-        <translation type="unfinished">用户管理</translation>
-    </message>
-    <message>
-        <location filename="ScreenService.cpp" line="103"/>
-        <source>Version</source>
-        <translation type="unfinished">版本</translation>
-    </message>
-    <message>
-        <location filename="ScreenService.cpp" line="104"/>
+        <location filename="ScreenRobot.cpp" line="64"/>
         <source>Information</source>
         <translation type="unfinished">信息</translation>
     </message>
     <message>
-        <location filename="ScreenService.cpp" line="105"/>
+        <location filename="ScreenRobot.cpp" line="64"/>
+        <source>Please select a robot</source>
+        <translation type="unfinished">请选择一个机器人</translation>
+    </message>
+    <message>
+        <location filename="ScreenRobot.cpp" line="69"/>
+        <source>Delete Robot</source>
+        <translation type="unfinished">删除机器人</translation>
+    </message>
+    <message>
+        <location filename="ScreenRobot.cpp" line="69"/>
+        <source>Confirm delete robot: %1</source>
+        <translation type="unfinished">确认删除机器人：%1</translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation type="obsolete">连接</translation>
+    </message>
+    <message>
+        <location filename="ScreenRobot.cpp" line="36"/>
+        <source>Name</source>
+        <translation type="unfinished">名称</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="obsolete">编辑</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenService</name>
+    <message>
+        <location filename="ScreenService.cpp" line="106"/>
+        <source>Setting</source>
+        <translation type="unfinished">设置</translation>
+    </message>
+    <message>
+        <location filename="ScreenService.cpp" line="107"/>
+        <source>User</source>
+        <translation type="unfinished">用户</translation>
+    </message>
+    <message>
+        <location filename="ScreenService.cpp" line="108"/>
+        <source>UserAdmin</source>
+        <translation type="unfinished">用户管理</translation>
+    </message>
+    <message>
+        <location filename="ScreenService.cpp" line="109"/>
+        <source>Robot</source>
+        <translation type="unfinished">机器人</translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation type="obsolete">版本</translation>
+    </message>
+    <message>
+        <location filename="ScreenService.cpp" line="110"/>
+        <source>Information</source>
+        <translation type="unfinished">信息</translation>
+    </message>
+    <message>
+        <location filename="ScreenService.cpp" line="111"/>
         <source>Network</source>
         <translation type="unfinished">网络</translation>
     </message>

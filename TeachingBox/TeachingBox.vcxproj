@@ -256,6 +256,7 @@
     <ClCompile Include="DialogLockScreen.cpp" />
     <ClCompile Include="DialogNewAddress.cpp" />
     <ClCompile Include="DialogNewMacro.cpp" />
+    <ClCompile Include="DialogNewRobot.cpp" />
     <ClCompile Include="DialogNewVariate.cpp" />
     <ClCompile Include="DialogParent.cpp" />
     <ClCompile Include="DoubleValue.cpp" />
@@ -302,6 +303,7 @@
     <ClCompile Include="RemoteFeedbackController.cpp" />
     <ClCompile Include="RemoteManager.cpp" />
     <ClCompile Include="RemoteParser.cpp" />
+    <ClCompile Include="RobotDatabase.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="ScreenAxis.cpp" />
     <ClCompile Include="ScreenCoordinate.cpp" />
@@ -311,6 +313,7 @@
     <ClCompile Include="ScreenProgram.cpp" />
     <ClCompile Include="ScreenProject.cpp" />
     <ClCompile Include="ScreenReferenceSystem.cpp" />
+    <ClCompile Include="ScreenRobot.cpp" />
     <ClCompile Include="ScreenService.cpp" />
     <ClCompile Include="ScreenSetting.cpp" />
     <ClCompile Include="ScreenState.cpp" />
@@ -411,6 +414,7 @@
     <ClInclude Include="CoordinateSystemTeachInfo.h" />
     <ClInclude Include="DatabaseHelper.h" />
     <ClInclude Include="DataStruct.h" />
+    <QtMoc Include="DialogNewRobot.h" />
     <ClInclude Include="DialogParent.h" />
     <ClInclude Include="DoubleValue.h" />
     <ClInclude Include="DoubleValueTreeWidgetItem.h" />
@@ -449,10 +453,12 @@
     <ClInclude Include="RemoteAdapterFactory.h" />
     <ClInclude Include="RemoteFeedbackController.h" />
     <ClInclude Include="RemoteManager.h" />
+    <ClInclude Include="RobotDatabase.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="ScreenAxis.h" />
     <ClInclude Include="ScreenMainParent.h" />
     <ClInclude Include="ScreenManager.h" />
+    <QtMoc Include="ScreenRobot.h" />
     <ClInclude Include="ScreenState.h" />
     <QtMoc Include="ScreenUser.h">
     </QtMoc>

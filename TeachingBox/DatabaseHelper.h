@@ -37,8 +37,7 @@ namespace Database{
 		~DatabaseHelper();
 
 		void CreateTable();	/*创建所有表*/
-		void CreateUserTable();	/*创建用户表*/
-		void CreateVariateTable();	/*创建变量表*/
+		void Exec(const QString& text); //执行数据库语句
 
 	private:
 		const QString DATABASE_TYPE = "QSQLITE";	/*数据库类型*/

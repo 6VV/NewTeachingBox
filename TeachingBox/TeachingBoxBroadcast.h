@@ -43,6 +43,7 @@ signals:
 	void AddVariate(std::shared_ptr<TVariate> variate);
 	void CurrentUserChanged();
 	void DeleteVariate(std::shared_ptr<TVariate> variate);
+	void RobotInfoChanged();
 	void ExecuteModeChanged(int newMode);
 	void ExecuteStateChanged(int newState);
 	void JogStateChanged(TeachingBoxContext::JogState state);

@@ -3,6 +3,8 @@
 #include "UserDatabase.h"
 #include "Exception.h"
 #include "VariateDatabase.h"
+#include "QSqlError"
+#include "RobotDatabase.h"
 
 namespace Database{
 
@@ -18,9 +20,6 @@ namespace Database{
 
 	DatabaseHelper::DatabaseHelper()
 	{
-		/*是否存在数据库*/
-		bool isExists = QFile::exists(DATABASE_NAME);
-
 		if (m_db.contains(CONNECTION_NAME))
 		{
 			m_db = QSqlDatabase::database(CONNECTION_NAME);
@@ -38,11 +37,7 @@ namespace Database{
 			m_db.open();
 		}
 
-		/*若之前不存在数据库，则创建表*/
-		if (!isExists)
-		{
-			CreateTable();
-		}
+		CreateTable(); //若表不存在，创建表
 	}
 
 	DatabaseHelper::~DatabaseHelper()
@@ -55,31 +50,21 @@ namespace Database{
 
 	void DatabaseHelper::CreateTable()
 	{
-		CreateUserTable();
-		CreateVariateTable();
+		Exec(UserDatabase::GetTextCreateTable()); //创建用户表
+		Exec(VariateDatabase::GetTextCreateTable()); //创建变量表
+		Exec(RobotDatabase::getTextCreateTable()); //创建机器人表
+
 	}
 
-	void DatabaseHelper::CreateUserTable()
+	void DatabaseHelper::Exec(const QString& text)
 	{
 		QSqlQuery query(m_db);
-
-		query.prepare(UserDatabase::GetTextCreateTable());
+		query.prepare(text);
 
 		if (!query.exec())
 		{
-			throw(Exception("Create User Table Failed"));
-		}
-	}
-
-	void DatabaseHelper::CreateVariateTable()
-	{
-		QSqlQuery query(m_db);
-	
-		query.prepare(VariateDatabase::GetTextCreateTable());
-
-		if (!query.exec())
-		{
-			throw Exception("Create variate table failed:\n");
+			qDebug() << query.lastError().text();
+			throw Exception(query.lastError().text());
 		}
 	}
 

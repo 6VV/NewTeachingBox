@@ -144,7 +144,7 @@ namespace Database{
 	{
 		QString length = QString::number(TeachingBoxContext::STRING_MAX_LENGTH);
 
-		QString oper = "CREATE TABLE " + TableName() + " ("
+		QString oper = "CREATE TABLE IF NOT EXISTS " + TableName() + " ("
 			+ ColumnScope() + " varchar(" + length + ") NOT NULL,"	/*作用域*/
 			+ ColumnName() + " varchar(" + length + ") NOT NULL,"	/*变量名*/
 			+ ColumnValue() + " varchar NOT NULL)"	/*值*/;

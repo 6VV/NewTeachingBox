@@ -62,6 +62,8 @@ private:
 	void UpdatePixmap(LabelWithBorder* widget, const QString& pixmapPath, Qt::AspectRatioMode aspectRatioMode = Qt::IgnoreAspectRatio, Qt::TransformationMode transformMode = Qt::SmoothTransformation);
 	void UpdateRefSysBox();	/*更新参考坐标系*/
 	void UpdateToolRefBox();	/*更新工具坐标系*/
+	void updateRobot(); //更新机器人信息
+
 private:
 	bool m_isFirstCreate = true;
 
@@ -79,9 +81,11 @@ private:
 
 	ComboBoxWithUniqueIcon* m_comboBoxRefSys;	/*参考坐标系*/
 	ComboBoxWithUniqueIcon* m_comboBoxTool;			/*工具手*/
-	ComboBoxWithUniqueIcon* m_comboBoxSpeed;			/*工具手*/
+	ComboBoxWithUniqueIcon* m_comboBoxSpeed;			/*速度*/
 	ComboBoxWithUniqueIcon* m_comboBoxProject;		/*当前打开的项目*/
 	ComboBoxWithUniqueIcon* m_comboBoxProgram;		/*当前打开的程序*/
+	ComboBoxWithUniqueIcon* m_comboBoxRobot;		/*机器人列表*/
+
 
 private:
 	class ComboBoxWithUniqueIcon :public QComboBox
@@ -90,6 +94,7 @@ private:
 		ComboBoxWithUniqueIcon(const QString& iconPath,QWidget* parent = 0);
 
 		void AddIconItem(const QString& text);
+		void AddIconItem(const QString& text,const QVariant& data);
 		void AddIconItems(const QStringList& texts);
 
 	private:

@@ -8,7 +8,6 @@
 #include "ScreenManager.h"
 
 
-
 Screen::Screen(QWidget* parent/*=0*/)
 	:QWidget(parent)
 {

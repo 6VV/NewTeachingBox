@@ -29,7 +29,6 @@ private:
 	const int LEFT_WIDTH_RATIO = 8;
 	const int RIGHT_WIDTH_RATIO = 1;
 
-
 public:
 	Screen(QWidget* parent=0);
 	~Screen();

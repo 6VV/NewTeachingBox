@@ -11,7 +11,7 @@ namespace Database{
 		QString strUserNameMaxLength = QString::number(TableNameMaxLength());
 		QString strUserPasswordMaxLength = QString::number(TablePasswordMaxLength());
 
-		QString tableText = "CREATE TABLE " + TableUser() + " ("
+		QString tableText = "CREATE TABLE IF NOT EXISTS " + TableName() + " ("
 			+ TableColumnName() + " varchar(" + strUserNameMaxLength + ") NOT NULL,"	/*用户名*/
 			+ TableColumnPassword() + " varchar(" + strUserPasswordMaxLength + ") NOT NULL,"	/*用户密码*/
 			+ TableColumnAuthority() + " int NOT NULL,"	/*用户权限*/
@@ -26,7 +26,7 @@ namespace Database{
 	void UserDatabase::InsertUserInfo(const User& user)
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
-		query.prepare("insert into " + TableUser() + " values(?,?,?,?)");
+		query.prepare("insert into " + TableName() + " values(?,?,?,?)");
 
 		query.bindValue(0, user.GetName());
 		query.bindValue(1, user.GetPassword());
@@ -42,7 +42,7 @@ namespace Database{
 	QList<User> UserDatabase::SelectAllUsers()
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
-		query.prepare(QString("select * from %1").arg(TableUser()));
+		query.prepare(QString("select * from %1").arg(TableName()));
 		QList<User> users;
 
 		if (query.exec())
@@ -64,7 +64,7 @@ namespace Database{
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
 		query.prepare(QString("select * from %1 where %2='%3'")
-			.arg(TableUser())
+			.arg(TableName())
 			.arg(TableColumnName())
 			.arg(name));
 
@@ -86,7 +86,7 @@ namespace Database{
 	void UserDatabase::UpdateUserInfo(const QString& oldUserName, const User& user)
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
-		query.prepare("update " + TableUser() + " set " + TableColumnName() + "=?,"
+		query.prepare("update " + TableName() + " set " + TableColumnName() + "=?,"
 			+ TableColumnPassword() + "=?,"
 			+ TableColumnAuthority() + "=?,"
 			+ TableColumnLanguage() + "=?"
@@ -107,7 +107,7 @@ namespace Database{
 	void UserDatabase::DeleteUserInfo(const QString& userName)
 	{
 		QSqlQuery query(*DatabaseHelper::GetInstance()->GetDatabase());
-		query.prepare(QString("delete from %1 where %2='%3'").arg(TableUser()).arg(TableColumnName()).arg(userName));
+		query.prepare(QString("delete from %1 where %2='%3'").arg(TableName()).arg(TableColumnName()).arg(userName));
 
 		if (!query.exec())
 		{
@@ -126,7 +126,7 @@ namespace Database{
 		return TeachingBoxContext::STRING_MAX_LENGTH;
 	}
 
-	QString UserDatabase::TableUser()
+	QString UserDatabase::TableName()
 	{
 		return "UserTable";
 	}

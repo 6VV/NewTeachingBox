@@ -7,6 +7,7 @@
 #include "ScreenNetwork.h"
 #include "TeachingBoxContext.h"
 #include "TeachingBoxBroadcast.h"
+#include "ScreenRobot.h"
 
 
 
@@ -17,10 +18,11 @@ ScreenService::ScreenService(QWidget* parent)
 	, m_screenSetting(new ScreenSetting(this))
 	, m_screenUserManager(new ScreenUserManager(this))
 	, m_screenNetwork(new ScreenNetwork(this))
+	, m_screenRobot(new ScreenRobot(this))
 	, m_btnSetting(new Button(this))
 	, m_btnUser(new Button(this))
 	, m_btnUserManager(new Button(this))
-	, m_btnVersion(new Button(this))
+	, m_btnRobot(new Button(this))
 	, m_btnNetwork(new Button(this))
 	, m_btnInformation(new Button(this))
 {
@@ -49,6 +51,7 @@ void ScreenService::InitStackedWidget()
 	m_stackedWidget->addWidget(m_screenUser);
 	m_stackedWidget->addWidget(m_screenUserManager);
 	m_stackedWidget->addWidget(m_screenNetwork);
+	m_stackedWidget->addWidget(m_screenRobot);
 }
 
 void ScreenService::InitSignalSlot()
@@ -70,6 +73,9 @@ void ScreenService::InitSignalSlot()
 	connect(m_btnUser, SIGNAL(clicked()), this, SLOT(SlotOnChangeToScreenUser()));
 	connect(m_btnUserManager, SIGNAL(clicked()), this, SLOT(SlotOnChangeToScreenUserManager()));
 	connect(m_btnNetwork, SIGNAL(clicked()), this, SLOT(SlotOnChangeToScreenNetwork()));
+	connect(m_btnRobot, &QPushButton::clicked, this, [this]() {
+		m_stackedWidget->setCurrentWidget(m_screenRobot);
+	});
 }
 
 void ScreenService::UpdateControlerEnabled()
@@ -91,7 +97,7 @@ void ScreenService::UpdateControlerEnabled(bool enabled)
 	m_btnUser->setEnabled(enabled);
 	m_btnUserManager->setEnabled(enabled);
 	m_btnInformation->setEnabled(enabled);
-	m_btnVersion->setEnabled(enabled);
+	m_btnRobot->setEnabled(enabled);
 	m_btnNetwork->setEnabled(enabled);
 }
 
@@ -100,7 +106,7 @@ void ScreenService::UpdateText()
 	m_btnSetting->setText(tr("Setting"));
 	m_btnUser->setText(tr("User"));
 	m_btnUserManager->setText(tr("UserAdmin"));
-	m_btnVersion->setText(tr("Version"));
+	m_btnRobot->setText(tr("Robot"));
 	m_btnInformation->setText(tr("Information"));
 	m_btnNetwork->setText(tr("Network"));
 }
@@ -111,7 +117,7 @@ QList<QWidget*> ScreenService::GetButtonList()
 	btnList.append(m_btnSetting);
 	btnList.append(m_btnUser);
 	btnList.append(m_btnUserManager);
-	btnList.append(m_btnVersion);
+	btnList.append(m_btnRobot);
 	btnList.append(m_btnInformation);
 	btnList.append(m_btnNetwork);
 	return btnList;

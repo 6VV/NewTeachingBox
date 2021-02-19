@@ -26,7 +26,6 @@ namespace Database{
 	class VariateDatabase
 	{
 	private:
-		static QString TableName();	/*表名*/
 		static QString ColumnScope();	/*作用域列名*/
 		static QString ColumnName();	/*变量名列名*/
 		static QString ColumnValue();	/*值列名*/
@@ -34,6 +33,7 @@ namespace Database{
 	public:
 		static const QString GetTextCreateTable();
 
+		static QString TableName();	/*表名*/
 		static void DeleteScope(const QString& scope, const QString& name);
 		static void DeleteScope(const QString& scope);
 		static void InsertVariate(QDataStream& dataStream);

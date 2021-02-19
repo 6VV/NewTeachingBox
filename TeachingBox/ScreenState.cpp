@@ -12,6 +12,7 @@
 #include "TeachingBoxInitialization.h"
 #include "TToolSys.h"
 #include "TVariateManager.h"
+#include "RobotDatabase.h"
 
 
 
@@ -71,6 +72,7 @@ void ScreenState::Init()
 
 	UpdateRefSysBox();
 	UpdateToolRefBox();
+	updateRobot();
 }
 
 void ScreenState::UpdateToolRefBox()
@@ -93,6 +95,24 @@ void ScreenState::UpdateToolRefBox()
 			currentText.split(".").at(0), currentText.split(".").at(1)));
 	}
 
+}
+
+void ScreenState::updateRobot()
+{
+	auto currentText = m_comboBoxRobot->currentText();
+	m_comboBoxRobot->clear();
+	auto robots = Database::RobotDatabase::selectRobot();
+	for (auto& robot : robots)
+	{
+		m_comboBoxRobot->AddIconItem(robot.name, robot.id);
+	}
+	if (currentText.isEmpty())
+	{
+		m_comboBoxRobot->setCurrentIndex(-1);
+	}
+	else {
+		m_comboBoxRobot->setCurrentText(currentText);
+	}
 }
 
 void ScreenState::UpdateRefSysBox()
@@ -139,6 +159,8 @@ void ScreenState::InitSignalSlot()
 	}, Qt::DirectConnection);
 	connect(TeachingBoxBroadcast::GetInstance(), &TeachingBoxBroadcast::AddVariate, this, &ScreenState::OnChangeVariate);
 	connect(TeachingBoxBroadcast::GetInstance(), &TeachingBoxBroadcast::DeleteVariate, this, &ScreenState::OnChangeVariate);
+	connect(TeachingBoxBroadcast::GetInstance(), &TeachingBoxBroadcast::RobotInfoChanged, this, &ScreenState::updateRobot);
+
 
 	connect(m_comboBoxProgram, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::textActivated), [this](const QString& program){
 		if (m_comboBoxProject->currentText().size()==0)
@@ -176,6 +198,14 @@ void ScreenState::InitSignalSlot()
 		}
 
 		TeachingBoxContext::GetInstance()->SetCurrentToolSys(TVariateManager::GetInstance()->GetVariate(scope, name));
+	});
+	connect(m_comboBoxRobot, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::textActivated), [this](const QString& text) {
+		if (m_comboBoxRobot->currentIndex() < 0)
+		{
+			return;
+		}
+		int id = m_comboBoxRobot->currentData().toInt();
+		RemoteManager::GetInstance()->SendSpecialCommand(CommandId::SET_ROBOT_ID, id);
 	});
 }
 
@@ -235,17 +265,18 @@ QLayout* ScreenState::GetFirstLayout()
 {
 	QHBoxLayout* layout = new QHBoxLayout(this);
 
-	QLabel* robotLabel = new QLabel("My Robot",this);
-	robotLabel->setAlignment(Qt::AlignCenter);
+	//QLabel* robotLabel = new QLabel("My Robot",this);
+	//robotLabel->setAlignment(Qt::AlignCenter);
 	m_comboBoxRefSys = new ComboBoxWithUniqueIcon(":/new/image/Resources/Image/coordinate_system_icon.png", this);
 	m_comboBoxTool = new ComboBoxWithUniqueIcon(":/new/image/Resources/Image/tool_icon.png",this);
 	m_comboBoxSpeed = new ComboBoxWithUniqueIcon(":/new/image/Resources/Image/speed_icon.png",this);
+	m_comboBoxRobot = new ComboBoxWithUniqueIcon(":/new/image/Resources/Image/robot_icon.png", this);
 
-	layout->addWidget(new WidgetWithBorderAndIcon(robotLabel, ":/new/image/Resources/Image/robot_icon.png"));
+	layout->addWidget(m_lbLogo);
 	layout->addWidget(new ComboBoxWithBorder(m_comboBoxRefSys));
 	layout->addWidget(new ComboBoxWithBorder(m_comboBoxTool));
 	layout->addWidget(new ComboBoxWithBorder(m_comboBoxSpeed));
-	layout->addWidget(m_lbLogo);
+	layout->addWidget(m_comboBoxRobot);
 
 	layout->setStretch(0, 4);
 	layout->setStretch(1, 6);
@@ -370,6 +401,11 @@ ScreenState::ComboBoxWithUniqueIcon::ComboBoxWithUniqueIcon(const QString& iconP
 void ScreenState::ComboBoxWithUniqueIcon::AddIconItem(const QString& text)
 {
 	QComboBox::addItem(QIcon(QPixmap(m_iconPath)), text);
+}
+
+void ScreenState::ComboBoxWithUniqueIcon::AddIconItem(const QString& text, const QVariant& data)
+{
+	QComboBox::addItem(QIcon(QPixmap(m_iconPath)), text, data);
 }
 
 void ScreenState::ComboBoxWithUniqueIcon::AddIconItems(const QStringList& texts)

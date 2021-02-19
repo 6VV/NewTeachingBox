@@ -16,11 +16,11 @@ namespace Database{
 		static User SelectUser(const QString& name);
 		static void UpdateUserInfo(const QString& oldUserName, const User& user);	/*更新用户信息*/
 		static void DeleteUserInfo(const QString& userName);	/*删除用户信息*/
+		static QString TableName();	/*用户表名*/
 
 	private:
 		static int TableNameMaxLength();	/*用户名最大长度*/
 		static int TablePasswordMaxLength();	/*用户密码最大长度*/
-		static QString TableUser();	/*用户表名*/
 		static QString TableColumnName();	/*用户名列名*/
 		static QString TableColumnPassword();	/*用户密码列名*/
 		static QString TableColumnAuthority();	/*用户权限列名*/
