@@ -72,7 +72,7 @@ QWidget* RefSysWidgetOrigin::GetTeachMethodWidget()
 	SetNextWidget(m_threePointsWithOrigin);
 	InitCoorInfo();
 
-	connect(buttonGroup, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::idClicked), [this](int id){
+	connect(buttonGroup, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), [this](int id){
 		switch (id)
 		{
 		case THREE_POINTS_WITH_ORIGIN:{

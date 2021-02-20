@@ -25,7 +25,7 @@ QWidget* RefSysWidgetThreePointsWithoutOriginStep3::MainWidget()
 	m_btnGroup->addButton(m_btnY, CoordinateSystemTeachInfo::Y);
 	m_btnGroup->addButton(m_btnZ, CoordinateSystemTeachInfo::Z);
 
-	connect(m_btnGroup, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::idClicked), [this](int id){
+	connect(m_btnGroup, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), [this](int id){
 		if (IsTeached())
 		{
 			m_coorInfo->UpdateOrientation(static_cast<CoordinateSystemTeachInfo::Orientation>(id));

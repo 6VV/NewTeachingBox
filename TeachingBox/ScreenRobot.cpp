@@ -12,6 +12,7 @@ ScreenRobot::ScreenRobot(QWidget* parent /*= nullptr*/)
 	initSignalSlot();
 
 	updateTable();
+	UpdateText();
 }
 
 void ScreenRobot::UpdateText()
@@ -34,7 +35,7 @@ void ScreenRobot::initWidget()
 	tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-	tableWidget->setHorizontalHeaderLabels({tr("Name"),("ID")});
+	tableWidget->setHorizontalHeaderLabels({tr("Name"),"ID"});
 
 	addButton = new Button(this);
 	deleteButton = new Button(this);

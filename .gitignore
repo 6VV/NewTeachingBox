@@ -187,4 +187,10 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-/.vs/TeachingBox/v15/Browse.VC.opendb
+/Win32/
+/x64/
+/Debug/
+/packages/
+
+/GeneratedFiles/
+.vs

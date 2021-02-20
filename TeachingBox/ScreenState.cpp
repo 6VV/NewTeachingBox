@@ -162,18 +162,18 @@ void ScreenState::InitSignalSlot()
 	connect(TeachingBoxBroadcast::GetInstance(), &TeachingBoxBroadcast::RobotInfoChanged, this, &ScreenState::updateRobot);
 
 
-	connect(m_comboBoxProgram, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::textActivated), [this](const QString& program){
+	connect(m_comboBoxProgram, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::activated), [this](const QString& program){
 		if (m_comboBoxProject->currentText().size()==0)
 		{
 			return;
 		}
 		emit(TeachingBoxBroadcast::GetInstance()->OpenProgram(m_comboBoxProject->currentText(), program));
 	});
-	connect(m_comboBoxSpeed, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::textActivated), [this](const QString& text){
+	connect(m_comboBoxSpeed, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::activated), [this](const QString& text){
 		int speed = text.left(text.size() - 1).toInt();
 		RemoteManager::GetInstance()->SendSpecialCommand(CommandId::SET_SPEED_PRECENT,speed);
 	});
-	connect(m_comboBoxRefSys, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::textActivated), [this](const QString& text){
+	connect(m_comboBoxRefSys, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::activated), [this](const QString& text){
 		auto scope = text.split(".").at(0);
 		auto name = text.split(".").at(1);
 		auto currentRefSys = TeachingBoxContext::GetInstance()->GetCurrentRefSys();
@@ -186,7 +186,7 @@ void ScreenState::InitSignalSlot()
 
 		TeachingBoxContext::GetInstance()->SetCurrentRefSys(TVariateManager::GetInstance()->GetVariate(scope, name));
 	});
-	connect(m_comboBoxTool, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::textActivated), [this](const QString& text){
+	connect(m_comboBoxTool, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::activated), [this](const QString& text){
 		auto scope = text.split(".").at(0);
 		auto name = text.split(".").at(1);
 		auto currentSys = TeachingBoxContext::GetInstance()->GetCurrentToolSys();
@@ -199,7 +199,7 @@ void ScreenState::InitSignalSlot()
 
 		TeachingBoxContext::GetInstance()->SetCurrentToolSys(TVariateManager::GetInstance()->GetVariate(scope, name));
 	});
-	connect(m_comboBoxRobot, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::textActivated), [this](const QString&) {
+	connect(m_comboBoxRobot, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::activated), [this](const QString&) {
 		if (m_comboBoxRobot->currentIndex() < 0)
 		{
 			return;

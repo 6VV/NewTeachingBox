@@ -116,7 +116,7 @@ QGroupBox* ScreenSetting::CreateBoxLogin()
 	m_lbAuthority = new QLabel(this);
 	m_ltAuthorityValue = new QLineEdit("1",this);
 	m_cmbUser = new QComboBox(this);
-	connect(m_cmbUser, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::textActivated), [this](const QString& name){
+	connect(m_cmbUser, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::activated), [this](const QString& name){
 		auto lastUserName = TeachingBoxContext::GetInstance()->GetUser().GetName();
 		if (name == lastUserName || name.size()==0)
 		{
