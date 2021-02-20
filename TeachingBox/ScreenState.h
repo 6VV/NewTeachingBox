@@ -19,6 +19,7 @@
 #include "InternationalWidget.h"
 #include "QLabel"
 #include "LabelWithBorder.h"
+#include "QVariant"
 
 class QLayout;
 class TVariate;
@@ -94,7 +95,7 @@ private:
 		ComboBoxWithUniqueIcon(const QString& iconPath,QWidget* parent = 0);
 
 		void AddIconItem(const QString& text);
-		void AddIconItem(const QString& text,const QVariant& data);
+		void AddIconItem(const QString& text,const QVariant& userData);
 		void AddIconItems(const QStringList& texts);
 
 	private:

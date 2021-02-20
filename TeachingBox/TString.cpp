@@ -3,7 +3,6 @@
 #include "TreeWidgetItemWithVariate.h"
 
 
-inline
 QString TString::TypeName()
 {
 	return "String";

@@ -5,7 +5,6 @@
 #include "LineEditWithRegExpAndKeyboard.h"
 
 
-inline
 QString TDouble::TypeName()
 {
 	return "Double";

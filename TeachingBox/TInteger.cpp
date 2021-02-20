@@ -6,7 +6,6 @@
 #include "LineEditWithRegExpAndKeyboard.h"
 
 
-inline
 QString TInteger::TypeName()
 {
 	return "Integer";

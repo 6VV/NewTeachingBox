@@ -27,7 +27,6 @@ TRefSys::ValueType TRefSys::GetSpecialValue() const
 
 TVariateRegister<TRefSys> TRefSys::m_register(TypeName());
 
-inline
 QString TRefSys::TypeName()
 {
 	return "RefSys";

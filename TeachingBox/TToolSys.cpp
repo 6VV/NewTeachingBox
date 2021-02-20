@@ -5,12 +5,10 @@
 
 TVariateRegister<TToolSys> TToolSys::m_register(TypeName());
 
-inline
 QString TToolSys::TypeName()
 {
 	return "ToolSys";
 }
-
 
 //TToolSys::TToolSys(const TSymbol& symbol, TComplex::ValueType value)
 //	:TComplex(symbol, value)

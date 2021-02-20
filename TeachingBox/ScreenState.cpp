@@ -199,7 +199,7 @@ void ScreenState::InitSignalSlot()
 
 		TeachingBoxContext::GetInstance()->SetCurrentToolSys(TVariateManager::GetInstance()->GetVariate(scope, name));
 	});
-	connect(m_comboBoxRobot, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::textActivated), [this](const QString& text) {
+	connect(m_comboBoxRobot, static_cast<void (QComboBox::*)(const QString& text)>(&QComboBox::textActivated), [this](const QString&) {
 		if (m_comboBoxRobot->currentIndex() < 0)
 		{
 			return;
@@ -403,9 +403,9 @@ void ScreenState::ComboBoxWithUniqueIcon::AddIconItem(const QString& text)
 	QComboBox::addItem(QIcon(QPixmap(m_iconPath)), text);
 }
 
-void ScreenState::ComboBoxWithUniqueIcon::AddIconItem(const QString& text, const QVariant& data)
+void ScreenState::ComboBoxWithUniqueIcon::AddIconItem(const QString& text, const QVariant& userData)
 {
-	QComboBox::addItem(QIcon(QPixmap(m_iconPath)), text, data);
+	QComboBox::addItem(QIcon(QPixmap(m_iconPath)), text, userData);
 }
 
 void ScreenState::ComboBoxWithUniqueIcon::AddIconItems(const QStringList& texts)

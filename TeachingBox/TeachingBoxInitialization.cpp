@@ -12,7 +12,7 @@
 
 std::shared_ptr<User> TeachingBoxInitialization::Adminastrator()
 {
-	return std::make_shared<User>("Adminastrator", "123456", 16, Language::Chinese());
+	return std::make_shared<User>("Adminastrator", "123456", 16, Language::English());
 }
 
 std::shared_ptr<TToolSys> TeachingBoxInitialization::DefaultToolSys()
